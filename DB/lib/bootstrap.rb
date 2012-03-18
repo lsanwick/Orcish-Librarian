@@ -1,3 +1,4 @@
+# encoding: utf-8
 
 Dir.chdir(File.join(File.dirname(__FILE__), '..'))
 $LOAD_PATH << 'lib'
