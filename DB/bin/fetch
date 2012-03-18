@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+options = { :log => $stderr, :env => 'dev', :append => false }
+OptionParser.new do |opts|
+  opts.banner = 'fetch [options] [SET]...'
+  opts.on('-l', '--log [file]') {|f| s = open(f, 'w'); options[:log] = s; at_exit { s.close } }
+  opts.on('-e', '--env [name]') {|e| options[:env] = e }
+  opts.on('-a', '--append') { options[:append] = true }
+end.parse!
+
+require File.join(File.dirname(__FILE__), '../lib/bootstrap')
+Orcish.env = options[:env]
+Orcish.log = options[:log]
+Orcish.debug("Using '#{Orcish.env}' environment")
+
+collection = { }
+fetch = FetchManager.new
+all_sets = fetch.sets
+sets_to_process = (ARGV.length > 0) ? ARGV : all_sets
+sets_to_process.each do |set|
+  if all_sets.include?(set)    
+    cards = fetch.cards_for_set(set)
+    collection[set] = cards
+  else
+    Orcish.debug("The set '#{set}' could not be found.")
+  end
+end
+
+card_count = 0
+FileUtils.rm_rf("data/#{Orcish.env}.pstore") unless options[:append]
+PStore.new("data/#{Orcish.env}.pstore").transaction do |store|
+  collection.each do |pair|
+    store[:sets] = [ ] if store[:sets].nil?
+    store[:sets] << pair[0] unless store[:sets].include?(pair[0])
+    store[pair[0]] = pair[1]
+  end
+  store[:sets].each do |set|
+    card_count = card_count + store[set].count
+  end
+end
+Orcish.debug("There are a total of #{card_count} cards currently stored.")

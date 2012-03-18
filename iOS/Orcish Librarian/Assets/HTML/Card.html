@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+<script src="jQuery.js"></script>
+<style>
+
+    body {
+        margin: 0;
+        padding: 10px;
+        background: #d8dce6;
+        color: #42464d;
+        font-family: sans-serif;
+        -webkit-text-size-adjust: none;
+    }
+    
+    .ol-header {
+
+    }
+    
+    .ol-block {
+        padding: 10px;
+        margin: 0 0 15px 0;
+        border: 1px solid #ccc;
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.15);
+    }
+    
+    .ol-card-name {
+        padding: 0;
+        margin: 0 0 4px 0;
+        font-size: 17px;
+        font-weight: bold;
+    }
+    
+    .ol-set-name {
+        margin: 0 0 4px 0;
+        font-size: 13px;
+        color: #7f848b;
+    }
+    
+    .ol-card-type {
+        font-size: 15px;
+        font-weight: bold;
+        color: #7f848b;
+    }
+    
+    .ol-card-image {
+        display: none;
+    }
+    
+    .ol-card-image img {
+        width: 280px;
+        border-radius: 2px;
+    }
+    
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+/* --------------------------------------------------
+//   styles for retina display   
+// ------------------------------------------------- */
+    
+    
+        
+}
+
+</style>
+</head>
+<body>
+	
+    <div class="ol-header ol-block">
+        <div class="ol-card-name">Card Name</div>
+        <div class="ol-set-name">Card Set</div>
+        <div class="ol-card-type">Type &ndash; Subtype</div>
+        <div class="ol-mana-cost">Mana Cost</div>
+    </div>
+    
+    <div id="ol-prices">
+        
+    </div>
+    
+    <div id="oracle-text">
+        <div class="ol-oracle-text">
+        </div>
+    </div>
+    
+    <div class="ol-card-image ol-block">
+        <img src="http://magiccards.info/scans/en/roe/21.jpg" />
+    </div>
+    
+    <div class="ol-other-parts">
+    </div>
+	
+    <div class="ol-other-editions">
+    </div>
+    
+<script>
+
+var SAMPLE_CARD = {"manaCost":"3{P/w}{PB}{pu}{pR}{pg}{Pc}","infoId":"93","rarity":"","name":"Ruthless Invasion","setLongName":"New Phyrexia","type":"Sorcery","otherEditions":[],"otherParts":[],"setShortName":"NPH","oracleText":"{Pw}: Nonartifact creatures can't block this turn.","pk":3,"gathererId":"198099"}    
+    
+var Orcish = { };    
+(function(){
+     
+// ----------------------------------------------------------------------------
+ 
+Orcish.setCardData = function(card) {
+    $('.ol-card-name').text(card.name);
+    $('.ol-set-name').text(card.setLongName);
+    $('.ol-card-type').text(card.type);
+    loadCardPhoto(card);
+}
+
+// ----------------------------------------------------------------------------
+ 
+function loadCardPhoto(card) {
+
+    var isPlane = card.type.match(/^Plane -/);
+    var imageURL = '';
+    if (card.type == 'Scheme' || isPlane) {
+        imageURL = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=' + encodeURIComponent(card.gathererId);
+    } else {
+        imageURL = 'http://magiccards.info/scans/en/' + card.setShortName.toLowerCase() + '/' + encodeURIComponent(card.infoId) + '.jpg';
+    }
+
+    $('<img />')
+        .attr('src', imageURL)
+        .appendTo($('.ol-card-image').empty())
+        .load(function(){ $('.ol-card-image').show() })
+        .wrap($('<div></div>')
+        .addClass(isPlane ? 'plane' : ''));
+}
+ 
+// ----------------------------------------------------------------------------
+ 
+function formatOracleText(text) {
+
+    // fix basic lands
+    if (text.length == 1) { text = '{T}: Add {' + text + '} to your mana pool.'; }
+
+    if (card.set == 'UG') { // in Unglued set
+        text = text.replace(/o([\d]+|[WBURGS])/g, '{$1}'); // fixes old-style mana symbol
+        text = text.replace(/ocT/g, '{T}');                // fixes old-style tap symbol
+    }
+
+    text = text.replace(/\n\s*\n+/g, "\n\n"); // no more than two newlines in a row
+    text = text.replace(/\{1\}0\}/g, '{10}'); // fixes a bug in Draco's {10} symbol            
+    text = text.replace(/\{([^}]+)\{/g, '{$1}{'); // fixes a symbol bug in Rhys the Redeemed's text
+    text = text.replace(/\{S\}i\}/gi, '{S}'); // fixes a bug with Snow Mana symbol            
+
+    // add HTML formatting to any level-up cards
+    if (text.match(/^LEVEL \d/m)) {
+        text = text.replace(/\n?\n?(LEVEL(\n|.)*)$/, "<div class=\"level-info\">$1</div>");
+        text = text.replace(/\n?\n?LEVEL (\d+)([-+])(\d+)?\n?\n?/g, "#START#<h4>LEVEL $1$2$3</h4>#END#");
+        text = text.replace(/#END#((\n|.)*?)(#START#|$)/g, '#END#<div class="details">$1</div>$3');
+        text = text.replace(/(#END#|#START#)/g, '');
+    }
+
+    text = text.replace(/\n/g, '<br />');     // replace newlines with <br /> elements 
+
+    var html = '';
+    var withinToken = false;
+    var openToken = '{';
+    var closeToken = '{';
+    var currentToken = '';
+    for (var i = 0; i < text.length; i++) {
+        var character = text[i];
+        if (withinToken) {
+            if (character == '}') {
+                withinToken = false;
+                html += formatToken(currentToken);
+            } else {
+                currentToken += character;
+            }
+        } else {
+            if (character == openToken) {
+                currentToken = '';
+                withinToken = true;
+            } else {
+                html += character;
+            }
+        }
+    }
+    return html.replace(/(\(.*?\))/g, '<em>$1</em>');
+}
+
+ 
+// ----------------------------------------------------------------------------
+    
+function formatManaString(text) {
+    var html = '';
+    var openToken = '{';
+    var closeToken = '}';
+    var withinToken = false;
+    var currentToken = '';
+    text = text.replace(/\(/g, '{');
+    text = text.replace(/\)/g, '}');
+    text = text.replace(/(\d+)/g, '{$1}');
+    for (var i=0;i<text.length;i++) {            
+        var character = text[i];
+        if (withinToken) {
+            if (character == '}') {
+                withinToken = false;
+                html += formatToken(currentToken);
+            } else {
+                currentToken += character;
+            }
+        }
+        else {
+            if (character == openToken) {
+                currentToken = '';
+                withinToken = true;
+            } else {
+                html += formatToken(character);
+            }
+        }
+    }
+    return html;
+}
+ 
+// ----------------------------------------------------------------------------
+ 
+function formatToken(token) {
+    var tap = /^(Q|T)$/i;
+    var number = /^([\dXYZ]+)$/i;
+    var color = /^([WBURGS])$/i;
+    var numberColor = /^([\dxyz]+)\/([WBURG])$/i;
+    var colorColor = /^([WBURG])\/([WBURG])$/i;
+    var infinite = /^∞$/i;
+    var loyalty = /^([-+]\d+)$/;
+    var chaos = /^C$/;
+    var phyrexian1 = /^P([WBURGC])$/i;
+    var phyrexian2 = /^P\/([WBURGC])$/i;
+    token = token.replace(/[(){}]/g, '');
+    if (token.match(tap))
+        return token.replace(tap, '<img src="symbols/$1.png" />').toLowerCase();
+    else if (token.match(infinite))
+        return token.replace(infinite, '<img src="symbols/mana_inf.png" />').toLowerCase();
+    else if (token.match(number))
+        return token.replace(number, '<img src="symbols/mana_$1.png" />').toLowerCase();
+    else if (token.match(color))
+        return token.replace(color, '<img src="symbols/mana_$1.png" />').toLowerCase();
+    else if (token.match(numberColor))
+        return token.replace(numberColor, '<img src="symbols/mana_$1$2.png" />').toLowerCase();
+    else if (token.match(colorColor))
+        return token.replace(colorColor, '<img src="symbols/mana_$1$2.png" />').toLowerCase();
+    else if (token.match(phyrexian1))
+        return token.replace(phyrexian1, '<img src="symbols/mana_p$1.png" />').toLowerCase();
+    else if (token.match(phyrexian2))
+        return token.replace(phyrexian2, '<img src="symbols/mana_p$1.png" />').toLowerCase();
+    else if (token.match(loyalty))
+        return token.replace(loyalty, '<img class="loyalty" src="symbols/loyalty$1.png" />').toLowerCase();    
+    else if (token.match(chaos))
+        return '"Chaos"';
+    else
+        return '<img src="symbols/mana_unknown.png" />';
+}
+    
+// ----------------------------------------------------------------------------
+ 
+ 
+ 
+})()
+    
+</script>
+</body>
+</html>

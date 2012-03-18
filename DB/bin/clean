@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+options = { :log => $stderr, :env => 'dev', :empty_cache => false }
+OptionParser.new do |opts|
+  opts.banner = 'export [options] '
+  opts.on('-l', '--log [file]') {|f| s = open(f, 'w'); options[:log] = s; at_exit { s.close } }
+  opts.on('-c', '--empty-cache') { options[:empty_cache] = true }
+  opts.on('-e', '--env [name]') {|e| options[:env] = e }
+end.parse!
+
+require File.join(File.dirname(__FILE__), '../lib/bootstrap')
+Orcish.env = options[:env]
+Orcish.log = options[:log]
+Orcish.debug("Using '#{Orcish.env}' environment")
+
+storage_path = "data/#{Orcish.env}.*"
+cache_path = "data/net-cache/*.#{Orcish.env}.cache"
+
+Orcish.debug("Deleting '#{storage_path}'")
+FileUtils.remove(Dir.glob(storage_path))
+
+if options[:empty_cache]
+  Orcish.debug("Deleting '#{cache_path}'")
+  FileUtils.remove(Dir.glob(cache_path))
+end
+

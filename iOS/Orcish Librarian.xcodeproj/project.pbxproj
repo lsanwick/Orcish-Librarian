@@ -1,0 +1,677 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D0480A314700C42001E183C /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0480A214700C42001E183C /* CardViewController.xib */; };
+		8D0480A714700CDD001E183C /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0480A614700CDD001E183C /* CardViewController.m */; };
+		8D0480A91470ABBF001E183C /* Back-Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D0480A81470ABBF001E183C /* Back-Button@2x.png */; };
+		8D0480AB1470AC3A001E183C /* Back-Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D0480AA1470AC3A001E183C /* Back-Button.png */; };
+		8D150EF4144FD41800141685 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D150EF3144FD41800141685 /* UIKit.framework */; };
+		8D150EF6144FD41800141685 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D150EF5144FD41800141685 /* Foundation.framework */; };
+		8D150EF8144FD41800141685 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D150EF7144FD41800141685 /* CoreGraphics.framework */; };
+		8D150F00144FD41800141685 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D150EFF144FD41800141685 /* main.m */; };
+		8D150F1E144FD41800141685 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D150F1D144FD41800141685 /* SenTestingKit.framework */; };
+		8D150F1F144FD41800141685 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D150EF3144FD41800141685 /* UIKit.framework */; };
+		8D150F20144FD41800141685 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D150EF5144FD41800141685 /* Foundation.framework */; };
+		8D150F28144FD41800141685 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D150F26144FD41800141685 /* InfoPlist.strings */; };
+		8D150F2B144FD41800141685 /* Orcish_LibrarianTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D150F2A144FD41800141685 /* Orcish_LibrarianTests.m */; };
+		8D150F36144FEED800141685 /* OrcishRootController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D150F35144FEED800141685 /* OrcishRootController.xib */; };
+		8D150F3D144FF0C700141685 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D150F3A144FF0C700141685 /* AppDelegate.m */; };
+		8D150F3E144FF0C700141685 /* OrcishRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D150F3C144FF0C700141685 /* OrcishRootController.m */; };
+		8D1DE81214775E1200D2A3C4 /* HTML in Resources */ = {isa = PBXBuildFile; fileRef = 8D1DE81114775E1200D2A3C4 /* HTML */; };
+		8D1F717214525BE50010C161 /* Menu-Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D1F717014525BE50010C161 /* Menu-Button.png */; };
+		8D1F717314525BE50010C161 /* Menu-Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D1F717114525BE50010C161 /* Menu-Button@2x.png */; };
+		8D1F717814525BF00010C161 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D1F717514525BF00010C161 /* Icon-72.png */; };
+		8D1F717914525BF00010C161 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D1F717614525BF00010C161 /* Icon.png */; };
+		8D1F717A14525BF00010C161 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D1F717714525BF00010C161 /* Icon@2x.png */; };
+		8D1F7180145314D50010C161 /* MenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1F717F145314D50010C161 /* MenuController.m */; };
+		8D1F71821453C4ED0010C161 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1F71811453C4ED0010C161 /* Utility.m */; };
+		8D30494A1474A82300928A5A /* Down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3049481474A82300928A5A /* Down@2x.png */; };
+		8D30494B1474A82300928A5A /* Up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3049491474A82300928A5A /* Up@2x.png */; };
+		8D40B9821472007800F3A4EC /* CardSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D40B9811472007800F3A4EC /* CardSequence.m */; };
+		8D40B9851473543A00F3A4EC /* Linen-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9841473543A00F3A4EC /* Linen-Background.png */; };
+		8D40B9881473E13D00F3A4EC /* Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9861473E13D00F3A4EC /* Down.png */; };
+		8D40B9891473E13D00F3A4EC /* Up.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9871473E13D00F3A4EC /* Up.png */; };
+		8D5012C3146F5CA300D463D6 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5012C2146F5CA300D463D6 /* Card.m */; };
+		8DBDB1251466DEC600140217 /* BasicSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB1241466DEC600140217 /* BasicSearchController.m */; };
+		8DBDB12B1466DF8B00140217 /* OrcishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB12A1466DF8B00140217 /* OrcishViewController.m */; };
+		8DD02111146A2A26008C522A /* BasicSearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD02110146A2A26008C522A /* BasicSearchController.xib */; };
+		8DE5D9921457A02000B6CAAF /* Menu-Section.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9901457A02000B6CAAF /* Menu-Section.png */; };
+		8DE5D9931457A02000B6CAAF /* Menu-Section@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */; };
+		8DE898DA147F32C50024E016 /* SearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE898D9147F32C50024E016 /* SearchCriteria.m */; };
+		8DE898E314832D820024E016 /* card-names.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8DE898E214832D820024E016 /* card-names.txt */; };
+		8DE898E71484645F0024E016 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE898E61484645F0024E016 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8DE898E9148473CF0024E016 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE898E8148473CE0024E016 /* libicucore.dylib */; };
+		8DED6461146F374500A787F4 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DED645C146F374500A787F4 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8DED6462146F374500A787F4 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DED645E146F374500A787F4 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8DED6463146F374500A787F4 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DED6460146F374500A787F4 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8DED6465146F3CE600A787F4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DED6464146F3CE600A787F4 /* libsqlite3.dylib */; };
+		8DED646E146F4E2000A787F4 /* cards.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 8DED646D146F4E2000A787F4 /* cards.sqlite3 */; };
+		8DEDA2651453CD5A0094D837 /* Menu-Row.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDA2631453CD5A0094D837 /* Menu-Row.png */; };
+		8DEDA2661453CD5A0094D837 /* Menu-Row@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDA2641453CD5A0094D837 /* Menu-Row@2x.png */; };
+		8DEDA26A145578650094D837 /* Menu-Row-Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDA268145578650094D837 /* Menu-Row-Selected.png */; };
+		8DEDA26B145578650094D837 /* Menu-Row-Selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDA269145578650094D837 /* Menu-Row-Selected@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8D150F21144FD41800141685 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D150EE6144FD41800141685 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D150EEE144FD41800141685;
+			remoteInfo = "Orcish Librarian";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8D0480A214700C42001E183C /* CardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardViewController.xib; path = Layout/CardViewController.xib; sourceTree = "<group>"; };
+		8D0480A514700CDD001E183C /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardViewController.h; sourceTree = "<group>"; };
+		8D0480A614700CDD001E183C /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardViewController.m; sourceTree = "<group>"; };
+		8D0480A81470ABBF001E183C /* Back-Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Back-Button@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Back-Button@2x.png"; sourceTree = SOURCE_ROOT; };
+		8D0480AA1470AC3A001E183C /* Back-Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Back-Button.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Back-Button.png"; sourceTree = SOURCE_ROOT; };
+		8D150EEF144FD41800141685 /* Orcish Librarian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Orcish Librarian.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D150EF3144FD41800141685 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8D150EF5144FD41800141685 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8D150EF7144FD41800141685 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8D150EFB144FD41800141685 /* Orcish Librarian-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Orcish Librarian-Info.plist"; sourceTree = "<group>"; };
+		8D150EFF144FD41800141685 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8D150F01144FD41800141685 /* Orcish Librarian-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Orcish Librarian-Prefix.pch"; sourceTree = "<group>"; };
+		8D150F1C144FD41800141685 /* Orcish LibrarianTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Orcish LibrarianTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D150F1D144FD41800141685 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		8D150F25144FD41800141685 /* Orcish LibrarianTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Orcish LibrarianTests-Info.plist"; sourceTree = "<group>"; };
+		8D150F27144FD41800141685 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8D150F29144FD41800141685 /* Orcish_LibrarianTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Orcish_LibrarianTests.h; sourceTree = "<group>"; };
+		8D150F2A144FD41800141685 /* Orcish_LibrarianTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Orcish_LibrarianTests.m; sourceTree = "<group>"; };
+		8D150F35144FEED800141685 /* OrcishRootController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OrcishRootController.xib; path = Layout/OrcishRootController.xib; sourceTree = "<group>"; };
+		8D150F39144FF0C700141685 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8D150F3A144FF0C700141685 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8D150F3B144FF0C700141685 /* OrcishRootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrcishRootController.h; sourceTree = "<group>"; };
+		8D150F3C144FF0C700141685 /* OrcishRootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrcishRootController.m; sourceTree = "<group>"; };
+		8D1DE81114775E1200D2A3C4 /* HTML */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HTML; sourceTree = "<group>"; };
+		8D1F717014525BE50010C161 /* Menu-Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Menu-Button.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Menu-Button.png"; sourceTree = SOURCE_ROOT; };
+		8D1F717114525BE50010C161 /* Menu-Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Menu-Button@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Menu-Button@2x.png"; sourceTree = SOURCE_ROOT; };
+		8D1F717514525BF00010C161 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		8D1F717614525BF00010C161 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		8D1F717714525BF00010C161 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		8D1F717E145314D50010C161 /* MenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuController.h; sourceTree = "<group>"; };
+		8D1F717F145314D50010C161 /* MenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuController.m; sourceTree = "<group>"; };
+		8D1F71811453C4ED0010C161 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		8D1F71831453C5630010C161 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		8D3049481474A82300928A5A /* Down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Down@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Down@2x.png"; sourceTree = SOURCE_ROOT; };
+		8D3049491474A82300928A5A /* Up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Up@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Up@2x.png"; sourceTree = SOURCE_ROOT; };
+		8D40B9801472007800F3A4EC /* CardSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardSequence.h; sourceTree = "<group>"; };
+		8D40B9811472007800F3A4EC /* CardSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardSequence.m; sourceTree = "<group>"; };
+		8D40B9841473543A00F3A4EC /* Linen-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Linen-Background.png"; sourceTree = "<group>"; };
+		8D40B9861473E13D00F3A4EC /* Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Down.png; path = "Orcish Librarian/Assets/Toolbar Icons/Down.png"; sourceTree = SOURCE_ROOT; };
+		8D40B9871473E13D00F3A4EC /* Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Up.png; path = "Orcish Librarian/Assets/Toolbar Icons/Up.png"; sourceTree = SOURCE_ROOT; };
+		8D5012C1146F5CA300D463D6 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		8D5012C2146F5CA300D463D6 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		8DBDB1231466DEC600140217 /* BasicSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicSearchController.h; sourceTree = "<group>"; };
+		8DBDB1241466DEC600140217 /* BasicSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicSearchController.m; sourceTree = "<group>"; };
+		8DBDB1291466DF8B00140217 /* OrcishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrcishViewController.h; sourceTree = "<group>"; };
+		8DBDB12A1466DF8B00140217 /* OrcishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrcishViewController.m; sourceTree = "<group>"; };
+		8DD02110146A2A26008C522A /* BasicSearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BasicSearchController.xib; path = Layout/BasicSearchController.xib; sourceTree = "<group>"; };
+		8DE5D9901457A02000B6CAAF /* Menu-Section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section.png"; sourceTree = "<group>"; };
+		8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section@2x.png"; sourceTree = "<group>"; };
+		8DE898D8147F32C50024E016 /* SearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCriteria.h; sourceTree = "<group>"; };
+		8DE898D9147F32C50024E016 /* SearchCriteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCriteria.m; sourceTree = "<group>"; };
+		8DE898E214832D820024E016 /* card-names.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "card-names.txt"; path = "../../../DB/data/card-names.txt"; sourceTree = "<group>"; };
+		8DE898E51484645F0024E016 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		8DE898E61484645F0024E016 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		8DE898E8148473CE0024E016 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		8DED645B146F374500A787F4 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = Other/FMDB/FMDatabase.h; sourceTree = "<group>"; };
+		8DED645C146F374500A787F4 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = Other/FMDB/FMDatabase.m; sourceTree = "<group>"; };
+		8DED645D146F374500A787F4 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = Other/FMDB/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		8DED645E146F374500A787F4 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = Other/FMDB/FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		8DED645F146F374500A787F4 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = Other/FMDB/FMResultSet.h; sourceTree = "<group>"; };
+		8DED6460146F374500A787F4 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = Other/FMDB/FMResultSet.m; sourceTree = "<group>"; };
+		8DED6464146F3CE600A787F4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		8DED646D146F4E2000A787F4 /* cards.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; name = cards.sqlite3; path = ../../../DB/data/cards.sqlite3; sourceTree = "<group>"; };
+		8DEDA2631453CD5A0094D837 /* Menu-Row.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Row.png"; sourceTree = "<group>"; };
+		8DEDA2641453CD5A0094D837 /* Menu-Row@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Row@2x.png"; sourceTree = "<group>"; };
+		8DEDA268145578650094D837 /* Menu-Row-Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Row-Selected.png"; sourceTree = "<group>"; };
+		8DEDA269145578650094D837 /* Menu-Row-Selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Row-Selected@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D150EEC144FD41800141685 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DE898E9148473CF0024E016 /* libicucore.dylib in Frameworks */,
+				8DED6465146F3CE600A787F4 /* libsqlite3.dylib in Frameworks */,
+				8D150EF4144FD41800141685 /* UIKit.framework in Frameworks */,
+				8D150EF6144FD41800141685 /* Foundation.framework in Frameworks */,
+				8D150EF8144FD41800141685 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D150F18144FD41800141685 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D150F1E144FD41800141685 /* SenTestingKit.framework in Frameworks */,
+				8D150F1F144FD41800141685 /* UIKit.framework in Frameworks */,
+				8D150F20144FD41800141685 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8D150EE4144FD41800141685 = {
+			isa = PBXGroup;
+			children = (
+				8D150EF9144FD41800141685 /* Orcish Librarian */,
+				8D150F23144FD41800141685 /* Orcish LibrarianTests */,
+				8D150EF2144FD41800141685 /* Frameworks */,
+				8D150EF0144FD41800141685 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8D150EF0144FD41800141685 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D150EEF144FD41800141685 /* Orcish Librarian.app */,
+				8D150F1C144FD41800141685 /* Orcish LibrarianTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8D150EF2144FD41800141685 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8DE898E8148473CE0024E016 /* libicucore.dylib */,
+				8DED6464146F3CE600A787F4 /* libsqlite3.dylib */,
+				8D150EF3144FD41800141685 /* UIKit.framework */,
+				8D150EF5144FD41800141685 /* Foundation.framework */,
+				8D150EF7144FD41800141685 /* CoreGraphics.framework */,
+				8D150F1D144FD41800141685 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8D150EF9144FD41800141685 /* Orcish Librarian */ = {
+			isa = PBXGroup;
+			children = (
+				8DE898E41484645F0024E016 /* RegexKitLite */,
+				8DED645A146F36F000A787F4 /* FMDB */,
+				8D1F7166145252460010C161 /* Assets */,
+				8D150F38144FF0C700141685 /* Classes */,
+				8D150F34144FEC2100141685 /* Layout */,
+				8D150EFA144FD41800141685 /* Supporting Files */,
+			);
+			path = "Orcish Librarian";
+			sourceTree = "<group>";
+		};
+		8D150EFA144FD41800141685 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8D150EFB144FD41800141685 /* Orcish Librarian-Info.plist */,
+				8D150EFF144FD41800141685 /* main.m */,
+				8D150F01144FD41800141685 /* Orcish Librarian-Prefix.pch */,
+				8D1F71811453C4ED0010C161 /* Utility.m */,
+				8D1F71831453C5630010C161 /* Utility.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8D150F23144FD41800141685 /* Orcish LibrarianTests */ = {
+			isa = PBXGroup;
+			children = (
+				8D150F29144FD41800141685 /* Orcish_LibrarianTests.h */,
+				8D150F2A144FD41800141685 /* Orcish_LibrarianTests.m */,
+				8D150F24144FD41800141685 /* Supporting Files */,
+			);
+			path = "Orcish LibrarianTests";
+			sourceTree = "<group>";
+		};
+		8D150F24144FD41800141685 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8D150F25144FD41800141685 /* Orcish LibrarianTests-Info.plist */,
+				8D150F26144FD41800141685 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8D150F34144FEC2100141685 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				8D150F35144FEED800141685 /* OrcishRootController.xib */,
+				8DD02110146A2A26008C522A /* BasicSearchController.xib */,
+				8D0480A214700C42001E183C /* CardViewController.xib */,
+			);
+			name = Layout;
+			sourceTree = "<group>";
+		};
+		8D150F38144FF0C700141685 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8D150F39144FF0C700141685 /* AppDelegate.h */,
+				8D150F3A144FF0C700141685 /* AppDelegate.m */,
+				8D150F3B144FF0C700141685 /* OrcishRootController.h */,
+				8D150F3C144FF0C700141685 /* OrcishRootController.m */,
+				8D1F717E145314D50010C161 /* MenuController.h */,
+				8D1F717F145314D50010C161 /* MenuController.m */,
+				8DBDB1231466DEC600140217 /* BasicSearchController.h */,
+				8DBDB1241466DEC600140217 /* BasicSearchController.m */,
+				8DBDB1291466DF8B00140217 /* OrcishViewController.h */,
+				8DBDB12A1466DF8B00140217 /* OrcishViewController.m */,
+				8D5012C1146F5CA300D463D6 /* Card.h */,
+				8D5012C2146F5CA300D463D6 /* Card.m */,
+				8D0480A514700CDD001E183C /* CardViewController.h */,
+				8D0480A614700CDD001E183C /* CardViewController.m */,
+				8D40B9801472007800F3A4EC /* CardSequence.h */,
+				8D40B9811472007800F3A4EC /* CardSequence.m */,
+				8DE898D8147F32C50024E016 /* SearchCriteria.h */,
+				8DE898D9147F32C50024E016 /* SearchCriteria.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		8D1F7166145252460010C161 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				8D1DE81114775E1200D2A3C4 /* HTML */,
+				8DED6455146F08F700A787F4 /* Data */,
+				8DEDA2621453CD5A0094D837 /* Components */,
+				8D1F717414525BF00010C161 /* App Icons */,
+				8D1F7167145252460010C161 /* Toolbar Icons */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		8D1F7167145252460010C161 /* Toolbar Icons */ = {
+			isa = PBXGroup;
+			children = (
+				8D40B9861473E13D00F3A4EC /* Down.png */,
+				8D3049481474A82300928A5A /* Down@2x.png */,
+				8D40B9871473E13D00F3A4EC /* Up.png */,
+				8D3049491474A82300928A5A /* Up@2x.png */,
+				8D0480AA1470AC3A001E183C /* Back-Button.png */,
+				8D0480A81470ABBF001E183C /* Back-Button@2x.png */,
+				8D1F717014525BE50010C161 /* Menu-Button.png */,
+				8D1F717114525BE50010C161 /* Menu-Button@2x.png */,
+			);
+			name = "Toolbar Icons";
+			path = Images;
+			sourceTree = "<group>";
+		};
+		8D1F717414525BF00010C161 /* App Icons */ = {
+			isa = PBXGroup;
+			children = (
+				8D1F717514525BF00010C161 /* Icon-72.png */,
+				8D1F717614525BF00010C161 /* Icon.png */,
+				8D1F717714525BF00010C161 /* Icon@2x.png */,
+			);
+			path = "App Icons";
+			sourceTree = "<group>";
+		};
+		8DE898E41484645F0024E016 /* RegexKitLite */ = {
+			isa = PBXGroup;
+			children = (
+				8DE898E51484645F0024E016 /* RegexKitLite.h */,
+				8DE898E61484645F0024E016 /* RegexKitLite.m */,
+			);
+			name = RegexKitLite;
+			path = Other/RegexKitLite;
+			sourceTree = "<group>";
+		};
+		8DED6455146F08F700A787F4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8DE898E214832D820024E016 /* card-names.txt */,
+				8DED646D146F4E2000A787F4 /* cards.sqlite3 */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		8DED645A146F36F000A787F4 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				8DED645B146F374500A787F4 /* FMDatabase.h */,
+				8DED645C146F374500A787F4 /* FMDatabase.m */,
+				8DED645D146F374500A787F4 /* FMDatabaseAdditions.h */,
+				8DED645E146F374500A787F4 /* FMDatabaseAdditions.m */,
+				8DED645F146F374500A787F4 /* FMResultSet.h */,
+				8DED6460146F374500A787F4 /* FMResultSet.m */,
+			);
+			name = FMDB;
+			sourceTree = "<group>";
+		};
+		8DEDA2621453CD5A0094D837 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8D40B9841473543A00F3A4EC /* Linen-Background.png */,
+				8DE5D9901457A02000B6CAAF /* Menu-Section.png */,
+				8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */,
+				8DEDA268145578650094D837 /* Menu-Row-Selected.png */,
+				8DEDA269145578650094D837 /* Menu-Row-Selected@2x.png */,
+				8DEDA2631453CD5A0094D837 /* Menu-Row.png */,
+				8DEDA2641453CD5A0094D837 /* Menu-Row@2x.png */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D150EEE144FD41800141685 /* Orcish Librarian */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D150F2E144FD41800141685 /* Build configuration list for PBXNativeTarget "Orcish Librarian" */;
+			buildPhases = (
+				8D150EEB144FD41800141685 /* Sources */,
+				8D150EEC144FD41800141685 /* Frameworks */,
+				8D150EED144FD41800141685 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Orcish Librarian";
+			productName = "Orcish Librarian";
+			productReference = 8D150EEF144FD41800141685 /* Orcish Librarian.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8D150F1B144FD41800141685 /* Orcish LibrarianTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D150F31144FD41800141685 /* Build configuration list for PBXNativeTarget "Orcish LibrarianTests" */;
+			buildPhases = (
+				8D150F17144FD41800141685 /* Sources */,
+				8D150F18144FD41800141685 /* Frameworks */,
+				8D150F19144FD41800141685 /* Resources */,
+				8D150F1A144FD41800141685 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8D150F22144FD41800141685 /* PBXTargetDependency */,
+			);
+			name = "Orcish LibrarianTests";
+			productName = "Orcish LibrarianTests";
+			productReference = 8D150F1C144FD41800141685 /* Orcish LibrarianTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8D150EE6144FD41800141685 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = Orcish;
+			};
+			buildConfigurationList = 8D150EE9144FD41800141685 /* Build configuration list for PBXProject "Orcish Librarian" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8D150EE4144FD41800141685;
+			productRefGroup = 8D150EF0144FD41800141685 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D150EEE144FD41800141685 /* Orcish Librarian */,
+				8D150F1B144FD41800141685 /* Orcish LibrarianTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D150EED144FD41800141685 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D150F36144FEED800141685 /* OrcishRootController.xib in Resources */,
+				8D1F717214525BE50010C161 /* Menu-Button.png in Resources */,
+				8D1F717314525BE50010C161 /* Menu-Button@2x.png in Resources */,
+				8D1F717814525BF00010C161 /* Icon-72.png in Resources */,
+				8D1F717914525BF00010C161 /* Icon.png in Resources */,
+				8D1F717A14525BF00010C161 /* Icon@2x.png in Resources */,
+				8DEDA2651453CD5A0094D837 /* Menu-Row.png in Resources */,
+				8DEDA2661453CD5A0094D837 /* Menu-Row@2x.png in Resources */,
+				8DEDA26A145578650094D837 /* Menu-Row-Selected.png in Resources */,
+				8DEDA26B145578650094D837 /* Menu-Row-Selected@2x.png in Resources */,
+				8DE5D9921457A02000B6CAAF /* Menu-Section.png in Resources */,
+				8DE5D9931457A02000B6CAAF /* Menu-Section@2x.png in Resources */,
+				8DD02111146A2A26008C522A /* BasicSearchController.xib in Resources */,
+				8DED646E146F4E2000A787F4 /* cards.sqlite3 in Resources */,
+				8D0480A314700C42001E183C /* CardViewController.xib in Resources */,
+				8D0480A91470ABBF001E183C /* Back-Button@2x.png in Resources */,
+				8D0480AB1470AC3A001E183C /* Back-Button.png in Resources */,
+				8D40B9851473543A00F3A4EC /* Linen-Background.png in Resources */,
+				8D40B9881473E13D00F3A4EC /* Down.png in Resources */,
+				8D40B9891473E13D00F3A4EC /* Up.png in Resources */,
+				8D30494A1474A82300928A5A /* Down@2x.png in Resources */,
+				8D30494B1474A82300928A5A /* Up@2x.png in Resources */,
+				8D1DE81214775E1200D2A3C4 /* HTML in Resources */,
+				8DE898E314832D820024E016 /* card-names.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D150F19144FD41800141685 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D150F28144FD41800141685 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8D150F1A144FD41800141685 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D150EEB144FD41800141685 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D150F00144FD41800141685 /* main.m in Sources */,
+				8D150F3D144FF0C700141685 /* AppDelegate.m in Sources */,
+				8D150F3E144FF0C700141685 /* OrcishRootController.m in Sources */,
+				8D1F7180145314D50010C161 /* MenuController.m in Sources */,
+				8D1F71821453C4ED0010C161 /* Utility.m in Sources */,
+				8DBDB1251466DEC600140217 /* BasicSearchController.m in Sources */,
+				8DBDB12B1466DF8B00140217 /* OrcishViewController.m in Sources */,
+				8DED6461146F374500A787F4 /* FMDatabase.m in Sources */,
+				8DED6462146F374500A787F4 /* FMDatabaseAdditions.m in Sources */,
+				8DED6463146F374500A787F4 /* FMResultSet.m in Sources */,
+				8D5012C3146F5CA300D463D6 /* Card.m in Sources */,
+				8D0480A714700CDD001E183C /* CardViewController.m in Sources */,
+				8D40B9821472007800F3A4EC /* CardSequence.m in Sources */,
+				8DE898DA147F32C50024E016 /* SearchCriteria.m in Sources */,
+				8DE898E71484645F0024E016 /* RegexKitLite.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D150F17144FD41800141685 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D150F2B144FD41800141685 /* Orcish_LibrarianTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8D150F22144FD41800141685 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D150EEE144FD41800141685 /* Orcish Librarian */;
+			targetProxy = 8D150F21144FD41800141685 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8D150F26144FD41800141685 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8D150F27144FD41800141685 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8D150F2C144FD41800141685 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8D150F2D144FD41800141685 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8D150F2F144FD41800141685 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Orcish Librarian/Orcish Librarian-Prefix.pch";
+				INFOPLIST_FILE = "Orcish Librarian/Orcish Librarian-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8D150F30144FD41800141685 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Orcish Librarian/Orcish Librarian-Prefix.pch";
+				INFOPLIST_FILE = "Orcish Librarian/Orcish Librarian-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		8D150F32144FD41800141685 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Orcish Librarian.app/Orcish Librarian";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Orcish Librarian/Orcish Librarian-Prefix.pch";
+				INFOPLIST_FILE = "Orcish LibrarianTests/Orcish LibrarianTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		8D150F33144FD41800141685 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Orcish Librarian.app/Orcish Librarian";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Orcish Librarian/Orcish Librarian-Prefix.pch";
+				INFOPLIST_FILE = "Orcish LibrarianTests/Orcish LibrarianTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8D150EE9144FD41800141685 /* Build configuration list for PBXProject "Orcish Librarian" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D150F2C144FD41800141685 /* Debug */,
+				8D150F2D144FD41800141685 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D150F2E144FD41800141685 /* Build configuration list for PBXNativeTarget "Orcish Librarian" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D150F2F144FD41800141685 /* Debug */,
+				8D150F30144FD41800141685 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D150F31144FD41800141685 /* Build configuration list for PBXNativeTarget "Orcish LibrarianTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D150F32144FD41800141685 /* Debug */,
+				8D150F33144FD41800141685 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8D150EE6144FD41800141685 /* Project object */;
+}

@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	Card Search - Search: "Legions" - Gatherer - Magic: The Gathering
+</title><link rel="shortcut icon" href="/Images/favicon.ico" /><meta name="description" content="Gatherer is the Magic Card Database. Search for the perfect addition to your deck. Browse through cards from Magic's entire history. See cards from the most recent sets and discover what players just like you are saying about them." /><meta name="keywords" content="monitor, gatherer, magic cards, magic the gathering, black lotus, magic: the gathering, wizards of the coast, wizards, trading card game, trading cards, collectible card game, tcg, ccg, magic sets, game, multiplayer, hobby" />
+    
+    <!-- google analytics -->
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker("UA-15020098-7");
+    pageTracker._setDomainName(".wizards.com");
+    pageTracker._trackPageview();
+    } catch(err) {}
+    </script>
+<link type="text/css" rel="stylesheet" media="screen" href="../../Styles/Styles.css" /><link href="/WebResource.axd?d=GRnNg3t4K46DgrIFhLf_9NAuUGNb9hPC5E3VRvvs03EEanuwjppIYb1ygZbulkgS4u5w9pKS9Yy4Yj6i6DYt9MPjPepf71AnWzo4xZTSDC41&amp;amp;t=634568892731759463" rel="icon" type="image/ico" /></head>
+<body>
+    
+
+    <form name="aspnetForm" method="post" action="Default.aspx?output=checklist&amp;set=%5b%22Legions%22%5d&amp;special=true" id="aspnetForm">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTEyMjI5ODM3NzhkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYDBTtjdGwwMCRjdGwwMCRjdGwwMCRNYWluQ29udGVudCRTZWFyY2hDb250cm9scyRTZWFyY2hDYXJkTmFtZQU8Y3RsMDAkY3RsMDAkY3RsMDAkTWFpbkNvbnRlbnQkU2VhcmNoQ29udHJvbHMkU2VhcmNoQ2FyZFR5cGVzBTtjdGwwMCRjdGwwMCRjdGwwMCRNYWluQ29udGVudCRTZWFyY2hDb250cm9scyRTZWFyY2hDYXJkVGV4dD0NS4S5r9zRScS2OJsvcAmvOCzV" />
+
+
+<script src="../../Scripts/Prototype.js" type="text/javascript"></script>
+<script src="../../Scripts/Utilities.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+var addSearchConditionHandler = '/Handlers/AdvancedQuery.ashx';
+var CardDatabaseSettings = 'CardDatabaseSettings';
+var SelectingCardAction = 'NavigatesToCard';
+var inlineCardSearchHandler = '/Handlers/InlineCardSearch.ashx';
+var autoCompleteGroupBy = 'None';
+var imageHandler = '/Handlers/Image.ashx';
+var cardSearchPage = '/Pages/Search/Default.aspx';
+var cardDetailsPage = '/Pages/Card/Details.aspx';
+var UtilitiesHandler = '/Handlers/RPCUtilities.ashx';
+
+var enableCardSearchAutoComplete = true;
+var enableHintText = true;
+var enableCardSearchAutoCompleteIfNameUnchecked = false;
+
+
+
+function ClientIDs() {}
+ClientIDs.MainForm = 'aspnetForm';
+ClientIDs.MainContainer = 'ctl00_ctl00_ctl00_MainContainer';
+ClientIDs.TopBannerAdvertisementCMS = 'ctl00_ctl00_ctl00_TopBannerAdvertisementCMS';
+ClientIDs.gathererIntroText = 'ctl00_ctl00_ctl00_gathererIntroText';
+ClientIDs.gathererWelcome = 'ctl00_ctl00_ctl00_gathererWelcome';
+ClientIDs.MainContent = 'ctl00_ctl00_ctl00_MainContent';
+ClientIDs.NavigationLinks = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks';
+ClientIDs.NavigationAnchorsContainer = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_NavigationAnchorsContainer';
+ClientIDs.Simple = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Simple';
+ClientIDs.Advanced = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Advanced';
+ClientIDs.Random = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Random';
+ClientIDs.Settings = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Settings';
+ClientIDs.Language = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Language';
+ClientIDs.Help = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Help';
+ClientIDs.Configuration = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Configuration';
+ClientIDs.SearchControls = 'ctl00_ctl00_ctl00_MainContent_SearchControls';
+ClientIDs.SearchBoxContainer = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxContainer';
+ClientIDs.CardSearchBoxParent = 'ctl00_ctl00_ctl00_MainContent_SearchControls_CardSearchBoxParent';
+ClientIDs.CardSearchBox = 'ctl00_ctl00_ctl00_MainContent_SearchControls_CardSearchBoxParent_CardSearchBox';
+ClientIDs.searchSubmitButton = 'ctl00_ctl00_ctl00_MainContent_SearchControls_searchSubmitButton';
+ClientIDs.SearchBoxResults = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxResults';
+ClientIDs.SearchBoxResultsTitle = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxResultsTitle';
+ClientIDs.SearchBoxResultsContent = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxResultsContent';
+ClientIDs.AllResultsLink = 'ctl00_ctl00_ctl00_MainContent_SearchControls_AllResultsLink';
+ClientIDs.SearchSettings = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchSettings';
+ClientIDs.searchControlsContainer = 'ctl00_ctl00_ctl00_MainContent_SearchControls_searchControlsContainer';
+ClientIDs.SearchCardName = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchCardName';
+ClientIDs.SearchCardTypes = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchCardTypes';
+ClientIDs.SearchCardText = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchCardText';
+ClientIDs.SubContent = 'ctl00_ctl00_ctl00_MainContent_SubContent';
+ClientIDs.SubContentHeader = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContentHeader';
+ClientIDs.searchTermDisplay = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContentHeader_searchTermDisplay';
+ClientIDs.SubContentAnchors = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContentAnchors';
+ClientIDs.topPagingControlsContainer = 'ctl00_ctl00_ctl00_MainContent_SubContent_topPagingControlsContainer';
+ClientIDs.previousSearch = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch';
+ClientIDs.prevSearchContainer = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_prevSearchContainer';
+ClientIDs.encodedSerializedParameters = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_encodedSerializedParameters';
+ClientIDs.filterSubmit = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_filterSubmit';
+ClientIDs.ajaxIndicatorImage = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_ajaxIndicatorImage';
+ClientIDs.extraBreaks = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_extraBreaks';
+ClientIDs.searchResultsContainer = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_searchResultsContainer';
+ClientIDs.sortDisplay = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sortDisplay';
+ClientIDs.searchControls = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_searchControls';
+ClientIDs.sorter = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter';
+ClientIDs.currentSort = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_currentSort';
+ClientIDs.sortBy = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_sortBy';
+ClientIDs.sortOrder = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_sortOrder';
+ClientIDs.addSort = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_addSort';
+ClientIDs.loadPreviousLink = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_loadPreviousLink';
+ClientIDs.switcher = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher';
+ClientIDs.switchStandard = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchStandard';
+ClientIDs.switchView = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchView';
+ClientIDs.switchTextChecklist = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchTextChecklist';
+ClientIDs.switchVisualSpoiler = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchVisualSpoiler';
+ClientIDs.switchTextSpoiler = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchTextSpoiler';
+ClientIDs.Nicknames = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_Nicknames';
+ClientIDs.Nickname = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_Nickname';
+ClientIDs.listRepeater = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_listRepeater';
+ClientIDs.cardRecord = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_listRepeater_ctl00_cardRecord';
+ClientIDs.DidYouMean = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_DidYouMean';
+ClientIDs.DidYouMeanText = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_DidYouMeanText';
+ClientIDs.DidYouMeanCandidates = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_DidYouMeanCandidates';
+ClientIDs.bottomPagingControlsContainer = 'ctl00_ctl00_ctl00_MainContent_SubContent_bottomPagingControlsContainer';
+ClientIDs.loginLinkPlaceholder = 'ctl00_ctl00_ctl00_loginLinkPlaceholder';
+ClientIDs.CopyrightYear = 'ctl00_ctl00_ctl00_CopyrightYear';
+ClientIDs.RightBannerAdvertisement = 'ctl00_ctl00_ctl00_RightBannerAdvertisement';
+var textBoxHash = new Hash( { ctl00_ctl00_ctl00_MainContent_SearchControls_CardSearchBoxParent_CardSearchBox: 'Search Terms...' } );//]]>
+</script>
+
+<script src="../../Scripts/Constants.js" type="text/javascript"></script>
+<script src="../../Scripts/CardDatabase.js" type="text/javascript"></script>
+<script src="../../Scripts/AdvancedSearch.js" type="text/javascript"></script>
+<script src="../../Scripts/SearchControls.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+Event.observe(window, 'load', RetrieveCurrentSearchConditions);
+//]]>
+</script>
+
+    <div style="width: 100%; height: 1px;">
+    </div>
+    <div id="ctl00_ctl00_ctl00_MainContainer" class="mainContainer">
+        <div class="leftContainer">
+            <div id="ctl00_ctl00_ctl00_TopBannerAdvertisementCMS" class="topBanner"><body docname="mtg_gatherer_banner_advertisement" doclang="en" xmlPath="" useDate="12/12/2011">
+  <p>
+    <a href="http://www.wizards.com/Magic/Novels/Product.aspx?x=mtg/novels/product/pathoftheplaneswalker2">
+      <img src="http://media.wizards.com/images/magic/daily/ads/pathII_728.jpg" />
+    </a>
+  </p>
+</body></div>
+            <div class="background">
+                <div class="top">
+                    <div class="left">
+                    </div>
+                    <div class="middle">
+                    </div>
+                    <div class="right">
+                    </div>
+                </div>
+                <div class="center">
+                    <div class="middle">
+                        <div class="middleright">
+                            <div class="gathererContent">
+                                
+
+<div class="logo">
+    <a class="magic" href="http://www.magicthegathering.com"></a>
+	<a href="../Default.aspx" class="cardDatabase"></a>
+</div>
+
+                                
+                                
+    <div id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_NavigationAnchorsContainer" class="searchcontrollinks">
+    <a href="../Default.aspx" id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_Simple" class="current">Simple</a>
+    <a href="../Advanced.aspx" id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_Advanced">Advanced</a>
+    <a href="../Card/Details.aspx?action=random" id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_Random">Random Card</a>
+    <a href="../Settings.aspx" id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_Settings">Settings</a>
+    <a href="../Language.aspx" id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_Language">Language</a>
+    <a href="../Help.aspx" id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_Help">Help</a>
+    
+</div>
+
+    
+    
+<div class="searchcontrols">
+    <div id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxContainer" class="searchboxcontainertop">
+        
+
+<div class="textbox" id="ctl00_ctl00_ctl00_MainContent_SearchControls_CardSearchBoxParent" style=""><input name="ctl00$ctl00$ctl00$MainContent$SearchControls$CardSearchBoxParent$CardSearchBox" type="text" id="ctl00_ctl00_ctl00_MainContent_SearchControls_CardSearchBoxParent_CardSearchBox" class="textboxinput" onblur="SetCurrentControlBlur(event)" onfocus="SetCurrentControlFocus(event, this);" autocomplete="off" maxlength="50" /></div>
+    </div>
+    <div class="searchsubmit">
+        <input type="submit" name="ctl00$ctl00$ctl00$MainContent$SearchControls$searchSubmitButton" value="Search" id="ctl00_ctl00_ctl00_MainContent_SearchControls_searchSubmitButton" class="searchbutton" />
+    </div>
+    <br class="clear" />
+    <!-- Autocomplete Results -->
+    <div id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxResults" class="searchresultscontainertop">
+        <div class="smallGreyBorder">
+            <b class="ct"><b></b></b>
+            <div class="simpleRoundedBoxTitleGrey">
+                <span id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxResultsTitle" class="boldtitle">Results </span>
+            </div>
+            <div id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxResultsContent" style="background-color: #b7b7b7;">
+            </div>
+            <div class="simpleRoundedBoxFooterGrey">
+                <span><a href="javascript:void(0);" id="ctl00_ctl00_ctl00_MainContent_SearchControls_AllResultsLink" class="autoCompleteAllResults">
+                    All Results</a></span></div>
+            <b class="cc"><b></b></b>
+        </div>
+    </div>
+    <!-- /Autocomplete Results -->
+    <!-- Search Settings -->
+    <div id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchSettings" class="searchsettingsdisplaytop">
+        <div class="searchsettings">
+            <a href="javascript:void(0);" onclick="SaveVisibleArea(event, this, ClientIDs.searchControlsContainer, 'searchControlsContainer', false); return ToggleSearchSettings(event, this);"
+                class="expandedNode"><b>using...</b></a>
+            <div id="ctl00_ctl00_ctl00_MainContent_SearchControls_searchControlsContainer">
+            <ul>
+                <li>
+                    <input name="ctl00$ctl00$ctl00$MainContent$SearchControls$SearchCardName" type="checkbox" id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchCardName" checked="checked" onclick="UpdateSimpleSearchFields" />
+                    Name</li>
+                <li>
+                    <input name="ctl00$ctl00$ctl00$MainContent$SearchControls$SearchCardTypes" type="checkbox" id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchCardTypes" onclick="UpdateSimpleSearchFields" />
+                    Types</li>
+                <li>
+                    <input name="ctl00$ctl00$ctl00$MainContent$SearchControls$SearchCardText" type="checkbox" id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchCardText" onclick="UpdateSimpleSearchFields" />
+                    Text</li>
+            </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Search Settings -->
+</div>
+    <br class="clear" />
+    
+    
+    <div class="contentcontainer">
+        <div class="smallGreyBorder">
+            <b class="dt"><b></b></b>
+            <div class="simpleRoundedBoxTitleGreyTall">
+                <div class="contentTitle">
+                    
+Search:<span id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContentHeader_searchTermDisplay"><i>"Legions"</i>  (145)</span>
+
+                </div>
+                
+                
+                <div class="pagingcontrols">
+                    <div id="ctl00_ctl00_ctl00_MainContent_SubContent_topPagingControlsContainer" class="paging">
+                    </div>
+                </div>
+            </div>
+            
+    
+<div class="filterList">
+<div id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_prevSearchContainer" class="smallGreyBorderBottom">
+    <a class="expandedNode" href="javascript:void(0);" onclick="SaveVisibleArea(event, this, 'filterControls', 'filterControls', false); return ToggleFilterOptions(event, this);">
+    <b>Search Criteria</b>
+    </a>
+    <div id="filterControls">
+        <input name="ctl00$ctl00$ctl00$MainContent$SubContent$SubContent$previousSearch$encodedSerializedParameters" type="hidden" id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_encodedSerializedParameters" />
+        
+        <div id="ajaxIndicator" class="indicator" style="display: none;">
+            <img id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_ajaxIndicatorImage" src="../../Images/ajax_indicator.gif" alt="Updating..." border="0" />
+            Updating search parameters...
+        </div>
+        
+        <div id="displayFilters" class="filters">None yet.</div>
+    </div>
+</div>
+</div>
+    <div id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_searchResultsContainer">
+
+<div class="cardList">
+    <!-- Options Container -->
+    <div class="smallGreyBorderBottom">
+        &nbsp;<a class="expandedNode" onclick="SaveVisibleArea(event, this, 'searchControls', 'searchControls', false); return ToggleSearchOptions(event, this);"
+            href="javascript:void(0);"><b>Search Result Options</b></a>
+        
+        <div id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_searchControls" class="controls" style="display:block;">
+            
+
+<div class="sorter">
+    <span class="sortField">special (asc) <span><a class="remove" href="/Pages/Search/Default.aspx?output=checklist&amp;set=%5b%22Legions%22%5d&amp;special=true&amp;removesortkey=special">x</a></span></span> > <span class="sortField">Name (asc) <span><a class="remove" href="/Pages/Search/Default.aspx?output=checklist&amp;set=%5b%22Legions%22%5d&amp;special=true&amp;removesortkey=abc">x</a></span></span>
+    <ul class="opts">
+        <li>
+            Additional Sort:
+            
+            <select name="ctl00$ctl00$ctl00$MainContent$SubContent$SubContent$ctl00$sorter$sortBy" id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_sortBy">
+	<option value="cn">Collector's Number</option>
+	<option value="color">Color</option>
+	<option value="mana">Color Weight</option>
+	<option value="rating">Community Rating</option>
+	<option value="cmc">Converted Mana Cost</option>
+	<option value="abc">Name</option>
+	<option value="p">Power</option>
+	<option value="rarity">Rarity</option>
+	<option value="t">Toughness</option>
+</select>
+
+            <select name="ctl00$ctl00$ctl00$MainContent$SubContent$SubContent$ctl00$sorter$sortOrder" id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_sortOrder">
+	<option value="asc">Ascending</option>
+	<option value="desc">Descending</option>
+</select>
+            <input type="submit" name="ctl00$ctl00$ctl00$MainContent$SubContent$SubContent$ctl00$sorter$addSort" value="Add" id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_addSort" />
+        </li>
+    </ul>
+    <br />
+    <a href="/Pages/Advanced.aspx?action=advanced&set=[&quot;Legions&quot;]&output=checklist&special=true" id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_loadPreviousLink" class="refineSearchLink">Refine Search</a>
+</div>
+            
+    
+<div class="switcher">
+    <a id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchStandard" href="Default.aspx?output=standard&amp;set=%5b%22Legions%22%5d&amp;special=true">Switch to Standard</a>
+
+    <a id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchView" href="Default.aspx?output=compact&amp;set=%5b%22Legions%22%5d&amp;special=true">Switch to Compact</a>
+
+    <a id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchTextChecklist" href="Default.aspx?output=checklist&amp;set=%5b%22Legions%22%5d&amp;special=true" style="text-decoration:underline;">Switch to Checklist</a>
+
+    <a id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchVisualSpoiler" href="Default.aspx?output=spoiler&amp;method=visual&amp;set=%5b%22Legions%22%5d&amp;special=true">Switch to Visual Spoiler</a>
+
+    <a id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchTextSpoiler" href="Default.aspx?output=spoiler&amp;method=text&amp;set=%5b%22Legions%22%5d&amp;special=true">Switch to Text Spoiler</a>  
+</div>
+
+        </div>
+        <div class="clear">
+        </div>
+        <b class="bb"><b></b></b>
+    </div>
+    <!-- End Options Container -->
+    
+    <table cellspacing="0" cellpadding="2" class="checklist">
+        <tr class="headerRow">
+            <td class="headerCell">#</td>
+            <td class="headerCell">Name</td>
+            <td class="headerCell">Artist</td>
+            <td class="headerCell">Color</td>
+            <td class="headerCell">Rarity</td>
+            <td class="headerCell">Set</td>
+        </tr>
+        
+                <tr class="cardItem"><td class="number">1</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42049" onclick="return CardLinkAction(event, this, 'SameWindow');">Akroma, Angel of Wrath</a></td><td class="artist">Ron Spears</td><td class="color">White</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">2</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44747" onclick="return CardLinkAction(event, this, 'SameWindow');">Akroma's Devoted</a></td><td class="artist">Dave Dorman</td><td class="color">White</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">59</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42060" onclick="return CardLinkAction(event, this, 'SameWindow');">Aphetto Exterminator</a></td><td class="artist">Scott M. Fischer</td><td class="color">Black</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">30</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44325" onclick="return CardLinkAction(event, this, 'SameWindow');">Aven Envoy</a></td><td class="artist">Alex Horley-Orlandelli</td><td class="color">Blue</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">3</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=43497" onclick="return CardLinkAction(event, this, 'SameWindow');">Aven Redeemer</a></td><td class="artist">Tim Hildebrandt</td><td class="color">White</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">4</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45838" onclick="return CardLinkAction(event, this, 'SameWindow');">Aven Warhawk</a></td><td class="artist">Glen Angus</td><td class="color">White</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">60</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44493" onclick="return CardLinkAction(event, this, 'SameWindow');">Bane of the Living</a></td><td class="artist">Justin Sweet</td><td class="color">Black</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">5</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44496" onclick="return CardLinkAction(event, this, 'SameWindow');">Beacon of Destiny</a></td><td class="artist">Tim Hildebrandt</td><td class="color">White</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">117</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44334" onclick="return CardLinkAction(event, this, 'SameWindow');">Berserk Murlodont</a></td><td class="artist">Arnie Swekel</td><td class="color">Green</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">88</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42016" onclick="return CardLinkAction(event, this, 'SameWindow');">Blade Sliver</a></td><td class="artist">David Martin</td><td class="color">Red</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">61</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44206" onclick="return CardLinkAction(event, this, 'SameWindow');">Blood Celebrant</a></td><td class="artist">Ben Thompson</td><td class="color">Black</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">89</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44209" onclick="return CardLinkAction(event, this, 'SameWindow');">Bloodstoke Howler</a></td><td class="artist">Christopher Moeller</td><td class="color">Red</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">118</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=37909" onclick="return CardLinkAction(event, this, 'SameWindow');">Branchsnap Lorian</a></td><td class="artist">Heather Hudson</td><td class="color">Green</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">119</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45133" onclick="return CardLinkAction(event, this, 'SameWindow');">Brontotherium</a></td><td class="artist">Carl Critchlow</td><td class="color">Green</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">120</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=39738" onclick="return CardLinkAction(event, this, 'SameWindow');">Brood Sliver</a></td><td class="artist">Ron Spears</td><td class="color">Green</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">121</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42187" onclick="return CardLinkAction(event, this, 'SameWindow');">Caller of the Claw</a></td><td class="artist">Matt Cavotta</td><td class="color">Green</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">122</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45849" onclick="return CardLinkAction(event, this, 'SameWindow');">Canopy Crawler</a></td><td class="artist">Anthony S. Waters</td><td class="color">Green</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">6</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42271" onclick="return CardLinkAction(event, this, 'SameWindow');">Celestial Gatekeeper</a></td><td class="artist">Christopher Moeller</td><td class="color">White</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">31</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=29717" onclick="return CardLinkAction(event, this, 'SameWindow');">Cephalid Pathmage</a></td><td class="artist">Alex Horley-Orlandelli</td><td class="color">Blue</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">32</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44205" onclick="return CardLinkAction(event, this, 'SameWindow');">Chromeshell Crab</a></td><td class="artist">Ron Spencer</td><td class="color">Blue</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">90</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42277" onclick="return CardLinkAction(event, this, 'SameWindow');">Clickslither</a></td><td class="artist">Kev Walker</td><td class="color">Red</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">7</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45839" onclick="return CardLinkAction(event, this, 'SameWindow');">Cloudreach Cavalry</a></td><td class="artist">Kev Walker</td><td class="color">White</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">62</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44279" onclick="return CardLinkAction(event, this, 'SameWindow');">Corpse Harvester</a></td><td class="artist">Mark Tedin</td><td class="color">Black</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">33</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=30659" onclick="return CardLinkAction(event, this, 'SameWindow');">Covert Operative</a></td><td class="artist">Kev Walker</td><td class="color">Blue</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">91</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45127" onclick="return CardLinkAction(event, this, 'SameWindow');">Crested Craghorn</a></td><td class="artist">Matt Cavotta</td><td class="color">Red</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">34</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42172" onclick="return CardLinkAction(event, this, 'SameWindow');">Crookclaw Elder</a></td><td class="artist">Ron Spencer</td><td class="color">Blue</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">63</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42033" onclick="return CardLinkAction(event, this, 'SameWindow');">Crypt Sliver</a></td><td class="artist">Edward P. Beard, Jr.</td><td class="color">Black</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">64</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42077" onclick="return CardLinkAction(event, this, 'SameWindow');">Dark Supplicant</a></td><td class="artist">Mark Zug</td><td class="color">Black</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">8</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42053" onclick="return CardLinkAction(event, this, 'SameWindow');">Daru Mender</a></td><td class="artist">Ben Thompson</td><td class="color">White</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">9</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44504" onclick="return CardLinkAction(event, this, 'SameWindow');">Daru Sanctifier</a></td><td class="artist">Tony Szczudlo</td><td class="color">White</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">10</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42278" onclick="return CardLinkAction(event, this, 'SameWindow');">Daru Stinger</a></td><td class="artist">Greg Staples</td><td class="color">White</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">65</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=35249" onclick="return CardLinkAction(event, this, 'SameWindow');">Deathmark Prelate</a></td><td class="artist">Tony Szczudlo</td><td class="color">Black</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">11</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44329" onclick="return CardLinkAction(event, this, 'SameWindow');">Defender of the Order</a></td><td class="artist">Darrell Riche</td><td class="color">White</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">123</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=39707" onclick="return CardLinkAction(event, this, 'SameWindow');">Defiant Elf</a></td><td class="artist">Pete Venters</td><td class="color">Green</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">12</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45132" onclick="return CardLinkAction(event, this, 'SameWindow');">Deftblade Elite</a></td><td class="artist">Alan Pollack</td><td class="color">White</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">35</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44300" onclick="return CardLinkAction(event, this, 'SameWindow');">Dermoplasm</a></td><td class="artist">John Avon</td><td class="color">Blue</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">36</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44840" onclick="return CardLinkAction(event, this, 'SameWindow');">Dreamborn Muse</a></td><td class="artist">Kev Walker</td><td class="color">Blue</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">66</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44492" onclick="return CardLinkAction(event, this, 'SameWindow');">Drinker of Sorrow</a></td><td class="artist">Carl Critchlow</td><td class="color">Black</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">67</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44316" onclick="return CardLinkAction(event, this, 'SameWindow');">Dripping Dead</a></td><td class="artist">Thomas M. Baxa</td><td class="color">Black</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">68</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42171" onclick="return CardLinkAction(event, this, 'SameWindow');">Earthblighter</a></td><td class="artist">Alex Horley-Orlandelli</td><td class="color">Black</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">37</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42059" onclick="return CardLinkAction(event, this, 'SameWindow');">Echo Tracer</a></td><td class="artist">Scott M. Fischer</td><td class="color">Blue</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">124</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42083" onclick="return CardLinkAction(event, this, 'SameWindow');">Elvish Soultiller</a></td><td class="artist">Ron Spears</td><td class="color">Green</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">69</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=43724" onclick="return CardLinkAction(event, this, 'SameWindow');">Embalmed Brawler</a></td><td class="artist">Justin Sweet</td><td class="color">Black</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">125</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44500" onclick="return CardLinkAction(event, this, 'SameWindow');">Enormous Baloth</a></td><td class="artist">Mark Tedin</td><td class="color">Green</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">13</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42025" onclick="return CardLinkAction(event, this, 'SameWindow');">Essence Sliver</a></td><td class="artist">Glen Angus</td><td class="color">White</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">126</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=34263" onclick="return CardLinkAction(event, this, 'SameWindow');">Feral Throwback</a></td><td class="artist">Carl Critchlow</td><td class="color">Green</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">92</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=43523" onclick="return CardLinkAction(event, this, 'SameWindow');">Flamewave Invoker</a></td><td class="artist">Dave Dorman</td><td class="color">Red</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">93</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42028" onclick="return CardLinkAction(event, this, 'SameWindow');">Frenetic Raptor</a></td><td class="artist">Daren Bader</td><td class="color">Red</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">38</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42160" onclick="return CardLinkAction(event, this, 'SameWindow');">Fugitive Wizard</a></td><td class="artist">Jim Nelson</td><td class="color">Blue</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">14</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=43791" onclick="return CardLinkAction(event, this, 'SameWindow');">Gempalm Avenger</a></td><td class="artist">Tim Hildebrandt</td><td class="color">White</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">94</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42066" onclick="return CardLinkAction(event, this, 'SameWindow');">Gempalm Incinerator</a></td><td class="artist">Luca Zontini</td><td class="color">Red</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">70</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42065" onclick="return CardLinkAction(event, this, 'SameWindow');">Gempalm Polluter</a></td><td class="artist">Dany Orizio</td><td class="color">Black</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">39</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42064" onclick="return CardLinkAction(event, this, 'SameWindow');">Gempalm Sorcerer</a></td><td class="artist">Greg Hildebrandt</td><td class="color">Blue</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">127</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42067" onclick="return CardLinkAction(event, this, 'SameWindow');">Gempalm Strider</a></td><td class="artist">Tim Hildebrandt</td><td class="color">Green</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">71</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42178" onclick="return CardLinkAction(event, this, 'SameWindow');">Ghastly Remains</a></td><td class="artist">Edward P. Beard, Jr.</td><td class="color">Black</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">40</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44204" onclick="return CardLinkAction(event, this, 'SameWindow');">Glintwing Invoker</a></td><td class="artist">Jim Nelson</td><td class="color">Blue</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">128</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=43723" onclick="return CardLinkAction(event, this, 'SameWindow');">Glowering Rogon</a></td><td class="artist">Kev Walker</td><td class="color">Green</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">15</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42073" onclick="return CardLinkAction(event, this, 'SameWindow');">Glowrider</a></td><td class="artist">Scott M. Fischer</td><td class="color">White</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">95</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44656" onclick="return CardLinkAction(event, this, 'SameWindow');">Goblin Assassin</a></td><td class="artist">Dave Dorman</td><td class="color">Red</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">96</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44317" onclick="return CardLinkAction(event, this, 'SameWindow');">Goblin Clearcutter</a></td><td class="artist">Eric Peterson</td><td class="color">Red</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">97</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42274" onclick="return CardLinkAction(event, this, 'SameWindow');">Goblin Dynamo</a></td><td class="artist">Ron Spencer</td><td class="color">Red</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">98</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44286" onclick="return CardLinkAction(event, this, 'SameWindow');">Goblin Firebug</a></td><td class="artist">Christopher Moeller</td><td class="color">Red</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">99</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=39888" onclick="return CardLinkAction(event, this, 'SameWindow');">Goblin Goon</a></td><td class="artist">Greg Staples</td><td class="color">Red</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">100</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45125" onclick="return CardLinkAction(event, this, 'SameWindow');">Goblin Grappler</a></td><td class="artist">Christopher Moeller</td><td class="color">Red</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">101</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45123" onclick="return CardLinkAction(event, this, 'SameWindow');">Goblin Lookout</a></td><td class="artist">Jim Nelson</td><td class="color">Red</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">72</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44294" onclick="return CardLinkAction(event, this, 'SameWindow');">Goblin Turncoat</a></td><td class="artist">Jim Nelson</td><td class="color">Black</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">73</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44841" onclick="return CardLinkAction(event, this, 'SameWindow');">Graveborn Muse</a></td><td class="artist">Kev Walker</td><td class="color">Black</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">74</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44299" onclick="return CardLinkAction(event, this, 'SameWindow');">Havoc Demon</a></td><td class="artist">Thomas M. Baxa</td><td class="color">Black</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">75</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=8829" onclick="return CardLinkAction(event, this, 'SameWindow');">Hollow Specter</a></td><td class="artist">rk post</td><td class="color">Black</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">129</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42249" onclick="return CardLinkAction(event, this, 'SameWindow');">Hundroog</a></td><td class="artist">Wayne England</td><td class="color">Green</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">102</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44772" onclick="return CardLinkAction(event, this, 'SameWindow');">Hunter Sliver</a></td><td class="artist">Kev Walker</td><td class="color">Red</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">103</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44623" onclick="return CardLinkAction(event, this, 'SameWindow');">Imperial Hellkite</a></td><td class="artist">Matt Cavotta</td><td class="color">Red</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">76</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44411" onclick="return CardLinkAction(event, this, 'SameWindow');">Infernal Caretaker</a></td><td class="artist">Christopher Moeller</td><td class="color">Black</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">41</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=35335" onclick="return CardLinkAction(event, this, 'SameWindow');">Keeneye Aven</a></td><td class="artist">Greg Hildebrandt</td><td class="color">Blue</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">42</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44626" onclick="return CardLinkAction(event, this, 'SameWindow');">Keeper of the Nine Gales</a></td><td class="artist">Jim Nelson</td><td class="color">Blue</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">104</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=39653" onclick="return CardLinkAction(event, this, 'SameWindow');">Kilnmouth Dragon</a></td><td class="artist">Carl Critchlow</td><td class="color">Red</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">130</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=35166" onclick="return CardLinkAction(event, this, 'SameWindow');">Krosan Cloudscraper</a></td><td class="artist">Ron Spears</td><td class="color">Green</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">131</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45134" onclick="return CardLinkAction(event, this, 'SameWindow');">Krosan Vorine</a></td><td class="artist">Carl Critchlow</td><td class="color">Green</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">105</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44842" onclick="return CardLinkAction(event, this, 'SameWindow');">Lavaborn Muse</a></td><td class="artist">Brian Snoddy</td><td class="color">Red</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">16</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=39603" onclick="return CardLinkAction(event, this, 'SameWindow');">Liege of the Axe</a></td><td class="artist">Christopher Moeller</td><td class="color">White</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">17</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45131" onclick="return CardLinkAction(event, this, 'SameWindow');">Lowland Tracker</a></td><td class="artist">Brian Snoddy</td><td class="color">White</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">106</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42440" onclick="return CardLinkAction(event, this, 'SameWindow');">Macetail Hystrodon</a></td><td class="artist">Daren Bader</td><td class="color">Red</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">107</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42041" onclick="return CardLinkAction(event, this, 'SameWindow');">Magma Sliver</a></td><td class="artist">Wayne England</td><td class="color">Red</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">43</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42068" onclick="return CardLinkAction(event, this, 'SameWindow');">Master of the Veil</a></td><td class="artist">Ron Spears</td><td class="color">Blue</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">44</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44501" onclick="return CardLinkAction(event, this, 'SameWindow');">Merchant of Secrets</a></td><td class="artist">Greg Hildebrandt</td><td class="color">Blue</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">45</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=43721" onclick="return CardLinkAction(event, this, 'SameWindow');">Mistform Seaswift</a></td><td class="artist">Dany Orizio</td><td class="color">Blue</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">46</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42037" onclick="return CardLinkAction(event, this, 'SameWindow');">Mistform Sliver</a></td><td class="artist">Ben Thompson</td><td class="color">Blue</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">47</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45840" onclick="return CardLinkAction(event, this, 'SameWindow');">Mistform Ultimus</a></td><td class="artist">Anthony S. Waters</td><td class="color">Blue</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">48</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42165" onclick="return CardLinkAction(event, this, 'SameWindow');">Mistform Wakecaster</a></td><td class="artist">Glen Angus</td><td class="color">Blue</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">132</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44210" onclick="return CardLinkAction(event, this, 'SameWindow');">Nantuko Vigilante</a></td><td class="artist">Alex Horley-Orlandelli</td><td class="color">Green</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">133</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42039" onclick="return CardLinkAction(event, this, 'SameWindow');">Needleshot Gourna</a></td><td class="artist">Edward P. Beard, Jr.</td><td class="color">Green</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">77</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44276" onclick="return CardLinkAction(event, this, 'SameWindow');">Noxious Ghoul</a></td><td class="artist">Luca Zontini</td><td class="color">Black</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">134</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42057" onclick="return CardLinkAction(event, this, 'SameWindow');">Patron of the Wild</a></td><td class="artist">Dave Dorman</td><td class="color">Green</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">78</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=40545" onclick="return CardLinkAction(event, this, 'SameWindow');">Phage the Untouchable</a></td><td class="artist">Ron Spears</td><td class="color">Black</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">18</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44323" onclick="return CardLinkAction(event, this, 'SameWindow');">Planar Guide</a></td><td class="artist">Eric Peterson</td><td class="color">White</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">19</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42017" onclick="return CardLinkAction(event, this, 'SameWindow');">Plated Sliver</a></td><td class="artist">Greg Staples</td><td class="color">White</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">135</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42272" onclick="return CardLinkAction(event, this, 'SameWindow');">Primal Whisperer</a></td><td class="artist">Greg Staples</td><td class="color">Green</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">49</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42437" onclick="return CardLinkAction(event, this, 'SameWindow');">Primoc Escapee</a></td><td class="artist">Tony Szczudlo</td><td class="color">Blue</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">136</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42029" onclick="return CardLinkAction(event, this, 'SameWindow');">Quick Sliver</a></td><td class="artist">John Avon</td><td class="color">Green</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">108</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=39566" onclick="return CardLinkAction(event, this, 'SameWindow');">Ridgetop Raptor</a></td><td class="artist">Daren Bader</td><td class="color">Red</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">50</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=39733" onclick="return CardLinkAction(event, this, 'SameWindow');">Riptide Director</a></td><td class="artist">Scott M. Fischer</td><td class="color">Blue</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">51</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=39914" onclick="return CardLinkAction(event, this, 'SameWindow');">Riptide Mangler</a></td><td class="artist">Arnie Swekel</td><td class="color">Blue</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">109</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=39736" onclick="return CardLinkAction(event, this, 'SameWindow');">Rockshard Elemental</a></td><td class="artist">Anthony S. Waters</td><td class="color">Red</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">137</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44271" onclick="return CardLinkAction(event, this, 'SameWindow');">Root Sliver</a></td><td class="artist">Matt Thompson</td><td class="color">Green</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">79</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42050" onclick="return CardLinkAction(event, this, 'SameWindow');">Scion of Darkness</a></td><td class="artist">Mark Zug</td><td class="color">Black</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">138</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=43607" onclick="return CardLinkAction(event, this, 'SameWindow');">Seedborn Muse</a></td><td class="artist">Adam Rex</td><td class="color">Green</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">110</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44282" onclick="return CardLinkAction(event, this, 'SameWindow');">Shaleskin Plower</a></td><td class="artist">Daren Bader</td><td class="color">Red</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">52</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42078" onclick="return CardLinkAction(event, this, 'SameWindow');">Shifting Sliver</a></td><td class="artist">Darrell Riche</td><td class="color">Blue</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">80</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42055" onclick="return CardLinkAction(event, this, 'SameWindow');">Skinthinner</a></td><td class="artist">Dany Orizio</td><td class="color">Black</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">111</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44306" onclick="return CardLinkAction(event, this, 'SameWindow');">Skirk Alarmist</a></td><td class="artist">Justin Sweet</td><td class="color">Red</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">112</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=46457" onclick="return CardLinkAction(event, this, 'SameWindow');">Skirk Drill Sergeant</a></td><td class="artist">Alex Horley-Orlandelli</td><td class="color">Red</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">113</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42056" onclick="return CardLinkAction(event, this, 'SameWindow');">Skirk Marauder</a></td><td class="artist">Pete Venters</td><td class="color">Red</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">114</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42082" onclick="return CardLinkAction(event, this, 'SameWindow');">Skirk Outrider</a></td><td class="artist">Greg Staples</td><td class="color">Red</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">81</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=43714" onclick="return CardLinkAction(event, this, 'SameWindow');">Smokespew Invoker</a></td><td class="artist">Thomas M. Baxa</td><td class="color">Black</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">82</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44207" onclick="return CardLinkAction(event, this, 'SameWindow');">Sootfeather Flock</a></td><td class="artist">David Martin</td><td class="color">Black</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">83</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44277" onclick="return CardLinkAction(event, this, 'SameWindow');">Spectral Sliver</a></td><td class="artist">Pete Venters</td><td class="color">Black</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">20</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=43792" onclick="return CardLinkAction(event, this, 'SameWindow');">Starlight Invoker</a></td><td class="artist">Glen Angus</td><td class="color">White</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">21</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42265" onclick="return CardLinkAction(event, this, 'SameWindow');">Stoic Champion</a></td><td class="artist">Greg Hildebrandt</td><td class="color">White</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">139</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=43534" onclick="return CardLinkAction(event, this, 'SameWindow');">Stonewood Invoker</a></td><td class="artist">Eric Peterson</td><td class="color">Green</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">22</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44328" onclick="return CardLinkAction(event, this, 'SameWindow');">Sunstrike Legionnaire</a></td><td class="artist">Mark Zug</td><td class="color">White</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">23</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45126" onclick="return CardLinkAction(event, this, 'SameWindow');">Swooping Talon</a></td><td class="artist">Mark Zug</td><td class="color">White</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">53</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42026" onclick="return CardLinkAction(event, this, 'SameWindow');">Synapse Sliver</a></td><td class="artist">Thomas M. Baxa</td><td class="color">Blue</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">140</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45121" onclick="return CardLinkAction(event, this, 'SameWindow');">Timberwatch Elf</a></td><td class="artist">Dave Dorman</td><td class="color">Green</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">141</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45124" onclick="return CardLinkAction(event, this, 'SameWindow');">Totem Speaker</a></td><td class="artist">Darrell Riche</td><td class="color">Green</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">84</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42038" onclick="return CardLinkAction(event, this, 'SameWindow');">Toxin Sliver</a></td><td class="artist">Lars Grant-West</td><td class="color">Black</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">142</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42170" onclick="return CardLinkAction(event, this, 'SameWindow');">Tribal Forcemage</a></td><td class="artist">Greg Staples</td><td class="color">Green</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">115</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44405" onclick="return CardLinkAction(event, this, 'SameWindow');">Unstable Hulk</a></td><td class="artist">Ron Spencer</td><td class="color">Red</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">143</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44327" onclick="return CardLinkAction(event, this, 'SameWindow');">Vexing Beetle</a></td><td class="artist">Matt Thompson</td><td class="color">Green</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">85</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45150" onclick="return CardLinkAction(event, this, 'SameWindow');">Vile Deacon</a></td><td class="artist">Matthew D. Wilson</td><td class="color">Black</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">54</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42069" onclick="return CardLinkAction(event, this, 'SameWindow');">Voidmage Apprentice</a></td><td class="artist">Jim Nelson</td><td class="color">Blue</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">55</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=39850" onclick="return CardLinkAction(event, this, 'SameWindow');">Wall of Deceit</a></td><td class="artist">John Avon</td><td class="color">Blue</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">24</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44324" onclick="return CardLinkAction(event, this, 'SameWindow');">Wall of Hope</a></td><td class="artist">David Martin</td><td class="color">White</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">116</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45130" onclick="return CardLinkAction(event, this, 'SameWindow');">Warbreak Trumpeter</a></td><td class="artist">Dany Orizio</td><td class="color">Red</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">25</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44296" onclick="return CardLinkAction(event, this, 'SameWindow');">Ward Sliver</a></td><td class="artist">Pete Venters</td><td class="color">White</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">56</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44274" onclick="return CardLinkAction(event, this, 'SameWindow');">Warped Researcher</a></td><td class="artist">rk post</td><td class="color">Blue</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">57</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42156" onclick="return CardLinkAction(event, this, 'SameWindow');">Weaver of Lies</a></td><td class="artist">Luca Zontini</td><td class="color">Blue</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">26</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=45122" onclick="return CardLinkAction(event, this, 'SameWindow');">Whipgrass Entangler</a></td><td class="artist">Ben Thompson</td><td class="color">White</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">27</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44212" onclick="return CardLinkAction(event, this, 'SameWindow');">White Knight</a></td><td class="artist">Edward P. Beard, Jr.</td><td class="color">White</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">58</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42054" onclick="return CardLinkAction(event, this, 'SameWindow');">Willbender</a></td><td class="artist">Eric Peterson</td><td class="color">Blue</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">28</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=44837" onclick="return CardLinkAction(event, this, 'SameWindow');">Windborn Muse</a></td><td class="artist">Adam Rex</td><td class="color">White</td><td class="rarity">R</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">29</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42058" onclick="return CardLinkAction(event, this, 'SameWindow');">Wingbeat Warrior</a></td><td class="artist">Kev Walker</td><td class="color">White</td><td class="rarity">C</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">144</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=35299" onclick="return CardLinkAction(event, this, 'SameWindow');">Wirewood Channeler</a></td><td class="artist">Alan Pollack</td><td class="color">Green</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">145</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=43794" onclick="return CardLinkAction(event, this, 'SameWindow');">Wirewood Hivemaster</a></td><td class="artist">Darrell Riche</td><td class="color">Green</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">86</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=46510" onclick="return CardLinkAction(event, this, 'SameWindow');">Withered Wretch</a></td><td class="artist">Tim Hildebrandt</td><td class="color">Black</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+                <tr class="cardItem"><td class="number">87</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=42270" onclick="return CardLinkAction(event, this, 'SameWindow');">Zombie Brute</a></td><td class="artist">Greg Hildebrandt</td><td class="color">Black</td><td class="rarity">U</td><td class="set">Legions</td></tr>
+            
+    </table>
+</div>
+</div>
+    
+    
+
+            <div class="clear"></div>
+            <div id="ctl00_ctl00_ctl00_MainContent_SubContent_bottomPagingControlsContainer">
+            <div class="pagingControls"></div></div>
+            <b class="dd"><b></b></b>
+        </div>
+    </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="left">
+                        </div>
+                        <div class="middle">
+                        </div>
+                        <div class="right">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <a href="http://www.magicthegathering.com">magicthegathering.com</a>&nbsp;&nbsp;
+                <a href="http://www.wizards.com/magic/Digital/MagicOnline.aspx">Magic: The Gathering
+                    Online</a>&nbsp;&nbsp; <a href="../Settings.aspx">Settings</a>&nbsp;&nbsp;
+                <a href="../Language.aspx">Language</a>&nbsp;&nbsp; <a href="../Help.aspx">Help</a>&nbsp;|&nbsp;
+                    <a href="../Login.aspx?returnurl=%2fPages%2fSearch%2fDefault.aspx%3foutput%3dchecklist%26set%3d%255b%2522Legions%2522%255d%26special%3dtrue">Login</a>
+                <div class="wizardsFooterSection">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &copy; 1995 - 2011 <a href="http://www.wizards.com">Wizards of the Coast</a> LLC,
+                    a subsidiary of Hasbro, Inc. All Rights Reserved.
+                </div>
+                <br />
+                <span class="smalldate"></span>
+            </div>
+        </div>
+        <div class="rightContainer">
+            
+        </div>
+    </div>
+    
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWCgK9gMDHDAKw+7DyCgKKqPSlCQLIiJiWCgLgiMDeAwKBjNExAu3S+MYMAp6/k60OAtqnqaUNAv+705EBvakLYBxjDyqD+LyQd+/nJkkfl9g=" /></form>
+</body>
+</html>

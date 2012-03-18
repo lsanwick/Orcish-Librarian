@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+options = { :format => 'json', :log => $stderr, :env => 'dev' }
+OptionParser.new do |opts|
+  opts.banner = 'export [options] '
+  opts.on('-f', '--format [format]') {|f| options[:format] = f.downcase }
+  opts.on('-l', '--log [file]') {|f| s = open(f, 'w'); options[:log] = s; at_exit { s.close } }
+  opts.on('-o', '--out-file [file]') {|f| options[:out] = f } 
+  opts.on('-e', '--env [name]') {|e| options[:env] = e }
+end.parse!
+
+require File.join(File.dirname(__FILE__), '../lib/bootstrap')
+Orcish.env = options[:env]
+Orcish.log = options[:log]
+Orcish.debug("Using '#{Orcish.env}' environment")
+options[:out] = options[:out] || "data/#{Orcish.env}.#{options[:format]}"
+
+box = CardBox.new
+PStore.new("data/#{Orcish.env}.pstore").transaction do |db|
+  sets = db[:sets]
+  if sets && sets.class == Array
+    db[:sets].each do |set| 
+      box.add(db[set], set) 
+    end
+  end
+end
+
+Orcish.debug("Exporting to \"#{options[:out]}\" as \"#{options[:format]}\"")
+box.save(options[:out], options[:format])
+
+
+
+

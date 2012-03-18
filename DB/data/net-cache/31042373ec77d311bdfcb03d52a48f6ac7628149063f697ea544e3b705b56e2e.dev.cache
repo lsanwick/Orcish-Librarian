@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	Card Search - Search: "Time Spiral "Timeshifted"" - Gatherer - Magic: The Gathering
+</title><link rel="shortcut icon" href="/Images/favicon.ico" /><meta name="description" content="Gatherer is the Magic Card Database. Search for the perfect addition to your deck. Browse through cards from Magic's entire history. See cards from the most recent sets and discover what players just like you are saying about them." /><meta name="keywords" content="monitor, gatherer, magic cards, magic the gathering, black lotus, magic: the gathering, wizards of the coast, wizards, trading card game, trading cards, collectible card game, tcg, ccg, magic sets, game, multiplayer, hobby" />
+    
+    <!-- google analytics -->
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker("UA-15020098-7");
+    pageTracker._setDomainName(".wizards.com");
+    pageTracker._trackPageview();
+    } catch(err) {}
+    </script>
+<link type="text/css" rel="stylesheet" media="screen" href="../../Styles/Styles.css" /><link href="/WebResource.axd?d=or7PpBsqDI3hlaEEThlmVDRzePzSrFyHvCSdTElIIm8jbPXP5PySeVoGjKlN7Df_R8Yrdfm8DAtAevqXp4wu4Fffv7Dmtd4mn4Xjxa7bf43SyevX1NnB9KBh--rFBOmlJp3lTErOKCK5IJhfE-mweMernyA1&amp;amp;t=634568784731759463" rel="icon" type="image/ico" /></head>
+<body>
+    
+
+    <form name="aspnetForm" method="post" action="Default.aspx?output=checklist&amp;set=%5b%22Time+Spiral+%22Timeshifted%22%22%5d&amp;special=true" id="aspnetForm">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTEyMjI5ODM3NzhkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYDBTtjdGwwMCRjdGwwMCRjdGwwMCRNYWluQ29udGVudCRTZWFyY2hDb250cm9scyRTZWFyY2hDYXJkTmFtZQU8Y3RsMDAkY3RsMDAkY3RsMDAkTWFpbkNvbnRlbnQkU2VhcmNoQ29udHJvbHMkU2VhcmNoQ2FyZFR5cGVzBTtjdGwwMCRjdGwwMCRjdGwwMCRNYWluQ29udGVudCRTZWFyY2hDb250cm9scyRTZWFyY2hDYXJkVGV4dD0NS4S5r9zRScS2OJsvcAmvOCzV" />
+
+
+<script src="../../Scripts/Prototype.js" type="text/javascript"></script>
+<script src="../../Scripts/Utilities.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+var addSearchConditionHandler = '/Handlers/AdvancedQuery.ashx';
+var CardDatabaseSettings = 'CardDatabaseSettings';
+var SelectingCardAction = 'NavigatesToCard';
+var inlineCardSearchHandler = '/Handlers/InlineCardSearch.ashx';
+var autoCompleteGroupBy = 'None';
+var imageHandler = '/Handlers/Image.ashx';
+var cardSearchPage = '/Pages/Search/Default.aspx';
+var cardDetailsPage = '/Pages/Card/Details.aspx';
+var UtilitiesHandler = '/Handlers/RPCUtilities.ashx';
+
+var enableCardSearchAutoComplete = true;
+var enableHintText = true;
+var enableCardSearchAutoCompleteIfNameUnchecked = false;
+
+
+
+function ClientIDs() {}
+ClientIDs.MainForm = 'aspnetForm';
+ClientIDs.MainContainer = 'ctl00_ctl00_ctl00_MainContainer';
+ClientIDs.TopBannerAdvertisementCMS = 'ctl00_ctl00_ctl00_TopBannerAdvertisementCMS';
+ClientIDs.gathererIntroText = 'ctl00_ctl00_ctl00_gathererIntroText';
+ClientIDs.gathererWelcome = 'ctl00_ctl00_ctl00_gathererWelcome';
+ClientIDs.MainContent = 'ctl00_ctl00_ctl00_MainContent';
+ClientIDs.NavigationLinks = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks';
+ClientIDs.NavigationAnchorsContainer = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_NavigationAnchorsContainer';
+ClientIDs.Simple = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Simple';
+ClientIDs.Advanced = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Advanced';
+ClientIDs.Random = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Random';
+ClientIDs.Settings = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Settings';
+ClientIDs.Language = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Language';
+ClientIDs.Help = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Help';
+ClientIDs.Configuration = 'ctl00_ctl00_ctl00_MainContent_NavigationLinks_Configuration';
+ClientIDs.SearchControls = 'ctl00_ctl00_ctl00_MainContent_SearchControls';
+ClientIDs.SearchBoxContainer = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxContainer';
+ClientIDs.CardSearchBoxParent = 'ctl00_ctl00_ctl00_MainContent_SearchControls_CardSearchBoxParent';
+ClientIDs.CardSearchBox = 'ctl00_ctl00_ctl00_MainContent_SearchControls_CardSearchBoxParent_CardSearchBox';
+ClientIDs.searchSubmitButton = 'ctl00_ctl00_ctl00_MainContent_SearchControls_searchSubmitButton';
+ClientIDs.SearchBoxResults = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxResults';
+ClientIDs.SearchBoxResultsTitle = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxResultsTitle';
+ClientIDs.SearchBoxResultsContent = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxResultsContent';
+ClientIDs.AllResultsLink = 'ctl00_ctl00_ctl00_MainContent_SearchControls_AllResultsLink';
+ClientIDs.SearchSettings = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchSettings';
+ClientIDs.searchControlsContainer = 'ctl00_ctl00_ctl00_MainContent_SearchControls_searchControlsContainer';
+ClientIDs.SearchCardName = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchCardName';
+ClientIDs.SearchCardTypes = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchCardTypes';
+ClientIDs.SearchCardText = 'ctl00_ctl00_ctl00_MainContent_SearchControls_SearchCardText';
+ClientIDs.SubContent = 'ctl00_ctl00_ctl00_MainContent_SubContent';
+ClientIDs.SubContentHeader = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContentHeader';
+ClientIDs.searchTermDisplay = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContentHeader_searchTermDisplay';
+ClientIDs.SubContentAnchors = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContentAnchors';
+ClientIDs.topPagingControlsContainer = 'ctl00_ctl00_ctl00_MainContent_SubContent_topPagingControlsContainer';
+ClientIDs.previousSearch = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch';
+ClientIDs.prevSearchContainer = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_prevSearchContainer';
+ClientIDs.encodedSerializedParameters = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_encodedSerializedParameters';
+ClientIDs.filterSubmit = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_filterSubmit';
+ClientIDs.ajaxIndicatorImage = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_ajaxIndicatorImage';
+ClientIDs.extraBreaks = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_extraBreaks';
+ClientIDs.searchResultsContainer = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_searchResultsContainer';
+ClientIDs.sortDisplay = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sortDisplay';
+ClientIDs.searchControls = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_searchControls';
+ClientIDs.sorter = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter';
+ClientIDs.currentSort = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_currentSort';
+ClientIDs.sortBy = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_sortBy';
+ClientIDs.sortOrder = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_sortOrder';
+ClientIDs.addSort = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_addSort';
+ClientIDs.loadPreviousLink = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_loadPreviousLink';
+ClientIDs.switcher = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher';
+ClientIDs.switchStandard = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchStandard';
+ClientIDs.switchView = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchView';
+ClientIDs.switchTextChecklist = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchTextChecklist';
+ClientIDs.switchVisualSpoiler = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchVisualSpoiler';
+ClientIDs.switchTextSpoiler = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchTextSpoiler';
+ClientIDs.Nicknames = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_Nicknames';
+ClientIDs.Nickname = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_Nickname';
+ClientIDs.listRepeater = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_listRepeater';
+ClientIDs.cardRecord = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_listRepeater_ctl00_cardRecord';
+ClientIDs.DidYouMean = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_DidYouMean';
+ClientIDs.DidYouMeanText = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_DidYouMeanText';
+ClientIDs.DidYouMeanCandidates = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_DidYouMeanCandidates';
+ClientIDs.bottomPagingControlsContainer = 'ctl00_ctl00_ctl00_MainContent_SubContent_bottomPagingControlsContainer';
+ClientIDs.loginLinkPlaceholder = 'ctl00_ctl00_ctl00_loginLinkPlaceholder';
+ClientIDs.CopyrightYear = 'ctl00_ctl00_ctl00_CopyrightYear';
+ClientIDs.RightBannerAdvertisement = 'ctl00_ctl00_ctl00_RightBannerAdvertisement';
+var textBoxHash = new Hash( { ctl00_ctl00_ctl00_MainContent_SearchControls_CardSearchBoxParent_CardSearchBox: 'Search Terms...' } );//]]>
+</script>
+
+<script src="../../Scripts/Constants.js" type="text/javascript"></script>
+<script src="../../Scripts/CardDatabase.js" type="text/javascript"></script>
+<script src="../../Scripts/AdvancedSearch.js" type="text/javascript"></script>
+<script src="../../Scripts/SearchControls.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+Event.observe(window, 'load', RetrieveCurrentSearchConditions);
+//]]>
+</script>
+
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWCgK9gMDHDAKw+7DyCgKKqPSlCQLIiJiWCgLgiMDeAwKBjNExAu3S+MYMAp6/k60OAtqnqaUNAv+705EBvakLYBxjDyqD+LyQd+/nJkkfl9g=" />
+    <div style="width: 100%; height: 1px;">
+    </div>
+    <div id="ctl00_ctl00_ctl00_MainContainer" class="mainContainer">
+        <div class="leftContainer">
+            <div id="ctl00_ctl00_ctl00_TopBannerAdvertisementCMS" class="topBanner"><body docname="mtg_gatherer_banner_advertisement" doclang="en" xmlPath="" useDate="12/12/2011">
+  <p>
+    <a href="http://www.wizards.com/Magic/Novels/Product.aspx?x=mtg/novels/product/pathoftheplaneswalker2">
+      <img src="http://media.wizards.com/images/magic/daily/ads/pathII_728.jpg" />
+    </a>
+  </p>
+</body></div>
+            <div class="background">
+                <div class="top">
+                    <div class="left">
+                    </div>
+                    <div class="middle">
+                    </div>
+                    <div class="right">
+                    </div>
+                </div>
+                <div class="center">
+                    <div class="middle">
+                        <div class="middleright">
+                            <div class="gathererContent">
+                                
+
+<div class="logo">
+    <a class="magic" href="http://www.magicthegathering.com"></a>
+	<a href="../Default.aspx" class="cardDatabase"></a>
+</div>
+
+                                
+                                
+    <div id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_NavigationAnchorsContainer" class="searchcontrollinks">
+    <a href="../Default.aspx" id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_Simple" class="current">Simple</a>
+    <a href="../Advanced.aspx" id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_Advanced">Advanced</a>
+    <a href="../Card/Details.aspx?action=random" id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_Random">Random Card</a>
+    <a href="../Settings.aspx" id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_Settings">Settings</a>
+    <a href="../Language.aspx" id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_Language">Language</a>
+    <a href="../Help.aspx" id="ctl00_ctl00_ctl00_MainContent_NavigationLinks_Help">Help</a>
+    
+</div>
+
+    
+    
+<div class="searchcontrols">
+    <div id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxContainer" class="searchboxcontainertop">
+        
+
+<div class="textbox" id="ctl00_ctl00_ctl00_MainContent_SearchControls_CardSearchBoxParent" style=""><input name="ctl00$ctl00$ctl00$MainContent$SearchControls$CardSearchBoxParent$CardSearchBox" type="text" id="ctl00_ctl00_ctl00_MainContent_SearchControls_CardSearchBoxParent_CardSearchBox" class="textboxinput" onblur="SetCurrentControlBlur(event)" onfocus="SetCurrentControlFocus(event, this);" autocomplete="off" maxlength="50" /></div>
+    </div>
+    <div class="searchsubmit">
+        <input type="submit" name="ctl00$ctl00$ctl00$MainContent$SearchControls$searchSubmitButton" value="Search" id="ctl00_ctl00_ctl00_MainContent_SearchControls_searchSubmitButton" class="searchbutton" />
+    </div>
+    <br class="clear" />
+    <!-- Autocomplete Results -->
+    <div id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxResults" class="searchresultscontainertop">
+        <div class="smallGreyBorder">
+            <b class="ct"><b></b></b>
+            <div class="simpleRoundedBoxTitleGrey">
+                <span id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxResultsTitle" class="boldtitle">Results </span>
+            </div>
+            <div id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchBoxResultsContent" style="background-color: #b7b7b7;">
+            </div>
+            <div class="simpleRoundedBoxFooterGrey">
+                <span><a href="javascript:void(0);" id="ctl00_ctl00_ctl00_MainContent_SearchControls_AllResultsLink" class="autoCompleteAllResults">
+                    All Results</a></span></div>
+            <b class="cc"><b></b></b>
+        </div>
+    </div>
+    <!-- /Autocomplete Results -->
+    <!-- Search Settings -->
+    <div id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchSettings" class="searchsettingsdisplaytop">
+        <div class="searchsettings">
+            <a href="javascript:void(0);" onclick="SaveVisibleArea(event, this, ClientIDs.searchControlsContainer, 'searchControlsContainer', false); return ToggleSearchSettings(event, this);"
+                class="expandedNode"><b>using...</b></a>
+            <div id="ctl00_ctl00_ctl00_MainContent_SearchControls_searchControlsContainer">
+            <ul>
+                <li>
+                    <input name="ctl00$ctl00$ctl00$MainContent$SearchControls$SearchCardName" type="checkbox" id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchCardName" checked="checked" onclick="UpdateSimpleSearchFields" />
+                    Name</li>
+                <li>
+                    <input name="ctl00$ctl00$ctl00$MainContent$SearchControls$SearchCardTypes" type="checkbox" id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchCardTypes" onclick="UpdateSimpleSearchFields" />
+                    Types</li>
+                <li>
+                    <input name="ctl00$ctl00$ctl00$MainContent$SearchControls$SearchCardText" type="checkbox" id="ctl00_ctl00_ctl00_MainContent_SearchControls_SearchCardText" onclick="UpdateSimpleSearchFields" />
+                    Text</li>
+            </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Search Settings -->
+</div>
+    <br class="clear" />
+    
+    
+    <div class="contentcontainer">
+        <div class="smallGreyBorder">
+            <b class="dt"><b></b></b>
+            <div class="simpleRoundedBoxTitleGreyTall">
+                <div class="contentTitle">
+                    
+Search:<span id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContentHeader_searchTermDisplay" style="font-size:0.6815921em;"><i>"Time Spiral "Timeshifted""</i>  (122)</span>
+
+                </div>
+                
+                
+                <div class="pagingcontrols">
+                    <div id="ctl00_ctl00_ctl00_MainContent_SubContent_topPagingControlsContainer" class="paging">
+                    </div>
+                </div>
+            </div>
+            
+    
+<div class="filterList">
+<div id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_prevSearchContainer" class="smallGreyBorderBottom">
+    <a class="expandedNode" href="javascript:void(0);" onclick="SaveVisibleArea(event, this, 'filterControls', 'filterControls', false); return ToggleFilterOptions(event, this);">
+    <b>Search Criteria</b>
+    </a>
+    <div id="filterControls">
+        <input name="ctl00$ctl00$ctl00$MainContent$SubContent$SubContent$previousSearch$encodedSerializedParameters" type="hidden" id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_encodedSerializedParameters" />
+        
+        <div id="ajaxIndicator" class="indicator" style="display: none;">
+            <img id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_previousSearch_ajaxIndicatorImage" src="../../Images/ajax_indicator.gif" alt="Updating..." border="0" />
+            Updating search parameters...
+        </div>
+        
+        <div id="displayFilters" class="filters">None yet.</div>
+    </div>
+</div>
+</div>
+    <div id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_searchResultsContainer">
+
+<div class="cardList">
+    <!-- Options Container -->
+    <div class="smallGreyBorderBottom">
+        &nbsp;<a class="expandedNode" onclick="SaveVisibleArea(event, this, 'searchControls', 'searchControls', false); return ToggleSearchOptions(event, this);"
+            href="javascript:void(0);"><b>Search Result Options</b></a>
+        
+        <div id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_searchControls" class="controls" style="display:block;">
+            
+
+<div class="sorter">
+    <span class="sortField">special (asc) <span><a class="remove" href="/Pages/Search/Default.aspx?output=checklist&amp;set=%5b%22Time%20Spiral%20%22Timeshifted%22%22%5d&amp;special=true&amp;removesortkey=special">x</a></span></span> > <span class="sortField">Name (asc) <span><a class="remove" href="/Pages/Search/Default.aspx?output=checklist&amp;set=%5b%22Time%20Spiral%20%22Timeshifted%22%22%5d&amp;special=true&amp;removesortkey=abc">x</a></span></span>
+    <ul class="opts">
+        <li>
+            Additional Sort:
+            
+            <select name="ctl00$ctl00$ctl00$MainContent$SubContent$SubContent$ctl00$sorter$sortBy" id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_sortBy">
+	<option value="cn">Collector's Number</option>
+	<option value="color">Color</option>
+	<option value="mana">Color Weight</option>
+	<option value="rating">Community Rating</option>
+	<option value="cmc">Converted Mana Cost</option>
+	<option value="abc">Name</option>
+	<option value="p">Power</option>
+	<option value="rarity">Rarity</option>
+	<option value="t">Toughness</option>
+</select>
+
+            <select name="ctl00$ctl00$ctl00$MainContent$SubContent$SubContent$ctl00$sorter$sortOrder" id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_sortOrder">
+	<option value="asc">Ascending</option>
+	<option value="desc">Descending</option>
+</select>
+            <input type="submit" name="ctl00$ctl00$ctl00$MainContent$SubContent$SubContent$ctl00$sorter$addSort" value="Add" id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_addSort" />
+        </li>
+    </ul>
+    <br />
+    <a href="/Pages/Advanced.aspx?action=advanced&set=[&quot;Time Spiral &quot;Timeshifted&quot;&quot;]&output=checklist&special=true" id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_sorter_loadPreviousLink" class="refineSearchLink">Refine Search</a>
+</div>
+            
+    
+<div class="switcher">
+    <a id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchStandard" href="Default.aspx?output=standard&amp;set=%5b%22Time+Spiral+%22Timeshifted%22%22%5d&amp;special=true">Switch to Standard</a>
+
+    <a id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchView" href="Default.aspx?output=compact&amp;set=%5b%22Time+Spiral+%22Timeshifted%22%22%5d&amp;special=true">Switch to Compact</a>
+
+    <a id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchTextChecklist" href="Default.aspx?output=checklist&amp;set=%5b%22Time+Spiral+%22Timeshifted%22%22%5d&amp;special=true" style="text-decoration:underline;">Switch to Checklist</a>
+
+    <a id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchVisualSpoiler" href="Default.aspx?output=spoiler&amp;method=visual&amp;set=%5b%22Time+Spiral+%22Timeshifted%22%22%5d&amp;special=true">Switch to Visual Spoiler</a>
+
+    <a id="ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl00_switcher_switchTextSpoiler" href="Default.aspx?output=spoiler&amp;method=text&amp;set=%5b%22Time+Spiral+%22Timeshifted%22%22%5d&amp;special=true">Switch to Text Spoiler</a>  
+</div>
+
+        </div>
+        <div class="clear">
+        </div>
+        <b class="bb"><b></b></b>
+    </div>
+    <!-- End Options Container -->
+    
+    <table cellspacing="0" cellpadding="2" class="checklist">
+        <tr class="headerRow">
+            <td class="headerCell">#</td>
+            <td class="headerCell">Name</td>
+            <td class="headerCell">Artist</td>
+            <td class="headerCell">Color</td>
+            <td class="headerCell">Rarity</td>
+            <td class="headerCell">Set</td>
+        </tr>
+        
+                <tr class="cardItem"><td class="number">1</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106645" onclick="return CardLinkAction(event, this, 'SameWindow');">Akroma, Angel of Wrath</a></td><td class="artist">Ron Spears</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">117</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109739" onclick="return CardLinkAction(event, this, 'SameWindow');">Arena</a></td><td class="artist">Rob Alexander</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">106</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109704" onclick="return CardLinkAction(event, this, 'SameWindow');">Assault</a></td><td class="artist">Ben Thompson</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">2</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106665" onclick="return CardLinkAction(event, this, 'SameWindow');">Auratog</a></td><td class="artist">Jeff Miracola</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">55</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108835" onclick="return CardLinkAction(event, this, 'SameWindow');">Avalanche Riders</a></td><td class="artist">Edward P. Beard, Jr.</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">37</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108929" onclick="return CardLinkAction(event, this, 'SameWindow');">Avatar of Woe</a></td><td class="artist">rk post</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">73</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108886" onclick="return CardLinkAction(event, this, 'SameWindow');">Avoid Fate</a></td><td class="artist">Phil Foglio</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">38</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108818" onclick="return CardLinkAction(event, this, 'SameWindow');">Bad Moon</a></td><td class="artist">Jesper Myrfors</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">106</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109704" onclick="return CardLinkAction(event, this, 'SameWindow');">Battery</a></td><td class="artist">Ben Thompson</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">56</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=107299" onclick="return CardLinkAction(event, this, 'SameWindow');">Browbeat</a></td><td class="artist">Mark Tedin</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">74</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109672" onclick="return CardLinkAction(event, this, 'SameWindow');">Call of the Herd</a></td><td class="artist">Carl Critchlow</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">3</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106639" onclick="return CardLinkAction(event, this, 'SameWindow');">Celestial Dawn</a></td><td class="artist">Liz Danforth</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">107</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109690" onclick="return CardLinkAction(event, this, 'SameWindow');">Claws of Gix</a></td><td class="artist">Henry G. Higgenbotham</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">91</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109718" onclick="return CardLinkAction(event, this, 'SameWindow');">Coalition Victory</a></td><td class="artist">Eric Peterson</td><td class="color">White/Blue/Black/Red/Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">75</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108912" onclick="return CardLinkAction(event, this, 'SameWindow');">Cockatrice</a></td><td class="artist">Dan Frazier</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">4</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108801" onclick="return CardLinkAction(event, this, 'SameWindow');">Consecrate Land</a></td><td class="artist">Jeff A. Menges</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">39</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108914" onclick="return CardLinkAction(event, this, 'SameWindow');">Conspiracy</a></td><td class="artist">Jeff Easley</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">76</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109748" onclick="return CardLinkAction(event, this, 'SameWindow');">Craw Giant</a></td><td class="artist">Christopher Rush</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">19</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106631" onclick="return CardLinkAction(event, this, 'SameWindow');">Dandân</a></td><td class="artist">Drew Tucker</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">40</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108919" onclick="return CardLinkAction(event, this, 'SameWindow');">Darkness</a></td><td class="artist">Harold McNeill</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">41</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=107288" onclick="return CardLinkAction(event, this, 'SameWindow');">Dauthi Slayer</a></td><td class="artist">Dermot Power</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">5</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108803" onclick="return CardLinkAction(event, this, 'SameWindow');">Defiant Vanguard</a></td><td class="artist">Pete Venters</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">118</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109713" onclick="return CardLinkAction(event, this, 'SameWindow');">Desert</a></td><td class="artist">Jesper Myrfors</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">57</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108917" onclick="return CardLinkAction(event, this, 'SameWindow');">Desolation Giant</a></td><td class="artist">Alan Pollack</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">6</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=107302" onclick="return CardLinkAction(event, this, 'SameWindow');">Disenchant</a></td><td class="artist">Amy Weber</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">58</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106636" onclick="return CardLinkAction(event, this, 'SameWindow');">Disintegrate</a></td><td class="artist">Anson Maddocks</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">108</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109736" onclick="return CardLinkAction(event, this, 'SameWindow');">Dodecapod</a></td><td class="artist">John Howe</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">59</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108810" onclick="return CardLinkAction(event, this, 'SameWindow');">Dragon Whelp</a></td><td class="artist">Amy Weber</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">60</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108843" onclick="return CardLinkAction(event, this, 'SameWindow');">Dragonstorm</a></td><td class="artist">Kev Walker</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">7</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108842" onclick="return CardLinkAction(event, this, 'SameWindow');">Enduring Renewal</a></td><td class="artist">Harold McNeill</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">61</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108922" onclick="return CardLinkAction(event, this, 'SameWindow');">Eron the Relentless</a></td><td class="artist">Christopher Rush</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">8</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106647" onclick="return CardLinkAction(event, this, 'SameWindow');">Essence Sliver</a></td><td class="artist">Glen Angus</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">42</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=107278" onclick="return CardLinkAction(event, this, 'SameWindow');">Evil Eye of Orms-by-Gore</a></td><td class="artist">Jesper Myrfors</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">43</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108840" onclick="return CardLinkAction(event, this, 'SameWindow');">Faceless Butcher</a></td><td class="artist">Daren Bader</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">109</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109694" onclick="return CardLinkAction(event, this, 'SameWindow');">Feldon's Cane</a></td><td class="artist">Mark Tedin</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">92</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108893" onclick="return CardLinkAction(event, this, 'SameWindow');">Fiery Justice</a></td><td class="artist">Melissa A. Benson</td><td class="color">White/Red/Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">62</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108880" onclick="return CardLinkAction(event, this, 'SameWindow');">Fiery Temper</a></td><td class="artist">Greg & Tim Hildebrandt</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">63</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108877" onclick="return CardLinkAction(event, this, 'SameWindow');">Fire Whip</a></td><td class="artist">Jeff Miracola</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">20</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=107291" onclick="return CardLinkAction(event, this, 'SameWindow');">Flying Men</a></td><td class="artist">Christopher Rush</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">44</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108895" onclick="return CardLinkAction(event, this, 'SameWindow');">Funeral Charm</a></td><td class="artist">Greg Spalenka</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">77</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108789" onclick="return CardLinkAction(event, this, 'SameWindow');">Gaea's Blessing</a></td><td class="artist">Rebecca Guay</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">78</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109744" onclick="return CardLinkAction(event, this, 'SameWindow');">Gaea's Liege</a></td><td class="artist">Dameon Willich</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">119</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109761" onclick="return CardLinkAction(event, this, 'SameWindow');">Gemstone Mine</a></td><td class="artist">Brom</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">21</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=107294" onclick="return CardLinkAction(event, this, 'SameWindow');">Ghost Ship</a></td><td class="artist">Tom Wänerstrand</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">22</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108816" onclick="return CardLinkAction(event, this, 'SameWindow');">Giant Oyster</a></td><td class="artist">Nicola Leonard</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">64</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=107280" onclick="return CardLinkAction(event, this, 'SameWindow');">Goblin Snowman</a></td><td class="artist">Daniel Gelon</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">110</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109708" onclick="return CardLinkAction(event, this, 'SameWindow');">Grinning Totem</a></td><td class="artist">Donato Giancola</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">79</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=107296" onclick="return CardLinkAction(event, this, 'SameWindow');">Hail Storm</a></td><td class="artist">Jeff A. Menges</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">9</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108879" onclick="return CardLinkAction(event, this, 'SameWindow');">Honorable Passage</a></td><td class="artist">Jeff Miracola</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">80</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=107282" onclick="return CardLinkAction(event, this, 'SameWindow');">Hunting Moa</a></td><td class="artist">DiTerlizzi</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">10</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=107283" onclick="return CardLinkAction(event, this, 'SameWindow');">Icatian Javelineers</a></td><td class="artist">Scott Kirschner</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">93</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109764" onclick="return CardLinkAction(event, this, 'SameWindow');">Jasmine Boreal</a></td><td class="artist">Richard Kane Ferguson</td><td class="color">White/Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">81</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108786" onclick="return CardLinkAction(event, this, 'SameWindow');">Jolrael, Empress of Beasts</a></td><td class="artist">Matthew D. Wilson</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">65</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106664" onclick="return CardLinkAction(event, this, 'SameWindow');">Kobold Taskmaster</a></td><td class="artist">Randy Asplund</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">82</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109684" onclick="return CardLinkAction(event, this, 'SameWindow');">Krosan Cloudscraper</a></td><td class="artist">Ron Spears</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">23</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108920" onclick="return CardLinkAction(event, this, 'SameWindow');">Leviathan</a></td><td class="artist">Mark Tedin</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">94</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109746" onclick="return CardLinkAction(event, this, 'SameWindow');">Lightning Angel</a></td><td class="artist">rk post</td><td class="color">White/Blue/Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">24</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106642" onclick="return CardLinkAction(event, this, 'SameWindow');">Lord of Atlantis</a></td><td class="artist">Melissa A. Benson</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">25</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108821" onclick="return CardLinkAction(event, this, 'SameWindow');">Merfolk Assassin</a></td><td class="artist">Dennis Detwiller</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">95</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108871" onclick="return CardLinkAction(event, this, 'SameWindow');">Merieke Ri Berit</a></td><td class="artist">Heather Hudson</td><td class="color">White/Blue/Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">111</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108933" onclick="return CardLinkAction(event, this, 'SameWindow');">Mindless Automaton</a></td><td class="artist">Brian Snoddy</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">112</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109724" onclick="return CardLinkAction(event, this, 'SameWindow');">Mirari</a></td><td class="artist">Donato Giancola</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">26</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=111062" onclick="return CardLinkAction(event, this, 'SameWindow');">Mistform Ultimus</a></td><td class="artist">Anthony S. Waters</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">11</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108849" onclick="return CardLinkAction(event, this, 'SameWindow');">Moorish Cavalry</a></td><td class="artist">Dameon Willich</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">96</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108828" onclick="return CardLinkAction(event, this, 'SameWindow');">Mystic Enforcer</a></td><td class="artist">Gary Ruddell</td><td class="color">White/Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">97</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109693" onclick="return CardLinkAction(event, this, 'SameWindow');">Mystic Snake</a></td><td class="artist">Daren Bader</td><td class="color">Blue/Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">98</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109754" onclick="return CardLinkAction(event, this, 'SameWindow');">Nicol Bolas</a></td><td class="artist">Edward P. Beard, Jr.</td><td class="color">Blue/Black/Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">66</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108833" onclick="return CardLinkAction(event, this, 'SameWindow');">Orcish Librarian</a></td><td class="artist">Phil Foglio</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">67</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106646" onclick="return CardLinkAction(event, this, 'SameWindow');">Orgg</a></td><td class="artist">Daniel Gelon</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">27</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108863" onclick="return CardLinkAction(event, this, 'SameWindow');">Ovinomancer</a></td><td class="artist">Kev Walker</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">68</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108862" onclick="return CardLinkAction(event, this, 'SameWindow');">Pandemonium</a></td><td class="artist">Pete Venters</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">120</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109755" onclick="return CardLinkAction(event, this, 'SameWindow');">Pendelhaven</a></td><td class="artist">Bryon Wackwitz</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">28</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108925" onclick="return CardLinkAction(event, this, 'SameWindow');">Pirate Ship</a></td><td class="artist">Tom Wänerstrand</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">29</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108906" onclick="return CardLinkAction(event, this, 'SameWindow');">Prodigal Sorcerer</a></td><td class="artist">Douglas Shuler</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">30</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108812" onclick="return CardLinkAction(event, this, 'SameWindow');">Psionic Blast</a></td><td class="artist">Douglas Shuler</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">12</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108885" onclick="return CardLinkAction(event, this, 'SameWindow');">Resurrection</a></td><td class="artist">Dan Frazier</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">13</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106625" onclick="return CardLinkAction(event, this, 'SameWindow');">Sacred Mesa</a></td><td class="artist">Margaret Organ-Kean</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">121</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=107275" onclick="return CardLinkAction(event, this, 'SameWindow');">Safe Haven</a></td><td class="artist">Christopher Rush</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">83</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106650" onclick="return CardLinkAction(event, this, 'SameWindow');">Scragnoth</a></td><td class="artist">Jeff Laubenstein</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">45</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106638" onclick="return CardLinkAction(event, this, 'SameWindow');">Sengir Autocrat</a></td><td class="artist">David A. Cherry</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">114</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109730" onclick="return CardLinkAction(event, this, 'SameWindow');">Serrated Arrows</a></td><td class="artist">David A. Cherry</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">46</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108864" onclick="return CardLinkAction(event, this, 'SameWindow');">Shadow Guildmage</a></td><td class="artist">Mike Kimble</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">99</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=126333" onclick="return CardLinkAction(event, this, 'SameWindow');">Shadowmage Infiltrator</a></td><td class="artist">Rick Farrell</td><td class="color">Blue/Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">31</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108935" onclick="return CardLinkAction(event, this, 'SameWindow');">Sindbad</a></td><td class="artist">Julie Baroh</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">100</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109723" onclick="return CardLinkAction(event, this, 'SameWindow');">Sol'kanar the Swamp King</a></td><td class="artist">Richard Kane Ferguson</td><td class="color">Blue/Black/Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">14</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108856" onclick="return CardLinkAction(event, this, 'SameWindow');">Soltari Priest</a></td><td class="artist">Janet Aulisio</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">47</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106644" onclick="return CardLinkAction(event, this, 'SameWindow');">Soul Collector</a></td><td class="artist">Matthew D. Wilson</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">84</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108924" onclick="return CardLinkAction(event, this, 'SameWindow');">Spike Feeder</a></td><td class="artist">Heather Hudson</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">101</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109679" onclick="return CardLinkAction(event, this, 'SameWindow');">Spined Sliver</a></td><td class="artist">Ron Spencer</td><td class="color">Red/Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">85</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108855" onclick="return CardLinkAction(event, this, 'SameWindow');">Spitting Slug</a></td><td class="artist">Anson Maddocks</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">15</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108908" onclick="return CardLinkAction(event, this, 'SameWindow');">Squire</a></td><td class="artist">Dennis Detwiller</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">102</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109674" onclick="return CardLinkAction(event, this, 'SameWindow');">Stormbind</a></td><td class="artist">NéNé Thomas & Phillip Mosness</td><td class="color">Red/Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">32</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106637" onclick="return CardLinkAction(event, this, 'SameWindow');">Stormscape Familiar</a></td><td class="artist">Heather Hudson</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">48</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108923" onclick="return CardLinkAction(event, this, 'SameWindow');">Stupor</a></td><td class="artist">Mike Kimble</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">69</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108883" onclick="return CardLinkAction(event, this, 'SameWindow');">Suq'Ata Lancer</a></td><td class="artist">Jeff Miracola</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">49</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106656" onclick="return CardLinkAction(event, this, 'SameWindow');">Swamp Mosquito</a></td><td class="artist">Nicola Leonard</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">103</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108787" onclick="return CardLinkAction(event, this, 'SameWindow');">Teferi's Moat</a></td><td class="artist">rk post</td><td class="color">White/Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">86</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108825" onclick="return CardLinkAction(event, this, 'SameWindow');">Thallid</a></td><td class="artist">Ron Spencer</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">113</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109725" onclick="return CardLinkAction(event, this, 'SameWindow');">The Rack</a></td><td class="artist">Richard Thomas</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">87</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109745" onclick="return CardLinkAction(event, this, 'SameWindow');">Thornscape Battlemage</a></td><td class="artist">Matt Cavotta</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">115</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109716" onclick="return CardLinkAction(event, this, 'SameWindow');">Tormod's Crypt</a></td><td class="artist">Christopher Rush</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">70</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108916" onclick="return CardLinkAction(event, this, 'SameWindow');">Tribal Flames</a></td><td class="artist">Tony Szczudlo</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">50</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108848" onclick="return CardLinkAction(event, this, 'SameWindow');">Twisted Abomination</a></td><td class="artist">Daren Bader</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">51</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108805" onclick="return CardLinkAction(event, this, 'SameWindow');">Uncle Istvan</a></td><td class="artist">Daniel Gelon</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">52</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108869" onclick="return CardLinkAction(event, this, 'SameWindow');">Undead Warchief</a></td><td class="artist">Greg Hildebrandt</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">53</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108791" onclick="return CardLinkAction(event, this, 'SameWindow');">Undertaker</a></td><td class="artist">Jeff Easley</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">33</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108827" onclick="return CardLinkAction(event, this, 'SameWindow');">Unstable Mutation</a></td><td class="artist">Douglas Shuler</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">71</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108806" onclick="return CardLinkAction(event, this, 'SameWindow');">Uthden Troll</a></td><td class="artist">Douglas Shuler</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">16</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106628" onclick="return CardLinkAction(event, this, 'SameWindow');">Valor</a></td><td class="artist">Kev Walker</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">88</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109688" onclick="return CardLinkAction(event, this, 'SameWindow');">Verdeloth the Ancient</a></td><td class="artist">Daren Bader</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">104</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109759" onclick="return CardLinkAction(event, this, 'SameWindow');">Vhati il-Dal</a></td><td class="artist">Ron Spencer</td><td class="color">Black/Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">105</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109677" onclick="return CardLinkAction(event, this, 'SameWindow');">Void</a></td><td class="artist">Kev Walker</td><td class="color">Black/Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">34</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108811" onclick="return CardLinkAction(event, this, 'SameWindow');">Voidmage Prodigy</a></td><td class="artist">Christopher Moeller</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">89</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106662" onclick="return CardLinkAction(event, this, 'SameWindow');">Wall of Roots</a></td><td class="artist">John Matson</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">116</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109757" onclick="return CardLinkAction(event, this, 'SameWindow');">War Barge</a></td><td class="artist">Tom Wänerstrand</td><td class="color"></td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">90</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=109683" onclick="return CardLinkAction(event, this, 'SameWindow');">Whirling Dervish</a></td><td class="artist">Susan Van Camp</td><td class="color">Green</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">35</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=106651" onclick="return CardLinkAction(event, this, 'SameWindow');">Whispers of the Muse</a></td><td class="artist">Quinton Hoover</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">72</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108813" onclick="return CardLinkAction(event, this, 'SameWindow');">Wildfire Emissary</a></td><td class="artist">Richard Kane Ferguson</td><td class="color">Red</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">36</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108861" onclick="return CardLinkAction(event, this, 'SameWindow');">Willbender</a></td><td class="artist">Eric Peterson</td><td class="color">Blue</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">17</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108794" onclick="return CardLinkAction(event, this, 'SameWindow');">Witch Hunter</a></td><td class="artist">Jesper Myrfors</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">54</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108890" onclick="return CardLinkAction(event, this, 'SameWindow');">Withered Wretch</a></td><td class="artist">Tim Hildebrandt</td><td class="color">Black</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+                <tr class="cardItem"><td class="number">18</td><td class="name"><a class="nameLink" href="../Card/Details.aspx?multiverseid=108868" onclick="return CardLinkAction(event, this, 'SameWindow');">Zhalfirin Commander</a></td><td class="artist">Stuart Griffin</td><td class="color">White</td><td class="rarity">S</td><td class="set">Time Spiral "Timeshifted"</td></tr>
+            
+    </table>
+</div>
+</div>
+    
+    
+
+            <div class="clear"></div>
+            <div id="ctl00_ctl00_ctl00_MainContent_SubContent_bottomPagingControlsContainer">
+            <div class="pagingControls"></div></div>
+            <b class="dd"><b></b></b>
+        </div>
+    </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="left">
+                        </div>
+                        <div class="middle">
+                        </div>
+                        <div class="right">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <a href="http://www.magicthegathering.com">magicthegathering.com</a>&nbsp;&nbsp;
+                <a href="http://www.wizards.com/magic/Digital/MagicOnline.aspx">Magic: The Gathering
+                    Online</a>&nbsp;&nbsp; <a href="../Settings.aspx">Settings</a>&nbsp;&nbsp;
+                <a href="../Language.aspx">Language</a>&nbsp;&nbsp; <a href="../Help.aspx">Help</a>&nbsp;|&nbsp;
+                    <a href="../Login.aspx?returnurl=%2fPages%2fSearch%2fDefault.aspx%3foutput%3dchecklist%26set%3d%255b%2522Time%2520Spiral%2520%2522Timeshifted%2522%2522%255d%26special%3dtrue">Login</a>
+                <div class="wizardsFooterSection">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &copy; 1995 - 2011 <a href="http://www.wizards.com">Wizards of the Coast</a> LLC,
+                    a subsidiary of Hasbro, Inc. All Rights Reserved.
+                </div>
+                <br />
+                <span class="smalldate"></span>
+            </div>
+        </div>
+        <div class="rightContainer">
+            
+        </div>
+    </div>
+    </form>
+</body>
+</html>
