@@ -1,1 +1,8 @@
-UserInterfaceState.xcuserstate
+*.DS_Store
+
+# Xcode
+*.pbxuser
+*.perspectivev3
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
