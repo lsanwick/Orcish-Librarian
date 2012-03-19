@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, user-scalable=no" />
-<script src="jQuery.js"></script>
+<script src="jquery.js"></script>
 <style>
 
     body {
@@ -14,6 +14,10 @@
         font-family: sans-serif;
         -webkit-text-size-adjust: none;
     }
+
+	a {
+		color: #6F789B;
+	}
     
     .ol-header {
 
@@ -36,16 +40,26 @@
     }
     
     .ol-set-name {
-        margin: 0 0 4px 0;
-        font-size: 13px;
+        margin-top: 3px;
+        font-size: 12px;
         color: #7f848b;
     }
     
     .ol-card-type {
-        font-size: 15px;
+		margin-top: 3px;
+        font-size: 14px;
         font-weight: bold;
         color: #7f848b;
     }
+
+	.ol-mana-cost {
+		margin-top: 5px;
+	}
+
+	.ol-mana-cost img {
+	    margin-right: 2px;
+	    height: 18px;
+	}
     
     .ol-card-image {
         display: none;
@@ -55,6 +69,33 @@
         width: 280px;
         border-radius: 2px;
     }
+
+	.ol-oracle-text img {
+	    position: relative;
+	    top: 2px;
+	    margin-right: 2px;
+	    width: 15px;
+	    height: 15px;
+	}
+	
+	.ol-other-editions,
+	.ol-other-parts {
+		font-size: 13px;
+		line-height: 1.5em;
+	}
+	
+	.ol-other-editions a,
+	.ol-other-parts a {
+		text-decoration: none;
+	}
+	
+	.subtitle {
+		margin: 17px 0 8px 8px;
+		font-size: 16px;
+		font-weight: bold;
+		color: #646F7C;
+		text-shadow: 1px 1px 1px white;
+	}
     
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
 /* --------------------------------------------------
@@ -76,28 +117,29 @@
         <div class="ol-mana-cost">Mana Cost</div>
     </div>
     
-    <div id="ol-prices">
-        
+    <div class="ol-prices">
     </div>
     
-    <div id="oracle-text">
-        <div class="ol-oracle-text">
-        </div>
+	<div class="subtitle">Oracle Text:</div>
+    <div class="ol-oracle-text ol-block">
     </div>
     
     <div class="ol-card-image ol-block">
-        <img src="http://magiccards.info/scans/en/roe/21.jpg" />
     </div>
     
     <div class="ol-other-parts">
+		<div class="subtitle">Other Parts:</div>
+		<div class="ol-block">
+		</div>
     </div>
 	
     <div class="ol-other-editions">
+		<div class="subtitle">Other Editions:</div>
+		<div class="ol-block">			
+		</div>
     </div>
     
 <script>
-
-var SAMPLE_CARD = {"manaCost":"3{P/w}{PB}{pu}{pR}{pg}{Pc}","infoId":"93","rarity":"","name":"Ruthless Invasion","setLongName":"New Phyrexia","type":"Sorcery","otherEditions":[],"otherParts":[],"setShortName":"NPH","oracleText":"{Pw}: Nonartifact creatures can't block this turn.","pk":3,"gathererId":"198099"}    
     
 var Orcish = { };    
 (function(){
@@ -108,7 +150,11 @@ Orcish.setCardData = function(card) {
     $('.ol-card-name').text(card.name);
     $('.ol-set-name').text(card.setLongName);
     $('.ol-card-type').text(card.type);
+	$('.ol-oracle-text').html(formattedOracleText(card));
+	$('.ol-mana-cost').html(formattedManaCost(card));
     loadCardPhoto(card);
+	loadOtherEditions(card);
+	loadOtherParts(card);
 }
 
 // ----------------------------------------------------------------------------
@@ -120,7 +166,7 @@ function loadCardPhoto(card) {
     if (card.type == 'Scheme' || isPlane) {
         imageURL = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=' + encodeURIComponent(card.gathererId);
     } else {
-        imageURL = 'http://magiccards.info/scans/en/' + card.setShortName.toLowerCase() + '/' + encodeURIComponent(card.infoId) + '.jpg';
+        imageURL = 'http://orcish.info/librarian/images/' + card.setShortName.toUpperCase() + '/' + encodeURIComponent(card.name) + '.full.jpg';
     }
 
     $('<img />')
@@ -130,25 +176,61 @@ function loadCardPhoto(card) {
         .wrap($('<div></div>')
         .addClass(isPlane ? 'plane' : ''));
 }
+
+// ----------------------------------------------------------------------------
+
+function loadOtherEditions(card) {
+	if(card.otherEditions && card.otherEditions.length > 0) {
+        var html = '';
+        $.each(card.otherEditions, function(i, edition) {
+            if (i != 0) { html += ', <br />' }   
+            html += '<a href="card://' + edition.pk + '">' + edition.setLongName + '</a>';
+        });
+        $('.ol-other-editions').show().find('.ol-block').html(html);
+    } else {
+		$('.ol-other-editions').hide();
+	}
+}
+
+// ----------------------------------------------------------------------------
+
+function loadOtherParts(card) {
+	if(card.otherParts && card.otherParts.length > 0) {
+        var html = '';
+        $.each(card.otherParts, function(i, otherCard) {
+			if (i != 0) { html += ', <br />' }
+			html += '<a href="card://' + otherCard.pk +'">' + otherCard.name + '</a>';
+        });
+        $('.ol-other-parts').show().find('.ol-block').html(html);
+    } else {
+        $('.ol-other-parts').hide();
+	}
+}
  
 // ----------------------------------------------------------------------------
  
-function formatOracleText(text) {
+function formattedOracleText(card) {
+
+	var text = card.oracleText;
 
     // fix basic lands
-    if (text.length == 1) { text = '{T}: Add {' + text + '} to your mana pool.'; }
+    if (text.length == 1) { 
+		text = '{T}: Add {' + text + '} to your mana pool.'; 
+	}
 
-    if (card.set == 'UG') { // in Unglued set
+	// Unglued was never updated with modern markup
+    if (card.set == 'UG') { 
         text = text.replace(/o([\d]+|[WBURGS])/g, '{$1}'); // fixes old-style mana symbol
         text = text.replace(/ocT/g, '{T}');                // fixes old-style tap symbol
     }
 
     text = text.replace(/\n\s*\n+/g, "\n\n"); // no more than two newlines in a row
-    text = text.replace(/\{1\}0\}/g, '{10}'); // fixes a bug in Draco's {10} symbol            
+    text = text.replace(/\{1\}0\}/g, '{10}'); // fixes a bug in Draco's {10} symbol
+	text = text.replace(/\{2\}0\}/g, '{20}'); // fixes a bug in Spawnsire of Ulamog's text
     text = text.replace(/\{([^}]+)\{/g, '{$1}{'); // fixes a symbol bug in Rhys the Redeemed's text
     text = text.replace(/\{S\}i\}/gi, '{S}'); // fixes a bug with Snow Mana symbol            
 
-    // add HTML formatting to any level-up cards
+    // level-up cards get special formatting
     if (text.match(/^LEVEL \d/m)) {
         text = text.replace(/\n?\n?(LEVEL(\n|.)*)$/, "<div class=\"level-info\">$1</div>");
         text = text.replace(/\n?\n?LEVEL (\d+)([-+])(\d+)?\n?\n?/g, "#START#<h4>LEVEL $1$2$3</h4>#END#");
@@ -187,7 +269,8 @@ function formatOracleText(text) {
  
 // ----------------------------------------------------------------------------
     
-function formatManaString(text) {
+function formattedManaCost(card) {
+	var text = card.manaCost;
     var html = '';
     var openToken = '{';
     var closeToken = '}';
@@ -196,6 +279,7 @@ function formatManaString(text) {
     text = text.replace(/\(/g, '{');
     text = text.replace(/\)/g, '}');
     text = text.replace(/(\d+)/g, '{$1}');
+	text = text.replace(/{{(\d)}\/([WBURG])}/g, '{$1/$2}'); // fix hybrid
     for (var i=0;i<text.length;i++) {            
         var character = text[i];
         if (withinToken) {
@@ -256,12 +340,26 @@ function formatToken(token) {
         return '<img src="symbols/mana_unknown.png" />';
 }
     
-// ----------------------------------------------------------------------------
- 
- 
+// ---------------------------------------------------------------------------- 
  
 })()
-    
+
+if (navigator.userAgent.indexOf('iPhone') == -1) {
+	Orcish.setCardData({
+		manaCost: "(R/W)(R/W)(R/G)",
+		rarity: "Common",
+		name: "Birds of Paradise",
+		setLongName: "Rise of the Eldrazi",
+		type: "Instant",
+		otherEditions: [ { pk: 5, setLongName: 'Ravnica' }, { pk: 6, setLongName: '8th Edition' } ],
+		otherParts: [ { pk: 10, name: 'Birds of Horror' } ],
+		setShortName: "10E",
+		oracleText: "{20}: Nonartifact creatures can't block this turn.",
+		pk: 3, 
+		gathererId: "198099"
+	});
+}    
+
 </script>
 </body>
 </html>
