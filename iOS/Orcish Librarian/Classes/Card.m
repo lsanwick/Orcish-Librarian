@@ -19,6 +19,7 @@
 
 @synthesize pk;
 @synthesize name;
+@synthesize searchName;
 @synthesize gathererId;
 @synthesize setPk;
 @synthesize setName;
@@ -43,6 +44,7 @@
 + (Card *) cardForResultSet:(FMResultSet *)rs {
     Card *card = [[Card alloc] init];
     card.pk = [rs stringForColumn:@"pk"];
+    card.searchName = [rs stringForColumn:@"search_name"];
     card.name = [rs stringForColumn:@"name"];
     card.gathererId = [rs stringForColumn:@"gatherer_id"];
     card.setPk = [rs stringForColumn:@"set_pk"];
@@ -76,7 +78,7 @@
     NSMutableArray *orderClauses = [NSMutableArray array];
     NSMutableArray *orderParams = [NSMutableArray array];
     
-    // NAME
+    // name
     if (criteria.nameText != nil && criteria.nameText.length >= kMinimumSearchCharacters) {
         NSArray *nameHashes = [self findNameHashesByText:criteria.nameText];
         if (nameHashes.count > 0) {
@@ -143,7 +145,59 @@
     }
     return searchNames;
 }
+
+// ----------------------------------------------------------------------------
+
+- (NSArray *) otherParts {
+    return [NSArray array];
+}
  
+// ----------------------------------------------------------------------------
+
+- (NSArray *) otherEditions {
+    NSMutableArray *cards = [NSMutableArray array];
+    FMResultSet *rs = [gAppDelegate.db executeQuery:
+        @"SELECT   cards.*, "
+        @"         sets.name AS set_name "
+        @"FROM     cards, sets "
+        @"WHERE    cards.set_pk = sets.pk "
+        @"AND      cards.search_name = ? "
+        @"AND      cards.pk != ? "
+        @"AND      sets.pk != ? ",
+        self.searchName,
+        self.pk,
+        self.setPk];
+    while([rs next]) {
+        [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+            [rs stringForColumn:@"set_name"], @"setName",
+            [rs stringForColumn:@"pk"], @"pk", 
+            nil]];
+    }                          
+    return cards;
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSString *) toJSON {
+    NSError *error;
+    NSArray *otherParts = [self otherParts];
+    NSArray *otherEditions = [self otherEditions];
+    NSDictionary *source = [NSDictionary dictionaryWithObjectsAndKeys:
+        self.pk,            @"pk",
+        self.gathererId,    @"gathererId",
+        self.name,          @"name",
+        self.setName,       @"setName",
+        self.manaCost,      @"manaCost",
+        self.oracleText,    @"oracleText",
+        self.rarity,        @"rarity",
+        self.typeLine,      @"typeLine",
+        otherEditions,      @"otherEditions",
+        otherParts,         @"otherParts",
+        nil];
+    return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:source 
+        options:0 error:&error] encoding:NSUTF8StringEncoding];
+}
+
 // ----------------------------------------------------------------------------
 
 @end

@@ -44,7 +44,7 @@ module SQLMaker
   end
   
   def sql_escape(text)    
-    text.to_s.gsub(/'/, "''").gsub("\n", '\n')
+    text.to_s.gsub(/'/, "''")
   end
   
 end

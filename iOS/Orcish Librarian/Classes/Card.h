@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) NSString *pk;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *searchName;
 @property (nonatomic, strong) NSString *gathererId;
 @property (nonatomic, strong) NSString *setPk;
 @property (nonatomic, strong) NSString *setName;
@@ -28,10 +29,14 @@
 @property (nonatomic, strong) NSString *toughness;
 @property (nonatomic, strong) NSString *loyalty;
 @property (nonatomic, assign) NSUInteger versionCount;
+@property (nonatomic, readonly) NSArray *otherEditions;
+@property (nonatomic, readonly) NSArray *otherParts;
 
 + (Card *) cardForResultSet:(FMResultSet *)resultSet;
 + (NSArray *) findCardsByTitleText:(NSString *)text;
 + (NSArray *) findCards:(SearchCriteria *)criteria;
 + (NSArray *) findNameHashesByText:(NSString *)text;
+
+- (NSString *) toJSON;
 
 @end

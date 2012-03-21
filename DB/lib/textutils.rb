@@ -1,5 +1,9 @@
 # encoding: utf-8
 
+require 'zlib'
+require 'digest'
+require 'set_codes'
+
 class String
   
   @@translations = {
@@ -40,6 +44,16 @@ class String
     result = result.gsub(/\(.*?\)/, '')     # remove parethetical text
     result = result.gsub(/[^A-Z0-9]/, '')   # remove non-alphanumeric characters
     result = result.strip                   # trim whitespace
+  end
+  
+  def to_name_hash()
+    result = self.to_searchable_name
+    result = (Digest::SHA256.new << result).to_s
+    return Zlib::crc32(result)
+  end
+  
+  def set_code()
+    SetCodes::code_for_name(self)
   end
   
 end

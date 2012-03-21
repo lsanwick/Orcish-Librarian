@@ -7,6 +7,7 @@
 //
 
 #import "CardViewController.h"
+#import "Card.h"
 
 #define kPageCount 3
 
@@ -66,8 +67,8 @@
 
 - (void) loadCard:(NSUInteger)index forView:(UIWebView *)view {
     Card *card = [cards objectAtIndex:index];
-    [view stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:
-        @""]];
+    [view stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]]];     
+    NSLog(@"%@", [card toJSON]);
 }
 
 // ----------------------------------------------------------------------------

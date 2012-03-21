@@ -30,6 +30,7 @@
         background: #fff;
         border-radius: 3px;
         box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.15);
+        font-size: 14px;
     }
     
     .ol-card-name {
@@ -80,6 +81,7 @@
 	
 	.ol-other-editions,
 	.ol-other-parts {
+		display: none;
 		font-size: 13px;
 		line-height: 1.5em;
 	}
@@ -148,8 +150,8 @@ var Orcish = { };
  
 Orcish.setCardData = function(card) {
     $('.ol-card-name').text(card.name);
-    $('.ol-set-name').text(card.setLongName);
-    $('.ol-card-type').text(card.type);
+    $('.ol-set-name').text(card.setName);
+    $('.ol-card-type').text(card.typeLine);
 	$('.ol-oracle-text').html(formattedOracleText(card));
 	$('.ol-mana-cost').html(formattedManaCost(card));
     loadCardPhoto(card);
@@ -161,12 +163,12 @@ Orcish.setCardData = function(card) {
  
 function loadCardPhoto(card) {
 
-    var isPlane = card.type.match(/^Plane -/);
+    var isPlane = card.typeLine.match(/^Plane -/);
     var imageURL = '';
-    if (card.type == 'Scheme' || isPlane) {
+    if (card.typeLine == 'Scheme' || isPlane) {
         imageURL = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=' + encodeURIComponent(card.gathererId);
     } else {
-        imageURL = 'http://orcish.info/librarian/images/' + card.setShortName.toUpperCase() + '/' + encodeURIComponent(card.name) + '.full.jpg';
+        imageURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(card.setName) + '/' + encodeURIComponent(card.name) + '.full.jpg';
     }
 
     $('<img />')
@@ -184,7 +186,7 @@ function loadOtherEditions(card) {
         var html = '';
         $.each(card.otherEditions, function(i, edition) {
             if (i != 0) { html += ', <br />' }   
-            html += '<a href="card://' + edition.pk + '">' + edition.setLongName + '</a>';
+            html += '<a href="card://' + edition.pk + '">' + edition.setName + '</a>';
         });
         $('.ol-other-editions').show().find('.ol-block').html(html);
     } else {
@@ -225,6 +227,7 @@ function formattedOracleText(card) {
     }
 
     text = text.replace(/\n\s*\n+/g, "\n\n"); // no more than two newlines in a row
+    text = text.replace(/\{(\d+)([WBURGS]+)\}/g, '{$1}{$2}'); // fix compressed mana cost in Blast from the Past
     text = text.replace(/\{1\}0\}/g, '{10}'); // fixes a bug in Draco's {10} symbol
 	text = text.replace(/\{2\}0\}/g, '{20}'); // fixes a bug in Spawnsire of Ulamog's text
     text = text.replace(/\{([^}]+)\{/g, '{$1}{'); // fixes a symbol bug in Rhys the Redeemed's text
@@ -238,7 +241,7 @@ function formattedOracleText(card) {
         text = text.replace(/(#END#|#START#)/g, '');
     }
 
-    text = text.replace(/\n/g, '<br />');     // replace newlines with <br /> elements 
+    text = text.replace(/\n/g, '<br /><br />');     // replace newlines with <br /> elements 
 
     var html = '';
     var withinToken = false;
@@ -345,20 +348,10 @@ function formatToken(token) {
 })()
 
 if (navigator.userAgent.indexOf('iPhone') == -1) {
-	Orcish.setCardData({
-		manaCost: "(R/W)(R/W)(R/G)",
-		rarity: "Common",
-		name: "Birds of Paradise",
-		setLongName: "Rise of the Eldrazi",
-		type: "Instant",
-		otherEditions: [ { pk: 5, setLongName: 'Ravnica' }, { pk: 6, setLongName: '8th Edition' } ],
-		otherParts: [ { pk: 10, name: 'Birds of Horror' } ],
-		setShortName: "10E",
-		oracleText: "{20}: Nonartifact creatures can't block this turn.",
-		pk: 3, 
-		gathererId: "198099"
-	});
-}    
+	Orcish.setCardData({"otherParts":[],"manaCost":"G","rarity":"rare","name":"Birds of Paradise","setName":"Classic Sixth Edition","otherEditions":[{"pk":"3264","set_name":"Eighth Edition"},{"pk":"4215","set_name":"Fifth Edition"},{"pk":"4640","set_name":"Fourth Edition"},{"pk":"7102","set_name":"Limited Edition Alpha"},{"pk":"7392","set_name":"Limited Edition Beta"},{"pk":"7970","set_name":"Magic 2010"},{"pk":"8213","set_name":"Magic 2011"},{"pk":"8446","set_name":"Magic 2012"},{"pk":"13762","set_name":"Ravnica: City of Guilds"},{"pk":"14063","set_name":"Revised Edition"},{"pk":"15144","set_name":"Seventh Edition"},{"pk":"16697","set_name":"Tenth Edition"},{"pk":"17952","set_name":"Unlimited Edition"}],"typeLine":"Creature - Bird","oracleText":"Flying\n{T}: Add one mana of any color to your mana pool.","pk":"1580","gathererId":"14719"});
+}
+
+// ----------------------------------------------------------------------------     
 
 </script>
 </body>

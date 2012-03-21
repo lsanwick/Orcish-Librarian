@@ -59,7 +59,7 @@ class CardBox
           name = card[:name].to_searchable_name
           if names[name].nil?
             searchable_name = card[:name].to_searchable_name
-            searchable_hash = searchable_name.hash.abs.to_s
+            searchable_hash = card[:name].to_name_hash.to_s
             io.write('|' + searchable_name)
             io.write('|' + searchable_hash)
             names[searchable_name] = true
@@ -122,7 +122,7 @@ class CardBox
         current_card_pk = current_card_pk + 1
         io.puts(sql_insert_row(:cards, card.merge({
           :search_name => card[:name].to_searchable_name,
-          :name_hash => card[:name].to_searchable_name.hash.abs.to_s,
+          :name_hash => card[:name].to_name_hash.to_s,
           :version_count => @data[:names][card[:name]],
           :pk => current_card_pk,
           :set_pk => current_set_pk
