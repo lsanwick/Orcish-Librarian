@@ -2,7 +2,6 @@
 
 require 'zlib'
 require 'digest'
-require 'set_codes'
 
 class String
   
@@ -50,10 +49,6 @@ class String
     result = self.to_searchable_name
     result = (Digest::SHA256.new << result).to_s
     return Zlib::crc32(result)
-  end
-  
-  def set_code()
-    SetCodes::code_for_name(self)
   end
   
 end
