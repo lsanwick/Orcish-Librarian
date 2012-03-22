@@ -149,7 +149,24 @@
 // ----------------------------------------------------------------------------
 
 - (NSArray *) otherParts {
-    return [NSArray array];
+    NSMutableArray *cards = [NSMutableArray array];
+    FMResultSet *rs = [gAppDelegate.db executeQuery:
+        @"SELECT   cards.* "
+        @"FROM     cards "
+        @"WHERE    cards.set_pk = ? "
+        @"AND      cards.collector_number == ? "
+        @"AND      cards.pk != ? ",
+        self.setPk,
+        self.collectorNumber,
+        self.pk];
+    while([rs next]) {
+        [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+            [rs stringForColumn:@"name"], @"name",
+            [rs stringForColumn:@"pk"], @"pk", 
+            nil]];
+    }                          
+    return cards;
+
 }
  
 // ----------------------------------------------------------------------------
