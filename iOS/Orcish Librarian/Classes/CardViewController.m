@@ -67,8 +67,8 @@
 
 - (void) loadCard:(NSUInteger)index forView:(UIWebView *)view {
     Card *card = [cards objectAtIndex:index];
-    [view stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]]];     
     NSLog(@"%@", [card toJSON]);
+    [view stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]]];     
 }
 
 // ----------------------------------------------------------------------------

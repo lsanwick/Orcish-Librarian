@@ -98,6 +98,7 @@ class CardBox
       :gatherer_id => :integer,
       :set_pk => :integer,
       :collector_number => :integer,
+      :artist => :varchar_255,
       :rarity => :varchar_32,
       :mana_cost => :varchar_255,
       :type_line => :varchar_255,
@@ -105,6 +106,7 @@ class CardBox
       :power => :varchar_8,
       :toughness => :varchar_8,
       :loyalty => :varchar_8,
+      :art_index => :integer,
       :version_count => :integer },
       :pk => :pk));
     # CREATE INDEXES

@@ -20,10 +20,13 @@
 @synthesize pk;
 @synthesize name;
 @synthesize searchName;
+@synthesize nameHash;
 @synthesize gathererId;
 @synthesize setPk;
 @synthesize setName;
 @synthesize collectorNumber;
+@synthesize artist;
+@synthesize artIndex;
 @synthesize rarity;
 @synthesize manaCost;
 @synthesize typeLine;
@@ -45,11 +48,14 @@
     Card *card = [[Card alloc] init];
     card.pk = [rs stringForColumn:@"pk"];
     card.searchName = [rs stringForColumn:@"search_name"];
+    card.nameHash = [rs stringForColumn:@"name_hash"];
     card.name = [rs stringForColumn:@"name"];
     card.gathererId = [rs stringForColumn:@"gatherer_id"];
     card.setPk = [rs stringForColumn:@"set_pk"];
     card.setName = [rs stringForColumn:@"set_name"];
     card.collectorNumber = [rs stringForColumn:@"collector_number"];
+    card.artist = [rs stringForColumn:@"artist"];
+    card.artIndex = [rs stringForColumn:@"art_index"];
     card.rarity = [rs stringForColumn:@"rarity"];
     card.manaCost = [rs stringForColumn:@"mana_cost"];
     card.typeLine = [rs stringForColumn:@"type_line"];
@@ -148,6 +154,28 @@
 
 // ----------------------------------------------------------------------------
 
+- (NSArray *) artVariants {
+    NSMutableArray *cards = [NSMutableArray array];
+    FMResultSet *rs = [gAppDelegate.db executeQuery:
+        @"SELECT   cards.* "
+        @"FROM     cards "
+        @"WHERE    cards.set_pk = ? "
+        @"AND      cards.name_hash == ? "
+        @"ORDER BY cards.art_index ASC",
+        self.setPk,
+        self.nameHash];
+    while([rs next]) {
+        [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+            [rs stringForColumn:@"artist"], @"artist",
+            [rs stringForColumn:@"art_index"], @"artIndex",
+            [rs stringForColumn:@"pk"], @"pk", 
+            nil]];
+    }                          
+    return cards;    
+}
+
+// ----------------------------------------------------------------------------
+
 - (NSArray *) otherParts {
     NSMutableArray *cards = [NSMutableArray array];
     FMResultSet *rs = [gAppDelegate.db executeQuery:
@@ -155,6 +183,7 @@
         @"FROM     cards "
         @"WHERE    cards.set_pk = ? "
         @"AND      cards.collector_number == ? "
+        @"AND      cards.collector_number != '' "
         @"AND      cards.pk != ? ",
         self.setPk,
         self.collectorNumber,
@@ -166,7 +195,6 @@
             nil]];
     }                          
     return cards;
-
 }
  
 // ----------------------------------------------------------------------------
@@ -197,19 +225,21 @@
 
 - (NSString *) toJSON {
     NSError *error;
-    NSArray *otherParts = [self otherParts];
-    NSArray *otherEditions = [self otherEditions];
     NSDictionary *source = [NSDictionary dictionaryWithObjectsAndKeys:
-        self.pk,            @"pk",
-        self.gathererId,    @"gathererId",
-        self.name,          @"name",
-        self.setName,       @"setName",
-        self.manaCost,      @"manaCost",
-        self.oracleText,    @"oracleText",
-        self.rarity,        @"rarity",
-        self.typeLine,      @"typeLine",
-        otherEditions,      @"otherEditions",
-        otherParts,         @"otherParts",
+        self.pk,              @"pk",
+        self.gathererId,      @"gathererId",
+        self.name,            @"name",
+        self.setName,         @"setName",
+        self.collectorNumber, @"collectorNumber",
+        self.artist,          @"artist",
+        self.artIndex,        @"artIndex",
+        self.manaCost,        @"manaCost",
+        self.oracleText,      @"oracleText",
+        self.rarity,          @"rarity",
+        self.typeLine,        @"typeLine",
+        self.otherEditions,   @"otherEditions",
+        self.otherParts,      @"otherParts",
+        self.artVariants,     @"artVariants",
         nil];
     return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:source 
         options:0 error:&error] encoding:NSUTF8StringEncoding];

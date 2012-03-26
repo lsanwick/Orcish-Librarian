@@ -26,12 +26,17 @@ class String
   end
   
   def to_normalized_name()
-    if /^(.*)\s\/\/\s(.*)\s\((.*)\)/.match(self) then
+    if /^(.*)\s\/\/\s(.*)\s\((.*)\)$/.match(self) then
       # Dead // Gone (Gone)  
-      "#{$3} (#{$1} // #{$2})"
-    elsif /(.*)\s\(.*\/.*\)/.match(self) then
+      # "#{$3} (#{$1} // #{$2})"
+      "#{$3}"
+    elsif /^(.*)\s\(.*\/.*\)$/.match(self) then
       # Gone (Dead/Gone)
-      "#{$1} (#{$2} // #{$3})"
+      # "#{$1} (#{$2} // #{$3})"
+      "#{$1}"
+    elsif /^(.*)\s\((.*)\)$/.match(self) then
+      # Nezumi Graverobber (Nighteyes the Desecrator)
+      "#{$2}"
     else
       # everything else
       self.gsub(/^XX(.*)\s+\(.*\)$/, '\1')

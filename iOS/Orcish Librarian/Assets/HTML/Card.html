@@ -62,7 +62,11 @@
 	    height: 18px;
 	}
     
-    .ol-card-image {
+    .ol-card-image,
+    .ol-oracle-text,
+    .ol-other-editions,
+	.ol-other-parts,
+    .ol-other-art {
         display: none;
     }
     
@@ -80,14 +84,15 @@
 	}
 	
 	.ol-other-editions,
-	.ol-other-parts {
-		display: none;
+	.ol-other-parts,
+    .ol-other-art {
 		font-size: 13px;
 		line-height: 1.5em;
 	}
 	
 	.ol-other-editions a,
-	.ol-other-parts a {
+	.ol-other-parts a,
+    .ol-other-art a {
 		text-decoration: none;
 	}
 	
@@ -122,13 +127,21 @@
     <div class="ol-prices">
     </div>
     
-	<div class="subtitle">Oracle Text:</div>
-    <div class="ol-oracle-text ol-block">
+    <div class="ol-oracle-text">
+        <div class="subtitle">Oracle Text:</div>
+        <div class="ol-block">
+        </div>
     </div>
     
     <div class="ol-card-image ol-block">
     </div>
     
+    <div class="ol-other-art">
+		<div class="subtitle">Other Art:</div>
+		<div class="ol-block">
+		</div>
+    </div>
+
     <div class="ol-other-parts">
 		<div class="subtitle">Other Parts:</div>
 		<div class="ol-block">
@@ -152,13 +165,25 @@ Orcish.setCardData = function(card) {
     $('.ol-card-name').text(card.name);
     $('.ol-set-name').text(card.setName);
     $('.ol-card-type').text(card.typeLine);
-	$('.ol-oracle-text').html(formattedOracleText(card));
-	$('.ol-mana-cost').html(formattedManaCost(card));
+	$('.ol-mana-cost').html(formattedManaCost(card));    
+    loadOracleText(card);
     loadCardPhoto(card);
 	loadOtherEditions(card);
 	loadOtherParts(card);
+    loadArtVariants(card);
 }
 
+// ----------------------------------------------------------------------------
+ 
+function loadOracleText(card) {
+    var text = formattedOracleText(card);
+    if (text.length > 0) {
+        $('.ol-oracle-text').show().find('.ol-block').html(text);
+    } else {
+        $('.ol-oracle-text').hide();
+    }
+}
+ 
 // ----------------------------------------------------------------------------
  
 function loadCardPhoto(card) {
@@ -168,7 +193,7 @@ function loadCardPhoto(card) {
     if (card.typeLine == 'Scheme' || isPlane) {
         imageURL = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=' + encodeURIComponent(card.gathererId);
     } else {
-        imageURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(card.setName) + '/' + encodeURIComponent(card.name) + '.full.jpg';
+        imageURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(card.setName) + '/' + encodeURIComponent(card.name) + card.artIndex + '.full.jpg';
     }
 
     $('<img />')
@@ -182,10 +207,10 @@ function loadCardPhoto(card) {
 // ----------------------------------------------------------------------------
 
 function loadOtherEditions(card) {
-	if(card.otherEditions && card.otherEditions.length > 0) {
+	if (card.otherEditions && card.otherEditions.length > 0) {
         var html = '';
         $.each(card.otherEditions, function(i, edition) {
-            if (i != 0) { html += ', <br />' }   
+            if (i != 0) { html += '<br />' }   
             html += '<a href="card://' + edition.pk + '">' + edition.setName + '</a>';
         });
         $('.ol-other-editions').show().find('.ol-block').html(html);
@@ -197,10 +222,10 @@ function loadOtherEditions(card) {
 // ----------------------------------------------------------------------------
 
 function loadOtherParts(card) {
-	if(card.otherParts && card.otherParts.length > 0) {
+	if (card.otherParts && card.otherParts.length > 0) {
         var html = '';
         $.each(card.otherParts, function(i, otherCard) {
-			if (i != 0) { html += ', <br />' }
+			if (i != 0) { html += '<br />' }
 			html += '<a href="card://' + otherCard.pk +'">' + otherCard.name + '</a>';
         });
         $('.ol-other-parts').show().find('.ol-block').html(html);
@@ -208,7 +233,24 @@ function loadOtherParts(card) {
         $('.ol-other-parts').hide();
 	}
 }
+
+// ----------------------------------------------------------------------------
  
+function loadArtVariants(card) {
+    if (card.artVariants && card.artVariants.length > 1) {
+        var html = '';
+		var first = true;
+		for (var i = 0; i < card.artVariants.length; i++) {
+			var variant = card.artVariants[i];
+			if (variant.pk == card.pk) { continue }			
+			if (!first) { html += '<br />' } else { first = false }
+			html += '<a href="card://' + variant.pk +'">Variant #' + (i + 1) + '</a>';
+		}
+        $('.ol-other-art').show().find('.ol-block').html(html);
+    } else {
+        $('.ol-other-art').hide();
+    }
+}
 // ----------------------------------------------------------------------------
  
 function formattedOracleText(card) {
@@ -348,10 +390,100 @@ function formatToken(token) {
 })()
 
 if (navigator.userAgent.indexOf('iPhone') == -1) {
-	Orcish.setCardData({"otherParts":[],"manaCost":"G","rarity":"rare","name":"Birds of Paradise","setName":"Classic Sixth Edition","otherEditions":[{"pk":"3264","set_name":"Eighth Edition"},{"pk":"4215","set_name":"Fifth Edition"},{"pk":"4640","set_name":"Fourth Edition"},{"pk":"7102","set_name":"Limited Edition Alpha"},{"pk":"7392","set_name":"Limited Edition Beta"},{"pk":"7970","set_name":"Magic 2010"},{"pk":"8213","set_name":"Magic 2011"},{"pk":"8446","set_name":"Magic 2012"},{"pk":"13762","set_name":"Ravnica: City of Guilds"},{"pk":"14063","set_name":"Revised Edition"},{"pk":"15144","set_name":"Seventh Edition"},{"pk":"16697","set_name":"Tenth Edition"},{"pk":"17952","set_name":"Unlimited Edition"}],"typeLine":"Creature - Bird","oracleText":"Flying\n{T}: Add one mana of any color to your mana pool.","pk":"1580","gathererId":"14719"});
+	Orcish.setCardData({"oracleText":"Target player discards two cards at random.","setName":"Fallen Empires","collectorNumber":"","gathererId":"1851","rarity":"C","artIndex":"1","otherEditions":[],"artVariants":[{"artIndex":"1","artist":"Scott Kirschner","pk":"85"},{"artIndex":"2","artist":"Quinton Hoover","pk":"86"},{"artIndex":"3","artist":"Susan Van Camp","pk":"87"},{"artIndex":"4","artist":"Liz Danforth","pk":"88"}],"typeLine":"Sorcery","otherParts":[],"pk":"85","artist":"Scott Kirschner","name":"Hymn to Tourach","manaCost":"BB"});
 }
 
 // ----------------------------------------------------------------------------     
+
+// ----------------------------------------------------------------------------
+//  Preload symbol images
+// ----------------------------------------------------------------------------
+
+(function($){
+    var cache = [];
+    $.preloadImages = function(images) {
+        for(var i=0;i<images.length;i++) {
+            var cacheImage = document.createElement('img');
+            cacheImage.src =images[i];
+            cache.push(cacheImage);
+        }
+    }
+})(jQuery)
+
+$.preloadImages([
+"symbols/mana_0.png",
+"symbols/mana_1.png",
+"symbols/mana_10.png",
+"symbols/mana_100.png",
+"symbols/mana_11.png",
+"symbols/mana_12.png",
+"symbols/mana_13.png",
+"symbols/mana_14.png",
+"symbols/mana_15.png",
+"symbols/mana_16.png",
+"symbols/mana_1b.png",
+"symbols/mana_1g.png",
+"symbols/mana_1r.png",
+"symbols/mana_1u.png",
+"symbols/mana_1w.png",
+"symbols/mana_2.png",
+"symbols/mana_2b.png",
+"symbols/mana_2g.png",
+"symbols/mana_2r.png",
+"symbols/mana_2u.png",
+"symbols/mana_2w.png",
+"symbols/mana_3.png",
+"symbols/mana_3b.png",
+"symbols/mana_3g.png",
+"symbols/mana_3r.png",
+"symbols/mana_3u.png",
+"symbols/mana_3w.png",
+"symbols/mana_4.png",
+"symbols/mana_4b.png",
+"symbols/mana_4g.png",
+"symbols/mana_4r.png",
+"symbols/mana_4u.png",
+"symbols/mana_4w.png",
+"symbols/mana_5.png",
+"symbols/mana_6.png",
+"symbols/mana_7.png",
+"symbols/mana_8.png",
+"symbols/mana_9.png",
+"symbols/mana_1000000.png",
+"symbols/mana_b.png",
+"symbols/mana_bg.png",
+"symbols/mana_br.png",
+"symbols/mana_circle.png",
+"symbols/mana_g.png",
+"symbols/mana_gu.png",
+"symbols/mana_gw.png",
+"symbols/mana_inf.png",
+"symbols/mana_nb.png",
+"symbols/mana_ng.png",
+"symbols/mana_nr.png",
+"symbols/mana_nu.png",
+"symbols/mana_nw.png",
+"symbols/mana_r.png",
+"symbols/mana_rg.png",
+"symbols/mana_rw.png",
+"symbols/mana_s.png",
+"symbols/mana_u.png",
+"symbols/mana_ub.png",
+"symbols/mana_ur.png",
+"symbols/mana_w.png",
+"symbols/mana_wb.png",
+"symbols/mana_wu.png",
+"symbols/mana_x.png",
+"symbols/mana_y.png",
+"symbols/mana_z.png",
+"symbols/mana_pw.png",
+"symbols/mana_pb.png",
+"symbols/mana_pu.png",
+"symbols/mana_pr.png",
+"symbols/mana_pg.png",
+"symbols/mana_pc.png",
+"symbols/q.png",
+"symbols/t.png"]);
 
 </script>
 </body>
