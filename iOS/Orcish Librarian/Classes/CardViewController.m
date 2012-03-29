@@ -8,10 +8,19 @@
 
 #import "CardViewController.h"
 #import "Card.h"
+#import "AppDelegate.h"
 
 #define kPageCount 3
 
+typedef void (^block_t)(void);
+
 @class Card;
+
+@interface CardViewController () {
+    NSUInteger webViewLoadCount;
+    block_t pendingAction;
+}
+@end
 
 @implementation CardViewController
 
@@ -25,8 +34,10 @@
     scrollView.bounces = YES;    
     NSURL *cardURL = [NSURL fileURLWithPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"HTML/Card.html"]];    
     pages = [NSMutableArray arrayWithCapacity:kPageCount];
+    webViewLoadCount = 0;
     for (int i = 0; i < kPageCount; i++) {
         UIWebView *page = [[UIWebView alloc] initWithFrame:scrollView.frame];
+        page.delegate = self;
         [pages addObject:page];
         page.scrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];        
         [page loadRequest:[NSURLRequest requestWithURL:cardURL]];
@@ -65,10 +76,16 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) loadCard:(NSUInteger)index forView:(UIWebView *)view {
-    Card *card = [cards objectAtIndex:index];
-    NSLog(@"%@", [card toJSON]);
-    [view stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]]];     
+- (void) loadCard:(NSUInteger)index forView:(UIWebView *)view {    
+    block_t action = ^{
+        Card *card = [cards objectAtIndex:index];
+        [view stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]]];
+    };
+    if (webViewLoadCount >= kPageCount) {
+        action();
+    } else {
+        pendingAction = action;
+    }
 }
 
 // ----------------------------------------------------------------------------
@@ -123,6 +140,36 @@
     }
     for (int i = 0; i < kPageCount; i++) {
         [[[pages objectAtIndex:i] scrollView] setContentOffset:CGPointMake(0, 0) animated:NO];
+    }
+}
+
+// ----------------------------------------------------------------------------
+//  UIWebViewDelegate
+// ----------------------------------------------------------------------------
+
+- (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSURL *URL = [request URL];    
+    if ([URL.scheme isEqualToString:@"card"]) {
+        NSString *pk = URL.host;
+        Card *card = [Card findCardByPk:pk];
+        if (card != nil) {            
+            [gAppDelegate showCard:card];
+             
+        } 
+        return NO;
+    }
+    return YES;
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) webViewDidFinishLoad:(UIWebView *)webView {
+    webViewLoadCount++;    
+    if (webViewLoadCount == kPageCount) {
+        if (pendingAction != nil) {
+            pendingAction();
+            pendingAction = nil;
+        }
     }
 }
 

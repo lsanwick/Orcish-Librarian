@@ -11,7 +11,7 @@
 
 @class CardSequence;
 
-@interface CardViewController : OrcishViewController <UIScrollViewDelegate> {
+@interface CardViewController : OrcishViewController <UIScrollViewDelegate, UIWebViewDelegate> {
     NSMutableArray *pages;
     UIScrollView *scrollView;
     NSUInteger layoutIndex;

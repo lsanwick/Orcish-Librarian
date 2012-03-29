@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BasicSearchController.h"
+#import "CardViewController.h"
 
 
 // ----------------------------------------------------------------------------
@@ -55,6 +56,21 @@
 
 - (void) hideKeyboard {
     [self.window.rootViewController.view endEditing:TRUE];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position {
+    CardViewController *controller = [self.rootController dequeueCardViewController];
+    controller.cards = cards;
+    controller.position = position;        
+    [gAppDelegate.rootController pushViewController:controller animated:YES];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) showCard:(Card *)card {
+    [self showCards:[NSArray arrayWithObject:card] atPosition:0];    
 }
 
 // ----------------------------------------------------------------------------

@@ -10,6 +10,7 @@
 
 @class MenuController;
 @class OrcishViewController;
+@class CardViewController;
 
 @interface OrcishRootController : UIViewController
 
@@ -30,6 +31,7 @@
 - (void) popViewControllerAnimated:(BOOL)animated;
 - (void) setViewController:(OrcishViewController *)controller animated:(BOOL)animated;
 
+- (CardViewController *) dequeueCardViewController;
 - (void) hideMenu;
 - (void) showMenu;
 

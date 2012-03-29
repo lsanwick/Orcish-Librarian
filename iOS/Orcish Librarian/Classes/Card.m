@@ -130,6 +130,20 @@
 
 // ----------------------------------------------------------------------------
 
++ (Card *) findCardByPk:(NSString *)pk {
+    NSString *sql = 
+        @"SELECT    cards.*, "
+        @"          sets.name AS set_name "
+        @"FROM      cards, sets "
+        @"WHERE     cards.set_pk = sets.pk "
+        @"AND       cards.pk = ? ";
+    FMResultSet *rs = [gAppDelegate.db executeQuery:sql withArgumentsInArray:
+        [NSArray arrayWithObject:pk]];        
+    return [rs next] ? [self cardForResultSet:rs] : nil;
+}
+
+// ----------------------------------------------------------------------------
+
 + (NSArray *) findNameHashesByText:(NSString *)text {
     if (text.length < kMinimumSearchCharacters) { return [NSArray array]; }
     NSMutableArray *searchNames = [NSMutableArray array];

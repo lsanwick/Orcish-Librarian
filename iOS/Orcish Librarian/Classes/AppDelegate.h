@@ -13,6 +13,7 @@
 #define gAppDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
 @class CardViewController;
+@class Card;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -24,5 +25,7 @@
 
 - (void) hideKeyboard;
 - (void) hideMenu;
+- (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position;
+- (void) showCard:(Card *)card;
 
 @end

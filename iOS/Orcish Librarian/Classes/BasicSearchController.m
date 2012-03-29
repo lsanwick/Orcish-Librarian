@@ -16,7 +16,6 @@
 
 @synthesize resultsTable;
 @synthesize searchBar;
-@synthesize cardViewController;
 @synthesize results;
 @synthesize hasBeenFirstResponder;
 
@@ -27,7 +26,6 @@
     self.hasBeenFirstResponder = NO;
     self.results = [NSArray array];
     [self view];
-    [self.cardViewController view];
 }
 
 // ----------------------------------------------------------------------------
@@ -45,11 +43,9 @@
 - (void) setResults:(NSArray *)cards {
     BOOL collapseResults = YES; // TODO: drive this value with settings
     if (collapseResults) {
-        results = [self collapsedResults:cards];        
-        self.cardViewController.cards = results;
+        results = [self collapsedResults:cards];                
     } else {
         results = [cards copy];
-        self.cardViewController.cards = results;
     }    
     [self.resultsTable reloadData];
 }
@@ -126,8 +122,10 @@
     [gAppDelegate hideKeyboard];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (gAppDelegate.rootController.topController == self) {
-        self.cardViewController.position = indexPath.row;
-        [gAppDelegate.rootController pushViewController:self.cardViewController animated:YES];
+        CardViewController *controller = [gAppDelegate.rootController dequeueCardViewController];
+        controller.cards = results;
+        controller.position = indexPath.row;
+        [gAppDelegate.rootController pushViewController:controller animated:YES];
     }
 }
 

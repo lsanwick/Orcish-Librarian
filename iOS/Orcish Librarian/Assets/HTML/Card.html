@@ -187,7 +187,6 @@ function loadOracleText(card) {
 // ----------------------------------------------------------------------------
  
 function loadCardPhoto(card) {
-
     var isPlane = card.typeLine.match(/^Plane -/);
     var imageURL = '';
     if (card.typeLine == 'Scheme' || isPlane) {
@@ -195,7 +194,8 @@ function loadCardPhoto(card) {
     } else {
         imageURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(card.setName) + '/' + encodeURIComponent(card.name) + card.artIndex + '.full.jpg';
     }
-
+ 
+    $('.ol-card-image').hide();
     $('<img />')
         .attr('src', imageURL)
         .appendTo($('.ol-card-image').empty())
@@ -263,7 +263,7 @@ function formattedOracleText(card) {
 	}
 
 	// Unglued was never updated with modern markup
-    if (card.set == 'UG') { 
+    if (card.setName == 'Unglued') { 
         text = text.replace(/o([\d]+|[WBURGS])/g, '{$1}'); // fixes old-style mana symbol
         text = text.replace(/ocT/g, '{T}');                // fixes old-style tap symbol
     }
@@ -284,6 +284,12 @@ function formattedOracleText(card) {
     }
 
     text = text.replace(/\n/g, '<br /><br />');     // replace newlines with <br /> elements 
+
+	// italicize certain keywords
+	text = text.replace(/\b(channel|chroma|domain|fateful|hour|grandeur|hellbent|imprint|join forces|kinship|landfall|metalcraft|morbid|radiance|sweep|threshold)\b/i, '<i>$1</i>');
+	
+	// convert hyphen into em-dash
+	text = text.replace(/(\s)-(\s)/, '$1&mdash;$2');
 
     var html = '';
     var withinToken = false;

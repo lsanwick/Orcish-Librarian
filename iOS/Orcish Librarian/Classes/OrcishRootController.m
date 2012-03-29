@@ -10,9 +10,15 @@
 #import "AppDelegate.h"
 #import "OrcishRootController.h"
 #import "OrcishViewController.h"
+#import "CardViewController.h"
 #import "MenuController.h"
 #import "Utility.h"
 
+
+@interface OrcishRootController () {
+    CardViewController *queuedCardViewController;
+}
+@end
 
 @implementation OrcishRootController
 
@@ -33,6 +39,8 @@
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         self.controllerStack = [[NSMutableArray alloc] init];
+        queuedCardViewController = [[CardViewController alloc] initWithNibName:nil bundle:nil];
+        [queuedCardViewController view];
     }
     return self;
 }
@@ -95,7 +103,7 @@
 // ----------------------------------------------------------------------------
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return NO;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 // ----------------------------------------------------------------------------
@@ -106,6 +114,15 @@
     } else {
         self.menuButton.image = [UIImage imageNamed:@"Menu-Button"];
     }
+}
+
+// ----------------------------------------------------------------------------
+
+- (CardViewController *) dequeueCardViewController {
+    CardViewController *previous = queuedCardViewController;
+    queuedCardViewController = [[CardViewController alloc] initWithNibName:nil bundle:nil];
+    [queuedCardViewController view];
+    return previous;
 }
 
 // ----------------------------------------------------------------------------

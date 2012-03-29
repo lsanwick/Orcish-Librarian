@@ -39,7 +39,7 @@ class Gatherer < Source
   
   def checklist_for_set(set)
     cards = { }
-    doc = fetch_document("http://gatherer.wizards.com/Pages/Search/Default.aspx?output=checklist&set=%5b%22#{URI.escape(set)}%22%5d&special=true")
+    doc = fetch_document("http://gatherer.wizards.com/Pages/Search/Default.aspx?output=checklist&set=%5b%22#{URI.escape(set)}%22%5d")
     doc.search("tr[@class=cardItem]").each do |tr|
       cells = tr.search('td')
       name = cells[1].at('a').inner_text.strip.clean.to_normalized_name

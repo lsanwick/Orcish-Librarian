@@ -15,7 +15,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *resultsTable;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (strong, nonatomic) IBOutlet CardViewController *cardViewController;
 @property (copy, nonatomic) NSArray *results;
 @property (assign, nonatomic) BOOL hasBeenFirstResponder;
 
