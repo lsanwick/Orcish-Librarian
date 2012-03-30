@@ -79,6 +79,8 @@ typedef void (^block_t)(void);
 - (void) loadCard:(NSUInteger)index forView:(UIWebView *)view {    
     block_t action = ^{
         Card *card = [cards objectAtIndex:index];
+        NSLog(@"---------------------------");
+        NSLog(@"%@", [card toJSON]);
         [view stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]]];
     };
     if (webViewLoadCount >= kPageCount) {

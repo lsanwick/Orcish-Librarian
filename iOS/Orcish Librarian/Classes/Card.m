@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "Card.h"
 #import "SearchCriteria.h"
+#import "NSNull+Wrap.h"
 
 #define kMinimumSearchCharacters 3
 #define kMaxSearchNames 5
@@ -38,31 +39,25 @@
 
 // ----------------------------------------------------------------------------
 
-- (NSString *) description {
-    return [NSString stringWithFormat:@"%@ (%@)", self.name, self.setName];
-}
-
-// ----------------------------------------------------------------------------
-
 + (Card *) cardForResultSet:(FMResultSet *)rs {
-    Card *card = [[Card alloc] init];
-    card.pk = [rs stringForColumn:@"pk"];
-    card.searchName = [rs stringForColumn:@"search_name"];
-    card.nameHash = [rs stringForColumn:@"name_hash"];
-    card.name = [rs stringForColumn:@"name"];
-    card.gathererId = [rs stringForColumn:@"gatherer_id"];
-    card.setPk = [rs stringForColumn:@"set_pk"];
-    card.setName = [rs stringForColumn:@"set_name"];
-    card.collectorNumber = [rs stringForColumn:@"collector_number"];
-    card.artist = [rs stringForColumn:@"artist"];
-    card.artIndex = [rs stringForColumn:@"art_index"];
-    card.rarity = [rs stringForColumn:@"rarity"];
-    card.manaCost = [rs stringForColumn:@"mana_cost"];
-    card.typeLine = [rs stringForColumn:@"type_line"];
-    card.oracleText = [rs stringForColumn:@"oracle_text"];
-    card.power = [rs stringForColumn:@"power"];
-    card.toughness = [rs stringForColumn:@"toughness"];
-    card.loyalty = [rs stringForColumn:@"loyalty"];
+    Card *card = [NSNull wrapNil:[[Card alloc] init]];
+    card.pk = [NSNull wrapNil:[rs stringForColumn:@"pk"]];
+    card.searchName = [NSNull wrapNil:[rs stringForColumn:@"search_name"]];
+    card.nameHash = [NSNull wrapNil:[rs stringForColumn:@"name_hash"]];
+    card.name = [NSNull wrapNil:[rs stringForColumn:@"name"]];
+    card.gathererId = [NSNull wrapNil:[rs stringForColumn:@"gatherer_id"]];
+    card.setPk = [NSNull wrapNil:[rs stringForColumn:@"set_pk"]];
+    card.setName = [NSNull wrapNil:[rs stringForColumn:@"set_name"]];
+    card.collectorNumber = [NSNull wrapNil:[rs stringForColumn:@"collector_number"]];
+    card.artist = [NSNull wrapNil:[rs stringForColumn:@"artist"]];
+    card.artIndex = [NSNull wrapNil:[rs stringForColumn:@"art_index"]];
+    card.rarity = [NSNull wrapNil:[rs stringForColumn:@"rarity"]];
+    card.manaCost = [NSNull wrapNil:[rs stringForColumn:@"mana_cost"]];
+    card.typeLine = [NSNull wrapNil:[rs stringForColumn:@"type_line"]];
+    card.oracleText = [NSNull wrapNil:[rs stringForColumn:@"oracle_text"]];
+    card.power = [NSNull wrapNil:[rs stringForColumn:@"power"]];
+    card.toughness = [NSNull wrapNil:[rs stringForColumn:@"toughness"]];
+    card.loyalty = [NSNull wrapNil:[rs stringForColumn:@"loyalty"]];
     card.versionCount = [rs intForColumn:@"version_count"];
     return card;
 }
@@ -168,6 +163,12 @@
 
 // ----------------------------------------------------------------------------
 
+- (NSString *) description {
+    return [NSString stringWithFormat:@"%@ (%@)", self.name, self.setName];
+}
+
+// ----------------------------------------------------------------------------
+
 - (NSArray *) artVariants {
     NSMutableArray *cards = [NSMutableArray array];
     FMResultSet *rs = [gAppDelegate.db executeQuery:
@@ -251,6 +252,9 @@
         self.oracleText,      @"oracleText",
         self.rarity,          @"rarity",
         self.typeLine,        @"typeLine",
+        self.power,           @"power",
+        self.toughness,       @"toughness",
+        self.loyalty,         @"loyalty",
         self.otherEditions,   @"otherEditions",
         self.otherParts,      @"otherParts",
         self.artVariants,     @"artVariants",

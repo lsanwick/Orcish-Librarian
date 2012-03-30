@@ -46,12 +46,12 @@
         color: #7f848b;
     }
     
-    .ol-card-type {
+	.ol-card-data {
 		margin-top: 3px;
         font-size: 14px;
         font-weight: bold;
         color: #7f848b;
-    }
+	}
 
 	.ol-mana-cost {
 		margin-top: 5px;
@@ -120,7 +120,10 @@
     <div class="ol-header ol-block">
         <div class="ol-card-name">Card Name</div>
         <div class="ol-set-name">Card Set</div>
-        <div class="ol-card-type">Type &ndash; Subtype</div>
+		<div class="ol-card-data">
+        	<span class="ol-card-type">Type &ndash; Subtype</span> 
+			<span class="ol-card-ptl"></span>
+		</div>
         <div class="ol-mana-cost">Mana Cost</div>
     </div>
     
@@ -164,13 +167,27 @@ var Orcish = { };
 Orcish.setCardData = function(card) {
     $('.ol-card-name').text(card.name);
     $('.ol-set-name').text(card.setName);
-    $('.ol-card-type').text(card.typeLine);
 	$('.ol-mana-cost').html(formattedManaCost(card));    
+	loadTypeLine(card);
     loadOracleText(card);
     loadCardPhoto(card);
 	loadOtherEditions(card);
 	loadOtherParts(card);
     loadArtVariants(card);
+}
+
+// ----------------------------------------------------------------------------
+
+function loadTypeLine(card) {
+	$('.ol-card-type').text(card.typeLine);
+	if (card.power || card.toughness) {
+		$('.ol-card-ptl').show().text('(' + card.power + '/' + card.toughness + ')');
+	} else if (card.loyalty) {
+		$('.ol-card-ptl').show().text('(' + card.loyalty + ')');
+	} else {
+		$('.ol-card-ptl').hide();
+	}
+	
 }
 
 // ----------------------------------------------------------------------------
@@ -396,7 +413,7 @@ function formatToken(token) {
 })()
 
 if (navigator.userAgent.indexOf('iPhone') == -1) {
-	Orcish.setCardData({"oracleText":"Target player discards two cards at random.","setName":"Fallen Empires","collectorNumber":"","gathererId":"1851","rarity":"C","artIndex":"1","otherEditions":[],"artVariants":[{"artIndex":"1","artist":"Scott Kirschner","pk":"85"},{"artIndex":"2","artist":"Quinton Hoover","pk":"86"},{"artIndex":"3","artist":"Susan Van Camp","pk":"87"},{"artIndex":"4","artist":"Liz Danforth","pk":"88"}],"typeLine":"Sorcery","otherParts":[],"pk":"85","artist":"Scott Kirschner","name":"Hymn to Tourach","manaCost":"BB"});
+	Orcish.setCardData({"oracleText":"Flying\nVigilance (Attacking doesn't cause this creature to tap.)","setName":"Duel Decks: Divine vs. Demonic","collectorNumber":"10","gathererId":"196999","rarity":"R","artIndex":"","otherEditions":[{"pk":"3699","setName":"Eighth Edition"},{"pk":"5197","setName":"Fourth Edition"},{"pk":"7690","setName":"Limited Edition Alpha"},{"pk":"7990","setName":"Limited Edition Beta"},{"pk":"8555","setName":"Magic 2010"},{"pk":"8811","setName":"Magic 2011"},{"pk":"9059","setName":"Magic 2012"},{"pk":"9350","setName":"Magic: The Gathering-Commander"},{"pk":"10294","setName":"Masters Edition IV"},{"pk":"12267","setName":"Ninth Edition"},{"pk":"14926","setName":"Revised Edition"},{"pk":"16070","setName":"Seventh Edition"},{"pk":"17711","setName":"Tenth Edition"},{"pk":"18962","setName":"Unlimited Edition"}],"artVariants":[{"artIndex":"","artist":"Greg Staples","pk":"2988"}],"typeLine":"Creature - Angel","otherParts":[],"pk":"2988","artist":"Greg Staples","name":"Serra Angel","manaCost":"3WW"});
 }
 
 // ----------------------------------------------------------------------------     
