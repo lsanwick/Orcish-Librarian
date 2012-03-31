@@ -10,7 +10,11 @@
 #import "OrcishViewController.h"
 #import "CardViewController.h"
 #import "AppDelegate.h"
+#import "PriceManager.h"
 #import "Card.h"
+
+#define kPriceRequestDelay 1.5
+
 
 @implementation BasicSearchController
 
@@ -41,13 +45,20 @@
 // ----------------------------------------------------------------------------
 
 - (void) setResults:(NSArray *)cards {
-    BOOL collapseResults = YES; // TODO: drive this value with settings
+    BOOL collapseResults = YES;
     if (collapseResults) {
         results = [self collapsedResults:cards];                
     } else {
         results = [cards copy];
     }    
     [self.resultsTable reloadData];
+    [[PriceManager shared] clearPriceRequests];
+    NSArray *currentResults = results;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kPriceRequestDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        if (results == currentResults && results.count > 0) {
+            [[PriceManager shared] queuePriceRequests:results];
+        }
+    });
 }
 
 // ----------------------------------------------------------------------------

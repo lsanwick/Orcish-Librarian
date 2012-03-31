@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "OrcishViewController.h"
 
-@class CardSequence;
-
 @interface CardViewController : OrcishViewController <UIScrollViewDelegate, UIWebViewDelegate> {
     NSMutableArray *pages;
     UIScrollView *scrollView;
