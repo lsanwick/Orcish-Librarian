@@ -10,15 +10,16 @@ class CardBox
   include SQLMaker
   
   def initialize()
-    @data = { :sets => [ ], :cards => { }, :names => { } }
+    @data = { :sets => [ ], :tcg => { }, :cards => { }, :names => { } }
   end
   
   def save(path, format = :json)
     self.send("save_as_#{format}", path)
   end
   
-  def add(cards, set)    
+  def add(cards, set, tcg)
     @data[:sets] << set
+    @data[:tcg][set] = tcg
     @data[:cards][set] = (@data[:cards][set] || [ ]) + cards
     cards.each do |card|
       if @data[:names][card[:name]].nil?
@@ -86,7 +87,8 @@ class CardBox
     # CREATE TABLE sets
     io.puts(sql_create_table(:sets, {
       :pk => :integer,
-      :name => :varchar_255 },
+      :name => :varchar_255,
+      :tcg => :varchar_255 },
       :pk => :pk))    
     # CREATE TABLE cards
     io.puts
@@ -102,6 +104,7 @@ class CardBox
       :rarity => :varchar_32,
       :mana_cost => :varchar_255,
       :type_line => :varchar_255,
+      :is_token => :integer,
       :oracle_text => :text,
       :power => :varchar_8,
       :toughness => :varchar_8,
@@ -112,15 +115,17 @@ class CardBox
     # CREATE INDEXES
     io.puts(sql_create_index(:table => :cards, :column => :search_name))
     io.puts(sql_create_index(:table => :cards, :column => :name_hash))
+    io.puts(sql_create_index(:table => :cards, :column => :is_token))
     # INSERTs
     io.puts
     current_set_pk = 0
     current_card_pk = 0
-    @data[:sets].each do |set|
+    @data[:sets].each do |set_name|
       current_set_pk = current_set_pk + 1
-      io.puts(sql_insert_row(:sets, :pk => current_set_pk, :name => set))
+      tcg = @data[:tcg][set_name] || ''
+      io.puts(sql_insert_row(:sets, :pk => current_set_pk, :name => set_name, :tcg => tcg))
       io.puts
-      @data[:cards][set].each do |card|
+      @data[:cards][set_name].each do |card|
         current_card_pk = current_card_pk + 1
         io.puts(sql_insert_row(:cards, card.merge({
           :search_name => card[:name].to_searchable_name,

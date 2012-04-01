@@ -21,12 +21,14 @@
 @property (nonatomic, strong) NSString *gathererId;
 @property (nonatomic, strong) NSString *setPk;
 @property (nonatomic, strong) NSString *setName;
+@property (nonatomic, strong) NSString *tcgSetName;
 @property (nonatomic, strong) NSString *collectorNumber;
 @property (nonatomic, strong) NSString *artist;
 @property (nonatomic, strong) NSString *artIndex;
 @property (nonatomic, strong) NSString *rarity;
 @property (nonatomic, strong) NSString *manaCost;
 @property (nonatomic, strong) NSString *typeLine;
+@property (nonatomic, assign) BOOL isToken;
 @property (nonatomic, strong) NSString *oracleText;
 @property (nonatomic, strong) NSString *power;
 @property (nonatomic, strong) NSString *toughness;

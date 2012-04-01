@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class Card;
+
+typedef void (^PriceCallback)(Card *, NSDictionary *);
+
 @interface PriceManager : NSObject
 
 + (PriceManager *) shared;
+- (void) requestPriceFor:(Card *)card withCallback:(PriceCallback)callback;
 - (void) clearPriceRequests;
-- (void) queuePriceRequests:(NSArray *)cards;
 
 @end

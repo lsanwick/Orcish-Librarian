@@ -16,6 +16,13 @@
 #define kPriceRequestDelay 1.5
 
 
+@interface BasicSearchController ()
+
+- (void) requestPricesFor:(NSArray *)cards;
+
+@end
+
+
 @implementation BasicSearchController
 
 @synthesize resultsTable;
@@ -56,7 +63,7 @@
     NSArray *currentResults = results;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kPriceRequestDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if (results == currentResults && results.count > 0) {
-            [[PriceManager shared] queuePriceRequests:results];
+            [self requestPricesFor:results];
         }
     });
 }
@@ -152,6 +159,19 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.results.count;
+}
+
+// ----------------------------------------------------------------------------
+//  PRIVATE METHODS
+// ----------------------------------------------------------------------------
+
+- (void) requestPricesFor:(NSArray *)cards {
+    [[PriceManager shared] clearPriceRequests];
+    for (Card *card in cards.reverseObjectEnumerator) {
+        [[PriceManager shared] requestPriceFor:card withCallback:^(Card *card, NSDictionary *prices){
+            
+        }];         
+    }
 }
 
 // ----------------------------------------------------------------------------

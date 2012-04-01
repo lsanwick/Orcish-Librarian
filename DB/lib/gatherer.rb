@@ -6,14 +6,7 @@ require 'textutils'
 class Gatherer < Source
 
   def sets
-    sets = [ ]
-    doc = fetch_document("http://gatherer.wizards.com/")
-    doc.search("select[@id$=setAddText] option").each do |option|
-      name = option.inner_text.strip
-      sets << name if name.length > 0
-    end    
-    debug("Found #{sets.length} sets on Gatherer.")
-    sets
+    @@sets
   end
   
   def cards_for_set(set)
@@ -90,11 +83,127 @@ class Gatherer < Source
           current_card[:mana_cost] = value.inner_text.strip
         end
       else
+        current_card[:is_token] = ((current_card[:mana_cost].nil? || current_card[:mana_cost] == '') && current_card[:type_line] == "Creature - #{current_card[:name]}") ? 1 : 0
         cards[current_card[:name]] = current_card
         current_card = { }
       end
     end
     cards
   end
+      
+  @@sets = {
+    
+    # misc. sets    
+    "Chronicles" => "Chronicles",    
+    "Battle Royale Box Set" => "Battle Royale Box Set",
+    "Beatdown Box Set" => "Beatdown Box Set",
+    "Portal" => "Portal",
+    "Portal Second Age" => "Portal Second Age",
+    "Portal Three Kingdoms" => "Portal Three Kingdoms",
+    "Starter 1999" => "Starter 1999",
+    "Starter 2000" => "Starter 2000",        
+    
+    "Unglued" => "Unglued",
+    "Unhinged" => "Unhinged",
+    
+    "Duel Decks: Elves vs. Goblins" => "Duel Decks: Elves vs. Goblins",
+    "Duel Decks: Jace vs. Chandra" => "Duel Decks: Jace vs. Chandra",
+    "Duel Decks: Divine vs. Demonic" => "Duel Decks: Divine vs. Demonic",
+    "Duel Decks: Garruk vs. Liliana" => "Duel Decks: Garruk vs. Liliana",
+    "Duel Decks: Phyrexia vs. the Coalition" => "Duel Decks: Phyrexia vs. the Coalition",
+    "Duel Decks: Elspeth vs. Tezzeret" => "Duel Decks: Elspeth vs. Tezzeret",
+    "Duel Decks: Knights vs. Dragons" => "Duel Decks: Knights vs Dragons",    
+    "Duel Decks: Ajani vs. Nicol Bolas" => "Duel Decks: Ajani vs. Nicol Bolas",
+    "Duel Decks: Venser vs. Koth" => "Duel Decks: Venser vs. Koth",
+    
+    "From the Vault: Dragons" => "From the Vault: Dragons",
+    "From the Vault: Exiled" => "From the Vault: Exiled",
+    "From the Vault: Relics" => "From the Vault: Relics",
+    "From the Vault: Legends" => "From the Vault: Legends",
+
+    "Premium Deck Series: Slivers" => "Premium Deck Series: Slivers",
+    "Premium Deck Series: Fire and Lightning" => "Premium Deck Series: Fire and Lightning",
+    "Premium Deck Series: Graveborn" => "Premium Deck Series: Graveborn",
+
+    "Planechase" => "Planechase",
+    "Archenemy" => "Archenemy",
+    "Magic: The Gathering-Commander" => "Commander",        
+    
+    # core sets
+    "Limited Edition Alpha" => "Alpha Edition",
+    "Limited Edition Beta" => "Beta Edition",
+    "Unlimited Edition" => "Unlimited Edition",
+    "Revised Edition" => "Revised Edition",
+    "Fourth Edition" => "Fourth Edition",
+    "Fifth Edition" => "Fifth Edition",
+    "Classic Sixth Edition" => "Classic Sixth Edition",
+    "Seventh Edition" => "7th Edition", 
+    "Eighth Edition" => "8th Edition",
+    "Ninth Edition" => "9th Edition",
+    "Tenth Edition" => "Tenth Edition",
+    "Magic 2010" => "Magic 2010",
+    "Magic 2011" => "Magic 2011 (M11)",
+    "Magic 2012" => "Magic 2012 (M12)",
+    
+    # expansion sets
+    "Arabian Nights" => "Arabian Nights",
+    "Antiquities" => "Antiquities",
+    "Legends" => "Legends",
+    "The Dark" => "The Dark",
+    "Fallen Empires" => "Fallen Empires",        
+    "Homelands" => "Homelands",
+    "Ice Age" => "Ice Age",
+    "Alliances" => "Alliances",
+    "Mirage" => "Mirage",
+    "Visions" => "Visions",
+    "Weatherlight" => "Weatherlight",
+    "Tempest" => "Tempest",
+    "Stronghold" => "Stronghold",
+    "Exodus" => "Exodus",
+    "Urza's Saga" => "Urza's Saga",
+    "Urza's Legacy" => "Urza's Legacy",
+    "Urza's Destiny" => "Urza's Destiny",
+    "Mercadian Masques" => "Mercadian Masques",
+    "Nemesis" => "Nemesis",
+    "Prophecy" => "Prophecy",
+    "Invasion" => "Invasion",
+    "Planeshift" => "Planeshift",    
+    "Apocalypse" => "Apocalypse",
+    "Odyssey" => "Odyssey",
+    "Torment" => "Torment",
+    "Judgment" => "Judgment",
+    "Onslaught" => "Onslaught",
+    "Legions" => "Legions",
+    "Scourge" => "Scourge",
+    "Mirrodin" => "Mirrodin",
+    "Darksteel" => "Darksteel",
+    "Fifth Dawn" => "Fifth Dawn",
+    "Champions of Kamigawa" => "Champions of Kamigawa",
+    "Betrayers of Kamigawa" => "Betrayers of Kamigawa",
+    "Saviors of Kamigawa" => "Saviors of Kamigawa",    
+    "Ravnica: City of Guilds" => "Ravnica: City of Guilds",
+    "Guildpact" => "Guildpact",
+    "Dissension" => "Dissension",    
+    "Time Spiral" => "Time Spiral",
+    "Coldsnap" => "Coldsnap",
+    "Time Spiral \"Timeshifted\"" => "Timeshifted",
+    "Planar Chaos" => "Planar Chaos",
+    "Future Sight" => "Future Sight",
+    "Lorwyn" => "Lorwyn",
+    "Morningtide" => "Morningtide",
+    "Shadowmoor" => "Shadowmoor",
+    "Eventide" => "Eventide",
+    "Shards of Alara" => "Shards of Alara",       
+    "Alara Reborn" => "Alara Reborn",
+    "Conflux" => "Conflux",
+    "Zendikar" => "Zendikar",
+    "Worldwake" => "Worldwake", 
+    "Rise of the Eldrazi" => "Rise of the Eldrazi",    
+    "Scars of Mirrodin" => "Scars of Mirrodin",
+    "Mirrodin Besieged" => "Mirrodin Besieged",
+    "New Phyrexia" => "New Phyrexia",    
+    "Innistrad" => "Innistrad",
+    "Dark Ascension" => "Dark Ascension"
+  }
       
 end

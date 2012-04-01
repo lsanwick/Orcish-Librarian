@@ -17,28 +17,21 @@ Orcish.log = options[:log]
 Orcish.debug("Using '#{Orcish.env}' environment")
 
 collection = { }
-fetch = FetchManager.new
-all_sets = fetch.sets
-sets_to_process = (ARGV.length > 0) ? ARGV : all_sets
+manager = FetchManager.new
+sets_to_process = (ARGV.length > 0) ? ARGV : manager.sets.keys
 sets_to_process.each do |set|
-  if all_sets.include?(set)    
-    cards = fetch.cards_for_set(set)
+  if manager.sets.keys.include?(set)    
+    cards = manager.cards_for_set(set)
     collection[set] = cards
   else
     Orcish.debug("The set '#{set}' could not be found.")
   end
 end
 
-card_count = 0
 FileUtils.rm_rf("data/#{Orcish.env}.pstore") unless options[:append]
 PStore.new("data/#{Orcish.env}.pstore").transaction do |store|
-  collection.each do |pair|
-    store[:sets] = [ ] if store[:sets].nil?
-    store[:sets] << pair[0] unless store[:sets].include?(pair[0])
-    store[pair[0]] = pair[1]
+  collection.each_pair do |set, cards|
+    store[set] = cards
   end
-  store[:sets].each do |set|
-    card_count = card_count + store[set].count
-  end
+  store[:sets] = manager.sets
 end
-Orcish.debug("There are a total of #{card_count} cards currently stored.")

@@ -209,9 +209,9 @@ function loadCardPhoto(card) {
     if (card.typeLine == 'Scheme' || isPlane) {
         imageURL = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=' + encodeURIComponent(card.gathererId);
     } else {
-        imageURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(card.setName) + '/' + encodeURIComponent(card.name) + card.artIndex + '.full.jpg';
+        var setName = card.setName.replace(/:/g, '');
+        imageURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(setName) + '/' + encodeURIComponent(card.name) + card.artIndex + '.full.jpg';
     }
- 
     $('.ol-card-image').hide();
     $('<img />')
         .attr('src', imageURL)

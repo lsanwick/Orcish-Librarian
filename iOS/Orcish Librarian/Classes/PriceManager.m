@@ -14,6 +14,16 @@
 #define kDownloadBatchSize 3
 
 
+@interface QueuedLookup : NSObject
+@property (nonatomic, strong) PriceCallback callback;
+@property (nonatomic, strong) Card *card;
+@end
+@implementation QueuedLookup
+@synthesize callback;
+@synthesize card;
+@end
+
+
 @interface PriceManager () {
     NSMutableArray *queue;
     NSMutableDictionary *prices;
@@ -21,14 +31,14 @@
 }
 
 - (void) downloadQueuedPrices;
-- (void) beginPriceDownloadForCard:(Card *)card;
-- (NSString *) tcgNameForCard:(Card *)card;
-- (NSString *) tcgSetForCard:(Card *)card;
+- (void) beginLookup:(QueuedLookup *)lookup;
 
 @end
 
 @implementation PriceManager
 
+// ----------------------------------------------------------------------------
+//  PUBLIC METHODS
 // ----------------------------------------------------------------------------
 
 + (PriceManager *) shared {
@@ -42,6 +52,33 @@
 
 // ----------------------------------------------------------------------------
 
+- (void) clearPriceRequests {
+    [queue removeAllObjects];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) queuePriceRequest:(Card *)card withCallback:(PriceCallback)callback {
+    if ([prices objectForKey:card.pk] == nil) {
+        [queue addObject:card];
+    }
+    [self downloadQueuedPrices];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) requestPriceFor:(Card *)card withCallback:(PriceCallback)callback {
+    QueuedLookup *lookup = [[QueuedLookup alloc] init];
+    lookup.callback = callback;
+    lookup.card = card;    
+    [queue addObject:lookup];
+    [self downloadQueuedPrices];
+}
+
+// ----------------------------------------------------------------------------
+//  PRIVATE METHODS
+// ----------------------------------------------------------------------------
+
 - (id) init {
     if (self = [super init]) {
         queue = [NSMutableArray array];
@@ -52,37 +89,20 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) clearPriceRequests {
-    [queue removeAllObjects];
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) queuePriceRequests:(NSArray *)cards {
-    for (Card *card in [cards reverseObjectEnumerator]) {
-        if ([prices objectForKey:card.pk] == nil) {
-            [queue addObject:card];
-        }
-    }
-    [self downloadQueuedPrices];
-}
-
-// ----------------------------------------------------------------------------
-
 - (void) downloadQueuedPrices {
     while (pendingRequests < kDownloadBatchSize && queue.count > 0) {
-        [self beginPriceDownloadForCard:[queue objectAtIndex:0]];
-        [queue removeObjectAtIndex:0];
+        [self beginLookup:[queue lastObject]];
+        [queue removeLastObject];
         pendingRequests++;
     }
 }
 
 // ----------------------------------------------------------------------------
 
-- (void) beginPriceDownloadForCard:(Card *)card {
+- (void) beginLookup:(QueuedLookup *)lookup {
     NSString *url = [NSString stringWithFormat:@"http://partner.tcgplayer.com/x/phl.asmx/p?pk=ORCSHLBRN&p=%@&s=%@",
-        [[self tcgNameForCard:card] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-        [[self tcgSetForCard:card] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];        
+        [lookup.card.name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+        [lookup.card.tcgSetName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];        
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData *response = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -90,10 +110,10 @@
             if (response != nil) {
                 NSDictionary *price = [self priceForResponse:response];
                 if (price != nil) {
-                    [prices setObject:price forKey:card.pk];
-                    NSLog(@"%@: %@", card.name, price);
+                    [prices setObject:price forKey:lookup.card.pk];
+                    lookup.callback(lookup.card, price);
                 } else {
-                    NSLog(@"Could not find price for %@", card.name);
+                    NSLog(@"Could not find price for %@", lookup.card.name);
                 }
             }
             [self downloadQueuedPrices];
@@ -118,6 +138,13 @@
             nil];
     }
     return nil;
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) announceNewPrice:(NSDictionary *)price forCard:(Card *)card {
+    NSLog(@"\n------------------------\nPrice for %@: %@", card.name, price);
+    
 }
 
 // ----------------------------------------------------------------------------

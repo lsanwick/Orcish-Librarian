@@ -25,12 +25,14 @@
 @synthesize gathererId;
 @synthesize setPk;
 @synthesize setName;
+@synthesize tcgSetName;
 @synthesize collectorNumber;
 @synthesize artist;
 @synthesize artIndex;
 @synthesize rarity;
 @synthesize manaCost;
 @synthesize typeLine;
+@synthesize isToken;
 @synthesize oracleText;
 @synthesize power;
 @synthesize toughness;
@@ -48,12 +50,14 @@
     card.gathererId = [NSNull wrapNil:[rs stringForColumn:@"gatherer_id"]];
     card.setPk = [NSNull wrapNil:[rs stringForColumn:@"set_pk"]];
     card.setName = [NSNull wrapNil:[rs stringForColumn:@"set_name"]];
+    card.tcgSetName = [NSNull wrapNil:[rs stringForColumn:@"tcg_set_name"]];
     card.collectorNumber = [NSNull wrapNil:[rs stringForColumn:@"collector_number"]];
     card.artist = [NSNull wrapNil:[rs stringForColumn:@"artist"]];
     card.artIndex = [NSNull wrapNil:[rs stringForColumn:@"art_index"]];
     card.rarity = [NSNull wrapNil:[rs stringForColumn:@"rarity"]];
     card.manaCost = [NSNull wrapNil:[rs stringForColumn:@"mana_cost"]];
     card.typeLine = [NSNull wrapNil:[rs stringForColumn:@"type_line"]];
+    card.isToken = [rs boolForColumn:@"is_token"];
     card.oracleText = [NSNull wrapNil:[rs stringForColumn:@"oracle_text"]];
     card.power = [NSNull wrapNil:[rs stringForColumn:@"power"]];
     card.toughness = [NSNull wrapNil:[rs stringForColumn:@"toughness"]];
@@ -107,7 +111,8 @@
     // construct & execute the SQL query
     NSString *sql = [NSString stringWithFormat:
         @"SELECT    cards.*, "
-        @"          sets.name AS set_name "
+        @"          sets.name AS set_name, "
+        @"          sets.tcg AS tcg_set_name "
         @"FROM      cards, sets "
         @"WHERE     cards.set_pk = sets.pk "
         @"AND      (%@) "
@@ -128,7 +133,8 @@
 + (Card *) findCardByPk:(NSString *)pk {
     NSString *sql = 
         @"SELECT    cards.*, "
-        @"          sets.name AS set_name "
+        @"          sets.name AS set_name, "
+        @"          sets.tcg AS tcg_set_name "
         @"FROM      cards, sets "
         @"WHERE     cards.set_pk = sets.pk "
         @"AND       cards.pk = ? ";
@@ -199,6 +205,7 @@
         @"WHERE    cards.set_pk = ? "
         @"AND      cards.collector_number == ? "
         @"AND      cards.collector_number != '' "
+        @"AND      cards.is_token == 0 "
         @"AND      cards.pk != ? ",
         self.setPk,
         self.collectorNumber,
@@ -221,10 +228,10 @@
         @"         sets.name AS set_name "
         @"FROM     cards, sets "
         @"WHERE    cards.set_pk = sets.pk "
-        @"AND      cards.search_name = ? "
+        @"AND      cards.name_hash = ? "
         @"AND      cards.pk != ? "
         @"AND      sets.pk != ? ",
-        self.searchName,
+        self.nameHash,
         self.pk,
         self.setPk];
     while([rs next]) {
@@ -241,23 +248,25 @@
 - (NSString *) toJSON {
     NSError *error;
     NSDictionary *source = [NSDictionary dictionaryWithObjectsAndKeys:
-        self.pk,              @"pk",
-        self.gathererId,      @"gathererId",
-        self.name,            @"name",
-        self.setName,         @"setName",
-        self.collectorNumber, @"collectorNumber",
-        self.artist,          @"artist",
-        self.artIndex,        @"artIndex",
-        self.manaCost,        @"manaCost",
-        self.oracleText,      @"oracleText",
-        self.rarity,          @"rarity",
-        self.typeLine,        @"typeLine",
-        self.power,           @"power",
-        self.toughness,       @"toughness",
-        self.loyalty,         @"loyalty",
-        self.otherEditions,   @"otherEditions",
-        self.otherParts,      @"otherParts",
-        self.artVariants,     @"artVariants",
+        self.pk,                                @"pk",
+        self.gathererId,                        @"gathererId",
+        self.name,                              @"name",
+        self.setName,                           @"setName",
+        self.tcgSetName,                        @"tcgSetName",
+        self.collectorNumber,                   @"collectorNumber",
+        self.artist,                            @"artist",
+        self.artIndex,                          @"artIndex",
+        self.manaCost,                          @"manaCost",
+        self.oracleText,                        @"oracleText",
+        self.rarity,                            @"rarity",
+        self.typeLine,                          @"typeLine",
+        self.power,                             @"power",
+        self.toughness,                         @"toughness",
+        self.loyalty,                           @"loyalty",
+        self.otherEditions,                     @"otherEditions",
+        self.otherParts,                        @"otherParts",
+        self.artVariants,                       @"artVariants",
+        [NSNumber numberWithBool:self.isToken], @"isToken",
         nil];
     return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:source 
         options:0 error:&error] encoding:NSUTF8StringEncoding];
