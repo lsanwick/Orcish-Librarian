@@ -105,13 +105,14 @@
         // otherwise, the default search order is appended to the end of whatever
         // order order criteria we've got set up.
         [orderClauses addObject:@"search_name ASC"];
-        [orderClauses addObject:@"set_name ASC"];
+        [orderClauses addObject:@"set_pk DESC"];
     }
     
     // construct & execute the SQL query
     NSString *sql = [NSString stringWithFormat:
         @"SELECT    cards.*, "
         @"          sets.name AS set_name, "
+        @"          sets.pk AS set_pk, "
         @"          sets.tcg AS tcg_set_name "
         @"FROM      cards, sets "
         @"WHERE     cards.set_pk = sets.pk "

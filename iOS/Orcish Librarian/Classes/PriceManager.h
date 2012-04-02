@@ -15,7 +15,8 @@ typedef void (^PriceCallback)(Card *, NSDictionary *);
 @interface PriceManager : NSObject
 
 + (PriceManager *) shared;
-- (void) requestPriceFor:(Card *)card withCallback:(PriceCallback)callback;
+- (NSDictionary *) priceForCard:(Card *)card;
+- (void) requestPriceForCard:(Card *)card withCallback:(PriceCallback)callback;
 - (void) clearPriceRequests;
 
 @end

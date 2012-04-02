@@ -12,15 +12,9 @@
 #import "AppDelegate.h"
 #import "PriceManager.h"
 #import "Card.h"
+#import "SearchResultCell.h"
 
-#define kPriceRequestDelay 1.5
-
-
-@interface BasicSearchController ()
-
-- (void) requestPricesFor:(NSArray *)cards;
-
-@end
+#define kPriceRequestDelay  1.5
 
 
 @implementation BasicSearchController
@@ -52,18 +46,19 @@
 // ----------------------------------------------------------------------------
 
 - (void) setResults:(NSArray *)cards {
-    BOOL collapseResults = YES;
-    if (collapseResults) {
-        results = [self collapsedResults:cards];                
-    } else {
-        results = [cards copy];
-    }    
+    BOOL collapseResults = YES; // TODO: pull from preferences
+    results = collapseResults ? [self collapsedResults:cards] : [cards copy];
     [self.resultsTable reloadData];
     [[PriceManager shared] clearPriceRequests];
     NSArray *currentResults = results;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kPriceRequestDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if (results == currentResults && results.count > 0) {
-            [self requestPricesFor:results];
+            [[PriceManager shared] clearPriceRequests];
+            for (Card *card in cards.reverseObjectEnumerator) {
+                [[PriceManager shared] requestPriceForCard:card withCallback:^(Card *card, NSDictionary *prices){
+                    [resultsTable reloadData];
+                }];         
+            }
         }
     });
 }
@@ -123,13 +118,12 @@
 // ----------------------------------------------------------------------------
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *kCellIdentifier = @"SearchCell";    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+    static NSString *identifier = @"CardCell";
+    SearchResultCell *cell = (SearchResultCell *) [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdentifier];        
-    }
-    Card *card = [self.results objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%d)", card.name, card.versionCount];
+        cell =  [[SearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    } 
+    cell.card = [self.results objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -148,6 +142,12 @@
 }
 
 // ----------------------------------------------------------------------------
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:indexPath {
+    return [SearchResultCell height];
+}
+
+// ----------------------------------------------------------------------------
 //  UITableViewDataSource
 // ----------------------------------------------------------------------------
 
@@ -159,19 +159,6 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.results.count;
-}
-
-// ----------------------------------------------------------------------------
-//  PRIVATE METHODS
-// ----------------------------------------------------------------------------
-
-- (void) requestPricesFor:(NSArray *)cards {
-    [[PriceManager shared] clearPriceRequests];
-    for (Card *card in cards.reverseObjectEnumerator) {
-        [[PriceManager shared] requestPriceFor:card withCallback:^(Card *card, NSDictionary *prices){
-            
-        }];         
-    }
 }
 
 // ----------------------------------------------------------------------------

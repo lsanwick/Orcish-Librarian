@@ -58,16 +58,13 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) queuePriceRequest:(Card *)card withCallback:(PriceCallback)callback {
-    if ([prices objectForKey:card.pk] == nil) {
-        [queue addObject:card];
-    }
-    [self downloadQueuedPrices];
+- (NSDictionary *) priceForCard:(Card *)card {
+    return [prices objectForKey:card.pk];
 }
 
 // ----------------------------------------------------------------------------
 
-- (void) requestPriceFor:(Card *)card withCallback:(PriceCallback)callback {
+- (void) requestPriceForCard:(Card *)card withCallback:(PriceCallback)callback {
     QueuedLookup *lookup = [[QueuedLookup alloc] init];
     lookup.callback = callback;
     lookup.card = card;    
@@ -112,8 +109,6 @@
                 if (price != nil) {
                     [prices setObject:price forKey:lookup.card.pk];
                     lookup.callback(lookup.card, price);
-                } else {
-                    NSLog(@"Could not find price for %@", lookup.card.name);
                 }
             }
             [self downloadQueuedPrices];
