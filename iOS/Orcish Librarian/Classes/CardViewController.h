@@ -15,8 +15,6 @@
     NSUInteger layoutIndex;
 }
 
-- (void) loadCard:(NSUInteger)index forView:(UIWebView *)view;
-
 @property (strong, nonatomic) NSArray *cards;
 @property (assign, nonatomic) NSUInteger position;
 

@@ -15,7 +15,9 @@
 //  Private Methods
 // ----------------------------------------------------------------------------
 
-@interface AppDelegate (Private)
+@interface AppDelegate () {
+    CardViewController *queuedController;
+}
 
 - (void) initializeDatabase;
 - (void) initializeSearchNames;
@@ -43,6 +45,10 @@
     dispatch_async(self.dbQueue, ^{ [self initializeDatabase]; });
     dispatch_async(self.dbQueue, ^{ [self initializeSearchNames]; });
     [self initializeWindow];    
+    dispatch_async(dispatch_get_main_queue(), ^{ 
+        queuedController = [[CardViewController alloc] initWithNibName:nil bundle:nil];
+        [queuedController view];
+    });
     return YES;
 }
 
@@ -60,10 +66,14 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position {
-    CardViewController *controller = [self.rootController dequeueCardViewController];
+- (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position {    
+    CardViewController *controller = queuedController;
     controller.cards = cards;
-    controller.position = position;        
+    controller.position = position;
+    dispatch_async(dispatch_get_main_queue(), ^{ 
+        queuedController = [[CardViewController alloc] initWithNibName:nil bundle:nil];
+        [queuedController view];
+    });
     [gAppDelegate.rootController pushViewController:controller animated:YES];
 }
 

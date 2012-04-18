@@ -134,10 +134,7 @@
     [gAppDelegate hideKeyboard];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (gAppDelegate.rootController.topController == self) {
-        CardViewController *controller = [gAppDelegate.rootController dequeueCardViewController];
-        controller.cards = results;
-        controller.position = indexPath.row;
-        [gAppDelegate.rootController pushViewController:controller animated:YES];
+        [gAppDelegate showCards:results atPosition:indexPath.row];
     }
 }
 

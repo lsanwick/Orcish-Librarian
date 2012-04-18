@@ -414,10 +414,12 @@ function formatToken(token) {
 
 if (navigator.userAgent.indexOf('iPhone') == -1) {
 	Orcish.setCardData({"oracleText":"Flying\nVigilance (Attacking doesn't cause this creature to tap.)","setName":"Duel Decks: Divine vs. Demonic","collectorNumber":"10","gathererId":"196999","rarity":"R","artIndex":"","otherEditions":[{"pk":"3699","setName":"Eighth Edition"},{"pk":"5197","setName":"Fourth Edition"},{"pk":"7690","setName":"Limited Edition Alpha"},{"pk":"7990","setName":"Limited Edition Beta"},{"pk":"8555","setName":"Magic 2010"},{"pk":"8811","setName":"Magic 2011"},{"pk":"9059","setName":"Magic 2012"},{"pk":"9350","setName":"Magic: The Gathering-Commander"},{"pk":"10294","setName":"Masters Edition IV"},{"pk":"12267","setName":"Ninth Edition"},{"pk":"14926","setName":"Revised Edition"},{"pk":"16070","setName":"Seventh Edition"},{"pk":"17711","setName":"Tenth Edition"},{"pk":"18962","setName":"Unlimited Edition"}],"artVariants":[{"artIndex":"","artist":"Greg Staples","pk":"2988"}],"typeLine":"Creature - Angel","otherParts":[],"pk":"2988","artist":"Greg Staples","name":"Serra Angel","manaCost":"3WW"});
+} else {
+	$(function(){
+		window.location = 'done://loading';
+	});
 }
-
-// ----------------------------------------------------------------------------     
-
+    
 // ----------------------------------------------------------------------------
 //  Preload symbol images
 // ----------------------------------------------------------------------------

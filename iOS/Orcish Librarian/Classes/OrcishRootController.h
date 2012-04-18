@@ -31,7 +31,6 @@
 - (void) popViewControllerAnimated:(BOOL)animated;
 - (void) setViewController:(OrcishViewController *)controller animated:(BOOL)animated;
 
-- (CardViewController *) dequeueCardViewController;
 - (void) hideMenu;
 - (void) showMenu;
 

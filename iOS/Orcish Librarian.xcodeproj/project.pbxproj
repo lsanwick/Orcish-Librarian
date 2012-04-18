@@ -38,6 +38,7 @@
 		8D40B9881473E13D00F3A4EC /* Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9861473E13D00F3A4EC /* Down.png */; };
 		8D40B9891473E13D00F3A4EC /* Up.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9871473E13D00F3A4EC /* Up.png */; };
 		8D5012C3146F5CA300D463D6 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5012C2146F5CA300D463D6 /* Card.m */; };
+		8D7F9755153E5D58001335DA /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F9754153E5D58001335DA /* CardView.m */; };
 		8D95BD1B15263552005B8518 /* NSNull+Wrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D95BD1A15263552005B8518 /* NSNull+Wrap.m */; };
 		8D95BD1F152642D8005B8518 /* PriceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D95BD1E152642D8005B8518 /* PriceManager.m */; };
 		8DBDB1251466DEC600140217 /* BasicSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB1241466DEC600140217 /* BasicSearchController.m */; };
@@ -113,6 +114,8 @@
 		8D40B9871473E13D00F3A4EC /* Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Up.png; path = "Orcish Librarian/Assets/Toolbar Icons/Up.png"; sourceTree = SOURCE_ROOT; };
 		8D5012C1146F5CA300D463D6 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		8D5012C2146F5CA300D463D6 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		8D7F9753153E5D58001335DA /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
+		8D7F9754153E5D58001335DA /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
 		8D95BD1915263552005B8518 /* NSNull+Wrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+Wrap.h"; sourceTree = "<group>"; };
 		8D95BD1A15263552005B8518 /* NSNull+Wrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+Wrap.m"; sourceTree = "<group>"; };
 		8D95BD1D152642D8005B8518 /* PriceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceManager.h; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 				8D95BD1E152642D8005B8518 /* PriceManager.m */,
 				8D32B0B415293DCC00C0EF2E /* SearchResultCell.h */,
 				8D32B0B515293DCC00C0EF2E /* SearchResultCell.m */,
+				8D7F9753153E5D58001335DA /* CardView.h */,
+				8D7F9754153E5D58001335DA /* CardView.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -515,6 +520,7 @@
 				8D95BD1B15263552005B8518 /* NSNull+Wrap.m in Sources */,
 				8D95BD1F152642D8005B8518 /* PriceManager.m in Sources */,
 				8D32B0B615293DCC00C0EF2E /* SearchResultCell.m in Sources */,
+				8D7F9755153E5D58001335DA /* CardView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

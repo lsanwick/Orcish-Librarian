@@ -8,6 +8,7 @@
 
 #import "CardViewController.h"
 #import "Card.h"
+#import "CardView.h"
 #import "AppDelegate.h"
 
 #define kPageCount 3
@@ -15,12 +16,6 @@
 typedef void (^block_t)(void);
 
 @class Card;
-
-@interface CardViewController () {
-    NSUInteger webViewLoadCount;
-    block_t pendingAction;
-}
-@end
 
 @implementation CardViewController
 
@@ -34,10 +29,8 @@ typedef void (^block_t)(void);
     scrollView.bounces = YES;    
     NSURL *cardURL = [NSURL fileURLWithPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"HTML/Card.html"]];    
     pages = [NSMutableArray arrayWithCapacity:kPageCount];
-    webViewLoadCount = 0;
     for (int i = 0; i < kPageCount; i++) {
-        UIWebView *page = [[UIWebView alloc] initWithFrame:scrollView.frame];
-        page.delegate = self;
+        CardView *page = [[CardView alloc] initWithFrame:scrollView.frame];
         [pages addObject:page];
         page.scrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];        
         [page loadRequest:[NSURLRequest requestWithURL:cardURL]];
@@ -53,10 +46,10 @@ typedef void (^block_t)(void);
     int pageCount = MIN(kPageCount, cards.count);
     layoutIndex = MIN(position, cards.count - pageCount);
     for (int i = 0; i < pageCount; i++) {
-        UIWebView *page = [pages objectAtIndex:i];
+        CardView *page = [pages objectAtIndex:i];
         [scrollView addSubview:page];
         page.frame = CGRectMake(width * i, 0, width, height);
-        [self loadCard:(layoutIndex+i) forView:page];
+        page.card = [cards objectAtIndex:layoutIndex+i];
     }
     scrollView.contentSize = CGSizeMake(width * MIN(cards.count, kPageCount), height);
     NSUInteger pageOffset = position - layoutIndex;
@@ -69,24 +62,8 @@ typedef void (^block_t)(void);
 - (void) viewWillDisappear:(BOOL)animated {
     position = 0;
     for (int i = 0; i < kPageCount; i++) {
-        UIWebView *page = [pages objectAtIndex:i];
+        CardView *page = [pages objectAtIndex:i];
         [page removeFromSuperview];
-    }
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) loadCard:(NSUInteger)index forView:(UIWebView *)view {    
-    block_t action = ^{
-        Card *card = [cards objectAtIndex:index];
-        NSLog(@"---------------------------");
-        NSLog(@"%@", [card toJSON]);
-        [view stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]]];
-    };
-    if (webViewLoadCount >= kPageCount) {
-        action();
-    } else {
-        pendingAction = action;
     }
 }
 
@@ -96,15 +73,15 @@ typedef void (^block_t)(void);
     CGFloat pageWidth = scrollView.frame.size.width;
     CGFloat pageHeight = scrollView.frame.size.height;
     for (int i = 0; i < (kPageCount-1); i++) {
-        UIWebView *page = [pages objectAtIndex:i];
+        CardView *page = [pages objectAtIndex:i];
         page.frame = CGRectMake((i+1) * pageWidth, 0, pageWidth, pageHeight);
     }
-    UIWebView *lastPage = [pages objectAtIndex:(kPageCount-1)];
+    CardView *lastPage = [pages objectAtIndex:(kPageCount-1)];
     lastPage.frame = CGRectMake(0, 0, pageWidth, pageHeight);
     [pages removeLastObject];
     [pages insertObject:lastPage atIndex:0];
     layoutIndex = layoutIndex - 1;
-    [self loadCard:layoutIndex forView:lastPage];
+    lastPage.card = [cards objectAtIndex:layoutIndex-1];
 }
 
 // ----------------------------------------------------------------------------
@@ -113,14 +90,14 @@ typedef void (^block_t)(void);
     CGFloat pageWidth = scrollView.frame.size.width;
     CGFloat pageHeight = scrollView.frame.size.height;
     for (int i = 1; i < kPageCount; i++) {
-        UIWebView *page = [pages objectAtIndex:i];
+        CardView *page = [pages objectAtIndex:i];
         page.frame = CGRectMake((i-1) * pageWidth, 0, pageWidth, pageHeight);
     }
-    UIWebView *firstPage = [pages  objectAtIndex:0];
+    CardView *firstPage = [pages  objectAtIndex:0];
     firstPage.frame = CGRectMake((kPageCount-1) * pageWidth, 0, pageWidth, pageHeight);
     [pages removeObjectAtIndex:0];
     [pages addObject:firstPage];
-    [self loadCard:(layoutIndex+kPageCount) forView:firstPage];
+    firstPage.card = [cards objectAtIndex:layoutIndex+kPageCount];
     layoutIndex = layoutIndex + 1;
 }
 
@@ -142,36 +119,6 @@ typedef void (^block_t)(void);
     }
     for (int i = 0; i < kPageCount; i++) {
         [[[pages objectAtIndex:i] scrollView] setContentOffset:CGPointMake(0, 0) animated:NO];
-    }
-}
-
-// ----------------------------------------------------------------------------
-//  UIWebViewDelegate
-// ----------------------------------------------------------------------------
-
-- (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSURL *URL = [request URL];    
-    if ([URL.scheme isEqualToString:@"card"]) {
-        NSString *pk = URL.host;
-        Card *card = [Card findCardByPk:pk];
-        if (card != nil) {            
-            [gAppDelegate showCard:card];
-             
-        } 
-        return NO;
-    }
-    return YES;
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) webViewDidFinishLoad:(UIWebView *)webView {
-    webViewLoadCount++;    
-    if (webViewLoadCount == kPageCount) {
-        if (pendingAction != nil) {
-            pendingAction();
-            pendingAction = nil;
-        }
     }
 }
 
