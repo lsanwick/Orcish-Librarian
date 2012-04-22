@@ -41,6 +41,8 @@
 		8D7F9755153E5D58001335DA /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F9754153E5D58001335DA /* CardView.m */; };
 		8D95BD1B15263552005B8518 /* NSNull+Wrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D95BD1A15263552005B8518 /* NSNull+Wrap.m */; };
 		8D95BD1F152642D8005B8518 /* PriceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D95BD1E152642D8005B8518 /* PriceManager.m */; };
+		8D9F91B41544428A0076FC9C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F91B31544428A0076FC9C /* Reachability.m */; };
+		8D9F91B6154456470076FC9C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9F91B5154456470076FC9C /* SystemConfiguration.framework */; };
 		8DBDB1251466DEC600140217 /* BasicSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB1241466DEC600140217 /* BasicSearchController.m */; };
 		8DBDB12B1466DF8B00140217 /* OrcishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB12A1466DF8B00140217 /* OrcishViewController.m */; };
 		8DD02111146A2A26008C522A /* BasicSearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD02110146A2A26008C522A /* BasicSearchController.xib */; };
@@ -120,6 +122,9 @@
 		8D95BD1A15263552005B8518 /* NSNull+Wrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+Wrap.m"; sourceTree = "<group>"; };
 		8D95BD1D152642D8005B8518 /* PriceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceManager.h; sourceTree = "<group>"; };
 		8D95BD1E152642D8005B8518 /* PriceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceManager.m; sourceTree = "<group>"; };
+		8D9F91B21544428A0076FC9C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Other/Reachability/Reachability.h; sourceTree = "<group>"; };
+		8D9F91B31544428A0076FC9C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Other/Reachability/Reachability.m; sourceTree = "<group>"; };
+		8D9F91B5154456470076FC9C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8DBDB1231466DEC600140217 /* BasicSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicSearchController.h; sourceTree = "<group>"; };
 		8DBDB1241466DEC600140217 /* BasicSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicSearchController.m; sourceTree = "<group>"; };
 		8DBDB1291466DF8B00140217 /* OrcishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrcishViewController.h; sourceTree = "<group>"; };
@@ -152,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D9F91B6154456470076FC9C /* SystemConfiguration.framework in Frameworks */,
 				8DE898E9148473CF0024E016 /* libicucore.dylib in Frameworks */,
 				8DED6465146F3CE600A787F4 /* libsqlite3.dylib in Frameworks */,
 				8D150EF4144FD41800141685 /* UIKit.framework in Frameworks */,
@@ -176,6 +182,7 @@
 		8D150EE4144FD41800141685 = {
 			isa = PBXGroup;
 			children = (
+				8D9F91B5154456470076FC9C /* SystemConfiguration.framework */,
 				8D150EF9144FD41800141685 /* Orcish Librarian */,
 				8D150F23144FD41800141685 /* Orcish LibrarianTests */,
 				8D150EF2144FD41800141685 /* Frameworks */,
@@ -208,6 +215,7 @@
 		8D150EF9144FD41800141685 /* Orcish Librarian */ = {
 			isa = PBXGroup;
 			children = (
+				8D9F91B0154442540076FC9C /* Reachability */,
 				8DE898E41484645F0024E016 /* RegexKitLite */,
 				8DED645A146F36F000A787F4 /* FMDB */,
 				8D1F7166145252460010C161 /* Assets */,
@@ -326,6 +334,15 @@
 				8D1F717714525BF00010C161 /* Icon@2x.png */,
 			);
 			path = "App Icons";
+			sourceTree = "<group>";
+		};
+		8D9F91B0154442540076FC9C /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				8D9F91B21544428A0076FC9C /* Reachability.h */,
+				8D9F91B31544428A0076FC9C /* Reachability.m */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 		8DE898E41484645F0024E016 /* RegexKitLite */ = {
@@ -521,6 +538,7 @@
 				8D95BD1F152642D8005B8518 /* PriceManager.m in Sources */,
 				8D32B0B615293DCC00C0EF2E /* SearchResultCell.m in Sources */,
 				8D7F9755153E5D58001335DA /* CardView.m in Sources */,
+				8D9F91B41544428A0076FC9C /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

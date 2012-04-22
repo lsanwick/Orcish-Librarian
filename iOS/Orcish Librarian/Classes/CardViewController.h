@@ -9,11 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "OrcishViewController.h"
 
-@interface CardViewController : OrcishViewController <UIScrollViewDelegate, UIWebViewDelegate> {
-    NSMutableArray *pages;
-    UIScrollView *scrollView;
-    NSUInteger layoutIndex;
-}
+@interface CardViewController : OrcishViewController <UIScrollViewDelegate, UIWebViewDelegate> 
 
 @property (strong, nonatomic) NSArray *cards;
 @property (assign, nonatomic) NSUInteger position;

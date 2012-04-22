@@ -17,11 +17,12 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) OrcishRootController *rootController;
-@property (assign, nonatomic) dispatch_queue_t dbQueue;
-@property (strong, nonatomic) FMDatabase *db;
-@property (strong, nonatomic) NSData *searchNames;
+@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) OrcishRootController *rootController;
+@property (nonatomic, assign) dispatch_queue_t dbQueue;
+@property (nonatomic, strong) FMDatabase *db;
+@property (nonatomic, strong) NSData *searchNames;
+@property (nonatomic, readonly) BOOL isOnline;
 
 - (void) hideKeyboard;
 - (void) hideMenu;

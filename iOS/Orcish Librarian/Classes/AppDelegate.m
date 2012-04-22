@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "BasicSearchController.h"
 #import "CardViewController.h"
+#import "Reachability.h"
 
 
 // ----------------------------------------------------------------------------
@@ -16,12 +17,13 @@
 // ----------------------------------------------------------------------------
 
 @interface AppDelegate () {
-    CardViewController *queuedController;
+    BOOL isOnline;
 }
 
 - (void) initializeDatabase;
 - (void) initializeSearchNames;
 - (void) initializeWindow;
+- (void) initializeNetworkStatus;
 
 @end
 
@@ -44,11 +46,8 @@
     self.dbQueue = dispatch_queue_create("info.orcish.db.queue", NULL);
     dispatch_async(self.dbQueue, ^{ [self initializeDatabase]; });
     dispatch_async(self.dbQueue, ^{ [self initializeSearchNames]; });
+    [self initializeNetworkStatus];
     [self initializeWindow];    
-    dispatch_async(dispatch_get_main_queue(), ^{ 
-        queuedController = [[CardViewController alloc] initWithNibName:nil bundle:nil];
-        [queuedController view];
-    });
     return YES;
 }
 
@@ -67,13 +66,9 @@
 // ----------------------------------------------------------------------------
 
 - (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position {    
-    CardViewController *controller = queuedController;
+    CardViewController *controller = [[CardViewController alloc] initWithNibName:nil bundle:nil];
     controller.cards = cards;
     controller.position = position;
-    dispatch_async(dispatch_get_main_queue(), ^{ 
-        queuedController = [[CardViewController alloc] initWithNibName:nil bundle:nil];
-        [queuedController view];
-    });
     [gAppDelegate.rootController pushViewController:controller animated:YES];
 }
 
@@ -81,6 +76,12 @@
 
 - (void) showCard:(Card *)card {
     [self showCards:[NSArray arrayWithObject:card] atPosition:0];    
+}
+
+// ----------------------------------------------------------------------------
+
+- (BOOL) isOnline {    
+    return isOnline;
 }
 
 // ----------------------------------------------------------------------------
@@ -136,6 +137,16 @@
     [basicSearchController view]; // force immediate NIB load
     [self.rootController setViewController:basicSearchController animated:NO];
     [self.window makeKeyAndVisible];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) initializeNetworkStatus {
+    static dispatch_once_t once;
+    static Reachability *reach = nil; 
+    dispatch_once(&once, ^{ reach = [Reachability reachabilityForInternetConnection]; });
+    reach.reachableBlock = ^(Reachability *reach) { isOnline = YES; };
+    reach.unreachableBlock = ^(Reachability *reach) { isOnline = NO; };
 }
 
 // ----------------------------------------------------------------------------
