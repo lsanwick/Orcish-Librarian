@@ -61,7 +61,24 @@
 	    margin-right: 2px;
 	    height: 18px;
 	}
-    
+
+	.ol-missing-prices, 
+    .ol-prices {
+		display: none;
+		margin: 10px 0 0 0;
+	    font-size: 70%;
+	}
+	
+	.ol-prices .ol-price {
+		display: inline-block;
+		margin-right: 10px;
+	}
+	
+	.ol-prices .ol-attribution {
+		margin-top: 5px;
+		font-size: 10px;
+	}
+
     .ol-card-image,
     .ol-oracle-text,
     .ol-other-editions,
@@ -125,6 +142,15 @@
 			<span class="ol-card-ptl"></span>
 		</div>
         <div class="ol-mana-cost">Mana Cost</div>
+		<div class="ol-prices">
+			<span class="ol-price ol-price-low">Low: <a href="#">$6.50</a></span>
+			<span class="ol-price ol-price-med">Med: <a href="#">$7.20</a></span>
+			<span class="ol-price ol-price-high">High: <a href="#">$13.99</a></span>
+			<div class="ol-attribution">Prices courtesy of TCGPlayer.com</div>
+		</div>
+		<div class="ol-missing-prices">
+			Price could not be loaded. <a href="price://reload">Try again</a>
+		</div>
     </div>
     
     <div class="ol-prices">
@@ -161,19 +187,43 @@
     
 var Orcish = { };    
 (function(){
-     
+    
+var PRICE_REQUEST_TIMEOUT = 5000;
+var priceRequestTimer = null;
+var currentCardPk = null;
+var cardPrice = null;
+ 
 // ----------------------------------------------------------------------------
  
 Orcish.setCardData = function(card) {
-    $('.ol-card-name').text(card.name);
-    $('.ol-set-name').text(card.setName);
-	$('.ol-mana-cost').html(formattedManaCost(card));    
-	loadTypeLine(card);
-    loadOracleText(card);
-    loadCardPhoto(card);
-	loadOtherEditions(card);
-	loadOtherParts(card);
-    loadArtVariants(card);
+	if (card.pk != currentCardPk) {
+		cardPrice = null;
+		currentCardPk = card.pk;
+	    $('.ol-card-name').text(card.name);
+	    $('.ol-set-name').text(card.setName);
+		$('.ol-mana-cost').html(formattedManaCost(card));    
+		loadTypeLine(card);
+	    loadOracleText(card);
+	    loadCardPhoto(card);
+		loadOtherEditions(card);
+		loadOtherParts(card);
+	    loadArtVariants(card);
+		waitForPrices(card);
+	}
+}
+
+// ----------------------------------------------------------------------------
+
+Orcish.setCardPrice = function(cardPk, price) {
+	if (cardPk = currentCardPk) {
+		clearTimeout(priceRequestTimer);
+		$('.ol-missing-prices').hide();
+		$('.ol-price-low a').text('$' + price.low)
+		$('.ol-price-med a').text('$' + price.average)
+		$('.ol-price-high a').text('$' + price.high)
+		$('.ol-price a').attr('href', 'tcg://' + price.tcgId);
+		$('.ol-prices').show();
+	}
 }
 
 // ----------------------------------------------------------------------------
@@ -268,6 +318,23 @@ function loadArtVariants(card) {
         $('.ol-other-art').hide();
     }
 }
+
+// ----------------------------------------------------------------------------
+
+function waitForPrices(card) {
+	$('.ol-prices').hide();
+	$('.ol-missing-prices').hide();
+	clearTimeout(priceRequestTimer);
+	priceRequestTimer = setTimeout(pricesNotLoadedInTime, PRICE_REQUEST_TIMEOUT);
+}
+
+// ----------------------------------------------------------------------------
+
+function pricesNotLoadedInTime() {
+	$('.ol-prices').hide();
+	$('.ol-missing-prices').show();
+}
+
 // ----------------------------------------------------------------------------
  
 function formattedOracleText(card) {
@@ -412,8 +479,9 @@ function formatToken(token) {
  
 })()
 
-if (navigator.userAgent.indexOf('iPhone') == -1) {
-	Orcish.setCardData({"oracleText":"Flying\nVigilance (Attacking doesn't cause this creature to tap.)","setName":"Duel Decks: Divine vs. Demonic","collectorNumber":"10","gathererId":"196999","rarity":"R","artIndex":"","otherEditions":[{"pk":"3699","setName":"Eighth Edition"},{"pk":"5197","setName":"Fourth Edition"},{"pk":"7690","setName":"Limited Edition Alpha"},{"pk":"7990","setName":"Limited Edition Beta"},{"pk":"8555","setName":"Magic 2010"},{"pk":"8811","setName":"Magic 2011"},{"pk":"9059","setName":"Magic 2012"},{"pk":"9350","setName":"Magic: The Gathering-Commander"},{"pk":"10294","setName":"Masters Edition IV"},{"pk":"12267","setName":"Ninth Edition"},{"pk":"14926","setName":"Revised Edition"},{"pk":"16070","setName":"Seventh Edition"},{"pk":"17711","setName":"Tenth Edition"},{"pk":"18962","setName":"Unlimited Edition"}],"artVariants":[{"artIndex":"","artist":"Greg Staples","pk":"2988"}],"typeLine":"Creature - Angel","otherParts":[],"pk":"2988","artist":"Greg Staples","name":"Serra Angel","manaCost":"3WW"});
+if (navigator.userAgent	.indexOf('iPhone') == -1) {
+	Orcish.setCardData({"pk":"3988","oracleText":"Flying\nVigilance (Attacking doesn't cause this creature to tap.)","setName":"Duel Decks: Divine vs. Demonic","collectorNumber":"10","gathererId":"196999","rarity":"R","artIndex":"","otherEditions":[{"pk":"3699","setName":"Eighth Edition"},{"pk":"5197","setName":"Fourth Edition"},{"pk":"7690","setName":"Limited Edition Alpha"},{"pk":"7990","setName":"Limited Edition Beta"},{"pk":"8555","setName":"Magic 2010"},{"pk":"8811","setName":"Magic 2011"},{"pk":"9059","setName":"Magic 2012"},{"pk":"9350","setName":"Magic: The Gathering-Commander"},{"pk":"10294","setName":"Masters Edition IV"},{"pk":"12267","setName":"Ninth Edition"},{"pk":"14926","setName":"Revised Edition"},{"pk":"16070","setName":"Seventh Edition"},{"pk":"17711","setName":"Tenth Edition"},{"pk":"18962","setName":"Unlimited Edition"}],"artVariants":[{"artIndex":"","artist":"Greg Staples"}],"typeLine":"Creature - Angel","otherParts":[],"artist":"Greg Staples","name":"Serra Angel","manaCost":"3WW"});
+	// Orcish.setCardPrice(3677, { "low": "4.50", "med": "6.40", "high": "10.45", 'tcgId': '5643' })
 } else {
 	$(function(){
 		window.location = 'done://loading';

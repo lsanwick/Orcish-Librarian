@@ -9,6 +9,7 @@
 #import "CardView.h"
 #import "Card.h"
 #import "AppDelegate.h"
+#import "PriceManager.h"
 
 @interface CardView ()
 
@@ -43,6 +44,11 @@
     if (self.isDoneLoading) {        
         dispatch_async(dispatch_get_main_queue(), ^{ 
             [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]]];
+            [[PriceManager shared] requestPriceForCard:card withCallback:^(Card *priceCard, NSDictionary *prices) {
+                NSError *error;
+                NSString *priceAsJSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:prices options:0 error:&error] encoding:NSUTF8StringEncoding];
+                [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardPrice(%@, %@)", card.pk, priceAsJSON]];
+            }];
         });
     }
 }
