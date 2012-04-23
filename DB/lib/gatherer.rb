@@ -141,7 +141,7 @@ class Gatherer < Source
     "Eighth Edition" => "8th Edition",
     "Ninth Edition" => "9th Edition",
     "Tenth Edition" => "Tenth Edition",
-    "Magic 2010" => "Magic 2010",
+    "Magic 2010" => "Magic 2010 (M10)",
     "Magic 2011" => "Magic 2011 (M11)",
     "Magic 2012" => "Magic 2012 (M12)",
     
