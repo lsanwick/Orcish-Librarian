@@ -43,6 +43,7 @@
 		8D95BD1F152642D8005B8518 /* PriceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D95BD1E152642D8005B8518 /* PriceManager.m */; };
 		8D9F91B41544428A0076FC9C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F91B31544428A0076FC9C /* Reachability.m */; };
 		8D9F91B6154456470076FC9C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9F91B5154456470076FC9C /* SystemConfiguration.framework */; };
+		8D9F91BB15450D150076FC9C /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F91B915450D150076FC9C /* sqlite3.c */; };
 		8DBDB1251466DEC600140217 /* BasicSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB1241466DEC600140217 /* BasicSearchController.m */; };
 		8DBDB12B1466DF8B00140217 /* OrcishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB12A1466DF8B00140217 /* OrcishViewController.m */; };
 		8DD02111146A2A26008C522A /* BasicSearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD02110146A2A26008C522A /* BasicSearchController.xib */; };
@@ -55,7 +56,6 @@
 		8DED6461146F374500A787F4 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DED645C146F374500A787F4 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DED6462146F374500A787F4 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DED645E146F374500A787F4 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DED6463146F374500A787F4 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DED6460146F374500A787F4 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		8DED6465146F3CE600A787F4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DED6464146F3CE600A787F4 /* libsqlite3.dylib */; };
 		8DED646E146F4E2000A787F4 /* cards.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 8DED646D146F4E2000A787F4 /* cards.sqlite3 */; };
 		8DEDA2651453CD5A0094D837 /* Menu-Row.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDA2631453CD5A0094D837 /* Menu-Row.png */; };
 		8DEDA2661453CD5A0094D837 /* Menu-Row@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEDA2641453CD5A0094D837 /* Menu-Row@2x.png */; };
@@ -125,6 +125,8 @@
 		8D9F91B21544428A0076FC9C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Other/Reachability/Reachability.h; sourceTree = "<group>"; };
 		8D9F91B31544428A0076FC9C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Other/Reachability/Reachability.m; sourceTree = "<group>"; };
 		8D9F91B5154456470076FC9C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8D9F91B915450D150076FC9C /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
+		8D9F91BA15450D150076FC9C /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		8DBDB1231466DEC600140217 /* BasicSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicSearchController.h; sourceTree = "<group>"; };
 		8DBDB1241466DEC600140217 /* BasicSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicSearchController.m; sourceTree = "<group>"; };
 		8DBDB1291466DF8B00140217 /* OrcishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrcishViewController.h; sourceTree = "<group>"; };
@@ -144,7 +146,6 @@
 		8DED645E146F374500A787F4 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = Other/FMDB/FMDatabaseAdditions.m; sourceTree = "<group>"; };
 		8DED645F146F374500A787F4 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = Other/FMDB/FMResultSet.h; sourceTree = "<group>"; };
 		8DED6460146F374500A787F4 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = Other/FMDB/FMResultSet.m; sourceTree = "<group>"; };
-		8DED6464146F3CE600A787F4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		8DED646D146F4E2000A787F4 /* cards.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; name = cards.sqlite3; path = ../../../DB/data/cards.sqlite3; sourceTree = "<group>"; };
 		8DEDA2631453CD5A0094D837 /* Menu-Row.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Row.png"; sourceTree = "<group>"; };
 		8DEDA2641453CD5A0094D837 /* Menu-Row@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Row@2x.png"; sourceTree = "<group>"; };
@@ -159,7 +160,6 @@
 			files = (
 				8D9F91B6154456470076FC9C /* SystemConfiguration.framework in Frameworks */,
 				8DE898E9148473CF0024E016 /* libicucore.dylib in Frameworks */,
-				8DED6465146F3CE600A787F4 /* libsqlite3.dylib in Frameworks */,
 				8D150EF4144FD41800141685 /* UIKit.framework in Frameworks */,
 				8D150EF6144FD41800141685 /* Foundation.framework in Frameworks */,
 				8D150EF8144FD41800141685 /* CoreGraphics.framework in Frameworks */,
@@ -203,7 +203,6 @@
 			isa = PBXGroup;
 			children = (
 				8DE898E8148473CE0024E016 /* libicucore.dylib */,
-				8DED6464146F3CE600A787F4 /* libsqlite3.dylib */,
 				8D150EF3144FD41800141685 /* UIKit.framework */,
 				8D150EF5144FD41800141685 /* Foundation.framework */,
 				8D150EF7144FD41800141685 /* CoreGraphics.framework */,
@@ -215,6 +214,7 @@
 		8D150EF9144FD41800141685 /* Orcish Librarian */ = {
 			isa = PBXGroup;
 			children = (
+				8D9F91B815450D150076FC9C /* SQLite3 */,
 				8D9F91B0154442540076FC9C /* Reachability */,
 				8DE898E41484645F0024E016 /* RegexKitLite */,
 				8DED645A146F36F000A787F4 /* FMDB */,
@@ -343,6 +343,16 @@
 				8D9F91B31544428A0076FC9C /* Reachability.m */,
 			);
 			name = Reachability;
+			sourceTree = "<group>";
+		};
+		8D9F91B815450D150076FC9C /* SQLite3 */ = {
+			isa = PBXGroup;
+			children = (
+				8D9F91B915450D150076FC9C /* sqlite3.c */,
+				8D9F91BA15450D150076FC9C /* sqlite3.h */,
+			);
+			name = SQLite3;
+			path = Other/SQLite3;
 			sourceTree = "<group>";
 		};
 		8DE898E41484645F0024E016 /* RegexKitLite */ = {
@@ -539,6 +549,7 @@
 				8D32B0B615293DCC00C0EF2E /* SearchResultCell.m in Sources */,
 				8D7F9755153E5D58001335DA /* CardView.m in Sources */,
 				8D9F91B41544428A0076FC9C /* Reachability.m in Sources */,
+				8D9F91BB15450D150076FC9C /* sqlite3.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

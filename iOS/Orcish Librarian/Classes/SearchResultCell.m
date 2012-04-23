@@ -189,11 +189,6 @@
     priceLabelLow.frame = CGRectMake(bounds.size.width - (kCellPadding + priceWidth), priceY, priceWidth, priceHeight);
     priceLabelMid.frame = CGRectMake(bounds.size.width - (kCellPadding + priceWidth), priceY + priceHeight, priceWidth, priceHeight);
     priceLabelHigh.frame = CGRectMake(bounds.size.width - (kCellPadding + priceWidth), priceY + (priceHeight * 2.0), priceWidth, priceHeight);
-    NSLog(@"%@", NSStringFromCGRect(nameLabel.frame));
-    NSLog(@"%@", NSStringFromCGRect(setLabel.frame));
-    NSLog(@"%@", NSStringFromCGRect(priceLabelLow.frame));
-    NSLog(@"%@", NSStringFromCGRect(priceLabelMid.frame));
-    NSLog(@"%@", NSStringFromCGRect(priceLabelHigh.frame));
 }
 
 // ----------------------------------------------------------------------------

@@ -51,7 +51,8 @@
     card = theCard;
     if (self.isDoneLoading) {        
         dispatch_async(dispatch_get_main_queue(), ^{ 
-            [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]]];
+            NSString *js = [NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]];
+            [self stringByEvaluatingJavaScriptFromString:js];
             [[PriceManager shared] requestPriceForCard:card withCallback:^(Card *priceCard, NSDictionary *price) {
                 [self setPrice:price forCard:card];
             }];

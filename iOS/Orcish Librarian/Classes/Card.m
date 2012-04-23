@@ -120,8 +120,7 @@
         @"ORDER BY  %@",                     
         [searchClauses componentsJoinedByString:@" AND "],
         [orderClauses componentsJoinedByString:@", "]];
-    FMResultSet *rs = [gAppDelegate.db executeQuery:sql withArgumentsInArray:
-        [searchParams arrayByAddingObjectsFromArray:orderParams]];
+    FMResultSet *rs = [gAppDelegate.db executeQuery:sql withArgumentsInArray:[searchParams arrayByAddingObjectsFromArray:orderParams]];
     NSMutableArray *cards = [NSMutableArray array];
     while ([rs next]) {
         [cards addObject:[self cardForResultSet:rs]];
