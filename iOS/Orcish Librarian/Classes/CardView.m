@@ -39,15 +39,21 @@
 
 // ----------------------------------------------------------------------------
 
+- (void) setPrice:(NSDictionary *)price forCard:(Card *)theCard {
+    NSError *error;
+    NSString *json = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:price options:0 error:&error] encoding:NSUTF8StringEncoding];
+    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardPrice(%@, %@)", card.pk, json]];
+}
+
+// ----------------------------------------------------------------------------
+
 - (void) setCard:(Card *)theCard {
     card = theCard;
     if (self.isDoneLoading) {        
         dispatch_async(dispatch_get_main_queue(), ^{ 
             [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]]];
-            [[PriceManager shared] requestPriceForCard:card withCallback:^(Card *priceCard, NSDictionary *prices) {
-                NSError *error;
-                NSString *priceAsJSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:prices options:0 error:&error] encoding:NSUTF8StringEncoding];
-                [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardPrice(%@, %@)", card.pk, priceAsJSON]];
+            [[PriceManager shared] requestPriceForCard:card withCallback:^(Card *priceCard, NSDictionary *price) {
+                [self setPrice:price forCard:card];
             }];
         });
     }
@@ -60,6 +66,7 @@
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSURL *URL = [request URL];    
     if ([URL.scheme isEqualToString:@"card"]) {
+        // push a new card view controller
         NSString *pk = URL.host;
         Card *newCard = [Card findCardByPk:pk];
         if (newCard != nil) {            
@@ -67,9 +74,15 @@
         } 
         return NO;
     } else if ([URL.scheme isEqualToString:@"done"]) {
+        // web view is alerting us that the DOM is done loading
         if (card != nil) {              
             self.card = card;
         }
+    } else if ([URL.scheme isEqualToString:@"price"]) {
+        // reload prices
+        [[PriceManager shared] requestPriceForCard:self.card withCallback:^(Card *theCard, NSDictionary *price) {
+            [self setPrice:price forCard:theCard];
+        }];
     }
     return YES;
 }

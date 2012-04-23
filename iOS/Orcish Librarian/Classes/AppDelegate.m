@@ -18,12 +18,14 @@
 
 @interface AppDelegate () {
     BOOL isOnline;
+    CardViewController *queuedController;
 }
 
 - (void) initializeDatabase;
 - (void) initializeSearchNames;
 - (void) initializeWindow;
 - (void) initializeNetworkStatus;
+- (CardViewController *) dequeueCardViewController;
 
 @end
 
@@ -46,6 +48,7 @@
     self.dbQueue = dispatch_queue_create("info.orcish.db.queue", NULL);
     dispatch_async(self.dbQueue, ^{ [self initializeDatabase]; });
     dispatch_async(self.dbQueue, ^{ [self initializeSearchNames]; });
+    [self dequeueCardViewController];
     [self initializeNetworkStatus];
     [self initializeWindow];    
     return YES;
@@ -66,7 +69,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position {    
-    CardViewController *controller = [[CardViewController alloc] initWithNibName:nil bundle:nil];
+    CardViewController *controller = [self dequeueCardViewController];
     controller.cards = cards;
     controller.position = position;
     [gAppDelegate.rootController pushViewController:controller animated:YES];
@@ -147,6 +150,17 @@
     dispatch_once(&once, ^{ reach = [Reachability reachabilityForInternetConnection]; });
     reach.reachableBlock = ^(Reachability *reach) { isOnline = YES; };
     reach.unreachableBlock = ^(Reachability *reach) { isOnline = NO; };
+}
+
+// ----------------------------------------------------------------------------
+
+- (CardViewController *) dequeueCardViewController {
+    CardViewController *result = queuedController;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        queuedController = [[CardViewController alloc] initWithNibName:nil bundle:nil];
+        [queuedController view];
+    });
+    return result;
 }
 
 // ----------------------------------------------------------------------------
