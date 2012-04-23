@@ -181,7 +181,7 @@ class Gatherer < Source
     "Champions of Kamigawa" => "Champions of Kamigawa",
     "Betrayers of Kamigawa" => "Betrayers of Kamigawa",
     "Saviors of Kamigawa" => "Saviors of Kamigawa",    
-    "Ravnica: City of Guilds" => "Ravnica: City of Guilds",
+    "Ravnica: City of Guilds" => "Ravnica",
     "Guildpact" => "Guildpact",
     "Dissension" => "Dissension",    
     "Time Spiral" => "Time Spiral",
