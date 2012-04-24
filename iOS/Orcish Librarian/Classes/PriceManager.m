@@ -67,7 +67,6 @@
 - (void) requestPriceForCard:(Card *)card withCallback:(PriceCallback)callback {
     NSDictionary *price = [self priceForCard:card];
     if (price) {
-        NSLog(@"Already had this one.");
         callback(card, price);
     } else {
         QueuedLookup *lookup = [[QueuedLookup alloc] init];

@@ -176,8 +176,6 @@
 // ----------------------------------------------------------------------------
 
 - (NSArray *) artVariants {
-    return [NSArray array];
-    /*
     NSMutableArray *cards = [NSMutableArray array];
     FMResultSet *rs = [gAppDelegate.db executeQuery:
         @"SELECT   cards.* "
@@ -195,14 +193,11 @@
             nil]];
     }                          
     return cards;    
-     */
 }
 
 // ----------------------------------------------------------------------------
 
 - (NSArray *) otherParts {
-    return [NSArray array];
-    /*
     NSMutableArray *cards = [NSMutableArray array];
     FMResultSet *rs = [gAppDelegate.db executeQuery:
         @"SELECT   cards.* "
@@ -222,14 +217,11 @@
             nil]];
     }                          
     return cards;
-     */
 }
  
 // ----------------------------------------------------------------------------
 
 - (NSArray *) otherEditions {
-    return [NSArray array];
-    /*
     NSMutableArray *cards = [NSMutableArray array];
     FMResultSet *rs = [gAppDelegate.db executeQuery:
         @"SELECT   cards.*, "
@@ -249,7 +241,6 @@
             nil]];
     }                          
     return cards;
-     */
 }
 
 // ----------------------------------------------------------------------------

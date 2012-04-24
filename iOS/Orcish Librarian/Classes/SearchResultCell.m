@@ -160,6 +160,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) setCard:(Card *)newCard {
+    // TODO: remove "otherEditions" call from this method
     card = newCard;
     NSArray *otherEditions = card.otherEditions;
     NSDictionary *price = [[PriceManager shared] priceForCard:card];  
