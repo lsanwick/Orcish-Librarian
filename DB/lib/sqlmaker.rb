@@ -26,7 +26,8 @@ module SQLMaker
   end
   
   def sql_create_index(params)
-    "CREATE INDEX #{params[:column]}_idx ON #{params[:table]} (#{params[:column]});"
+    columns = params[:column].class == Array ? params[:column] : [ params[:column] ]
+    "CREATE INDEX #{columns.join('_')}_idx ON #{params[:table]} (#{columns.join(', ')});"
   end
   
   def sql_column(name, type, primary_key = false)

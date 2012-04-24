@@ -112,10 +112,15 @@ class CardBox
       :art_index => :integer,
       :version_count => :integer },
       :pk => :pk));
-    # CREATE INDEXES
-    io.puts(sql_create_index(:table => :cards, :column => :search_name))
-    io.puts(sql_create_index(:table => :cards, :column => :name_hash))
-    io.puts(sql_create_index(:table => :cards, :column => :is_token))
+      
+    ## CREATE INDEXES    
+    # other editions
+    io.puts(sql_create_index(:table => :cards, :column => :name_hash))    
+    # art variants
+    io.puts(sql_create_index(:table => :cards, :column => [ :set_pk, :name_hash ]))        
+    # other parts
+    io.puts(sql_create_index(:table => :cards, :column => [ :set_pk, :collector_number, :is_token ]))
+    
     # INSERTs
     io.puts
     current_set_pk = 0
