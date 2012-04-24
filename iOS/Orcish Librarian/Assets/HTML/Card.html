@@ -62,6 +62,7 @@
 	    height: 18px;
 	}
 
+	.ol-loading-prices,
 	.ol-missing-prices, 
     .ol-prices {
 		display: none;
@@ -149,7 +150,10 @@
 			<div class="ol-attribution">Prices courtesy of TCGPlayer.com</div>
 		</div>
 		<div class="ol-missing-prices">
-			Price could not be loaded. <a href="price://reload">Try again</a>
+			Price could not be loaded. <a href="javascript:void(0)">Try again</a>
+		</div>
+		<div class="ol-loading-prices">
+			Loading...
 		</div>
     </div>
     
@@ -208,7 +212,7 @@ Orcish.setCardData = function(card) {
 		loadOtherEditions(card);
 		loadOtherParts(card);
 	    loadArtVariants(card);
-		waitForPrices(card);
+		waitForPrice(card);
 	}
 }
 
@@ -218,6 +222,7 @@ Orcish.setCardPrice = function(cardPk, price) {
 	if (cardPk = currentCardPk) {
 		clearTimeout(priceRequestTimer);
 		$('.ol-missing-prices').hide();
+		$('.ol-loading-prices').hide();
 		$('.ol-price-low a').text('$' + price.low)
 		$('.ol-price-med a').text('$' + price.average)
 		$('.ol-price-high a').text('$' + price.high)
@@ -321,17 +326,30 @@ function loadArtVariants(card) {
 
 // ----------------------------------------------------------------------------
 
-function waitForPrices(card) {
+function waitForPrice(card) {
 	$('.ol-prices').hide();
 	$('.ol-missing-prices').hide();
+	$('.ol-loading-prices').hide();
 	clearTimeout(priceRequestTimer);
 	priceRequestTimer = setTimeout(pricesNotLoadedInTime, PRICE_REQUEST_TIMEOUT);
 }
 
 // ----------------------------------------------------------------------------
 
+function reloadPrice() {
+	$('.ol-prices').hide();
+	$('.ol-missing-prices').hide();
+	$('.ol-loading-prices').show();
+	clearTimeout(priceRequestTimer);
+	priceRequestTimer = setTimeout(pricesNotLoadedInTime, PRICE_REQUEST_TIMEOUT);
+	window.location = 'price://reload';
+}
+
+// ----------------------------------------------------------------------------
+
 function pricesNotLoadedInTime() {
 	$('.ol-prices').hide();
+	$('.ol-loading-prices').hide();
 	$('.ol-missing-prices').show();
 }
 
@@ -474,7 +492,11 @@ function formatToken(token) {
     else
         return '<img src="symbols/mana_unknown.png" />';
 }
-    
+
+// ---------------------------------------------------------------------------- 
+
+$('.ol-missing-prices a').click(reloadPrice);
+
 // ---------------------------------------------------------------------------- 
  
 })()
