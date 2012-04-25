@@ -203,7 +203,7 @@ Orcish.setCardData = function(card) {
 	if (card.pk != currentCardPk) {
 		cardPrice = null;
 		currentCardPk = card.pk;
-	    $('.ol-card-name').text(card.name);
+	    $('.ol-card-name').text(card.displayName);
 	    $('.ol-set-name').text(card.setName);
 		$('.ol-mana-cost').html(formattedManaCost(card));    
 		loadTypeLine(card);
@@ -265,7 +265,9 @@ function loadCardPhoto(card) {
         imageURL = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=' + encodeURIComponent(card.gathererId);
     } else {
         var setName = card.setName.replace(/:/g, '');
-        imageURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(setName) + '/' + encodeURIComponent(card.name) + card.artIndex + '.full.jpg';
+		var cardName = card.displayName;
+		cardName = cardName.replace(/^.*\((.*)\s\/\/\s(.*)\)$/, '$1$2');
+        imageURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(setName) + '/' + encodeURIComponent(cardName) + card.artIndex + '.full.jpg';
     }
     $('.ol-card-image').hide();
     $('<img />')
@@ -298,7 +300,7 @@ function loadOtherParts(card) {
         var html = '';
         $.each(card.otherParts, function(i, otherCard) {
 			if (i != 0) { html += '<br />' }
-			html += '<a href="card://' + otherCard.pk +'">' + otherCard.name + '</a>';
+			html += '<a href="card://' + otherCard.pk +'">' + otherCard.displayName + '</a>';
         });
         $('.ol-other-parts').show().find('.ol-block').html(html);
     } else {
@@ -502,7 +504,7 @@ $('.ol-missing-prices a').click(reloadPrice);
 })()
 
 if (navigator.userAgent	.indexOf('iPhone') == -1) {
-	Orcish.setCardData({"pk":"3988","oracleText":"Flying\nVigilance (Attacking doesn't cause this creature to tap.)","setName":"Duel Decks: Divine vs. Demonic","collectorNumber":"10","gathererId":"196999","rarity":"R","artIndex":"","otherEditions":[{"pk":"3699","setName":"Eighth Edition"},{"pk":"5197","setName":"Fourth Edition"},{"pk":"7690","setName":"Limited Edition Alpha"},{"pk":"7990","setName":"Limited Edition Beta"},{"pk":"8555","setName":"Magic 2010"},{"pk":"8811","setName":"Magic 2011"},{"pk":"9059","setName":"Magic 2012"},{"pk":"9350","setName":"Magic: The Gathering-Commander"},{"pk":"10294","setName":"Masters Edition IV"},{"pk":"12267","setName":"Ninth Edition"},{"pk":"14926","setName":"Revised Edition"},{"pk":"16070","setName":"Seventh Edition"},{"pk":"17711","setName":"Tenth Edition"},{"pk":"18962","setName":"Unlimited Edition"}],"artVariants":[{"artIndex":"","artist":"Greg Staples"}],"typeLine":"Creature - Angel","otherParts":[],"artist":"Greg Staples","name":"Serra Angel","manaCost":"3WW"});
+	Orcish.setCardData({"otherParts":[{"pk":"10119","displayName":"Ice (Fire \/\/ Ice)"}],"displayName":"Fire (Fire \/\/ Ice)","artIndex":"1","tcgSetName":"Apocalypse","loyalty":null,"name":"Fire","setName":"Apocalypse","rarity":"U","power":"","otherEditions":[{"pk":"1238","setName":"Magic: The Gathering-Commander"}],"artist":"Franz Vohwinkel","gathererId":"27166","manaCost":"1R","typeLine":"Instant","pk":"10103","isToken":false,"collectorNumber":"128","oracleText":"Fire deals 2 damage divided as you choose among one or two target creatures and\/or players.","artVariants":[{"artIndex":"1","artist":"Franz Vohwinkel","pk":"10103"}],"toughness":""})
 	// Orcish.setCardPrice(3677, { "low": "4.50", "med": "6.40", "high": "10.45", 'tcgId': '5643' })
 } else {
 	$(function(){

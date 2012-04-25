@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) NSString *pk;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *displayName;
 @property (nonatomic, strong) NSString *searchName;
 @property (nonatomic, strong) NSString *nameHash;
 @property (nonatomic, strong) NSString *gathererId;

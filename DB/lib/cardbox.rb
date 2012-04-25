@@ -96,6 +96,7 @@ class CardBox
       :pk => :integer,
       :name => :varchar_255,
       :search_name => :varchar_255,
+      :display_name => :varchar_255,
       :name_hash => :integer,
       :gatherer_id => :integer,
       :set_pk => :integer,

@@ -44,14 +44,16 @@ class Gatherer < Source
         :collector_number => cells[0].inner_text,
         :rarity => cells[4].inner_text
       }
-      others << entry
+      if (others.length == 0 || others[0][:collector_number] != entry[:collector_number] || entry[:collector_number] == '')
+        others << entry  
+      end
     end
     cards.each_pair do |name, card|
       if card.length > 1
         for i in 0 ... card.length
           card[i][:art_index] = (i + 1)
         end
-      else
+      else 
         card[0][:art_index] = ''
       end
     end
@@ -69,6 +71,7 @@ class Gatherer < Source
         value = cells[1]
         if label == 'Name'
           current_card[:name] = value.inner_text.strip.clean.to_normalized_name
+          current_card[:display_name] = value.inner_text.strip.clean.to_display_name
           current_card[:gatherer_id] = value.at('a')['href'].gsub(/^.*?(\d+)$/, '\1')
         elsif label == 'Pow/Tgh'
           current_card[:power] = value.inner_text.strip.gsub(/^\((.*)\/(.*)\)$/, '\1')

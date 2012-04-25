@@ -20,6 +20,7 @@
 
 @synthesize pk;
 @synthesize name;
+@synthesize displayName;
 @synthesize searchName;
 @synthesize nameHash;
 @synthesize gathererId;
@@ -47,6 +48,7 @@
     card.searchName = [NSNull wrapNil:[rs stringForColumn:@"search_name"]];
     card.nameHash = [NSNull wrapNil:[rs stringForColumn:@"name_hash"]];
     card.name = [NSNull wrapNil:[rs stringForColumn:@"name"]];
+    card.displayName = [NSNull wrapNil:[rs stringForColumn:@"display_name"]];
     card.gathererId = [NSNull wrapNil:[rs stringForColumn:@"gatherer_id"]];
     card.setPk = [NSNull wrapNil:[rs stringForColumn:@"set_pk"]];
     card.setName = [NSNull wrapNil:[rs stringForColumn:@"set_name"]];
@@ -170,7 +172,7 @@
 // ----------------------------------------------------------------------------
 
 - (NSString *) description {
-    return [NSString stringWithFormat:@"%@ (%@)", self.name, self.setName];
+    return [NSString stringWithFormat:@"%@ (%@)", self.displayName, self.setName];
 }
 
 // ----------------------------------------------------------------------------
@@ -212,7 +214,7 @@
         self.pk];
     while([rs next]) {
         [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-            [rs stringForColumn:@"name"], @"name",
+            [rs stringForColumn:@"display_name"], @"displayName",
             [rs stringForColumn:@"pk"], @"pk", 
             nil]];
     }                          
@@ -251,6 +253,7 @@
         self.pk,                                @"pk",
         self.gathererId,                        @"gathererId",
         self.name,                              @"name",
+        self.displayName,                       @"displayName",
         self.setName,                           @"setName",
         self.tcgSetName,                        @"tcgSetName",
         self.collectorNumber,                   @"collectorNumber",

@@ -102,8 +102,9 @@
 // ----------------------------------------------------------------------------
 
 - (void) beginLookup:(QueuedLookup *)lookup {
+    NSString *cardName = [lookup.card.displayName stringByReplacingOccurrencesOfRegex:@"^.*\\((.*)\\s\\/\\/\\s(.*)\\)$" withString:@"$1 // $2"];
     NSString *url = [NSString stringWithFormat:@"http://partner.tcgplayer.com/x/phl.asmx/p?pk=ORCSHLBRN&p=%@&s=%@",
-        [lookup.card.name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+        [cardName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
         [lookup.card.tcgSetName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];        
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData *response = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];

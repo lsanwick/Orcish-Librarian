@@ -25,22 +25,38 @@ class String
     result
   end
   
-  def to_normalized_name()
-    if /^(.*)\s\/\/\s(.*)\s\((.*)\)$/.match(self) then
-      # Dead // Gone (Gone)  
-      # "#{$3} (#{$1} // #{$2})"
-      "#{$3}"
-    elsif /^(.*)\s\(.*\/.*\)$/.match(self) then
-      # Gone (Dead/Gone)
-      # "#{$1} (#{$2} // #{$3})"
-      "#{$1}"
-    elsif /^(.*)\s\((.*)\)$/.match(self) then
-      # Nezumi Graverobber (Nighteyes the Desecrator)
-      "#{$2}"
-    else
-      # everything else
-      self.gsub(/^XX(.*)\s+\(.*\)$/, '\1')
+  def to_display_name()
+    # XXValor (Valor)
+    if /^XX(.*)\s\((.*)\)/.match(self) && $1 == $2
+      return $1
     end
+    # Dead // Gone (Gone)  
+    if /^(.*)\s\/\/\s(.*)\s\((.*)\)$/.match(self) then
+      return "#{$3} (#{$1} // #{$2})"
+    end
+    # Nezumi Graverobber (Nighteyes the Desecrator)
+    if /^(.*)\s\((.*)\)$/.match(self) then
+      return $2
+    end    
+    # everything else
+    self.gsub(/^XX(.*)\s+\(.*\)$/, '\1')
+  end
+  
+  def to_normalized_name()    
+    # XXValor (Valor)
+    if /^XX(.*)\s\((.*)\)/.match(self) && $1 == $2
+      return $1
+    end
+    # Dead // Gone (Gone)  
+    if /^(.*)\s\/\/\s(.*)\s\((.*)\)$/.match(self) then
+      return $3
+    end
+    # Nezumi Graverobber (Nighteyes the Desecrator)
+    if /^(.*)\s\((.*)\)$/.match(self) then
+      return $2
+    end    
+    # everything else
+    self.gsub(/^XX(.*)\s+\(.*\)$/, '\1')
   end
   
   def to_searchable_name()

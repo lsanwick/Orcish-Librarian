@@ -69,9 +69,9 @@
     NSMutableArray *collapsedResults = [NSMutableArray arrayWithCapacity:cards.count];
     NSMutableDictionary *names = [NSMutableDictionary dictionaryWithCapacity:cards.count];
     for (Card *card in cards) {
-        if ([names objectForKey:card.name] == nil) {
+        if ([names objectForKey:card.displayName] == nil) {
             [collapsedResults addObject:card];
-            [names setObject:card forKey:card.name];
+            [names setObject:card forKey:card.displayName];
         }
     }
     return collapsedResults;

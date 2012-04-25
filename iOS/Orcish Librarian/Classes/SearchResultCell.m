@@ -167,7 +167,7 @@
     priceLabelLow.text = price ? [NSString stringWithFormat:@"L: $%@", [price objectForKey:@"low"]] : @"";
     priceLabelMid.text = price ? [NSString stringWithFormat:@"M: $%@", [price objectForKey:@"average"]] : @"";
     priceLabelHigh.text = price ? [NSString stringWithFormat:@"H: $%@", [price objectForKey:@"high"]] : @"";
-    nameLabel.text = card.name;    
+    nameLabel.text = card.displayName;    
     if (otherEditions.count > 0) {
         setLabel.text = [NSString stringWithFormat:@"%@ (%d more)", card.setName, otherEditions.count];
     } else {
