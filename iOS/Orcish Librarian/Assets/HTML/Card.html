@@ -93,6 +93,15 @@
         border-radius: 2px;
     }
 
+	.ol-oracle-text {
+		line-height: 1.2em;
+	}
+	
+	.ol-oracle-text .separator {
+		height: 10px;
+		overflow: hidden;
+	}	
+
 	.ol-oracle-text img {
 	    position: relative;
 	    top: 2px;
@@ -100,6 +109,21 @@
 	    width: 15px;
 	    height: 15px;
 	}
+	
+	.ol-oracle-text .level-info {
+	    margin-left: 10px;
+	}
+
+	.ol-oracle-text .level-info .details { 
+	    margin: -5px 0 10px 0;
+	    line-height: 1.2em;
+	}
+
+	.ol-oracle-text .level-info h4 {
+	    margin-top: 20px;
+	    margin-left: -10px;
+	}
+	
 	
 	.ol-other-editions,
 	.ol-other-parts,
@@ -387,7 +411,9 @@ function formattedOracleText(card) {
         text = text.replace(/(#END#|#START#)/g, '');
     }
 
-    text = text.replace(/\n/g, '<br /><br />');     // replace newlines with <br /> elements 
+	// replace newlines with <br /> elements 
+    // text = '<p>' + text.split(/\n+/).join('</p><p>') + '</p>';
+	text = text.replace(/\n+/g, '<div class="separator"></div>');
 
 	// italicize certain keywords
 	text = text.replace(/\b(channel|chroma|domain|fateful|hour|grandeur|hellbent|imprint|join forces|kinship|landfall|metalcraft|morbid|radiance|sweep|threshold)\b/i, '<i>$1</i>');
@@ -504,8 +530,8 @@ $('.ol-missing-prices a').click(reloadPrice);
 })()
 
 if (navigator.userAgent	.indexOf('iPhone') == -1) {
-	Orcish.setCardData({"otherParts":[{"pk":"10119","displayName":"Ice (Fire \/\/ Ice)"}],"displayName":"Fire (Fire \/\/ Ice)","artIndex":"1","tcgSetName":"Apocalypse","loyalty":null,"name":"Fire","setName":"Apocalypse","rarity":"U","power":"","otherEditions":[{"pk":"1238","setName":"Magic: The Gathering-Commander"}],"artist":"Franz Vohwinkel","gathererId":"27166","manaCost":"1R","typeLine":"Instant","pk":"10103","isToken":false,"collectorNumber":"128","oracleText":"Fire deals 2 damage divided as you choose among one or two target creatures and\/or players.","artVariants":[{"artIndex":"1","artist":"Franz Vohwinkel","pk":"10103"}],"toughness":""})
-	// Orcish.setCardPrice(3677, { "low": "4.50", "med": "6.40", "high": "10.45", 'tcgId': '5643' })
+	//Orcish.setCardData({"otherParts":[],"displayName":"Ikiral Outrider","artIndex":"","tcgSetName":"Rise of the Eldrazi","loyalty":null,"name":"Ikiral Outrider","setName":"Rise of the Eldrazi","rarity":"C","power":"1","otherEditions":[],"artist":"Kekai Kotaki","gathererId":"198176","manaCost":"1W","typeLine":"Creature - Human Soldier","pk":"17820","isToken":false,"collectorNumber":"27","oracleText":"Level up {4} ({4}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-3\n2\/6\nVigilance\nLEVEL 4+\n3\/10\nVigilance","artVariants":[{"artIndex":"","artist":"Kekai Kotaki","pk":"17820"}],"toughness":"2"})
+	Orcish.setCardData({"otherParts":[],"displayName":"Angelic Destiny","artIndex":"","tcgSetName":"Magic 2012 (M12)","loyalty":null,"name":"Angelic Destiny","setName":"Magic 2012","rarity":"M","power":"","otherEditions":[],"artist":"Jana Schirmer & Johannes Voss","gathererId":"220230","manaCost":"2WW","typeLine":"Enchantment - Aura","pk":"18805","isToken":false,"collectorNumber":"3","oracleText":"Enchant creature\nEnchanted creature gets +4\/+4, has flying and first strike, and is an Angel in addition to its other types.\nWhen enchanted creature dies, return Angelic Destiny to its owner's hand.","artVariants":[{"artIndex":"","artist":"Jana Schirmer & Johannes Voss","pk":"18805"}],"toughness":""})
 } else {
 	$(function(){
 		window.location = 'done://loading';
