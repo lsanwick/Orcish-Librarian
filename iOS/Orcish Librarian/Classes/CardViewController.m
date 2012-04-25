@@ -19,6 +19,8 @@ typedef void (^block_t)(void);
 
 @interface CardViewController ()
 
+- (void) scrollAllViewsToTop;
+
 @property (nonatomic, assign) NSUInteger layoutIndex;
 @property (nonatomic, strong) NSMutableArray *pages;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -113,6 +115,14 @@ typedef void (^block_t)(void);
 }
 
 // ----------------------------------------------------------------------------
+
+- (void) scrollAllViewsToTop {
+    for (int i = 0; i < kPageCount; i++) {
+        [[[self.pages objectAtIndex:i] scrollView] setContentOffset:CGPointMake(0, 0) animated:NO];
+    }
+}
+
+// ----------------------------------------------------------------------------
 //  UIScrollViewDelegate
 // ----------------------------------------------------------------------------
 
@@ -123,14 +133,13 @@ typedef void (^block_t)(void);
     NSUInteger middlePage = floor(kPageCount / 2.0);
     if (index > middlePage && self.layoutIndex < (self.cards.count - kPageCount)) {
         [self shiftLeft];
-        [self.scrollView scrollRectToVisible:CGRectMake(pageWidth * (index - 1), 0 , pageWidth, pageHeight) animated:NO];
+        [self scrollAllViewsToTop];
+        [self.scrollView scrollRectToVisible:CGRectMake(pageWidth * (index - 1), 0 , pageWidth, pageHeight) animated:NO];        
     } else if (index < middlePage && self.layoutIndex > 0) {
         [self shiftRight];
+        [self scrollAllViewsToTop];
         [self.scrollView scrollRectToVisible:CGRectMake(pageWidth * (index + 1), 0 , pageWidth, pageHeight) animated:NO];
-    }
-    for (int i = 0; i < kPageCount; i++) {
-        [[[self.pages objectAtIndex:i] scrollView] setContentOffset:CGPointMake(0, 0) animated:NO];
-    }
+    }    
 }
 
 // ----------------------------------------------------------------------------
