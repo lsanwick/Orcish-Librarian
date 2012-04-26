@@ -227,11 +227,12 @@
     NSMutableArray *cards = [NSMutableArray array];
     FMResultSet *rs = [gAppDelegate.db executeQuery:
         @"SELECT   cards.*, "
-        @"         sets.name AS set_name "
+        @"         sets.name  AS set_name "
         @"FROM     cards, sets "
         @"WHERE    cards.set_pk = sets.pk "
         @"AND      cards.name_hash = ? "
         @"AND      cards.pk != ? "
+        @"AND     (cards.art_index = '' OR cards.art_index = 1) "
         @"AND      sets.pk != ? ",
         self.nameHash,
         self.pk,
