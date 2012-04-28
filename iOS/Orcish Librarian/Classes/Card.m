@@ -59,7 +59,6 @@
     card.rarity = [NSNull wrapNil:[rs stringForColumn:@"rarity"]];
     card.manaCost = [NSNull wrapNil:[rs stringForColumn:@"mana_cost"]];
     card.typeLine = [NSNull wrapNil:[rs stringForColumn:@"type_line"]];
-    card.isToken = [rs boolForColumn:@"is_token"];
     card.oracleText = [NSNull wrapNil:[rs stringForColumn:@"oracle_text"]];
     card.power = [NSNull wrapNil:[rs stringForColumn:@"power"]];
     card.toughness = [NSNull wrapNil:[rs stringForColumn:@"toughness"]];
@@ -216,7 +215,6 @@
         @"WHERE    cards.set_pk = ? "
         @"AND      cards.collector_number == ? "
         @"AND      cards.collector_number != '' "
-        @"AND      cards.is_token == 0 "
         @"AND      cards.pk != ? ",
         self.setPk,
         self.collectorNumber,

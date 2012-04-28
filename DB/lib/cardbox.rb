@@ -105,7 +105,6 @@ class CardBox
       :rarity => :varchar_32,
       :mana_cost => :varchar_255,
       :type_line => :varchar_255,
-      :is_token => :integer,
       :oracle_text => :text,
       :power => :varchar_8,
       :toughness => :varchar_8,
@@ -120,7 +119,7 @@ class CardBox
     # art variants
     io.puts(sql_create_index(:table => :cards, :column => [ :set_pk, :name_hash ]))        
     # other parts
-    io.puts(sql_create_index(:table => :cards, :column => [ :set_pk, :collector_number, :is_token ]))
+    io.puts(sql_create_index(:table => :cards, :column => [ :set_pk, :collector_number ]))
     
     # INSERTs
     io.puts

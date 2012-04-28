@@ -17,7 +17,7 @@ class Gatherer < Source
     checklist.each_pair do |name, cards_with_name|
       spoiler_entry = spoiler[name]
       if spoiler_entry.nil?
-        debug("ERROR: No spoiler entry for #{name}")
+        debug("WARNING: No spoiler entry for #{name}")
       else
         cards_with_name.each do |card|
           card = card.clone
@@ -86,8 +86,11 @@ class Gatherer < Source
           current_card[:mana_cost] = value.inner_text.strip
         end
       else
-        current_card[:is_token] = ((current_card[:mana_cost].nil? || current_card[:mana_cost] == '') && current_card[:type_line] == "Creature - #{current_card[:name]}") ? 1 : 0
-        cards[current_card[:name]] = current_card
+        # disregard token cards
+        is_token = (current_card[:mana_cost].nil? || current_card[:mana_cost] == '') && current_card[:type_line] == "Creature - #{current_card[:name]}"
+        if !is_token
+          cards[current_card[:name]] = current_card 
+        end
         current_card = { }
       end
     end
