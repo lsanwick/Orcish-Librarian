@@ -44,6 +44,7 @@
 + (NSArray *) findCards:(SearchCriteria *)criteria;
 + (NSArray *) findNameHashesByText:(NSString *)text;
 + (Card *) findCardByPk:(NSString *)pk;
++ (Card *) findRandomCard;
 
 - (NSString *) toJSON;
 

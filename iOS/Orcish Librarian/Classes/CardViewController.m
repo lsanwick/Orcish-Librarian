@@ -9,6 +9,7 @@
 #import "CardViewController.h"
 #import "Card.h"
 #import "CardView.h"
+#import "CardSequence.h"
 #import "AppDelegate.h"
 
 #define kPageCount 3
@@ -29,7 +30,7 @@ typedef void (^block_t)(void);
 
 @implementation CardViewController 
 
-@synthesize cards;
+@synthesize sequence;
 @synthesize position;
 @synthesize layoutIndex;
 @synthesize pages;
@@ -56,15 +57,15 @@ typedef void (^block_t)(void);
 - (void) viewWillAppear:(BOOL)animated {
     CGFloat width = self.scrollView.frame.size.width;
     CGFloat height = self.scrollView.frame.size.height;    
-    NSUInteger pageCount = MIN(kPageCount, self.cards.count);
-    self.layoutIndex = MIN(self.position, (self.cards.count - pageCount));
+    NSUInteger pageCount = MIN(kPageCount, self.sequence.count);
+    self.layoutIndex = MIN(self.position, (self.sequence.count - pageCount));
     for (int i = 0; i < pageCount; i++) {
         CardView *page = [self.pages objectAtIndex:i];
         [self.scrollView addSubview:page];
         page.frame = CGRectMake(width * i, 0, width, height);
-        page.card = [self.cards objectAtIndex:self.layoutIndex+i];
+        page.card = [self.sequence cardAtPosition:self.layoutIndex+i];
     }
-    self.scrollView.contentSize = CGSizeMake(width * MIN(self.cards.count, kPageCount), height);
+    self.scrollView.contentSize = CGSizeMake(width * MIN(self.sequence.count, kPageCount), height);
     NSUInteger pageOffset = position - self.layoutIndex;
     [self.scrollView scrollRectToVisible:CGRectMake(width * pageOffset, 0, width, height) animated:NO];
     [self scrollViewDidEndDecelerating:self.scrollView];
@@ -94,7 +95,7 @@ typedef void (^block_t)(void);
     [self.pages removeLastObject];
     [self.pages insertObject:lastPage atIndex:0];
     self.layoutIndex = self.layoutIndex - 1;
-    lastPage.card = [self.cards objectAtIndex:self.layoutIndex];
+    lastPage.card = [self.sequence cardAtPosition:self.layoutIndex];
 }
 
 // ----------------------------------------------------------------------------
@@ -110,7 +111,7 @@ typedef void (^block_t)(void);
     firstPage.frame = CGRectMake((kPageCount-1) * pageWidth, 0, pageWidth, pageHeight);
     [self.pages removeObjectAtIndex:0];
     [pages addObject:firstPage];
-    firstPage.card = [cards objectAtIndex:self.layoutIndex+kPageCount];
+    firstPage.card = [sequence cardAtPosition:self.layoutIndex+kPageCount];
     self.layoutIndex = self.layoutIndex + 1;
 }
 
@@ -131,7 +132,7 @@ typedef void (^block_t)(void);
     NSUInteger pageHeight = view.frame.size.height;
     NSUInteger index = view.contentOffset.x / pageWidth;
     NSUInteger middlePage = floor(kPageCount / 2.0);
-    if (index > middlePage && self.layoutIndex < (self.cards.count - kPageCount)) {
+    if (index > middlePage && self.layoutIndex < (self.sequence.count - kPageCount)) {
         [self shiftLeft];
         [self scrollAllViewsToTop];
         [self.scrollView scrollRectToVisible:CGRectMake(pageWidth * (index - 1), 0 , pageWidth, pageHeight) animated:NO];        

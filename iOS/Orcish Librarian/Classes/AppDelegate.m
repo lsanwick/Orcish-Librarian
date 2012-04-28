@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "BasicSearchController.h"
 #import "CardViewController.h"
+#import "CardSequence.h"
 #import "Reachability.h"
 
 
@@ -70,7 +71,7 @@
 
 - (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position {    
     CardViewController *controller = [self dequeueCardViewController];
-    controller.cards = cards;
+    controller.sequence = [CardSequence sequenceWithCards:cards];
     controller.position = position;
     [gAppDelegate.rootController pushViewController:controller animated:YES];
 }
@@ -135,10 +136,8 @@
 - (void) initializeWindow {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = self.rootController = [[OrcishRootController alloc] initWithNibName:nil bundle:nil];
-    BasicSearchController *basicSearchController = [[BasicSearchController alloc] initWithNibName:@"BasicSearchController" bundle:nil];
     [self.rootController view]; // force immediate NIB load
-    [basicSearchController view]; // force immediate NIB load
-    [self.rootController setViewController:basicSearchController animated:NO];
+    [self showBasicSearchController];
     [self.window makeKeyAndVisible];
 }
 
@@ -161,6 +160,25 @@
         [queuedController view];
     });
     return result;
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) showRandomCardController {
+    [self hideMenu];
+    CardViewController *controller = [self dequeueCardViewController];
+    controller.sequence = [CardSequence randomCardSequence];
+    controller.position = 0;
+    [self.rootController setViewController:controller animated:NO];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) showBasicSearchController {
+    [self hideMenu];
+    BasicSearchController *controller = [[BasicSearchController alloc] initWithNibName:nil bundle:nil];
+    [controller view];
+    [self.rootController setViewController:controller animated:NO];
 }
 
 // ----------------------------------------------------------------------------

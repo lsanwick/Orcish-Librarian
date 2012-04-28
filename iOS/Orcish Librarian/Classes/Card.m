@@ -147,6 +147,15 @@
 
 // ----------------------------------------------------------------------------
 
++ (Card *) findRandomCard {
+    FMResultSet *rs = [gAppDelegate.db executeQuery:@"SELECT MAX(pk) FROM cards"];
+    [rs next];
+    NSNumber *pk = [NSNumber numberWithInt:(arc4random() % [rs intForColumnIndex:0]) + 1];
+    return [self findCardByPk:[pk stringValue]];
+}
+
+// ----------------------------------------------------------------------------
+
 + (NSArray *) findNameHashesByText:(NSString *)text {
     if (text.length < kMinimumSearchCharacters) { return [NSArray array]; }
     NSMutableArray *searchNames = [NSMutableArray array];

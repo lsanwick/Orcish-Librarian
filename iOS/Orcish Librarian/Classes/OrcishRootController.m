@@ -149,6 +149,7 @@
     for (UIView *subview in self.contentView.subviews) {
         [subview removeFromSuperview];
     }
+    [self.controllerStack removeAllObjects];
     [controller willPush:animated];
     [self.controllerStack addObject:controller];
     controller.view.alpha = 0.0;

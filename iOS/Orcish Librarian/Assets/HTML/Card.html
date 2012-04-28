@@ -289,7 +289,7 @@ function loadCardPhoto(card) {
         imageURL = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=' + encodeURIComponent(card.gathererId);
     } else {
         var setName = card.setName.replace(/:/g, '');
-		var cardName = card.displayName;
+		var cardName = card.displayName.replace(/:/g, '');
 		cardName = cardName.replace(/^.*\((.*)\s\/\/\s(.*)\)$/, '$1$2');
         imageURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(setName) + '/' + encodeURIComponent(cardName) + card.artIndex + '.full.jpg';
     }

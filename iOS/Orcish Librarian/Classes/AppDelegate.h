@@ -29,4 +29,7 @@
 - (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position;
 - (void) showCard:(Card *)card;
 
+- (void) showBasicSearchController;
+- (void) showRandomCardController;
+
 @end

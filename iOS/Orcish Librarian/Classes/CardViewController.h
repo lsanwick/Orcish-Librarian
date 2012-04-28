@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "OrcishViewController.h"
 
+@class CardSequence;
+
 @interface CardViewController : OrcishViewController <UIScrollViewDelegate, UIWebViewDelegate> 
 
-@property (strong, nonatomic) NSArray *cards;
+@property (strong, nonatomic) CardSequence *sequence;
 @property (assign, nonatomic) NSUInteger position;
 
 @end
