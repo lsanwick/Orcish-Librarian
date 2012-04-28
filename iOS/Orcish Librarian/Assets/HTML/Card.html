@@ -260,7 +260,12 @@ Orcish.setCardPrice = function(cardPk, price) {
 function loadTypeLine(card) {
 	$('.ol-card-type').text(card.typeLine);
 	if (card.power || card.toughness) {
-		$('.ol-card-ptl').show().text('(' + card.power + '/' + card.toughness + ')');
+		var pt = (card.power + '/' + card.toughness);
+		if (card.setName == 'Unhinged') { 
+			pt = pt.replace(/\{1\/2\}/g, '½');
+			pt = pt.replace(/\{\^2\}/g, '²')
+		}
+		$('.ol-card-ptl').show().text('(' + pt + ')');
 	} else if (card.loyalty) {
 		$('.ol-card-ptl').show().text('(' + card.loyalty + ')');
 	} else {
@@ -390,11 +395,20 @@ function formattedOracleText(card) {
 		text = '{T}: Add {' + text + '} to your mana pool.'; 
 	}
 
+	// Unhinged has 1/2 mana symbols that look like nonsense
+	// It also has 1/2 P/T modifiers that are represented similarly
+	if (card.setName == 'Unhinged') {
+		text = text.replace('{o{1\/2}}', '{o{C\/2}}');
+		text = text.replace(/\{o\{1\/2\*([WBURG])\}\}/, '{o{$1\/2}}');
+		text = text.replace(/\{o\{([WBURGC])\/2\}\}/i, '{$1/2}');
+		text = text.replace(/\+(\d+)\{1\/2\}/g, '+$1½');
+	}
+
 	// Unglued was never updated with modern markup
-    if (card.setName == 'Unglued') { 
+    else if (card.setName == 'Unglued') { 
         text = text.replace(/o([\d]+|[WBURGS])/g, '{$1}'); // fixes old-style mana symbol
         text = text.replace(/ocT/g, '{T}');                // fixes old-style tap symbol
-    }
+    }	
 
     text = text.replace(/\n\s*\n+/g, "\n\n"); // no more than two newlines in a row
     text = text.replace(/\{(\d+)([WBURGS]+)\}/g, '{$1}{$2}'); // fix compressed mana cost in Blast from the Past
@@ -457,10 +471,14 @@ function formattedManaCost(card) {
     var closeToken = '}';
     var withinToken = false;
     var currentToken = '';
+	if (card.setName == 'Unhinged' && text == '500') {
+		text = '{W/2}'; // fix bug with mana cost of 'Little Girl' 
+	}
     text = text.replace(/\(/g, '{');
-    text = text.replace(/\)/g, '}');
-    text = text.replace(/(\d+)/g, '{$1}');
+	text = text.replace(/\)/g, '}');
+	text = text.replace(/(\d+)/g, '{$1}');
 	text = text.replace(/{{(\d)}\/([WBURG])}/g, '{$1/$2}'); // fix hybrid
+	text = text.replace(/\{([WBURGC])\/\{2\}\}/g, '{$1/2}'); // fix half mana
     for (var i=0;i<text.length;i++) {            
         var character = text[i];
         if (withinToken) {
@@ -496,6 +514,7 @@ function formatToken(token) {
     var chaos = /^C$/;
     var phyrexian1 = /^P([WBURGC])$/i;
     var phyrexian2 = /^P\/([WBURGC])$/i;
+	var halfMana = /^([WBURGC])\/2$/i;
     token = token.replace(/[(){}]/g, '');
     if (token.match(tap))
         return token.replace(tap, '<img src="symbols/$1.png" />').toLowerCase();
@@ -517,6 +536,9 @@ function formatToken(token) {
         return token.replace(loyalty, '<img class="loyalty" src="symbols/loyalty$1.png" />').toLowerCase();    
     else if (token.match(chaos))
         return '"Chaos"';
+	else if (token.match(halfMana)) {
+		return token.replace(halfMana, '<img src="symbols/mana_half_$1.png" />').toLowerCase();
+	}
     else
         return '<img src="symbols/mana_unknown.png" />';
 }
@@ -530,8 +552,7 @@ $('.ol-missing-prices a').click(reloadPrice);
 })()
 
 if (navigator.userAgent	.indexOf('iPhone') == -1) {
-	//Orcish.setCardData({"otherParts":[],"displayName":"Ikiral Outrider","artIndex":"","tcgSetName":"Rise of the Eldrazi","loyalty":null,"name":"Ikiral Outrider","setName":"Rise of the Eldrazi","rarity":"C","power":"1","otherEditions":[],"artist":"Kekai Kotaki","gathererId":"198176","manaCost":"1W","typeLine":"Creature - Human Soldier","pk":"17820","isToken":false,"collectorNumber":"27","oracleText":"Level up {4} ({4}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-3\n2\/6\nVigilance\nLEVEL 4+\n3\/10\nVigilance","artVariants":[{"artIndex":"","artist":"Kekai Kotaki","pk":"17820"}],"toughness":"2"})
-	Orcish.setCardData({"otherParts":[],"displayName":"Angelic Destiny","artIndex":"","tcgSetName":"Magic 2012 (M12)","loyalty":null,"name":"Angelic Destiny","setName":"Magic 2012","rarity":"M","power":"","otherEditions":[],"artist":"Jana Schirmer & Johannes Voss","gathererId":"220230","manaCost":"2WW","typeLine":"Enchantment - Aura","pk":"18805","isToken":false,"collectorNumber":"3","oracleText":"Enchant creature\nEnchanted creature gets +4\/+4, has flying and first strike, and is an Angel in addition to its other types.\nWhen enchanted creature dies, return Angelic Destiny to its owner's hand.","artVariants":[{"artIndex":"","artist":"Jana Schirmer & Johannes Voss","pk":"18805"}],"toughness":""})
+	Orcish.setCardData({"otherParts":[],"displayName":"Assquatch","artIndex":"","tcgSetName":"Unhinged","loyalty":null,"name":"Assquatch","setName":"Unhinged","rarity":"R","power":"3{1\/2}","otherEditions":[],"artist":"Jeremy Jarvis","gathererId":"74251","manaCost":"4R","typeLine":"Creature - Donkey Lord","pk":"12780","isToken":false,"collectorNumber":"71","oracleText":"Each other Donkey gets +1{1\/2}\/+1{1\/2}.\nWhenever another Donkey comes into play, untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.","artVariants":[{"artIndex":"","artist":"Jeremy Jarvis","pk":"12780"}],"toughness":"3{1\/2}"})
 } else {
 	$(function(){
 		window.location = 'done://loading';
@@ -626,7 +647,15 @@ $.preloadImages([
 "symbols/mana_pg.png",
 "symbols/mana_pc.png",
 "symbols/q.png",
-"symbols/t.png"]);
+"symbols/t.png",
+"symbols/mana_half_w.png",
+"symbols/mana_half_b.png",
+"symbols/mana_half_u.png",
+"symbols/mana_half_r.png",
+"symbols/mana_half_g.png",
+"symbols/mana_half_s.png",
+"symbols/mana_half_c.png"
+]);
 
 </script>
 </body>

@@ -74,8 +74,8 @@ class Gatherer < Source
           current_card[:display_name] = value.inner_text.strip.clean.to_display_name
           current_card[:gatherer_id] = value.at('a')['href'].gsub(/^.*?(\d+)$/, '\1')
         elsif label == 'Pow/Tgh'
-          current_card[:power] = value.inner_text.strip.gsub(/^\((.*)\/(.*)\)$/, '\1')
-          current_card[:toughness] = value.inner_text.strip.gsub(/^\((.*)\/(.*)\)$/, '\2')
+          current_card[:power] = value.inner_text.strip.gsub(/^\(([^\/]*(?:\{1\/2\})?)\/([^\/]*(?:\{1\/2\})?)\)/, '\1')
+          current_card[:toughness] = value.inner_text.strip.gsub(/^\(([^\/]*(?:\{1\/2\})?)\/([^\/]*(?:\{1\/2\})?)\)/, '\2')
         elsif label == 'Loyalty'
           current_card[:loyalty] = value.inner_text.strip.gsub(/^\((.*)\)$/, '\1')
         elsif label == 'Type'
