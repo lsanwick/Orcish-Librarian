@@ -77,6 +77,14 @@
 
 // ----------------------------------------------------------------------------
 
++ (NSArray *) findCardsBySet:(NSString *)setPk {
+    SearchCriteria *criteria = [[SearchCriteria alloc] init];
+    criteria.sets = [NSArray arrayWithObject:setPk];
+    return [self findCards:criteria];
+}
+
+// ----------------------------------------------------------------------------
+
 + (NSArray *) findCards:(SearchCriteria *)criteria {
     
     NSMutableArray *searchClauses = [NSMutableArray array];
@@ -92,11 +100,21 @@
             for (int i = 0; i < nameHashes.count; i++) {
                 [marks addObject:@"?"];
             }
-            [searchClauses addObject:[NSString stringWithFormat:@"name_hash IN (%@)", [marks componentsJoinedByString:@", "]]];
+            [searchClauses addObject:[NSString stringWithFormat:@"cards.name_hash IN (%@)", [marks componentsJoinedByString:@", "]]];
             [searchParams addObjectsFromArray:nameHashes];
-            [orderClauses addObject:[NSString stringWithFormat:@"(SUBSTR(search_name, 0, %d) = ?) DESC", criteria.nameText.length + 1]];
+            [orderClauses addObject:[NSString stringWithFormat:@"(SUBSTR(cards.search_name, 0, %d) = ?) DESC", criteria.nameText.length + 1]];
             [orderParams addObject:criteria.nameText];
         }
+    }
+    
+    // set
+    if (criteria.sets != nil && criteria.sets.count > 0) {
+        NSMutableArray *marks = [NSMutableArray arrayWithCapacity:criteria.sets.count];
+        for (int i = 0; i < criteria.sets.count; i++) {
+            [marks addObject:@"?"];
+        }
+        [searchClauses addObject:[NSString stringWithFormat:@"cards.set_pk IN (%@)", [marks componentsJoinedByString:@", "]]];
+        [searchParams addObjectsFromArray:criteria.sets];
     }
     
     if (searchClauses.count == 0) {
@@ -233,8 +251,7 @@
 - (NSArray *) otherEditions {
     NSMutableArray *cards = [NSMutableArray array];
     FMResultSet *rs = [gAppDelegate.db executeQuery:
-        @"SELECT   cards.*, "
-        @"         sets.name  AS set_name "
+        @"SELECT   sets.pk AS set_pk, sets.name AS set_name "
         @"FROM     cards, sets "
         @"WHERE    cards.set_pk = sets.pk "
         @"AND      cards.name_hash = ? "
@@ -247,7 +264,7 @@
     while([rs next]) {
         [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
             [rs stringForColumn:@"set_name"], @"setName",
-            [rs stringForColumn:@"pk"], @"pk", 
+            [rs stringForColumn:@"set_pk"], @"setPk", 
             nil]];
     }                          
     return cards;

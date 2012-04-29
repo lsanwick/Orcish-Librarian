@@ -52,7 +52,7 @@
     if (self.isDoneLoading) {        
         dispatch_async(dispatch_get_main_queue(), ^{ 
             NSString *js = [NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]];
-            NSLog(@"%@", js);
+            // NSLog(@"%@", js);
             [self stringByEvaluatingJavaScriptFromString:js];
             [[PriceManager shared] requestPriceForCard:card withCallback:^(Card *priceCard, NSDictionary *price) {
                 [self setPrice:price forCard:card];
@@ -67,26 +67,29 @@
 
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSURL *URL = [request URL];    
-    if ([URL.scheme isEqualToString:@"card"]) {
-        // push a new card view controller
+    if ([URL.scheme isEqualToString:@"set"]) {
+        NSArray *cards = [Card findCardsBySet:URL.host];
+        [gAppDelegate showCards:cards atPosition:[cards indexOfObjectPassingTest:^(Card *test, NSUInteger index, BOOL *stop) {
+            return (BOOL) ([self.card.nameHash isEqualToString:test.nameHash] ? (*stop = YES) : NO);
+        }]];
+    } else if ([URL.scheme isEqualToString:@"card"]) {
         NSString *pk = URL.host;
         Card *newCard = [Card findCardByPk:pk];
         if (newCard != nil) {            
             [gAppDelegate showCard:newCard];
         } 
-        return NO;
     } else if ([URL.scheme isEqualToString:@"done"]) {
-        // web view is alerting us that the DOM is done loading
         if (card != nil) {              
             self.card = card;
         }
     } else if ([URL.scheme isEqualToString:@"price"]) {
-        // reload prices
         [[PriceManager shared] requestPriceForCard:self.card withCallback:^(Card *theCard, NSDictionary *price) {
             [self setPrice:price forCard:theCard];
         }];
+    } else {
+        return YES;
     }
-    return YES;
+    return NO;
 }
 
 // ----------------------------------------------------------------------------

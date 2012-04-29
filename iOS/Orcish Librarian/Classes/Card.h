@@ -41,6 +41,7 @@
 
 + (Card *) cardForResultSet:(FMResultSet *)resultSet;
 + (NSArray *) findCardsByTitleText:(NSString *)text;
++ (NSArray *) findCardsBySet:(NSString *)setPk;
 + (NSArray *) findCards:(SearchCriteria *)criteria;
 + (NSArray *) findNameHashesByText:(NSString *)text;
 + (Card *) findCardByPk:(NSString *)pk;

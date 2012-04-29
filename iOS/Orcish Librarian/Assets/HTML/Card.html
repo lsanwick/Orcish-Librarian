@@ -183,14 +183,14 @@
     
     <div class="ol-prices">
     </div>
-    
-    <div class="ol-card-image ol-block">
-    </div>
-    
+       
     <div class="ol-oracle-text">
         <div class="subtitle">Oracle Text:</div>
         <div class="ol-block">
         </div>
+    </div>
+
+	<div class="ol-card-image ol-block">
     </div>
     
     <div class="ol-other-art">
@@ -314,7 +314,7 @@ function loadOtherEditions(card) {
         var html = '';
         $.each(card.otherEditions, function(i, edition) {
             if (i != 0) { html += '<br />' }   
-            html += '<a href="card://' + edition.pk + '">' + edition.setName + '</a>';
+            html += '<a href="set://' + edition.setPk + '">' + edition.setName + '</a>';
         });
         $('.ol-other-editions').show().find('.ol-block').html(html);
     } else {
