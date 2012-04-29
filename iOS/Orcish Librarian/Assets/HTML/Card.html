@@ -132,10 +132,16 @@
 		line-height: 1.5em;
 	}
 	
+	.ol-gatherer a,
 	.ol-other-editions a,
 	.ol-other-parts a,
     .ol-other-art a {
 		text-decoration: none;
+	}
+	
+	.ol-gatherer { 
+		font-size: 14px; 
+		font-weight: bold;
 	}
 	
 	.subtitle {
@@ -168,9 +174,9 @@
 		</div>
         <div class="ol-mana-cost">Mana Cost</div>
 		<div class="ol-prices">
-			<span class="ol-price ol-price-low">Low: <a href="#">$6.50</a></span>
-			<span class="ol-price ol-price-med">Med: <a href="#">$7.20</a></span>
-			<span class="ol-price ol-price-high">High: <a href="#">$13.99</a></span>
+			<span class="ol-price ol-price-low">Low: <a href="tcg://show">$6.50</a></span>
+			<span class="ol-price ol-price-med">Med: <a href="tcg://show">$7.20</a></span>
+			<span class="ol-price ol-price-high">High: <a href="tcg://show">$13.99</a></span>
 			<div class="ol-attribution">Prices courtesy of TCGPlayer.com</div>
 		</div>
 		<div class="ol-missing-prices">
@@ -209,6 +215,10 @@
 		<div class="subtitle">Other Editions:</div>
 		<div class="ol-block">			
 		</div>
+    </div>
+
+	<div class="ol-gatherer ol-block">
+        <a href="gatherer://go">Open in Safari ➞</a>
     </div>
     
 <script>
@@ -552,7 +562,8 @@ $('.ol-missing-prices a').click(reloadPrice);
 })()
 
 if (navigator.userAgent	.indexOf('iPhone') == -1) {
-	Orcish.setCardData({"otherParts":[],"displayName":"Assquatch","artIndex":"","tcgSetName":"Unhinged","loyalty":null,"name":"Assquatch","setName":"Unhinged","rarity":"R","power":"3{1\/2}","otherEditions":[],"artist":"Jeremy Jarvis","gathererId":"74251","manaCost":"4R","typeLine":"Creature - Donkey Lord","pk":"12780","isToken":false,"collectorNumber":"71","oracleText":"Each other Donkey gets +1{1\/2}\/+1{1\/2}.\nWhenever another Donkey comes into play, untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.","artVariants":[{"artIndex":"","artist":"Jeremy Jarvis","pk":"12780"}],"toughness":"3{1\/2}"})
+	Orcish.setCardData({"otherParts":[],"displayName":"Gideon Jura","artIndex":"","tcgSetName":"Magic 2012 (M12)","loyalty":"6","name":"Gideon Jura","setName":"Magic 2012","rarity":"M","power":null,"otherEditions":[{"setName":"Rise of the Eldrazi","setPk":"94"}],"artist":"Aleksi Briclot","gathererId":"238329","manaCost":"3WW","typeLine":"Planeswalker - Gideon","pk":"18879","isToken":false,"collectorNumber":"16","oracleText":"+2: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.\n-2: Destroy target tapped creature.\n0: Until end of turn, Gideon Jura becomes a 6\/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.","artVariants":[{"artIndex":"","artist":"Aleksi Briclot","pk":"18879"}],"toughness":null})
+	
 } else {
 	$(function(){
 		window.location = 'done://loading';

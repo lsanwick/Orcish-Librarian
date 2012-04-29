@@ -49,7 +49,7 @@
 
 - (void) setCard:(Card *)theCard {
     card = theCard;
-    if (self.isDoneLoading) {        
+    if (theCard != nil && self.isDoneLoading) {        
         dispatch_async(dispatch_get_main_queue(), ^{ 
             NSString *js = [NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]];
             // NSLog(@"%@", js);
@@ -79,9 +79,10 @@
             [gAppDelegate showCard:newCard];
         } 
     } else if ([URL.scheme isEqualToString:@"done"]) {
-        if (card != nil) {              
-            self.card = card;
-        }
+        self.card = self.card; // retriggers the JavaScript loader
+    } else if ([URL.scheme isEqualToString:@"gatherer"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:
+            @"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%@", self.card.gathererId]]];        
     } else if ([URL.scheme isEqualToString:@"price"]) {
         [[PriceManager shared] requestPriceForCard:self.card withCallback:^(Card *theCard, NSDictionary *price) {
             [self setPrice:price forCard:theCard];

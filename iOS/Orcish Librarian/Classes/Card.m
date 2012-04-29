@@ -233,10 +233,12 @@
         @"WHERE    cards.set_pk = ? "
         @"AND      cards.collector_number == ? "
         @"AND      cards.collector_number != '' "
-        @"AND      cards.pk != ? ",
+        @"AND      cards.pk != ? "
+        @"AND      cards.rarity = ? ",
         self.setPk,
         self.collectorNumber,
-        self.pk];
+        self.pk,
+        self.rarity];
     while([rs next]) {
         [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
             [rs stringForColumn:@"display_name"], @"displayName",
