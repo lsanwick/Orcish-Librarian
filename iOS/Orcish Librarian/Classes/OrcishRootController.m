@@ -15,6 +15,9 @@
 #import "Utility.h"
 
 
+#define kMaxControllerStackDepth 10
+
+
 @implementation OrcishRootController
 
 @synthesize menuView;
@@ -112,7 +115,6 @@
 // ----------------------------------------------------------------------------
 
 - (void) pushViewController:(OrcishViewController *)controller animated:(BOOL)animated {
-    [controller willPush:animated];
     [self.controllerStack addObject:controller];
     controller.view.frame = CGRectMake(self.contentView.frame.size.width, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
     [self.contentView addSubview:controller.view];
@@ -122,15 +124,18 @@
             controller.view.frame = CGRectMake(0.0, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
         }
         completion:^(BOOL finished){
-            [controller pushed];
+
         }];
+    if (self.controllerStack.count > kMaxControllerStackDepth) {
+        [[[self.controllerStack objectAtIndex:0] view] removeFromSuperview];
+        [self.controllerStack removeObjectAtIndex:0];
+    }
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) popViewControllerAnimated:(BOOL)animated {    
     OrcishViewController *controller = [self.controllerStack lastObject];
-    [controller willPop:animated];
     [self.controllerStack removeLastObject];
     [self updateMenuButton];
     [UIView animateWithDuration:(animated ? 0.2 : 0.0)
@@ -139,7 +144,6 @@
         } 
         completion:^(BOOL finished){
             [controller.view removeFromSuperview];
-            [controller popped];
         }];        
 }
 
@@ -150,7 +154,6 @@
         [subview removeFromSuperview];
     }
     [self.controllerStack removeAllObjects];
-    [controller willPush:animated];
     [self.controllerStack addObject:controller];
     controller.view.alpha = 0.0;
     controller.view.frame = CGRectMake(0.0, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);
@@ -161,7 +164,7 @@
             controller.view.alpha = 1.0;
         }
         completion:^(BOOL animated){
-            [controller pushed];
+
         }];
 }
 

@@ -10,9 +10,4 @@
 
 @implementation OrcishViewController
 
-- (void) willPop:(BOOL)animated { }
-- (void) popped { }
-- (void) willPush:(BOOL)animated { }
-- (void) pushed { }
-
 @end
