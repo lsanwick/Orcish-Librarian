@@ -38,14 +38,14 @@
 		8D40B9881473E13D00F3A4EC /* Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9861473E13D00F3A4EC /* Down.png */; };
 		8D40B9891473E13D00F3A4EC /* Up.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9871473E13D00F3A4EC /* Up.png */; };
 		8D5012C3146F5CA300D463D6 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5012C2146F5CA300D463D6 /* Card.m */; };
+		8D6B5684154DA17A006BFA0C /* PriceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B5683154DA17A006BFA0C /* PriceListController.m */; };
+		8D6B5687154E3046006BFA0C /* PriceListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6B5686154E3046006BFA0C /* PriceListController.xib */; };
 		8D7F9755153E5D58001335DA /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F9754153E5D58001335DA /* CardView.m */; };
 		8D95BD1B15263552005B8518 /* NSNull+Wrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D95BD1A15263552005B8518 /* NSNull+Wrap.m */; };
 		8D95BD1F152642D8005B8518 /* PriceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D95BD1E152642D8005B8518 /* PriceManager.m */; };
-		8D9F91B41544428A0076FC9C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F91B31544428A0076FC9C /* Reachability.m */; };
 		8D9F91B6154456470076FC9C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9F91B5154456470076FC9C /* SystemConfiguration.framework */; };
 		8D9F91BB15450D150076FC9C /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F91B915450D150076FC9C /* sqlite3.c */; };
 		8DBDB1251466DEC600140217 /* BasicSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB1241466DEC600140217 /* BasicSearchController.m */; };
-		8DBDB12B1466DF8B00140217 /* OrcishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB12A1466DF8B00140217 /* OrcishViewController.m */; };
 		8DD02111146A2A26008C522A /* BasicSearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD02110146A2A26008C522A /* BasicSearchController.xib */; };
 		8DE5D9921457A02000B6CAAF /* Menu-Section.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9901457A02000B6CAAF /* Menu-Section.png */; };
 		8DE5D9931457A02000B6CAAF /* Menu-Section@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */; };
@@ -117,21 +117,20 @@
 		8D40B9871473E13D00F3A4EC /* Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Up.png; path = "Orcish Librarian/Assets/Toolbar Icons/Up.png"; sourceTree = SOURCE_ROOT; };
 		8D5012C1146F5CA300D463D6 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		8D5012C2146F5CA300D463D6 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		8D6B5682154DA17A006BFA0C /* PriceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceListController.h; sourceTree = "<group>"; };
+		8D6B5683154DA17A006BFA0C /* PriceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceListController.m; sourceTree = "<group>"; };
+		8D6B5686154E3046006BFA0C /* PriceListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PriceListController.xib; path = Layout/PriceListController.xib; sourceTree = "<group>"; };
 		8D7F9753153E5D58001335DA /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
 		8D7F9754153E5D58001335DA /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
 		8D95BD1915263552005B8518 /* NSNull+Wrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+Wrap.h"; sourceTree = "<group>"; };
 		8D95BD1A15263552005B8518 /* NSNull+Wrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+Wrap.m"; sourceTree = "<group>"; };
 		8D95BD1D152642D8005B8518 /* PriceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceManager.h; sourceTree = "<group>"; };
 		8D95BD1E152642D8005B8518 /* PriceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceManager.m; sourceTree = "<group>"; };
-		8D9F91B21544428A0076FC9C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Other/Reachability/Reachability.h; sourceTree = "<group>"; };
-		8D9F91B31544428A0076FC9C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Other/Reachability/Reachability.m; sourceTree = "<group>"; };
 		8D9F91B5154456470076FC9C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8D9F91B915450D150076FC9C /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
 		8D9F91BA15450D150076FC9C /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		8DBDB1231466DEC600140217 /* BasicSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicSearchController.h; sourceTree = "<group>"; };
 		8DBDB1241466DEC600140217 /* BasicSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicSearchController.m; sourceTree = "<group>"; };
-		8DBDB1291466DF8B00140217 /* OrcishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrcishViewController.h; sourceTree = "<group>"; };
-		8DBDB12A1466DF8B00140217 /* OrcishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrcishViewController.m; sourceTree = "<group>"; };
 		8DD02110146A2A26008C522A /* BasicSearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BasicSearchController.xib; path = Layout/BasicSearchController.xib; sourceTree = "<group>"; };
 		8DE5D9901457A02000B6CAAF /* Menu-Section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section.png"; sourceTree = "<group>"; };
 		8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section@2x.png"; sourceTree = "<group>"; };
@@ -218,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				8D9F91B815450D150076FC9C /* SQLite3 */,
-				8D9F91B0154442540076FC9C /* Reachability */,
 				8DE898E41484645F0024E016 /* RegexKitLite */,
 				8DED645A146F36F000A787F4 /* FMDB */,
 				8D1F7166145252460010C161 /* Assets */,
@@ -266,6 +264,7 @@
 				8D150F35144FEED800141685 /* OrcishRootController.xib */,
 				8DD02110146A2A26008C522A /* BasicSearchController.xib */,
 				8D0480A214700C42001E183C /* CardViewController.xib */,
+				8D6B5686154E3046006BFA0C /* PriceListController.xib */,
 			);
 			name = Layout;
 			sourceTree = "<group>";
@@ -281,8 +280,6 @@
 				8D1F717F145314D50010C161 /* MenuController.m */,
 				8DBDB1231466DEC600140217 /* BasicSearchController.h */,
 				8DBDB1241466DEC600140217 /* BasicSearchController.m */,
-				8DBDB1291466DF8B00140217 /* OrcishViewController.h */,
-				8DBDB12A1466DF8B00140217 /* OrcishViewController.m */,
 				8D5012C1146F5CA300D463D6 /* Card.h */,
 				8D5012C2146F5CA300D463D6 /* Card.m */,
 				8D0480A514700CDD001E183C /* CardViewController.h */,
@@ -299,6 +296,8 @@
 				8D7F9754153E5D58001335DA /* CardView.m */,
 				8DEFE4401548FA43009AB624 /* CardSequence.h */,
 				8DEFE4411548FA43009AB624 /* CardSequence.m */,
+				8D6B5682154DA17A006BFA0C /* PriceListController.h */,
+				8D6B5683154DA17A006BFA0C /* PriceListController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -339,15 +338,6 @@
 				8D1F717714525BF00010C161 /* Icon@2x.png */,
 			);
 			path = "App Icons";
-			sourceTree = "<group>";
-		};
-		8D9F91B0154442540076FC9C /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				8D9F91B21544428A0076FC9C /* Reachability.h */,
-				8D9F91B31544428A0076FC9C /* Reachability.m */,
-			);
-			name = Reachability;
 			sourceTree = "<group>";
 		};
 		8D9F91B815450D150076FC9C /* SQLite3 */ = {
@@ -501,6 +491,7 @@
 				8D30494B1474A82300928A5A /* Up@2x.png in Resources */,
 				8D1DE81214775E1200D2A3C4 /* HTML in Resources */,
 				8DE898E314832D820024E016 /* card-names.txt in Resources */,
+				8D6B5687154E3046006BFA0C /* PriceListController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,7 +532,6 @@
 				8D1F7180145314D50010C161 /* MenuController.m in Sources */,
 				8D1F71821453C4ED0010C161 /* Utility.m in Sources */,
 				8DBDB1251466DEC600140217 /* BasicSearchController.m in Sources */,
-				8DBDB12B1466DF8B00140217 /* OrcishViewController.m in Sources */,
 				8DED6461146F374500A787F4 /* FMDatabase.m in Sources */,
 				8DED6462146F374500A787F4 /* FMDatabaseAdditions.m in Sources */,
 				8DED6463146F374500A787F4 /* FMResultSet.m in Sources */,
@@ -553,9 +543,9 @@
 				8D95BD1F152642D8005B8518 /* PriceManager.m in Sources */,
 				8D32B0B615293DCC00C0EF2E /* SearchResultCell.m in Sources */,
 				8D7F9755153E5D58001335DA /* CardView.m in Sources */,
-				8D9F91B41544428A0076FC9C /* Reachability.m in Sources */,
 				8D9F91BB15450D150076FC9C /* sqlite3.c in Sources */,
 				8DEFE4421548FA43009AB624 /* CardSequence.m in Sources */,
+				8D6B5684154DA17A006BFA0C /* PriceListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

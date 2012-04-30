@@ -88,7 +88,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSColor" key="IBUITintColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC40NDcwNTg4MjM1IDAgMAA</bytes>
+									<bytes key="NSRGB">MC41MDE5NjA4MTQgMCAwAA</bytes>
 								</object>
 								<array key="IBUIItems">
 									<object class="IBUINavigationItem" id="400095737">

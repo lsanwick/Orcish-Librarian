@@ -67,7 +67,9 @@
 
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSURL *URL = [request URL];    
-    if ([URL.scheme isEqualToString:@"set"]) {
+    if ([URL.scheme isEqualToString:@"done"]) {
+        self.card = self.card; // retriggers the JavaScript loader
+    } else if ([URL.scheme isEqualToString:@"set"]) {
         NSArray *cards = [Card findCardsBySet:URL.host];
         [gAppDelegate showCards:cards atPosition:[cards indexOfObjectPassingTest:^(Card *test, NSUInteger index, BOOL *stop) {
             return (BOOL) ([self.card.nameHash isEqualToString:test.nameHash] ? (*stop = YES) : NO);
@@ -78,8 +80,6 @@
         if (newCard != nil) {            
             [gAppDelegate showCard:newCard];
         } 
-    } else if ([URL.scheme isEqualToString:@"done"]) {
-        self.card = self.card; // retriggers the JavaScript loader
     } else if ([URL.scheme isEqualToString:@"gatherer"]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:
             @"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%@", self.card.gathererId]]];        
@@ -87,6 +87,9 @@
         [[PriceManager shared] requestPriceForCard:self.card withCallback:^(Card *theCard, NSDictionary *price) {
             [self setPrice:price forCard:theCard];
         }];
+    } 
+    else if ([URL.scheme isEqualToString:@"tcg"]) {
+        [gAppDelegate showPriceModalForCard:self.card];
     } else {
         return YES;
     }

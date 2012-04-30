@@ -9,13 +9,21 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
 #import "OrcishRootController.h"
-#import "OrcishViewController.h"
 #import "CardViewController.h"
 #import "MenuController.h"
 #import "Utility.h"
 
 
 #define kMaxControllerStackDepth 10
+
+
+@interface OrcishRootController () 
+
+@property (strong, nonatomic) NSMutableArray *controllerStack;
+@property (assign, nonatomic) BOOL menuIsVisible;
+@property (strong, nonatomic) NSMutableArray *modalControllerStack;
+
+@end
 
 
 @implementation OrcishRootController
@@ -31,12 +39,14 @@
 @synthesize backButton;
 @synthesize controllerStack;
 @synthesize menuIsVisible;
+@synthesize modalControllerStack;
 
 // ----------------------------------------------------------------------------
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         self.controllerStack = [[NSMutableArray alloc] init];
+        self.modalControllerStack = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -114,7 +124,7 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) pushViewController:(OrcishViewController *)controller animated:(BOOL)animated {
+- (void) pushViewController:(UIViewController *)controller animated:(BOOL)animated {
     [self.controllerStack addObject:controller];
     controller.view.frame = CGRectMake(self.contentView.frame.size.width, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
     [self.contentView addSubview:controller.view];
@@ -135,7 +145,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) popViewControllerAnimated:(BOOL)animated {    
-    OrcishViewController *controller = [self.controllerStack lastObject];
+    UIViewController *controller = [self.controllerStack lastObject];
     [self.controllerStack removeLastObject];
     [self updateMenuButton];
     [UIView animateWithDuration:(animated ? 0.2 : 0.0)
@@ -149,7 +159,7 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) setViewController:(OrcishViewController *)controller animated:(BOOL)animated {
+- (void) setViewController:(UIViewController *)controller animated:(BOOL)animated {
     for (UIView *subview in self.contentView.subviews) {
         [subview removeFromSuperview];
     }
@@ -170,7 +180,36 @@
 
 // ----------------------------------------------------------------------------
 
-- (OrcishViewController *) topController {
+- (void) presentModalViewController:(UIViewController *)controller animated:(BOOL)animated {
+    [self.modalControllerStack addObject:controller];
+    controller.view.frame = CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);    
+    [self.view addSubview:controller.view];
+    [UIView animateWithDuration:(animated ? 0.4 : 0.0)
+        animations:^{
+            controller.view.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);    
+        }
+        completion:^(BOOL finished){
+
+        }];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) dismissModalViewControllerAnimated:(BOOL)animated {
+    UIViewController *controller = [self.modalControllerStack lastObject];
+    [self.modalControllerStack removeLastObject];
+    [UIView animateWithDuration:(animated ? 0.4 : 0.0)
+    animations:^{
+        controller.view.frame = CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);    
+    } 
+    completion:^(BOOL finished){
+        [controller.view removeFromSuperview];
+    }];           
+}
+
+// ----------------------------------------------------------------------------
+
+- (UIViewController *) topController {
     return self.controllerStack.lastObject;
 }
 

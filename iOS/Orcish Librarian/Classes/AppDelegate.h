@@ -22,12 +22,12 @@
 @property (nonatomic, assign) dispatch_queue_t dbQueue;
 @property (nonatomic, strong) FMDatabase *db;
 @property (nonatomic, strong) NSData *searchNames;
-@property (nonatomic, readonly) BOOL isOnline;
 
 - (void) hideKeyboard;
 - (void) hideMenu;
 - (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position;
 - (void) showCard:(Card *)card;
+- (void) showPriceModalForCard:(Card *)card;
 
 - (void) showBasicSearchController;
 - (void) showRandomCardController;

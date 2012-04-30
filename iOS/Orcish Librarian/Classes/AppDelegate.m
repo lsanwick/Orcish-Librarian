@@ -8,9 +8,9 @@
 
 #import "AppDelegate.h"
 #import "BasicSearchController.h"
+#import "PriceListController.h"
 #import "CardViewController.h"
 #import "CardSequence.h"
-#import "Reachability.h"
 
 
 // ----------------------------------------------------------------------------
@@ -18,14 +18,12 @@
 // ----------------------------------------------------------------------------
 
 @interface AppDelegate () {
-    BOOL isOnline;
     CardViewController *queuedController;
 }
 
 - (void) initializeDatabase;
 - (void) initializeSearchNames;
 - (void) initializeWindow;
-- (void) initializeNetworkStatus;
 - (CardViewController *) dequeueCardViewController;
 
 @end
@@ -50,7 +48,6 @@
     dispatch_async(self.dbQueue, ^{ [self initializeDatabase]; });
     dispatch_async(self.dbQueue, ^{ [self initializeSearchNames]; });
     [self dequeueCardViewController];
-    [self initializeNetworkStatus];
     [self initializeWindow];    
     return YES;
 }
@@ -73,7 +70,7 @@
     CardViewController *controller = [self dequeueCardViewController];
     controller.sequence = [CardSequence sequenceWithCards:cards];
     controller.position = position;
-    [gAppDelegate.rootController pushViewController:controller animated:YES];
+    [self.rootController pushViewController:controller animated:YES];
 }
 
 // ----------------------------------------------------------------------------
@@ -84,8 +81,10 @@
 
 // ----------------------------------------------------------------------------
 
-- (BOOL) isOnline {    
-    return isOnline;
+- (void) showPriceModalForCard:(Card *)card {
+    PriceListController *controller = [[PriceListController alloc] initWithNibName:nil bundle:nil];
+    [controller view];
+    [self.rootController presentModalViewController:controller animated:YES];
 }
 
 // ----------------------------------------------------------------------------
@@ -139,16 +138,6 @@
     [self.rootController view]; // force immediate NIB load
     [self showBasicSearchController];
     [self.window makeKeyAndVisible];
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) initializeNetworkStatus {
-    static dispatch_once_t once;
-    static Reachability *reach = nil; 
-    dispatch_once(&once, ^{ reach = [Reachability reachabilityForInternetConnection]; });
-    reach.reachableBlock = ^(Reachability *reach) { isOnline = YES; };
-    reach.unreachableBlock = ^(Reachability *reach) { isOnline = NO; };
 }
 
 // ----------------------------------------------------------------------------
