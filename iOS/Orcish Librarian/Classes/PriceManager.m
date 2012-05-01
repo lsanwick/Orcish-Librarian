@@ -143,13 +143,6 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) announceNewPrice:(NSDictionary *)price forCard:(Card *)card {
-    NSLog(@"\n------------------------\nPrice for %@: %@", card.name, price);
-    
-}
-
-// ----------------------------------------------------------------------------
-
 - (NSString *) tcgNameForCard:(Card *)card {
     return card.name;
 }

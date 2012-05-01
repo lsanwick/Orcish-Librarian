@@ -81,9 +81,10 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) showPriceModalForCard:(Card *)card {
+- (void) showPriceModalForProductId:(NSString *)productId {
     PriceListController *controller = [[PriceListController alloc] initWithNibName:nil bundle:nil];
     [controller view];
+    controller.productId = productId;
     [self.rootController presentModalViewController:controller animated:YES];
 }
 

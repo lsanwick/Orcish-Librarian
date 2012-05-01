@@ -10,4 +10,8 @@
 
 @interface PriceVendorCell : UITableViewCell
 
++ (CGFloat) height;
+
+@property (nonatomic, strong) NSDictionary *vendor;
+
 @end

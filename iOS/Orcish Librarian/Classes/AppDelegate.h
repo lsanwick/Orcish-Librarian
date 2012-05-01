@@ -27,7 +27,7 @@
 - (void) hideMenu;
 - (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position;
 - (void) showCard:(Card *)card;
-- (void) showPriceModalForCard:(Card *)card;
+- (void) showPriceModalForProductId:(NSString *)productId;
 
 - (void) showBasicSearchController;
 - (void) showRandomCardController;

@@ -66,7 +66,7 @@
 // ----------------------------------------------------------------------------
 
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSURL *URL = [request URL];    
+    NSURL *URL = request.URL;    
     if ([URL.scheme isEqualToString:@"done"]) {
         self.card = self.card; // retriggers the JavaScript loader
     } else if ([URL.scheme isEqualToString:@"set"]) {
@@ -89,7 +89,7 @@
         }];
     } 
     else if ([URL.scheme isEqualToString:@"tcg"]) {
-        [gAppDelegate showPriceModalForCard:self.card];
+        [gAppDelegate showPriceModalForProductId:URL.host];
     } else {
         return YES;
     }
