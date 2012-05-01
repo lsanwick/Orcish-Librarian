@@ -85,7 +85,7 @@
 										</object>
 									</object>
 								</array>
-								<string key="NSFrame">{{60, 6}, {195, 33}}</string>
+								<string key="NSFrame">{{59, 6}, {195, 33}}</string>
 								<reference key="NSSuperview" ref="177689909"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="964586946"/>
@@ -125,10 +125,11 @@
 								<reference key="IBUICustomView" ref="366106756"/>
 								<reference key="IBUIToolbar" ref="177689909"/>
 							</object>
-							<object class="IBUIBarButtonItem" id="427041141">
+							<object class="IBUIBarButtonItem" id="721630596">
 								<bool key="IBUIEnabled">NO</bool>
 								<string key="IBUITitle">Foils</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<float key="IBUIWidth">50</float>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="177689909"/>
 							</object>
@@ -251,6 +252,14 @@
 					<int key="connectionID">31</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">foilButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="721630596"/>
+					</object>
+					<int key="connectionID">37</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">doneButtonTapped:</string>
 						<reference key="source" ref="1050048257"/>
@@ -273,6 +282,22 @@
 						<reference key="destination" ref="841351856"/>
 					</object>
 					<int key="connectionID">35</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="1001034164"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">39</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">foilButtonTapped:</string>
+						<reference key="source" ref="721630596"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">40</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -312,7 +337,7 @@
 							<reference ref="1050048257"/>
 							<reference ref="827804260"/>
 							<reference ref="14003998"/>
-							<reference ref="427041141"/>
+							<reference ref="721630596"/>
 						</array>
 						<reference key="parent" ref="556521027"/>
 					</object>
@@ -373,7 +398,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">36</int>
-						<reference key="object" ref="427041141"/>
+						<reference key="object" ref="721630596"/>
 						<reference key="parent" ref="177689909"/>
 					</object>
 				</array>
@@ -400,7 +425,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">36</int>
+			<int key="maxID">40</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -419,11 +444,16 @@
 						</object>
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="foilButton">UIBarButtonItem</string>
 						<string key="loadingView">UIView</string>
 						<string key="tableView">UITableView</string>
 						<string key="webView">UIWebView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="foilButton">
+							<string key="name">foilButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="loadingView">
 							<string key="name">loadingView</string>
 							<string key="candidateClassName">UIView</string>

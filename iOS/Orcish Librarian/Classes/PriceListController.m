@@ -14,7 +14,10 @@
 @interface PriceListController ()
 
 @property (nonatomic, strong) NSArray *prices;
+@property (nonatomic, strong) NSArray *foilPrices;
 @property (nonatomic, assign) BOOL firstRequestMade;
+@property (nonatomic, assign) BOOL showFoilsOnly;
+@property (nonatomic, readonly) NSArray *currentPrices;
 
 @end
 
@@ -24,15 +27,12 @@
 @synthesize webView;
 @synthesize tableView;
 @synthesize loadingView;
+@synthesize foilButton;
 @synthesize productId;
 @synthesize prices;
+@synthesize foilPrices;
+@synthesize showFoilsOnly;
 @synthesize firstRequestMade;
-
-// ----------------------------------------------------------------------------
-
-- (void) viewDidLoad {
-    self.webView.delegate = self;
-}
 
 // ----------------------------------------------------------------------------
 
@@ -55,9 +55,30 @@
     if (prices) {
         [self.tableView reloadData];
         self.loadingView.hidden = YES;
+        NSIndexSet *foilIndexes = [prices indexesOfObjectsPassingTest:^(id price, NSUInteger i, BOOL *s) { return (BOOL) (([[price objectForKey:@"condition"] rangeOfString:@"foil" options:NSCaseInsensitiveSearch]).location != NSNotFound); }];
+        self.foilPrices = [prices objectsAtIndexes:foilIndexes];
+        self.foilButton.enabled = (self.foilPrices.count > 0);
     } else {
         // TODO: log this error (analytics, please)
     }
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSArray *) currentPrices {
+    return self.showFoilsOnly ? self.foilPrices : self.prices;
+}
+    
+// ----------------------------------------------------------------------------
+
+- (IBAction) foilButtonTapped:(id)sender {
+    if (self.showFoilsOnly) {
+        [self.foilButton setTitle:@"Foils"];
+    } else {
+        [self.foilButton setTitle:@"All"];
+    }
+    self.showFoilsOnly = !self.showFoilsOnly;
+    [self.tableView reloadData];
 }
 
 // ----------------------------------------------------------------------------
@@ -77,7 +98,7 @@
 // ----------------------------------------------------------------------------
 
 - (NSInteger) tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section {
-    return self.prices.count;
+    return self.currentPrices.count;
 }
 
 // ----------------------------------------------------------------------------
@@ -87,8 +108,8 @@
     PriceVendorCell *cell = (PriceVendorCell *) [aTableView dequeueReusableCellWithIdentifier:identifier];    
     if (cell == nil) {
         cell =  [[PriceVendorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    } 
-    cell.vendor = [self.prices objectAtIndex:indexPath.row];
+    }     
+    cell.vendor = [self.currentPrices objectAtIndex:indexPath.row];
     return cell;
 }
 
