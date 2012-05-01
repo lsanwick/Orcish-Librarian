@@ -119,7 +119,6 @@
     [aTableView deselectRowAtIndexPath:indexPath animated:YES];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:
         [NSString stringWithFormat:@"http://store.tcgplayer.com/product.aspx?id=%@", productId]]];
-    [gAppDelegate.rootController dismissModalViewControllerAnimated:YES];
 }
 
 // ----------------------------------------------------------------------------
