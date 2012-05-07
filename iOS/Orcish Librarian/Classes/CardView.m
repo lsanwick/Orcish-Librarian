@@ -71,24 +71,30 @@
         self.card = self.card; // retriggers the JavaScript loader
     } else if ([URL.scheme isEqualToString:@"set"]) {
         NSArray *cards = [Card findCardsBySet:URL.host];
+        [gAppDelegate trackEvent:@"Card View" action:@"Show Other Editions" label:self.card.displayName];
         [gAppDelegate showCards:cards atPosition:[cards indexOfObjectPassingTest:^(Card *test, NSUInteger index, BOOL *stop) {
             return (BOOL) ([self.card.nameHash isEqualToString:test.nameHash] ? (*stop = YES) : NO);
         }]];
-    } else if ([URL.scheme isEqualToString:@"card"]) {
+    } else if ([URL.scheme isEqualToString:@"card"]) {        
         NSString *pk = URL.host;
         Card *newCard = [Card findCardByPk:pk];
-        if (newCard != nil) {            
+        if (newCard != nil) {
+            [gAppDelegate trackEvent:@"Card View" action:@"Show Card" label:newCard.displayName];
             [gAppDelegate showCard:newCard];
         } 
     } else if ([URL.scheme isEqualToString:@"gatherer"]) {
+        [gAppDelegate trackEvent:@"Card View" action:@"Show Gatherer" label:self.card.displayName];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:
-            @"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%@", self.card.gathererId]]];        
+            @"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%@", self.card.gathererId]]];
+        
     } else if ([URL.scheme isEqualToString:@"price"]) {
+        [gAppDelegate trackEvent:@"Card View" action:@"Reload Prices" label:self.card.displayName];
         [[PriceManager shared] requestPriceForCard:self.card withCallback:^(Card *theCard, NSDictionary *price) {
             [self setPrice:price forCard:theCard];
         }];
     } 
     else if ([URL.scheme isEqualToString:@"tcg"]) {
+        [gAppDelegate trackEvent:@"Card View" action:@"All Prices" label:self.card.displayName];
         [gAppDelegate showPriceModalForProductId:URL.host];
     } else {
         return YES;

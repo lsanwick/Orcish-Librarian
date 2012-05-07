@@ -116,8 +116,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString *text = [[[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] uppercaseString];
     if ([text isEqualToString:@"HOME"]) {
+        [gAppDelegate trackEvent:@"Menu" action:@"Home" label:@""];
         [gAppDelegate showBasicSearchController];
     } else if([text isEqualToString:@"RANDOM CARD"]) {
+        [gAppDelegate trackEvent:@"Menu" action:@"Random Card" label:@""];
         [gAppDelegate showRandomCardController];
     }
 }

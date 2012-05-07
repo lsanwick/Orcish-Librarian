@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) OrcishRootController *rootController;
+@property (nonatomic, assign) dispatch_queue_t analyticsQueue;
 @property (nonatomic, assign) dispatch_queue_t dbQueue;
 @property (nonatomic, strong) FMDatabase *db;
 @property (nonatomic, strong) NSData *searchNames;
@@ -31,5 +32,8 @@
 
 - (void) showBasicSearchController;
 - (void) showRandomCardController;
+
+- (void) trackScreen:(NSString *)path;
+- (void) trackEvent:(NSString *)category action:(NSString *)action label:(NSString *)label;
 
 @end

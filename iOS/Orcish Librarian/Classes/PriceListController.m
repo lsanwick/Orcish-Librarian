@@ -36,6 +36,13 @@
 
 // ----------------------------------------------------------------------------
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [gAppDelegate trackScreen:@"/CardView/Prices"];
+}
+
+// ----------------------------------------------------------------------------
+
 - (void) setProductId:(NSString *)theProductId {
     productId = theProductId;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:
@@ -59,7 +66,7 @@
         self.foilPrices = [prices objectsAtIndexes:foilIndexes];
         self.foilButton.enabled = (self.foilPrices.count > 0);
     } else {
-        // TODO: log this error (analytics, please)
+        [gAppDelegate trackEvent:@"All Prices" action:@"Failed" label:@"Nil prices"];
     }
 }
 
@@ -73,9 +80,11 @@
 
 - (IBAction) foilButtonTapped:(id)sender {
     if (self.showFoilsOnly) {
+        [gAppDelegate trackEvent:@"All Prices" action:@"Show All" label:@""];
         [self.foilButton setTitle:@"Foils"];
     } else {
-        [self.foilButton setTitle:@"All"];
+        [gAppDelegate trackEvent:@"All Prices" action:@"Show Foils" label:@""];
+        [self.foilButton setTitle:@"Any"];
     }
     self.showFoilsOnly = !self.showFoilsOnly;
     [self.tableView reloadData];
@@ -84,6 +93,7 @@
 // ----------------------------------------------------------------------------
 
 - (IBAction) doneButtonTapped:(id)sender {
+    [gAppDelegate trackEvent:@"All Prices" action:@"Done" label:@""];
     [gAppDelegate.rootController dismissModalViewControllerAnimated:YES];
 }
 
@@ -117,6 +127,7 @@
 
 - (void) tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [aTableView deselectRowAtIndexPath:indexPath animated:YES];
+    [gAppDelegate trackEvent:@"All Prices" action:@"Show TCGPlayer" label:@""];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:
         [NSString stringWithFormat:@"http://store.tcgplayer.com/product.aspx?id=%@", productId]]];
 }
@@ -133,7 +144,7 @@
             NSError *error = nil;
             self.prices = [NSJSONSerialization JSONObjectWithData:[pricesAsJSON dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
         } else {
-            // TODO: log this error (analytics, please)
+            [gAppDelegate trackEvent:@"All Prices" action:@"Failed" label:@"Bad JSON"];
         }
         return NO;
     } else if (self.firstRequestMade) {

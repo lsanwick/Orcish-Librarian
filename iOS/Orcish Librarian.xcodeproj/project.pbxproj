@@ -47,6 +47,8 @@
 		8D9F91B6154456470076FC9C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9F91B5154456470076FC9C /* SystemConfiguration.framework */; };
 		8D9F91BB15450D150076FC9C /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F91B915450D150076FC9C /* sqlite3.c */; };
 		8DBDB1251466DEC600140217 /* BasicSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB1241466DEC600140217 /* BasicSearchController.m */; };
+		8DC308EC1555ED32007AAD7D /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC308EB1555ED32007AAD7D /* libGoogleAnalytics.a */; };
+		8DC308EF1555F518007AAD7D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC308EE1555F518007AAD7D /* CFNetwork.framework */; };
 		8DD02111146A2A26008C522A /* BasicSearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD02110146A2A26008C522A /* BasicSearchController.xib */; };
 		8DE5D9921457A02000B6CAAF /* Menu-Section.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9901457A02000B6CAAF /* Menu-Section.png */; };
 		8DE5D9931457A02000B6CAAF /* Menu-Section@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */; };
@@ -134,6 +136,9 @@
 		8D9F91BA15450D150076FC9C /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		8DBDB1231466DEC600140217 /* BasicSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicSearchController.h; sourceTree = "<group>"; };
 		8DBDB1241466DEC600140217 /* BasicSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicSearchController.m; sourceTree = "<group>"; };
+		8DC308EA1555ED32007AAD7D /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
+		8DC308EB1555ED32007AAD7D /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		8DC308EE1555F518007AAD7D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		8DD02110146A2A26008C522A /* BasicSearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BasicSearchController.xib; path = Layout/BasicSearchController.xib; sourceTree = "<group>"; };
 		8DE5D9901457A02000B6CAAF /* Menu-Section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section.png"; sourceTree = "<group>"; };
 		8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section@2x.png"; sourceTree = "<group>"; };
@@ -163,11 +168,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DC308EF1555F518007AAD7D /* CFNetwork.framework in Frameworks */,
 				8D9F91B6154456470076FC9C /* SystemConfiguration.framework in Frameworks */,
 				8DE898E9148473CF0024E016 /* libicucore.dylib in Frameworks */,
 				8D150EF4144FD41800141685 /* UIKit.framework in Frameworks */,
 				8D150EF6144FD41800141685 /* Foundation.framework in Frameworks */,
 				8D150EF8144FD41800141685 /* CoreGraphics.framework in Frameworks */,
+				8DC308EC1555ED32007AAD7D /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,7 +194,6 @@
 		8D150EE4144FD41800141685 = {
 			isa = PBXGroup;
 			children = (
-				8D9F91B5154456470076FC9C /* SystemConfiguration.framework */,
 				8D150EF9144FD41800141685 /* Orcish Librarian */,
 				8D150F23144FD41800141685 /* Orcish LibrarianTests */,
 				8D150EF2144FD41800141685 /* Frameworks */,
@@ -208,6 +214,8 @@
 			isa = PBXGroup;
 			children = (
 				8DE898E8148473CE0024E016 /* libicucore.dylib */,
+				8DC308EE1555F518007AAD7D /* CFNetwork.framework */,
+				8D9F91B5154456470076FC9C /* SystemConfiguration.framework */,
 				8D150EF3144FD41800141685 /* UIKit.framework */,
 				8D150EF5144FD41800141685 /* Foundation.framework */,
 				8D150EF7144FD41800141685 /* CoreGraphics.framework */,
@@ -219,6 +227,7 @@
 		8D150EF9144FD41800141685 /* Orcish Librarian */ = {
 			isa = PBXGroup;
 			children = (
+				8DC308E91555ED32007AAD7D /* GANT */,
 				8D9F91B815450D150076FC9C /* SQLite3 */,
 				8DE898E41484645F0024E016 /* RegexKitLite */,
 				8DED645A146F36F000A787F4 /* FMDB */,
@@ -353,6 +362,16 @@
 			);
 			name = SQLite3;
 			path = Other/SQLite3;
+			sourceTree = "<group>";
+		};
+		8DC308E91555ED32007AAD7D /* GANT */ = {
+			isa = PBXGroup;
+			children = (
+				8DC308EA1555ED32007AAD7D /* GANTracker.h */,
+				8DC308EB1555ED32007AAD7D /* libGoogleAnalytics.a */,
+			);
+			name = GANT;
+			path = Other/GANT;
 			sourceTree = "<group>";
 		};
 		8DE898E41484645F0024E016 /* RegexKitLite */ = {
@@ -638,6 +657,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Orcish Librarian/Orcish Librarian-Prefix.pch";
 				INFOPLIST_FILE = "Orcish Librarian/Orcish Librarian-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Orcish Librarian/Other/GANT\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
@@ -650,6 +673,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Orcish Librarian/Orcish Librarian-Prefix.pch";
 				INFOPLIST_FILE = "Orcish Librarian/Orcish Librarian-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Orcish Librarian/Other/GANT\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;

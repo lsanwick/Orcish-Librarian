@@ -98,6 +98,7 @@
 
 - (IBAction) menuButtonTapped:(id)sender {
     if (self.controllerStack.count > 1) {
+        [gAppDelegate trackEvent:@"Navigation" action:@"Back" label:@""];
         [self popViewControllerAnimated:YES];
     } else if (self.menuIsVisible) {
         [self hideMenu];

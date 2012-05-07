@@ -55,6 +55,7 @@ typedef void (^block_t)(void);
 // ----------------------------------------------------------------------------
 
 - (void) viewWillAppear:(BOOL)animated {
+    [gAppDelegate trackScreen:@"/CardView"];
     CGFloat width = self.scrollView.frame.size.width;
     CGFloat height = self.scrollView.frame.size.height;    
     NSUInteger pageCount = MIN(kPageCount, self.sequence.count);

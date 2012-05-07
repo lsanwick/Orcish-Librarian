@@ -11,6 +11,7 @@
 #import "PriceListController.h"
 #import "CardViewController.h"
 #import "CardSequence.h"
+#import "GANTracker.h"
 
 
 // ----------------------------------------------------------------------------
@@ -24,6 +25,7 @@
 - (void) initializeDatabase;
 - (void) initializeSearchNames;
 - (void) initializeWindow;
+- (void) initializeAnalytics;
 - (CardViewController *) dequeueCardViewController;
 
 @end
@@ -37,6 +39,7 @@
 
 @synthesize window;
 @synthesize rootController;
+@synthesize analyticsQueue;
 @synthesize dbQueue;
 @synthesize db;
 @synthesize searchNames;
@@ -45,10 +48,13 @@
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.dbQueue = dispatch_queue_create("info.orcish.db.queue", NULL);
+    self.analyticsQueue = dispatch_queue_create("info.orcish.analytics.queue", NULL);    
     dispatch_async(self.dbQueue, ^{ [self initializeDatabase]; });
-    dispatch_async(self.dbQueue, ^{ [self initializeSearchNames]; });
+    dispatch_async(self.dbQueue, ^{ [self initializeSearchNames]; });    
+    [self initializeAnalytics];
     [self dequeueCardViewController];
     [self initializeWindow];    
+    [self trackEvent:@"Application" action:@"Initialize" label:@""];
     return YES;
 }
 
@@ -139,6 +145,38 @@
     [self.rootController view]; // force immediate NIB load
     [self showBasicSearchController];
     [self.window makeKeyAndVisible];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) initializeAnalytics {
+    dispatch_async(self.analyticsQueue, ^{ 
+        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+        NSError *error;
+        [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-18007072-1" dispatchPeriod:10 delegate:nil];
+        [[GANTracker sharedTracker] setCustomVariableAtIndex:1 name:@"version" value:version withError:&error];    
+    });
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) trackScreen:(NSString *)path {
+    NSLog(@"TRACK SCREEN (%@)", path);
+    dispatch_async(self.analyticsQueue, ^{ 
+        NSError *error;
+        [[GANTracker sharedTracker] trackPageview:path withError:&error];
+    });
+
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) trackEvent:(NSString *)category action:(NSString *)action label:(NSString *)label {
+    NSLog(@"TRACK EVENT (%@, %@, %@)", category, action, label);
+    dispatch_async(self.analyticsQueue, ^{ 
+        NSError *error;
+        [[GANTracker sharedTracker] trackEvent:category action:action label:label value:0 withError:&error];
+    });
 }
 
 // ----------------------------------------------------------------------------

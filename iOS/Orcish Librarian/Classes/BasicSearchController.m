@@ -36,6 +36,7 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [gAppDelegate trackScreen:@"/BasicSearch"];
     if (!self.hasBeenFirstResponder) {
         self.hasBeenFirstResponder = YES;
         [self.searchBar becomeFirstResponder];
@@ -129,6 +130,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [gAppDelegate trackEvent:@"Search Results" action:@"Click" label:[[results objectAtIndex:indexPath.row] displayName]];
     [gAppDelegate hideMenu];
     [gAppDelegate hideKeyboard];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
