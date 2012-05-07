@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "PriceVendorCell.h"
 
+#define kRequestTimeout 10
 
 @interface PriceListController ()
 
@@ -27,6 +28,8 @@
 @synthesize webView;
 @synthesize tableView;
 @synthesize loadingView;
+@synthesize timeoutView;
+@synthesize retryButton;
 @synthesize foilButton;
 @synthesize productId;
 @synthesize prices;
@@ -44,7 +47,16 @@
 // ----------------------------------------------------------------------------
 
 - (void) setProductId:(NSString *)theProductId {
-    productId = theProductId;
+    productId = theProductId;    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kRequestTimeout * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        if (self.prices == nil) {
+            [self.webView stopLoading];
+            self.firstRequestMade = NO;
+            self.loadingView.hidden = YES;
+            self.timeoutView.hidden = NO;
+            [gAppDelegate trackEvent:@"All Prices" action:@"Failed" label:@"Timeout"];
+        }
+    });
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:
         [NSString stringWithFormat:@"http://store.tcgplayer.com/product.aspx?id=%@", productId]]]];
 }
@@ -88,6 +100,15 @@
     }
     self.showFoilsOnly = !self.showFoilsOnly;
     [self.tableView reloadData];
+}
+
+// ----------------------------------------------------------------------------
+
+- (IBAction) retryButtonTapped:(id)sender {
+    [gAppDelegate trackEvent:@"All Prices" action:@"Retry" label:@""];
+    self.timeoutView.hidden = YES;
+    self.loadingView.hidden = NO;
+    self.productId = self.productId; // triggers data load
 }
 
 // ----------------------------------------------------------------------------
