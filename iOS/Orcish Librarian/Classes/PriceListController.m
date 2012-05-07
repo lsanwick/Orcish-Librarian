@@ -129,7 +129,7 @@
     [aTableView deselectRowAtIndexPath:indexPath animated:YES];
     [gAppDelegate trackEvent:@"All Prices" action:@"Show TCGPlayer" label:@""];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:
-        [NSString stringWithFormat:@"http://store.tcgplayer.com/product.aspx?id=%@", productId]]];
+        [NSString stringWithFormat:@"http://store.tcgplayer.com/product.aspx?id=%@&partner=ORCSHLBRN", productId]]];
 }
 
 // ----------------------------------------------------------------------------
