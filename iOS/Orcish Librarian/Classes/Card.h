@@ -29,7 +29,6 @@
 @property (nonatomic, strong) NSString *rarity;
 @property (nonatomic, strong) NSString *manaCost;
 @property (nonatomic, strong) NSString *typeLine;
-@property (nonatomic, assign) BOOL isToken;
 @property (nonatomic, strong) NSString *oracleText;
 @property (nonatomic, strong) NSString *power;
 @property (nonatomic, strong) NSString *toughness;
@@ -38,6 +37,8 @@
 @property (nonatomic, readonly) NSArray *artVariants;
 @property (nonatomic, readonly) NSArray *otherEditions;
 @property (nonatomic, readonly) NSArray *otherParts;
+
+@property (nonatomic, assign) BOOL isBookmarked;
 
 + (Card *) cardForResultSet:(FMResultSet *)resultSet;
 + (NSArray *) findCardsByTitleText:(NSString *)text;

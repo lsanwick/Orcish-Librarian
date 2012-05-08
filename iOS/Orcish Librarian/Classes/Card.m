@@ -33,7 +33,6 @@
 @synthesize rarity;
 @synthesize manaCost;
 @synthesize typeLine;
-@synthesize isToken;
 @synthesize oracleText;
 @synthesize power;
 @synthesize toughness;
@@ -274,29 +273,52 @@
 
 // ----------------------------------------------------------------------------
 
+- (BOOL) isBookmarked {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *bookmarks = [defaults objectForKey:@"bookmarks"];
+    return ([bookmarks objectForKey:self.gathererId] != nil);
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) setIsBookmarked:(BOOL)bookmarked {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSSet *existing = [defaults objectForKey:@"bookmarks"];
+    NSMutableDictionary *bookmarks = existing ? [existing mutableCopy] : [NSMutableDictionary dictionary];
+    if (bookmarked) {
+        [bookmarks setObject:[NSNumber numberWithBool:YES] forKey:self.gathererId];
+    } else {
+        [bookmarks removeObjectForKey:self.gathererId];
+    }
+    [defaults setObject:bookmarks forKey:@"bookmarks"];
+    [defaults synchronize];
+}
+
+// ----------------------------------------------------------------------------
+
 - (NSString *) toJSON {
     NSError *error;
     NSDictionary *source = [NSDictionary dictionaryWithObjectsAndKeys:
-        self.pk,                                @"pk",
-        self.gathererId,                        @"gathererId",
-        self.name,                              @"name",
-        self.displayName,                       @"displayName",
-        self.setName,                           @"setName",
-        self.tcgSetName,                        @"tcgSetName",
-        self.collectorNumber,                   @"collectorNumber",
-        self.artist,                            @"artist",
-        self.artIndex,                          @"artIndex",
-        self.manaCost,                          @"manaCost",
-        self.oracleText,                        @"oracleText",
-        self.rarity,                            @"rarity",
-        self.typeLine,                          @"typeLine",
-        self.power,                             @"power",
-        self.toughness,                         @"toughness",
-        self.loyalty,                           @"loyalty",
-        self.otherEditions,                     @"otherEditions",
-        self.otherParts,                        @"otherParts",
-        self.artVariants,                       @"artVariants",
-        [NSNumber numberWithBool:self.isToken], @"isToken",
+        self.pk,                                     @"pk",
+        self.gathererId,                             @"gathererId",
+        self.name,                                   @"name",
+        self.displayName,                            @"displayName",
+        self.setName,                                @"setName",
+        self.tcgSetName,                             @"tcgSetName",
+        self.collectorNumber,                        @"collectorNumber",
+        self.artist,                                 @"artist",
+        self.artIndex,                               @"artIndex",
+        self.manaCost,                               @"manaCost",
+        self.oracleText,                             @"oracleText",
+        self.rarity,                                 @"rarity",
+        self.typeLine,                               @"typeLine",
+        self.power,                                  @"power",
+        self.toughness,                              @"toughness",
+        self.loyalty,                                @"loyalty",
+        self.otherEditions,                          @"otherEditions",
+        self.otherParts,                             @"otherParts",
+        self.artVariants,                            @"artVariants",
+        [NSNumber numberWithBool:self.isBookmarked], @"isBookmarked",
         nil];
     return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:source 
         options:0 error:&error] encoding:NSUTF8StringEncoding];

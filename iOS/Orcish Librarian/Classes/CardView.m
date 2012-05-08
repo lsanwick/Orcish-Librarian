@@ -67,38 +67,64 @@
 
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSURL *URL = request.URL;    
+    
+    // DONE LOADING WEBVIEW
     if ([URL.scheme isEqualToString:@"done"]) {
         self.card = self.card; // retriggers the JavaScript loader
-    } else if ([URL.scheme isEqualToString:@"set"]) {
+    } 
+    
+    // SHOW THIS CARD IN ANOTHER SET
+    else if ([URL.scheme isEqualToString:@"set"]) {
         NSArray *cards = [Card findCardsBySet:URL.host];
         [gAppDelegate trackEvent:@"Card View" action:@"Show Other Editions" label:self.card.displayName];
         [gAppDelegate showCards:cards atPosition:[cards indexOfObjectPassingTest:^(Card *test, NSUInteger index, BOOL *stop) {
             return (BOOL) ([self.card.nameHash isEqualToString:test.nameHash] ? (*stop = YES) : NO);
         }]];
-    } else if ([URL.scheme isEqualToString:@"card"]) {        
+    } 
+    
+    // SHOW SPECIFIC CARD
+    else if ([URL.scheme isEqualToString:@"card"]) {        
         NSString *pk = URL.host;
         Card *newCard = [Card findCardByPk:pk];
         if (newCard != nil) {
             [gAppDelegate trackEvent:@"Card View" action:@"Show Card" label:newCard.displayName];
             [gAppDelegate showCard:newCard];
         } 
-    } else if ([URL.scheme isEqualToString:@"gatherer"]) {
+    } 
+    
+    // LAUNCH GATHERER
+    else if ([URL.scheme isEqualToString:@"gatherer"]) {
         [gAppDelegate trackEvent:@"Card View" action:@"Show Gatherer" label:self.card.displayName];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:
             @"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%@", self.card.gathererId]]];
         
-    } else if ([URL.scheme isEqualToString:@"price"]) {
+    } 
+    
+    // RELOAD PRICES
+    else if ([URL.scheme isEqualToString:@"price"]) {
         [gAppDelegate trackEvent:@"Card View" action:@"Reload Prices" label:self.card.displayName];
         [[PriceManager shared] requestPriceForCard:self.card withCallback:^(Card *theCard, NSDictionary *price) {
             [self setPrice:price forCard:theCard];
         }];
     } 
+    
+    // SHOW "ALL PRICES" MODAL
     else if ([URL.scheme isEqualToString:@"tcg"]) {
         [gAppDelegate trackEvent:@"Card View" action:@"All Prices" label:self.card.displayName];
         [gAppDelegate showPriceModalForProductId:URL.host];
-    } else {
+    } 
+    
+    // TOGGLE BOOKMARK 
+    else if ([URL.scheme isEqualToString:@"bookmark"]) {        
+        self.card.isBookmarked = [URL.host isEqualToString:@"on"];
+        [gAppDelegate trackEvent:@"Card View" action:@"Set Bookmark" label:(self.card.isBookmarked ? @"On" : @"Off")];
+    }
+    
+    // UNKNOWN COMMAND
+    else {
         return YES;
     }
+    
     return NO;
 }
 

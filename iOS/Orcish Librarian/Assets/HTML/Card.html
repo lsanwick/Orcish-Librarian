@@ -20,7 +20,7 @@
 	}
     
     .ol-header {
-
+		position: relative;
     }
     
     .ol-block {
@@ -148,6 +148,22 @@
 		font-weight: bold;
 	}
 	
+	.ol-bookmark {
+		position: absolute;
+		right: 10px;
+		bottom: 3px;		
+		font-size: 30px;		
+	}
+	
+	.ol-bookmark a {
+		color: #dedede;
+		text-decoration: none;
+	}
+	
+	.ol-bookmark.active a {
+		color: #a00;
+	}
+	
 	.subtitle {
 		margin: 17px 0 8px 8px;
 		font-size: 16px;
@@ -170,6 +186,7 @@
 <body>
 	
     <div class="ol-header ol-block">
+		<div class="ol-bookmark"><a href="javascript:void(0)">★</a></div>
         <div class="ol-card-name">Card Name</div>
         <div class="ol-set-name">Card Set</div>
 		<div class="ol-card-data">
@@ -243,7 +260,8 @@ Orcish.setCardData = function(card) {
 		currentCardPk = card.pk;
 	    $('.ol-card-name').text(card.displayName);
 	    $('.ol-set-name').text(card.setName);
-		$('.ol-mana-cost').html(formattedManaCost(card));    
+		$('.ol-mana-cost').html(formattedManaCost(card));
+		$('.ol-bookmark').toggleClass('active', card.isBookmarked);
 		loadTypeLine(card);
 	    loadOracleText(card);
 	    loadCardPhoto(card);
@@ -396,6 +414,14 @@ function pricesNotLoadedInTime() {
 	$('.ol-prices').hide();
 	$('.ol-loading-prices').hide();
 	$('.ol-missing-prices').show();
+}
+
+// ----------------------------------------------------------------------------
+
+function toggleBookmark() {
+	var bookmarkIcon = $('.ol-bookmark');
+	window.location = 'bookmark://' + (bookmarkIcon.hasClass('active') ? 'off' : 'on');
+	bookmarkIcon.toggleClass('active');
 }
 
 // ----------------------------------------------------------------------------
@@ -560,13 +586,14 @@ function formatToken(token) {
 // ---------------------------------------------------------------------------- 
 
 $('.ol-missing-prices a').click(reloadPrice);
+$('.ol-bookmark a').click(toggleBookmark);
 
 // ---------------------------------------------------------------------------- 
  
 })()
 
 if (navigator.userAgent	.indexOf('iPhone') == -1) {
-	Orcish.setCardData({"otherParts":[],"displayName":"Gideon Jura","artIndex":"","tcgSetName":"Magic 2012 (M12)","loyalty":"6","name":"Gideon Jura","setName":"Magic 2012","rarity":"M","power":null,"otherEditions":[{"setName":"Rise of the Eldrazi","setPk":"94"}],"artist":"Aleksi Briclot","gathererId":"238329","manaCost":"3WW","typeLine":"Planeswalker - Gideon","pk":"18879","isToken":false,"collectorNumber":"16","oracleText":"+2: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.\n-2: Destroy target tapped creature.\n0: Until end of turn, Gideon Jura becomes a 6\/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.","artVariants":[{"artIndex":"","artist":"Aleksi Briclot","pk":"18879"}],"toughness":null})
+	Orcish.setCardData({"otherParts":[],"displayName":"Gideon Jura","artIndex":"","tcgSetName":"Magic 2012 (M12)","loyalty":"6","name":"Gideon Jura","setName":"Magic 2012","rarity":"M","power":null,"otherEditions":[{"setName":"Rise of the Eldrazi","setPk":"94"}],"artist":"Aleksi Briclot","gathererId":"238329","manaCost":"3WW","typeLine":"Planeswalker - Gideon","pk":"18879","collectorNumber":"16","oracleText":"+2: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.\n-2: Destroy target tapped creature.\n0: Until end of turn, Gideon Jura becomes a 6\/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.","artVariants":[{"artIndex":"","artist":"Aleksi Briclot","pk":"18879"}],"toughness":null})
 	
 } else {
 	$(function(){
