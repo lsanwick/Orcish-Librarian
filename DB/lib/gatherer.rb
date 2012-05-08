@@ -204,7 +204,8 @@ class Gatherer < Source
     "New Phyrexia" => "New Phyrexia",    
     "Magic 2012" => "Magic 2012 (M12)",
     "Innistrad" => "Innistrad",
-    "Dark Ascension" => "Dark Ascension"    
+    "Dark Ascension" => "Dark Ascension",
+    "Avacyn Restored" => "Avacyn Restored"   
   }
       
 end
