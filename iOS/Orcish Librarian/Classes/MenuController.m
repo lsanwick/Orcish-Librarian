@@ -30,10 +30,7 @@
     static NSArray *sections = nil;
     if (!sections) {
         sections = [NSArray arrayWithObjects:
-            @"",
-            @"Trading",
-            @"Fun",
-            @"Orcish Librarian",
+            @"Orcish",
             nil];
     }
     return sections;
@@ -45,10 +42,7 @@
     static NSArray *items = nil;
     if (!items) {
         items = [NSArray arrayWithObjects:
-            [NSArray arrayWithObjects:@"Home", @"Advanced Search", @"Browse", @"Bookmarks", nil],
-            [NSArray arrayWithObjects:@"Trade Manager", @"Financial Trends", nil],
-            [NSArray arrayWithObjects:@"Card of the Day", @"Random Card", nil],
-            [NSArray arrayWithObjects:@"Settings", @"Info", nil],
+            [NSArray arrayWithObjects:@"Home", @"Advanced Search", @"Browse", @"Bookmarks", @"Random Card", nil],
             nil];
     }
     return items;
@@ -115,10 +109,21 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString *text = [[[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] uppercaseString];
+    
+    // HOME (BASIC SEARCH)
     if ([text isEqualToString:@"HOME"]) {
         [gAppDelegate trackEvent:@"Menu" action:@"Home" label:@""];
         [gAppDelegate showBasicSearchController];
-    } else if([text isEqualToString:@"RANDOM CARD"]) {
+    } 
+    
+    // BOOKMARKS
+    else if ([text isEqualToString:@"BOOKMARKS"]) {
+        [gAppDelegate trackEvent:@"Menu" action:@"Bookmarks" label:@""];
+        [gAppDelegate showBookmarkController];
+    }
+    
+    // RANDOM CARD
+    else if ([text isEqualToString:@"RANDOM CARD"]) {
         [gAppDelegate trackEvent:@"Menu" action:@"Random Card" label:@""];
         [gAppDelegate showRandomCardController];
     }

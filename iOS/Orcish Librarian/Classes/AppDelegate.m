@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "BasicSearchController.h"
 #import "PriceListController.h"
+#import "BookmarkController.h"
 #import "CardViewController.h"
 #import "CardSequence.h"
 #import "GANTracker.h"
@@ -205,6 +206,15 @@
 - (void) showBasicSearchController {
     [self hideMenu];
     BasicSearchController *controller = [[BasicSearchController alloc] initWithNibName:nil bundle:nil];
+    [controller view];
+    [self.rootController setViewController:controller animated:NO];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) showBookmarkController {
+    [self hideMenu];
+    BookmarkController *controller = [[BookmarkController alloc] init];
     [controller view];
     [self.rootController setViewController:controller animated:NO];
 }

@@ -45,6 +45,7 @@
 + (NSArray *) findCardsBySet:(NSString *)setPk;
 + (NSArray *) findCards:(SearchCriteria *)criteria;
 + (NSArray *) findNameHashesByText:(NSString *)text;
++ (NSArray *) findBookmarkedCards;
 + (Card *) findCardByPk:(NSString *)pk;
 + (Card *) findRandomCard;
 

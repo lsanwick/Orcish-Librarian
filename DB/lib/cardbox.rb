@@ -114,6 +114,8 @@ class CardBox
       :pk => :pk));
       
     ## CREATE INDEXES    
+    # bookmarks
+    io.puts(sql_create_index(:table => :cards, :column => :gatherer_id))    
     # other editions
     io.puts(sql_create_index(:table => :cards, :column => :name_hash))    
     # art variants

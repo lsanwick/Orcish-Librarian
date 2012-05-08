@@ -148,6 +148,28 @@
 
 // ----------------------------------------------------------------------------
 
++ (NSArray *) findBookmarkedCards {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *bookmarks = [defaults objectForKey:@"bookmarks"];
+    NSString *gathererIds = [[bookmarks allKeys] componentsJoinedByString:@","];
+    NSMutableArray *cards = [NSMutableArray array];
+    NSString *sql = [NSString stringWithFormat:
+        @"SELECT    cards.*, "
+        @"          sets.name AS set_name, "
+        @"          sets.tcg AS tcg_set_name "
+        @"FROM      cards, sets "
+        @"WHERE     cards.set_pk = sets.pk "
+        @"AND       cards.gatherer_id IN (%@) ",
+        gathererIds];
+    FMResultSet *rs = [gAppDelegate.db executeQuery:sql];
+    while([rs next]) {
+        [cards addObject:[Card cardForResultSet:rs]];
+    }                          
+    return cards;
+}
+
+// ----------------------------------------------------------------------------
+
 + (Card *) findCardByPk:(NSString *)pk {
     NSString *sql = 
         @"SELECT    cards.*, "

@@ -128,6 +128,12 @@ typedef void (^block_t)(void);
 //  UIScrollViewDelegate
 // ----------------------------------------------------------------------------
 
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+    [gAppDelegate hideMenu];
+}
+
+// ----------------------------------------------------------------------------
+
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)view {
     NSUInteger pageWidth = view.frame.size.width;
     NSUInteger pageHeight = view.frame.size.height;

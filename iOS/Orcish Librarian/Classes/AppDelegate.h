@@ -31,6 +31,7 @@
 - (void) showPriceModalForProductId:(NSString *)productId;
 
 - (void) showBasicSearchController;
+- (void) showBookmarkController;
 - (void) showRandomCardController;
 
 - (void) trackScreen:(NSString *)path;
