@@ -52,6 +52,14 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self reloadCards];
+    if (self.cards.count > 0) {
+        [[PriceManager shared] clearPriceRequests];
+        for (Card *card in self.cards) {
+            [[PriceManager shared] requestPriceForCard:card withCallback:^(Card *card, NSDictionary *prices){
+                [self.resultsTable reloadData];
+            }];         
+        }
+    }
 }
 
 // ----------------------------------------------------------------------------
