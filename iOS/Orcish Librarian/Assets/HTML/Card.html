@@ -177,7 +177,6 @@
 //   styles for retina display   
 // ------------------------------------------------- */
     
-    
         
 }
 
@@ -188,7 +187,7 @@
     <div class="ol-header ol-block">
 		<div class="ol-bookmark"><a href="javascript:void(0)">★</a></div>
         <div class="ol-card-name">Card Name</div>
-        <div class="ol-set-name">Card Set</div>
+        <div class="ol-set-name">Card Set - Rarity</div>
 		<div class="ol-card-data">
         	<span class="ol-card-type">Type &ndash; Subtype</span> 
 			<span class="ol-card-ptl"></span>
@@ -259,7 +258,7 @@ Orcish.setCardData = function(card) {
 		cardPrice = null;
 		currentCardPk = card.pk;
 	    $('.ol-card-name').text(card.displayName);
-	    $('.ol-set-name').text(card.setName);
+	    $('.ol-set-name').text(card.setName + ' — ' + formatRarity(card.rarity));
 		$('.ol-mana-cost').html(formattedManaCost(card));
 		$('.ol-bookmark').toggleClass('active', card.isBookmarked);
 		loadTypeLine(card);
@@ -583,6 +582,25 @@ function formatToken(token) {
         return '<img src="symbols/mana_unknown.png" />';
 }
 
+// ---------------------------------------------------------------------------- 
+ 
+function formatRarity(code) {
+    code = code.toLowerCase();
+    if (code == 'c') {
+        return 'Common';
+    } else if (code == 'u') {
+        return 'Uncommon';
+    } else if (code == 'r') {
+        return 'Rare';
+    } else if (code == 'm') {
+        return 'Mythic';
+    } else if (code == 'l') {
+        return 'Land';
+    } else {
+        return 'Special';
+    }
+}
+ 
 // ---------------------------------------------------------------------------- 
 
 $('.ol-missing-prices a').click(reloadPrice);
