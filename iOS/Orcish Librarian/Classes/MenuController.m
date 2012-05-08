@@ -42,7 +42,13 @@
     static NSArray *items = nil;
     if (!items) {
         items = [NSArray arrayWithObjects:
-            [NSArray arrayWithObjects:@"Home", @"Advanced Search", @"Browse", @"Bookmarks", @"Random Card", nil],
+            [NSArray arrayWithObjects:
+                @"Basic Search", 
+                @"Advanced Search", 
+                @"Browse", 
+                @"Bookmarks", 
+                @"Random Card", 
+                nil],
             nil];
     }
     return items;
