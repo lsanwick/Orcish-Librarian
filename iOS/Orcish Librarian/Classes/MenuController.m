@@ -133,6 +133,12 @@
         [gAppDelegate trackEvent:@"Menu" action:@"Random Card" label:@""];
         [gAppDelegate showRandomCardController];
     }
+    
+    // BROWSE BY SET
+    else if ([text isEqualToString:@"BROWSE"]) {
+        [gAppDelegate trackEvent:@"Menu" action:@"Browse" label:@""];
+        [gAppDelegate showBrowseController];
+    }
 }
 
 // ----------------------------------------------------------------------------

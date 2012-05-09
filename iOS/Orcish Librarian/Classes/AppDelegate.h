@@ -33,6 +33,7 @@
 - (void) showBasicSearchController;
 - (void) showBookmarkController;
 - (void) showRandomCardController;
+- (void) showBrowseController;
 
 - (void) trackScreen:(NSString *)path;
 - (void) trackEvent:(NSString *)category action:(NSString *)action label:(NSString *)label;

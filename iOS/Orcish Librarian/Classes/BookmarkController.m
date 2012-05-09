@@ -21,6 +21,7 @@
 - (void) reloadCards;
 - (NSArray *) collapsedResults:(NSArray *)theCards;
 
+@property (strong, nonatomic) UITableView *resultsTable;
 @property (nonatomic, strong) NSArray *cards;
 
 @end
@@ -30,13 +31,6 @@
 
 @synthesize resultsTable;
 @synthesize cards;
-
-// ----------------------------------------------------------------------------
-
-- (void) viewDidLoad {
-    [super viewDidLoad];
-    [self view];
-}
 
 // ----------------------------------------------------------------------------
 

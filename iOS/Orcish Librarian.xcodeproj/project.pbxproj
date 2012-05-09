@@ -50,6 +50,8 @@
 		8DC308EC1555ED32007AAD7D /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC308EB1555ED32007AAD7D /* libGoogleAnalytics.a */; };
 		8DC308EF1555F518007AAD7D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC308EE1555F518007AAD7D /* CFNetwork.framework */; };
 		8DC308F51558C9DC007AAD7D /* BookmarkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC308F41558C9DC007AAD7D /* BookmarkController.m */; };
+		8DC308F8155A1BB8007AAD7D /* SetListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC308F7155A1BB8007AAD7D /* SetListController.m */; };
+		8DC308FB155A2770007AAD7D /* CardSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC308FA155A2770007AAD7D /* CardSet.m */; };
 		8DD02111146A2A26008C522A /* BasicSearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD02110146A2A26008C522A /* BasicSearchController.xib */; };
 		8DE5D9921457A02000B6CAAF /* Menu-Section.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9901457A02000B6CAAF /* Menu-Section.png */; };
 		8DE5D9931457A02000B6CAAF /* Menu-Section@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */; };
@@ -142,6 +144,10 @@
 		8DC308EE1555F518007AAD7D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		8DC308F31558C9DC007AAD7D /* BookmarkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkController.h; sourceTree = "<group>"; };
 		8DC308F41558C9DC007AAD7D /* BookmarkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkController.m; sourceTree = "<group>"; };
+		8DC308F6155A1BB8007AAD7D /* SetListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetListController.h; sourceTree = "<group>"; };
+		8DC308F7155A1BB8007AAD7D /* SetListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetListController.m; sourceTree = "<group>"; };
+		8DC308F9155A276F007AAD7D /* CardSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardSet.h; sourceTree = "<group>"; };
+		8DC308FA155A2770007AAD7D /* CardSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardSet.m; sourceTree = "<group>"; };
 		8DD02110146A2A26008C522A /* BasicSearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BasicSearchController.xib; path = Layout/BasicSearchController.xib; sourceTree = "<group>"; };
 		8DE5D9901457A02000B6CAAF /* Menu-Section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section.png"; sourceTree = "<group>"; };
 		8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section@2x.png"; sourceTree = "<group>"; };
@@ -317,6 +323,10 @@
 				8D6B568D154F7777006BFA0C /* PriceVendorCell.m */,
 				8DC308F31558C9DC007AAD7D /* BookmarkController.h */,
 				8DC308F41558C9DC007AAD7D /* BookmarkController.m */,
+				8DC308F6155A1BB8007AAD7D /* SetListController.h */,
+				8DC308F7155A1BB8007AAD7D /* SetListController.m */,
+				8DC308F9155A276F007AAD7D /* CardSet.h */,
+				8DC308FA155A2770007AAD7D /* CardSet.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -577,6 +587,8 @@
 				8D6B5684154DA17A006BFA0C /* PriceListController.m in Sources */,
 				8D6B568E154F7777006BFA0C /* PriceVendorCell.m in Sources */,
 				8DC308F51558C9DC007AAD7D /* BookmarkController.m in Sources */,
+				8DC308F8155A1BB8007AAD7D /* SetListController.m in Sources */,
+				8DC308FB155A2770007AAD7D /* CardSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

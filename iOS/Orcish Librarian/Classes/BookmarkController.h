@@ -12,6 +12,4 @@
 
 @interface BookmarkController : UIViewController <UITableViewDelegate, UITableViewDataSource> 
 
-@property (strong, nonatomic) IBOutlet UITableView *resultsTable;
-
 @end

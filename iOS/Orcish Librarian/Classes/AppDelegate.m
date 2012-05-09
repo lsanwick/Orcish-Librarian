@@ -10,6 +10,7 @@
 #import "BasicSearchController.h"
 #import "PriceListController.h"
 #import "BookmarkController.h"
+#import "SetListController.h"
 #import "CardViewController.h"
 #import "CardSequence.h"
 #import "GANTracker.h"
@@ -215,6 +216,15 @@
 - (void) showBookmarkController {
     [self hideMenu];
     BookmarkController *controller = [[BookmarkController alloc] init];
+    [controller view];
+    [self.rootController setViewController:controller animated:NO];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) showBrowseController {
+    [self hideMenu];
+    SetListController *controller = [[SetListController alloc] init];
     [controller view];
     [self.rootController setViewController:controller animated:NO];
 }
