@@ -52,6 +52,7 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self reloadCards];
+    [self.resultsTable reloadData];
     if (self.cards.count > 0) {
         [[PriceManager shared] clearPriceRequests];
         for (Card *card in self.cards) {
@@ -73,8 +74,7 @@
 
 - (void) reloadCards {
     self.cards = [[self collapsedResults:[Card findBookmarkedCards]] sortedArrayUsingDescriptors:
-        [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES]]];
-    [self.resultsTable reloadData];
+        [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES]]];    
 }
 
 // ----------------------------------------------------------------------------
@@ -130,6 +130,16 @@
 
 // ----------------------------------------------------------------------------
 //  UITableViewDataSource
+// ----------------------------------------------------------------------------
+
+- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [[self.cards objectAtIndex:indexPath.row] setIsBookmarked:NO];
+        [self reloadCards];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];        
+    }  
+}
+
 // ----------------------------------------------------------------------------
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {    
