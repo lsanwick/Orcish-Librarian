@@ -117,8 +117,8 @@
     NSString *text = [[[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] uppercaseString];
     
     // HOME (BASIC SEARCH)
-    if ([text isEqualToString:@"HOME"]) {
-        [gAppDelegate trackEvent:@"Menu" action:@"Home" label:@""];
+    if ([text isEqualToString:@"BASIC SEARCH"]) {
+        [gAppDelegate trackEvent:@"Menu" action:@"Basic Search" label:@""];
         [gAppDelegate showBasicSearchController];
     } 
     
