@@ -118,7 +118,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Card *card = [self.cards objectAtIndex:indexPath.row];
     [gAppDelegate trackEvent:@"Bookmarks" action:@"Show Card" label:card.displayName];
-    [gAppDelegate showCard:card];
+    [gAppDelegate showCards:self.cards atPosition:indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];    
 }
 
