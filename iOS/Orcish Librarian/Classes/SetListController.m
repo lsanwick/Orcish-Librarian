@@ -72,6 +72,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
     } 
     cell.textLabel.text = [[self.sets objectAtIndex:indexPath.row] name];
     return cell;
