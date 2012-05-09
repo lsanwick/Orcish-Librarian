@@ -551,8 +551,8 @@ function formatToken(token) {
     var infinite = /^∞$/i;
     var loyalty = /^([-+]\d+)$/;
     var chaos = /^C$/;
-    var phyrexian1 = /^P([WBURGC])$/i;
-    var phyrexian2 = /^P\/([WBURGC])$/i;
+    var phyrexian1 = /^([WBURGC])P$/i;
+    var phyrexian2 = /^([WBURGC])\/P$/i;
 	var halfMana = /^([WBURGC])\/2$/i;
     token = token.replace(/[(){}]/g, '');
     if (token.match(tap))
@@ -611,7 +611,7 @@ $('.ol-bookmark a').click(toggleBookmark);
 })()
 
 if (navigator.userAgent	.indexOf('iPhone') == -1) {
-	Orcish.setCardData({"otherParts":[],"displayName":"Gideon Jura","artIndex":"","tcgSetName":"Magic 2012 (M12)","loyalty":"6","name":"Gideon Jura","setName":"Magic 2012","rarity":"M","power":null,"otherEditions":[{"setName":"Rise of the Eldrazi","setPk":"94"}],"artist":"Aleksi Briclot","gathererId":"238329","manaCost":"3WW","typeLine":"Planeswalker - Gideon","pk":"18879","collectorNumber":"16","oracleText":"+2: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.\n-2: Destroy target tapped creature.\n0: Until end of turn, Gideon Jura becomes a 6\/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.","artVariants":[{"artIndex":"","artist":"Aleksi Briclot","pk":"18879"}],"toughness":null})
+	Orcish.setCardData({"otherParts":[],"displayName":"Act of Aggression","artIndex":"","tcgSetName":"New Phyrexia","loyalty":null,"name":"Act of Aggression","setName":"New Phyrexia","rarity":"U","power":"","otherEditions":[],"isBookmarked":false,"artist":"Whit Brachna","gathererId":"230076","manaCost":"3(R\/P)(R\/P)","typeLine":"Instant","pk":"18610","collectorNumber":"78","oracleText":"({(r\/p)} can be paid with either {R} or 2 life.)\nGain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.","artVariants":[{"artIndex":"","artist":"Whit Brachna","pk":"18610"}],"toughness":""})
 	
 } else {
 	$(function(){
