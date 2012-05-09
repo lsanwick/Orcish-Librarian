@@ -146,15 +146,17 @@
 // ----------------------------------------------------------------------------
 
 - (void) popViewControllerAnimated:(BOOL)animated {    
-    UIViewController *controller = [self.controllerStack lastObject];
+    UIViewController *controller = self.controllerStack.lastObject;
     [self.controllerStack removeLastObject];
     [self updateMenuButton];
+    [self.controllerStack.lastObject viewWillAppear:animated];
     [UIView animateWithDuration:(animated ? 0.2 : 0.0)
-        animations:^{
+        animations:^{            
             controller.view.frame = CGRectMake(self.contentView.frame.size.width, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
         } 
         completion:^(BOOL finished){
             [controller.view removeFromSuperview];
+            [self.controllerStack.lastObject viewDidAppear:animated];
         }];        
 }
 
@@ -197,15 +199,19 @@
 // ----------------------------------------------------------------------------
 
 - (void) dismissModalViewControllerAnimated:(BOOL)animated {
-    UIViewController *controller = [self.modalControllerStack lastObject];
+    UIViewController *controller = self.modalControllerStack.lastObject;
     [self.modalControllerStack removeLastObject];
-    [UIView animateWithDuration:(animated ? 0.4 : 0.0)
-    animations:^{
-        controller.view.frame = CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);    
-    } 
-    completion:^(BOOL finished){
-        [controller.view removeFromSuperview];
-    }];           
+    UIViewController *revealed = (self.modalControllerStack.count > 0) ?
+        self.modalControllerStack.lastObject : self.controllerStack.lastObject;
+    [revealed viewWillAppear:animated];
+    [UIView animateWithDuration:(animated ? 0.4 : 0.0) 
+        animations:^{        
+            controller.view.frame = CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);    
+        } 
+        completion:^(BOOL finished){
+            [controller.view removeFromSuperview];
+            [revealed viewDidAppear:animated];
+        }];           
 }
 
 // ----------------------------------------------------------------------------
