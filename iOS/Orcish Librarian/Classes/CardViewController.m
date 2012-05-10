@@ -25,6 +25,7 @@ typedef void (^block_t)(void);
 @property (nonatomic, assign) NSUInteger layoutIndex;
 @property (nonatomic, strong) NSMutableArray *pages;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, assign) BOOL hasAppearedBefore;
 
 @end
 
@@ -35,6 +36,7 @@ typedef void (^block_t)(void);
 @synthesize layoutIndex;
 @synthesize pages;
 @synthesize scrollView;
+@synthesize hasAppearedBefore;
 
 // ----------------------------------------------------------------------------
 
@@ -55,21 +57,24 @@ typedef void (^block_t)(void);
 // ----------------------------------------------------------------------------
 
 - (void) viewWillAppear:(BOOL)animated {
-    [gAppDelegate trackScreen:@"/CardView"];
-    CGFloat width = self.scrollView.frame.size.width;
-    CGFloat height = self.scrollView.frame.size.height;    
-    NSUInteger pageCount = MIN(kPageCount, self.sequence.count);
-    self.layoutIndex = MIN(self.position, (self.sequence.count - pageCount));
-    for (int i = 0; i < pageCount; i++) {
-        CardView *page = [self.pages objectAtIndex:i];
-        [self.scrollView addSubview:page];
-        page.frame = CGRectMake(width * i, 0, width, height);
-        page.card = [self.sequence cardAtPosition:self.layoutIndex+i];
+    if (!self.hasAppearedBefore) {
+        self.hasAppearedBefore = YES;
+        [gAppDelegate trackScreen:@"/CardView"];    
+        CGFloat width = self.scrollView.frame.size.width;
+        CGFloat height = self.scrollView.frame.size.height;    
+        NSUInteger pageCount = MIN(kPageCount, self.sequence.count);
+        self.layoutIndex = MIN(self.position, (self.sequence.count - pageCount));
+        for (int i = 0; i < pageCount; i++) {
+            CardView *page = [self.pages objectAtIndex:i];
+            [self.scrollView addSubview:page];
+            page.frame = CGRectMake(width * i, 0, width, height);
+            page.card = [self.sequence cardAtPosition:self.layoutIndex+i];
+        }
+        self.scrollView.contentSize = CGSizeMake(width * MIN(self.sequence.count, kPageCount), height);
+        NSUInteger pageOffset = position - self.layoutIndex;
+        [self.scrollView scrollRectToVisible:CGRectMake(width * pageOffset, 0, width, height) animated:NO];
+        [self scrollViewDidEndDecelerating:self.scrollView];
     }
-    self.scrollView.contentSize = CGSizeMake(width * MIN(self.sequence.count, kPageCount), height);
-    NSUInteger pageOffset = position - self.layoutIndex;
-    [self.scrollView scrollRectToVisible:CGRectMake(width * pageOffset, 0, width, height) animated:NO];
-    [self scrollViewDidEndDecelerating:self.scrollView];
 }
 
 // ----------------------------------------------------------------------------
