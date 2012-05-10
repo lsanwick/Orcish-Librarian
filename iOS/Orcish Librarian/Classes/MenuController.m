@@ -47,7 +47,7 @@
                 @"Advanced Search", 
                 @"Browse", 
                 @"Bookmarks", 
-                @"Random Card", 
+                @"Random Cards", 
                 nil],
             nil];
     }
@@ -129,8 +129,8 @@
     }
     
     // RANDOM CARD
-    else if ([text isEqualToString:@"RANDOM CARD"]) {
-        [gAppDelegate trackEvent:@"Menu" action:@"Random Card" label:@""];
+    else if ([text isEqualToString:@"RANDOM CARDS"]) {
+        [gAppDelegate trackEvent:@"Menu" action:@"Random Cards" label:@""];
         [gAppDelegate showRandomCardController];
     }
     
