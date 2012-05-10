@@ -73,13 +73,21 @@
         self.card = self.card; // retriggers the JavaScript loader
     } 
     
-    // SHOW THIS CARD IN ANOTHER SET
-    else if ([URL.scheme isEqualToString:@"set"]) {
-        NSArray *cards = [Card findCardsBySet:URL.host];
-        [gAppDelegate trackEvent:@"Card View" action:@"Show Other Editions" label:self.card.displayName];
-        [gAppDelegate showCards:cards atPosition:[cards indexOfObjectPassingTest:^(Card *test, NSUInteger index, BOOL *stop) {
-            return (BOOL) ([self.card.nameHash isEqualToString:test.nameHash] ? (*stop = YES) : NO);
-        }]];
+    // SHOW ANOTHER SET
+    else if ([URL.scheme isEqualToString:@"set"]) {        
+        if ([URL.host isEqualToString:@"self"]) {
+            // show the current card's set
+            NSArray *cards = [Card findCardsBySet:self.card.setPk];
+            [gAppDelegate trackEvent:@"Card View" action:@"Show Set" label:self.card.setName];
+            [gAppDelegate showCards:cards atPosition:0];
+        } else {
+            // show the set from the current card's equivalent
+            NSArray *cards = [Card findCardsBySet:URL.host];
+            [gAppDelegate trackEvent:@"Card View" action:@"Show Other Editions" label:self.card.displayName];
+            [gAppDelegate showCards:cards atPosition:[cards indexOfObjectPassingTest:^(Card *test, NSUInteger index, BOOL *stop) {
+                return (BOOL) ([self.card.nameHash isEqualToString:test.nameHash] ? (*stop = YES) : NO);
+            }]];
+        }
     } 
     
     // SHOW SPECIFIC CARD
@@ -96,8 +104,7 @@
     else if ([URL.scheme isEqualToString:@"gatherer"]) {
         [gAppDelegate trackEvent:@"Card View" action:@"Show Gatherer" label:self.card.displayName];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:
-            @"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%@", self.card.gathererId]]];
-        
+            @"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%@", self.card.gathererId]]];        
     } 
     
     // RELOAD PRICES

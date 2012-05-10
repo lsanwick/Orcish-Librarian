@@ -45,6 +45,10 @@
         font-size: 12px;
         color: #7f848b;
     }
+
+	.ol-set-name a {
+		text-decoration: none;
+	}
     
 	.ol-card-data {
 		margin-top: 3px;
@@ -187,7 +191,7 @@
     <div class="ol-header ol-block">
 		<div class="ol-bookmark"><a href="javascript:void(0)">★</a></div>
         <div class="ol-card-name">Card Name</div>
-        <div class="ol-set-name">Card Set - Rarity</div>
+        <div class="ol-set-name"><a href="set://self">Card Set - Rarity</a></div>
 		<div class="ol-card-data">
         	<span class="ol-card-type">Type &ndash; Subtype</span> 
 			<span class="ol-card-ptl"></span>
@@ -258,7 +262,7 @@ Orcish.setCardData = function(card) {
 		cardPrice = null;
 		currentCardPk = card.pk;
 	    $('.ol-card-name').text(card.displayName);
-	    $('.ol-set-name').text(card.setName + ' — ' + formatRarity(card.rarity));
+	    $('.ol-set-name a').text(card.setName + ' — ' + formatRarity(card.rarity));
 		$('.ol-mana-cost').html(formattedManaCost(card));
 		$('.ol-bookmark').toggleClass('active', card.isBookmarked);
 		loadTypeLine(card);
@@ -331,9 +335,11 @@ function loadCardPhoto(card) {
     }
     $('.ol-card-image').hide();
     $('<img />')
+		.load(onImageLoaded)
+		.error(onImageMissing)
+		.attr('gathererId', card.gathererId)
         .attr('src', imageURL)
-        .appendTo($('.ol-card-image').empty())
-        .load(function(){ $('.ol-card-image').show() })
+        .appendTo($('.ol-card-image').empty())        
         .wrap($('<div></div>')
         .addClass(isPlane ? 'plane' : ''));
 }
@@ -384,6 +390,20 @@ function loadArtVariants(card) {
     } else {
         $('.ol-other-art').hide();
     }
+}
+
+// ----------------------------------------------------------------------------
+
+function onImageLoaded() {
+	$('.ol-card-image').show();
+}
+
+// ----------------------------------------------------------------------------
+
+function onImageMissing() {
+	var gathererId = $(this).attr('gathererId');
+	$(this).attr('src',
+		'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=' + gathererId);	
 }
 
 // ----------------------------------------------------------------------------

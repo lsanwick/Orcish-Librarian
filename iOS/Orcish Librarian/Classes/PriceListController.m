@@ -9,6 +9,7 @@
 #import "PriceListController.h"
 #import "AppDelegate.h"
 #import "PriceVendorCell.h"
+#import "RegexKitLite.h"
 
 #define kRequestTimeout 10
 
@@ -39,9 +40,12 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [gAppDelegate trackScreen:@"/CardView/Prices"];
+- (NSString *) strippedHTML:(NSString *)html {
+    NSError *error;
+    html = [html stringByReplacingOccurrencesOfRegex:@"<script.*?<\\/script>" withString:@"<noscript></noscript>" options:RKLDotAll range:NSMakeRange(0, html.length) error:&error];
+    html = [html stringByReplacingOccurrencesOfRegex:@"<(\\/)?(?i:link)\\s" withString:@"<$1fink " options:RKLDotAll range:NSMakeRange(0, html.length) error:&error];
+    html = [html stringByReplacingOccurrencesOfRegex:@"src=\"[^\"]+\"" withString:@"src=\"#\"" options:RKLDotAll range:NSMakeRange(0, html.length) error:&error];
+    return html;
 }
 
 // ----------------------------------------------------------------------------
@@ -57,8 +61,29 @@
             [gAppDelegate trackEvent:@"All Prices" action:@"Failed" label:@"Timeout"];
         }
     });
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:
-        [NSString stringWithFormat:@"http://store.tcgplayer.com/product.aspx?id=%@", productId]]]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *url = [NSString stringWithFormat:@"http://store.tcgplayer.com/product.aspx?id=%@", productId];
+        NSData *response = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+        if (!response) {
+            self.firstRequestMade = NO;
+            self.loadingView.hidden = YES;
+            self.timeoutView.hidden = NO;
+            [gAppDelegate trackEvent:@"All Prices" action:@"Failed" label:@"No Response"];
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSURL *base = [NSURL URLWithString:@"http://store.tcgplayer.com/"];
+                NSString *html = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+                [self.webView loadHTMLString:[self strippedHTML:html] baseURL:base];
+            });
+        }
+    });
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [gAppDelegate trackScreen:@"/CardView/Prices"];
 }
 
 // ----------------------------------------------------------------------------
