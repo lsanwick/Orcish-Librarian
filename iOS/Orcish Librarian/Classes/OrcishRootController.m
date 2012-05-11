@@ -73,7 +73,7 @@
     CGRect slideFrame = self.slideView.frame;
     menuFrame.origin.x = -menuFrame.size.width;
     slideFrame.origin.x = 0.0;
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.4
         animations:^{
             self.slideView.frame = slideFrame; 
         }];
@@ -88,7 +88,7 @@
     CGRect slideFrame = self.slideView.frame;
     menuFrame.origin.x = 0.0;
     slideFrame.origin.x = menuFrame.size.width;
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.4
         animations:^{
             self.slideView.frame = slideFrame;
         }];
@@ -128,11 +128,13 @@
 - (void) pushViewController:(UIViewController *)controller animated:(BOOL)animated {
     [self.controllerStack addObject:controller];
     controller.view.frame = CGRectMake(self.contentView.frame.size.width, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
+    controller.view.alpha = 0.0;
     [self.contentView addSubview:controller.view];
     [self updateMenuButton];
-    [UIView animateWithDuration:(animated ? 0.2 : 0.0)
+    [UIView animateWithDuration:(animated ? 0.4 : 0.0)
         animations:^{
             controller.view.frame = CGRectMake(0.0, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
+            controller.view.alpha = 1.0;
         }
         completion:^(BOOL finished){
 
@@ -150,9 +152,10 @@
     [self.controllerStack removeLastObject];
     [self updateMenuButton];
     [self.controllerStack.lastObject viewWillAppear:animated];
-    [UIView animateWithDuration:(animated ? 0.2 : 0.0)
+    [UIView animateWithDuration:(animated ? 0.4 : 0.0)
         animations:^{            
             controller.view.frame = CGRectMake(self.contentView.frame.size.width, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
+            controller.view.alpha = 0.0;
         } 
         completion:^(BOOL finished){
             [controller.view removeFromSuperview];
@@ -187,8 +190,10 @@
     [self.modalControllerStack addObject:controller];
     controller.view.frame = CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);    
     [self.view addSubview:controller.view];
-    [UIView animateWithDuration:(animated ? 0.4 : 0.0)
+    controller.view.alpha = 0.0;
+    [UIView animateWithDuration:(animated ? 0.5 : 0.0)
         animations:^{
+            controller.view.alpha = 1.0;
             controller.view.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);    
         }
         completion:^(BOOL finished){
@@ -204,7 +209,7 @@
     UIViewController *revealed = (self.modalControllerStack.count > 0) ?
         self.modalControllerStack.lastObject : self.controllerStack.lastObject;
     [revealed viewWillAppear:animated];
-    [UIView animateWithDuration:(animated ? 0.4 : 0.0) 
+    [UIView animateWithDuration:(animated ? 0.5 : 0.0) 
         animations:^{        
             controller.view.frame = CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);    
         } 

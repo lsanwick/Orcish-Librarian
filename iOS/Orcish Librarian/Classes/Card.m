@@ -68,6 +68,20 @@
 
 // ----------------------------------------------------------------------------
 
++ (NSArray *) collapseCardList:(NSArray *)cards {
+    NSMutableArray *results = [NSMutableArray arrayWithCapacity:cards.count];
+    NSMutableDictionary *names = [NSMutableDictionary dictionaryWithCapacity:cards.count];
+    for (Card *card in cards) {
+        if ([names objectForKey:card.displayName] == nil) {
+            [results addObject:card];
+            [names setObject:card forKey:card.displayName];
+        }
+    }
+    return results;
+}
+
+// ----------------------------------------------------------------------------
+
 + (NSArray *) findCardsByTitleText:(NSString *)text {
     SearchCriteria *criteria = [[SearchCriteria alloc] init];
     criteria.nameText = text;

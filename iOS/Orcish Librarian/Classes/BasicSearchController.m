@@ -16,6 +16,13 @@
 #define kPriceRequestDelay  1.5
 
 
+@interface BasicSearchController ()
+
+@property (assign, nonatomic) BOOL hasBeenFirstResponder;
+@property (copy, nonatomic) NSArray *results;
+
+@end
+
 @implementation BasicSearchController
 
 @synthesize resultsTable;
@@ -45,8 +52,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) setResults:(NSArray *)cards {
-    BOOL collapseResults = YES; // TODO: pull from preferences
-    results = collapseResults ? [self collapsedResults:cards] : [cards copy];
+    results = cards;
     [self.resultsTable reloadData];
     [[PriceManager shared] clearPriceRequests];
     NSArray *currentResults = results;
@@ -60,20 +66,6 @@
             }
         }
     });
-}
-
-// ----------------------------------------------------------------------------
-
-- (NSArray *) collapsedResults:(NSArray *)cards {
-    NSMutableArray *collapsedResults = [NSMutableArray arrayWithCapacity:cards.count];
-    NSMutableDictionary *names = [NSMutableDictionary dictionaryWithCapacity:cards.count];
-    for (Card *card in cards) {
-        if ([names objectForKey:card.displayName] == nil) {
-            [collapsedResults addObject:card];
-            [names setObject:card forKey:card.displayName];
-        }
-    }
-    return collapsedResults;
 }
 
 // ----------------------------------------------------------------------------
@@ -91,7 +83,7 @@
 
 - (void) searchBar:(UISearchBar *)bar textDidChange:(NSString *)searchText {
     dispatch_async(gAppDelegate.dbQueue, ^{
-        NSArray *cards = [Card findCardsByTitleText:searchText];
+        NSArray *cards = [Card collapseCardList:[Card findCardsByTitleText:searchText]];
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([bar.text isEqualToString:searchText]) {
                 self.results = cards;

@@ -14,9 +14,5 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *resultsTable;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (copy, nonatomic) NSArray *results;
-@property (assign, nonatomic) BOOL hasBeenFirstResponder;
-
-- (NSArray *) collapsedResults:(NSArray *)cards;
 
 @end

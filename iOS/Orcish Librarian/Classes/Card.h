@@ -41,6 +41,7 @@
 @property (nonatomic, assign) BOOL isBookmarked;
 
 + (Card *) cardForResultSet:(FMResultSet *)resultSet;
++ (NSArray *) collapseCardList:(NSArray *)cards;
 + (NSArray *) findCardsByTitleText:(NSString *)text;
 + (NSArray *) findCardsBySet:(NSString *)setPk;
 + (NSArray *) findCards:(SearchCriteria *)criteria;

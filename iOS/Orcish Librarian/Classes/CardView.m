@@ -77,12 +77,12 @@
     else if ([URL.scheme isEqualToString:@"set"]) {        
         if ([URL.host isEqualToString:@"self"]) {
             // show the current card's set
-            NSArray *cards = [Card findCardsBySet:self.card.setPk];
+            NSArray *cards = [Card collapseCardList:[Card findCardsBySet:self.card.setPk]];
             [gAppDelegate trackEvent:@"Card View" action:@"Show Set" label:self.card.setName];
             [gAppDelegate showCards:cards atPosition:0];
         } else {
             // show the set from the current card's equivalent
-            NSArray *cards = [Card findCardsBySet:URL.host];
+            NSArray *cards = [Card collapseCardList:[Card findCardsBySet:URL.host]];
             [gAppDelegate trackEvent:@"Card View" action:@"Show Other Editions" label:self.card.displayName];
             [gAppDelegate showCards:cards atPosition:[cards indexOfObjectPassingTest:^(Card *test, NSUInteger index, BOOL *stop) {
                 return (BOOL) ([self.card.nameHash isEqualToString:test.nameHash] ? (*stop = YES) : NO);
