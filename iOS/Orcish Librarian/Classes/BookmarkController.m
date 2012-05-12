@@ -21,7 +21,6 @@
 - (void) reloadCards;
 - (NSArray *) collapsedResults:(NSArray *)theCards;
 
-@property (strong, nonatomic) UITableView *resultsTable;
 @property (nonatomic, strong) NSArray *cards;
 
 @end
@@ -31,15 +30,6 @@
 
 @synthesize resultsTable;
 @synthesize cards;
-
-// ----------------------------------------------------------------------------
-
-- (void) loadView {
-    self.resultsTable = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    self.resultsTable.delegate = self;
-    self.resultsTable.dataSource = self;
-    self.view = self.resultsTable;    
-}
 
 // ----------------------------------------------------------------------------
 

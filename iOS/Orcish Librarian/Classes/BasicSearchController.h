@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OrcishViewController.h"
 
-@class CardViewController;
-
-@interface BasicSearchController : UIViewController <UITableViewDelegate, UITableViewDataSource> 
+@interface BasicSearchController : OrcishViewController <UITableViewDelegate, UITableViewDataSource> 
 
 @property (strong, nonatomic) IBOutlet UITableView *resultsTable;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;

@@ -13,19 +13,15 @@
 
 @interface OrcishRootController : UIViewController
 
+@property (strong, nonatomic) NSMutableArray *controllerStack;
 @property (strong, nonatomic) IBOutlet UITableView *menuView;
 @property (strong, nonatomic) IBOutlet MenuController *menuController;
 @property (strong, nonatomic) IBOutlet UIView *dropShadowView;
 @property (strong, nonatomic) IBOutlet UIView *slideView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
-@property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
-@property (strong, nonatomic) IBOutlet UINavigationItem *navigationItem;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *menuButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *backButton;
-
-- (IBAction) menuButtonTapped:(id)sender;
 
 @property (readonly, nonatomic) UIViewController *topController;
+@property (assign, nonatomic) BOOL menuIsVisible;
 
 - (void) pushViewController:(UIViewController *)controller animated:(BOOL)animated;
 - (void) popViewControllerAnimated:(BOOL)animated;

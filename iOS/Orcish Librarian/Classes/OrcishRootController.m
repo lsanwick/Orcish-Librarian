@@ -19,8 +19,6 @@
 
 @interface OrcishRootController () 
 
-@property (strong, nonatomic) NSMutableArray *controllerStack;
-@property (assign, nonatomic) BOOL menuIsVisible;
 @property (strong, nonatomic) NSMutableArray *modalControllerStack;
 
 @end
@@ -33,10 +31,6 @@
 @synthesize dropShadowView;
 @synthesize slideView;
 @synthesize contentView;
-@synthesize navigationBar;
-@synthesize navigationItem;
-@synthesize menuButton;
-@synthesize backButton;
 @synthesize controllerStack;
 @synthesize menuIsVisible;
 @synthesize modalControllerStack;
@@ -55,7 +49,6 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    menuButton.image = [UIImage imageNamed:@"Menu-Button"];
     [menuController viewDidLoad];
     dropShadowView.layer.masksToBounds = NO;
     dropShadowView.layer.cornerRadius = 0.0;
@@ -96,31 +89,8 @@
 
 // ----------------------------------------------------------------------------
 
-- (IBAction) menuButtonTapped:(id)sender {
-    if (self.controllerStack.count > 1) {
-        [gAppDelegate trackEvent:@"Navigation" action:@"Back" label:@""];
-        [self popViewControllerAnimated:YES];
-    } else if (self.menuIsVisible) {
-        [self hideMenu];
-    } else {
-        [self showMenu];
-    }
-}
-
-// ----------------------------------------------------------------------------
-
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) updateMenuButton {
-    if (self.controllerStack.count > 1) {
-        self.menuButton.image = [UIImage imageNamed:@"Back-Button"];
-    } else {
-        self.menuButton.image = [UIImage imageNamed:@"Menu-Button"];
-    }
 }
 
 // ----------------------------------------------------------------------------
@@ -130,7 +100,6 @@
     controller.view.frame = CGRectMake(self.contentView.frame.size.width, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
     controller.view.alpha = 0.0;
     [self.contentView addSubview:controller.view];
-    [self updateMenuButton];
     [UIView animateWithDuration:(animated ? 0.4 : 0.0)
         animations:^{
             controller.view.frame = CGRectMake(0.0, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
@@ -150,7 +119,6 @@
 - (void) popViewControllerAnimated:(BOOL)animated {    
     UIViewController *controller = self.controllerStack.lastObject;
     [self.controllerStack removeLastObject];
-    [self updateMenuButton];
     [self.controllerStack.lastObject viewWillAppear:animated];
     [UIView animateWithDuration:(animated ? 0.4 : 0.0)
         animations:^{            
@@ -159,6 +127,7 @@
         } 
         completion:^(BOOL finished){
             [controller.view removeFromSuperview];
+            
             [self.controllerStack.lastObject viewDidAppear:animated];
         }];        
 }
@@ -174,7 +143,6 @@
     controller.view.alpha = 0.0;
     controller.view.frame = CGRectMake(0.0, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);
     [self.contentView addSubview:controller.view];
-    [self updateMenuButton];
     [UIView animateWithDuration:(animated ? 0.2 : 0.0) 
         animations:^{
             controller.view.alpha = 1.0;

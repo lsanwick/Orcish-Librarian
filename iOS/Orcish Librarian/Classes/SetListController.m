@@ -16,7 +16,6 @@
 - (void) loadData;
 
 @property (strong, nonatomic) NSArray *sets;
-@property (strong, nonatomic) UITableView *resultsTable;
 
 @end
 
@@ -28,24 +27,15 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) loadView {
-    [self loadData];
-    self.resultsTable = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    self.resultsTable.delegate = self;
-    self.resultsTable.dataSource = self;    
-    self.view = self.resultsTable;    
-}
-
-// ----------------------------------------------------------------------------
-
 - (void) loadData {
     self.sets = [CardSet findAll];
 }
 
 // ----------------------------------------------------------------------------
 
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void) viewDidLoad {
+    [super viewDidLoad];
+    [self loadData];
 }
 
 // ----------------------------------------------------------------------------

@@ -42,6 +42,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [gAppDelegate trackScreen:@"/BasicSearch"];
     if (!self.hasBeenFirstResponder) {
         self.hasBeenFirstResponder = YES;

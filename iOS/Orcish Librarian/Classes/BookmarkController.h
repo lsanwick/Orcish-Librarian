@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrcishViewController.h"
 
 @class CardViewController;
 
-@interface BookmarkController : UIViewController <UITableViewDelegate, UITableViewDataSource> 
+@interface BookmarkController : OrcishViewController <UITableViewDelegate, UITableViewDataSource> 
+
+@property (strong, nonatomic) IBOutlet UITableView *resultsTable;
 
 @end

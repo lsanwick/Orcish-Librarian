@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrcishViewController.h"
 
 @class CardSequence;
 
-@interface CardViewController : UIViewController <UIScrollViewDelegate, UIWebViewDelegate> 
+@interface CardViewController : OrcishViewController <UIScrollViewDelegate, UIWebViewDelegate> 
+
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *pagingButton;
+
+- (IBAction) pagingButtonTapped:(id)sender;
 
 @property (strong, nonatomic) CardSequence *sequence;
 @property (assign, nonatomic) NSUInteger position;

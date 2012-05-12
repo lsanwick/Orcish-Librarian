@@ -215,7 +215,7 @@
 
 - (void) showBookmarkController {
     [self hideMenu];
-    BookmarkController *controller = [[BookmarkController alloc] init];
+    BookmarkController *controller = [[BookmarkController alloc] initWithNibName:nil bundle:nil];
     [controller view];
     [self.rootController setViewController:controller animated:NO];
 }
@@ -224,7 +224,7 @@
 
 - (void) showBrowseController {
     [self hideMenu];
-    SetListController *controller = [[SetListController alloc] init];
+    SetListController *controller = [[SetListController alloc] initWithNibName:nil bundle:nil];
     [controller view];
     [self.rootController setViewController:controller animated:NO];
 }

@@ -81,15 +81,14 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [gAppDelegate trackScreen:@"/CardView/Prices"];
+- (void) viewDidLoad {
+    
 }
 
 // ----------------------------------------------------------------------------
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (void) viewWillAppear:(BOOL)animated {
+    [gAppDelegate trackScreen:@"/CardView/Prices"];
 }
 
 // ----------------------------------------------------------------------------
