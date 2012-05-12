@@ -15,6 +15,9 @@
 
 
 #define kMaxControllerStackDepth 10
+#define kMenuAnimatePeriod 0.25
+#define kControllerAnimatePeriod 0.3
+#define kModalAnimatePeriod 0.4
 
 
 @interface OrcishRootController () 
@@ -66,7 +69,7 @@
     CGRect slideFrame = self.slideView.frame;
     menuFrame.origin.x = -menuFrame.size.width;
     slideFrame.origin.x = 0.0;
-    [UIView animateWithDuration:0.4
+    [UIView animateWithDuration:kMenuAnimatePeriod
         animations:^{
             self.slideView.frame = slideFrame; 
         }];
@@ -81,7 +84,7 @@
     CGRect slideFrame = self.slideView.frame;
     menuFrame.origin.x = 0.0;
     slideFrame.origin.x = menuFrame.size.width;
-    [UIView animateWithDuration:0.4
+    [UIView animateWithDuration:kMenuAnimatePeriod
         animations:^{
             self.slideView.frame = slideFrame;
         }];
@@ -100,7 +103,7 @@
     controller.view.frame = CGRectMake(self.contentView.frame.size.width, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
     controller.view.alpha = 0.0;
     [self.contentView addSubview:controller.view];
-    [UIView animateWithDuration:(animated ? 0.4 : 0.0)
+    [UIView animateWithDuration:(animated ? kControllerAnimatePeriod : 0.0)
         animations:^{
             controller.view.frame = CGRectMake(0.0, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
             controller.view.alpha = 1.0;
@@ -120,7 +123,7 @@
     UIViewController *controller = self.controllerStack.lastObject;
     [self.controllerStack removeLastObject];
     [self.controllerStack.lastObject viewWillAppear:animated];
-    [UIView animateWithDuration:(animated ? 0.4 : 0.0)
+    [UIView animateWithDuration:(animated ? kControllerAnimatePeriod : 0.0)
         animations:^{            
             controller.view.frame = CGRectMake(self.contentView.frame.size.width, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
             controller.view.alpha = 0.0;
@@ -143,7 +146,7 @@
     controller.view.alpha = 0.0;
     controller.view.frame = CGRectMake(0.0, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);
     [self.contentView addSubview:controller.view];
-    [UIView animateWithDuration:(animated ? 0.2 : 0.0) 
+    [UIView animateWithDuration:(animated ? kControllerAnimatePeriod : 0.0) 
         animations:^{
             controller.view.alpha = 1.0;
         }
@@ -159,7 +162,7 @@
     controller.view.frame = CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);    
     [self.view addSubview:controller.view];
     controller.view.alpha = 0.0;
-    [UIView animateWithDuration:(animated ? 0.5 : 0.0)
+    [UIView animateWithDuration:(animated ? kModalAnimatePeriod : 0.0)
         animations:^{
             controller.view.alpha = 1.0;
             controller.view.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);    
@@ -177,7 +180,7 @@
     UIViewController *revealed = (self.modalControllerStack.count > 0) ?
         self.modalControllerStack.lastObject : self.controllerStack.lastObject;
     [revealed viewWillAppear:animated];
-    [UIView animateWithDuration:(animated ? 0.5 : 0.0) 
+    [UIView animateWithDuration:(animated ? kModalAnimatePeriod : 0.0) 
         animations:^{        
             controller.view.frame = CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);    
         } 
