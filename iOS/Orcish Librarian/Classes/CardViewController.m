@@ -66,6 +66,7 @@ typedef void (^block_t)(void);
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self scrollAllViewsToTop];
     self.scrollView.scrollsToTop = YES;
     if (!self.hasAppearedBefore) {
         self.hasAppearedBefore = YES;
