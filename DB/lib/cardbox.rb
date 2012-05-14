@@ -10,16 +10,17 @@ class CardBox
   include SQLMaker
   
   def initialize()
-    @data = { :sets => [ ], :tcg => { }, :cards => { }, :names => { } }
+    @data = { :sets => [ ], :tcg => { }, :type => { }, :cards => { }, :names => { } }
   end
   
   def save(path, format = :json)
     self.send("save_as_#{format}", path)
   end
   
-  def add(cards, set, tcg)
+  def add(cards, set, tcg, type)
     @data[:sets] << set
     @data[:tcg][set] = tcg
+    @data[:type][set] = type
     @data[:cards][set] = (@data[:cards][set] || [ ]) + cards
     cards.each do |card|
       if @data[:names][card[:name]].nil?
@@ -88,6 +89,7 @@ class CardBox
     io.puts(sql_create_table(:sets, {
       :pk => :integer,
       :name => :varchar_255,
+      :type => :integer,
       :tcg => :varchar_255 },
       :pk => :pk))    
     # CREATE TABLE cards
@@ -130,7 +132,8 @@ class CardBox
     @data[:sets].each do |set_name|
       current_set_pk = current_set_pk + 1
       tcg = @data[:tcg][set_name] || ''
-      io.puts(sql_insert_row(:sets, :pk => current_set_pk, :name => set_name, :tcg => tcg))
+      type = @data[:type][set_name] || ''
+      io.puts(sql_insert_row(:sets, :pk => current_set_pk, :name => set_name, :tcg => tcg, :type => type))
       io.puts
       @data[:cards][set_name].each do |card|
         current_card_pk = current_card_pk + 1

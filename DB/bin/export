@@ -20,8 +20,8 @@ options[:out] = options[:out] || "data/#{Orcish.env}.#{options[:format]}"
 
 box = CardBox.new
 PStore.new("data/#{Orcish.env}.pstore").transaction do |db|
-  db[:sets].each_pair do |set, tcg|        
-      box.add(db[set], set, tcg) unless db[set].nil?
+  db[:sets].each_pair do |set, meta|
+    box.add(db[set], set, meta[:tcg], meta[:type]) unless db[set].nil?
   end
 end
 
