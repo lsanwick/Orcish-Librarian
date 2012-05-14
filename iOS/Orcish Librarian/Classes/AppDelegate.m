@@ -163,7 +163,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) trackScreen:(NSString *)path {
-    NSLog(@"TRACK SCREEN (%@)", path);
+    // NSLog(@"TRACK SCREEN (%@)", path);
     dispatch_async(self.analyticsQueue, ^{ 
         NSError *error;
         [[GANTracker sharedTracker] trackPageview:path withError:&error];
@@ -174,7 +174,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) trackEvent:(NSString *)category action:(NSString *)action label:(NSString *)label {
-    NSLog(@"TRACK EVENT (%@, %@, %@)", category, action, label);
+    // NSLog(@"TRACK EVENT (%@, %@, %@)", category, action, label);
     dispatch_async(self.analyticsQueue, ^{ 
         NSError *error;
         [[GANTracker sharedTracker] trackEvent:category action:action label:label value:0 withError:&error];
