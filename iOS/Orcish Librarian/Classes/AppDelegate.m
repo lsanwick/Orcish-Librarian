@@ -74,6 +74,16 @@
 
 // ----------------------------------------------------------------------------
 
+- (void) showCardList:(NSArray *)cards withTitle:(NSString *)title {
+    OrcishViewController *controller = [[OrcishViewController alloc] initWithNibName:nil bundle:nil];
+    [controller view];
+    controller.cardList = cards;
+    controller.navigationItem.title = title;
+    [self.rootController pushViewController:controller animated:YES];
+}
+
+// ----------------------------------------------------------------------------
+
 - (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position {    
     CardViewController *controller = [self dequeueCardViewController];
     controller.sequence = [CardSequence sequenceWithCards:cards];
@@ -215,8 +225,9 @@
 
 - (void) showBookmarkController {
     [self hideMenu];
-    BookmarkController *controller = [[BookmarkController alloc] initWithNibName:nil bundle:nil];
+    BookmarkController *controller = [[BookmarkController alloc] initWithNibName:@"OrcishViewController" bundle:nil];
     [controller view];
+    controller.navigationItem.title = @"Bookmarks";
     [self.rootController setViewController:controller animated:NO];
 }
 

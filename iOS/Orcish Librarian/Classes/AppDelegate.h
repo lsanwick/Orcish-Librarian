@@ -26,6 +26,7 @@
 
 - (void) hideKeyboard;
 - (void) hideMenu;
+- (void) showCardList:(NSArray *)cards withTitle:(NSString *)title;
 - (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position;
 - (void) showCard:(Card *)card;
 - (void) showPriceModalForProductId:(NSString *)productId;

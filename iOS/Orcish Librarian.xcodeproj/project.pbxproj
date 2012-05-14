@@ -46,7 +46,7 @@
 		8D95BD1F152642D8005B8518 /* PriceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D95BD1E152642D8005B8518 /* PriceManager.m */; };
 		8D9F91B6154456470076FC9C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9F91B5154456470076FC9C /* SystemConfiguration.framework */; };
 		8D9F91BB15450D150076FC9C /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F91B915450D150076FC9C /* sqlite3.c */; };
-		8DA1AFDC155E1F9C0091A368 /* BookmarkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA1AFDB155E1F9C0091A368 /* BookmarkController.xib */; };
+		8DA1AFDC155E1F9C0091A368 /* OrcishViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA1AFDB155E1F9C0091A368 /* OrcishViewController.xib */; };
 		8DA1AFDF155E21C20091A368 /* SetListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA1AFDE155E21C20091A368 /* SetListController.xib */; };
 		8DB1AE85155E03790038F991 /* OrcishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB1AE84155E03790038F991 /* OrcishViewController.m */; };
 		8DBDB1251466DEC600140217 /* BasicSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB1241466DEC600140217 /* BasicSearchController.m */; };
@@ -140,7 +140,7 @@
 		8D9F91B5154456470076FC9C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8D9F91B915450D150076FC9C /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
 		8D9F91BA15450D150076FC9C /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
-		8DA1AFDB155E1F9C0091A368 /* BookmarkController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BookmarkController.xib; path = Layout/BookmarkController.xib; sourceTree = "<group>"; };
+		8DA1AFDB155E1F9C0091A368 /* OrcishViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OrcishViewController.xib; path = Layout/OrcishViewController.xib; sourceTree = "<group>"; };
 		8DA1AFDE155E21C20091A368 /* SetListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SetListController.xib; path = Layout/SetListController.xib; sourceTree = "<group>"; };
 		8DB1AE83155E03790038F991 /* OrcishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrcishViewController.h; sourceTree = "<group>"; };
 		8DB1AE84155E03790038F991 /* OrcishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrcishViewController.m; sourceTree = "<group>"; };
@@ -293,7 +293,7 @@
 				8DD02110146A2A26008C522A /* BasicSearchController.xib */,
 				8D0480A214700C42001E183C /* CardViewController.xib */,
 				8D6B5686154E3046006BFA0C /* PriceListController.xib */,
-				8DA1AFDB155E1F9C0091A368 /* BookmarkController.xib */,
+				8DA1AFDB155E1F9C0091A368 /* OrcishViewController.xib */,
 				8DA1AFDE155E21C20091A368 /* SetListController.xib */,
 			);
 			name = Layout;
@@ -542,7 +542,7 @@
 				8D1DE81214775E1200D2A3C4 /* HTML in Resources */,
 				8DE898E314832D820024E016 /* card-names.txt in Resources */,
 				8D6B5687154E3046006BFA0C /* PriceListController.xib in Resources */,
-				8DA1AFDC155E1F9C0091A368 /* BookmarkController.xib in Resources */,
+				8DA1AFDC155E1F9C0091A368 /* OrcishViewController.xib in Resources */,
 				8DA1AFDF155E21C20091A368 /* SetListController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

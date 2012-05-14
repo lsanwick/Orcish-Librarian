@@ -66,7 +66,6 @@
 }
 
 // ----------------------------------------------------------------------------
-// ----------------------------------------------------------------------------
 
 + (NSArray *) collapsedResults:(NSArray *)cards {
     NSMutableArray *collapsedResults = [NSMutableArray arrayWithCapacity:cards.count];
@@ -136,7 +135,8 @@
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // override me
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [gAppDelegate showCards:self.cardList atPosition:indexPath.row];
 }
 
 // ----------------------------------------------------------------------------

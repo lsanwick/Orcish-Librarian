@@ -82,10 +82,10 @@
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];    
     CardSet *set = [self.sets objectAtIndex:indexPath.row];
     [gAppDelegate trackEvent:@"Browse" action:@"Show Set" label:set.name];
-    [gAppDelegate showCards:set.cards atPosition:0];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];    
+    [gAppDelegate showCardList:set.cards withTitle:set.name];
 }
 
 // ----------------------------------------------------------------------------
@@ -94,6 +94,12 @@
     cell.backgroundColor = (indexPath.row % 2) ?
         tableView.separatorColor :    
         [UIColor whiteColor];
+}
+
+// ----------------------------------------------------------------------------
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:indexPath {
+    return 44.0;
 }
 
 // ----------------------------------------------------------------------------
