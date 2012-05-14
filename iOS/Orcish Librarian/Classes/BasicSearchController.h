@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "OrcishViewController.h"
 
-@interface BasicSearchController : OrcishViewController <UITableViewDelegate, UITableViewDataSource> 
+@interface BasicSearchController : OrcishViewController
 
-@property (strong, nonatomic) IBOutlet UITableView *resultsTable;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end

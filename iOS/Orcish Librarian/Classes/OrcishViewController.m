@@ -8,13 +8,20 @@
 
 #import "OrcishViewController.h"
 #import "OrcishRootController.h"
+#import "SearchResultCell.h"
 #import "AppDelegate.h"
+#import "PriceManager.h"
+#import "Card.h"
+
+#define kPriceRequestDelay  1.5
 
 
 @interface OrcishViewController () {
     UIBarButtonItem *navigationButton;
 }
     
++ (NSArray *) collapsedResults:(NSArray *)cards;
+
 @end
 
 
@@ -22,6 +29,8 @@
 
 @dynamic navigationItem;
 @synthesize parentViewController;
+@synthesize cardList;
+@synthesize cardListView;
 
 // ----------------------------------------------------------------------------
 
@@ -54,6 +63,94 @@
     } else {
         [gAppDelegate.rootController showMenu];
     }
+}
+
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+
++ (NSArray *) collapsedResults:(NSArray *)cards {
+    NSMutableArray *collapsedResults = [NSMutableArray arrayWithCapacity:cards.count];
+    NSMutableDictionary *names = [NSMutableDictionary dictionaryWithCapacity:cards.count];
+    for (Card *card in cards) {
+        if ([names objectForKey:card.displayName] == nil) {
+            [collapsedResults addObject:card];
+            [names setObject:card forKey:card.displayName];
+        }
+    }
+    return collapsedResults;
+}                  
+
+// ----------------------------------------------------------------------------
+
+- (void) setCardList:(NSArray *)cards {
+    cards = [[self class] collapsedResults:cards];
+    cardList = cards;
+    [self.cardListView reloadData];
+    [[PriceManager shared] clearPriceRequests];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kPriceRequestDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        if (self.cardList == cards && cards.count > 0) {
+            for (Card *card in cards.reverseObjectEnumerator) {
+                [[PriceManager shared] requestPriceForCard:card withCallback:^(Card *card, NSDictionary *prices){
+                    [self.cardListView reloadData];
+                }];         
+            }
+        }
+    });
+}
+
+// ----------------------------------------------------------------------------
+//  UIScrollViewDelegate
+// ----------------------------------------------------------------------------
+
+- (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [gAppDelegate hideMenu];
+}
+
+// ----------------------------------------------------------------------------
+//  UITableViewDelegate
+// ----------------------------------------------------------------------------
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifier = @"CardCell";
+    SearchResultCell *cell = (SearchResultCell *) [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (cell == nil) {
+        cell =  [[SearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    } 
+    cell.card = (indexPath.row < self.cardList.count) ? [self.cardList objectAtIndex:indexPath.row] : nil;
+    return cell;
+}
+
+// ----------------------------------------------------------------------------
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:indexPath {
+    return [SearchResultCell height];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = (indexPath.row % 2) ? tableView.separatorColor : [UIColor whiteColor];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // override me
+}
+
+// ----------------------------------------------------------------------------
+//  UITableViewDataSource
+// ----------------------------------------------------------------------------
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {    
+    return 1;
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return MAX(7, self.cardList.count);
 }
 
 // ----------------------------------------------------------------------------

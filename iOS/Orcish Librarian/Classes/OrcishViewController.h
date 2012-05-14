@@ -10,8 +10,10 @@
 
 @class OrcishRootController;
 
-@interface OrcishViewController : UIViewController
+@interface OrcishViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
+@property (nonatomic, strong) NSArray *cardList;
+@property (nonatomic, strong) IBOutlet UITableView *cardListView;
 @property (nonatomic, strong) IBOutlet UINavigationItem *navigationItem;
 
 @end

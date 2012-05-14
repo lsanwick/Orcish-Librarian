@@ -11,8 +11,6 @@
 
 @class CardViewController;
 
-@interface BookmarkController : OrcishViewController <UITableViewDelegate, UITableViewDataSource> 
-
-@property (strong, nonatomic) IBOutlet UITableView *resultsTable;
+@interface BookmarkController : OrcishViewController
 
 @end
