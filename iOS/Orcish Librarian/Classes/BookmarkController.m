@@ -33,6 +33,14 @@
 
 // ----------------------------------------------------------------------------
 
+- (void) viewDidLoad {
+    [super viewDidLoad];
+    self.resultsTable.backgroundColor = self.resultsTable.separatorColor = 
+        [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
+}
+
+// ----------------------------------------------------------------------------
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self reloadCards];
@@ -92,24 +100,35 @@
     SearchResultCell *cell = (SearchResultCell *) [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell =  [[SearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     } 
-    cell.card = [self.cards objectAtIndex:indexPath.row];
+    cell.card = (indexPath.row < self.cards.count) ? [self.cards objectAtIndex:indexPath.row] : nil;
     return cell;
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Card *card = [self.cards objectAtIndex:indexPath.row];
-    [gAppDelegate trackEvent:@"Bookmarks" action:@"Show Card" label:card.displayName];
-    [gAppDelegate showCards:self.cards atPosition:indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];    
+    if (indexPath.row < self.cards.count) {
+        Card *card = [self.cards objectAtIndex:indexPath.row];
+        [gAppDelegate trackEvent:@"Bookmarks" action:@"Show Card" label:card.displayName];
+        [gAppDelegate showCards:self.cards atPosition:indexPath.row];
+    }
 }
 
 // ----------------------------------------------------------------------------
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:indexPath {
     return [SearchResultCell height];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = (indexPath.row % 2) ?
+        tableView.separatorColor :    
+        [UIColor whiteColor];
 }
 
 // ----------------------------------------------------------------------------
@@ -133,7 +152,7 @@
 // ----------------------------------------------------------------------------
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.cards.count;
+    return MAX(7, self.cards.count);
 }
 
 // ----------------------------------------------------------------------------

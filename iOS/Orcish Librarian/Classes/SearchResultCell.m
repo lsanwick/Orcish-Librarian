@@ -113,6 +113,8 @@
 // ----------------------------------------------------------------------------
 
 + (CGFloat) height {
+    return 62;
+    /*
     return MAX(
         // combined height of the left-hand rows
         kCellPadding + 
@@ -122,13 +124,14 @@
         kCellPadding,
         // combined height of the right-hand rows
         [self priceLabelHeight] * 3.0);
+     */ 
 }
 
 // ----------------------------------------------------------------------------
 
 - (id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self) {    
         priceLabelLow = [[UILabel alloc] init];
         priceLabelMid = [[UILabel alloc] init];
         priceLabelHigh = [[UILabel alloc] init];
@@ -142,6 +145,11 @@
         priceLabelLow.textAlignment = UITextAlignmentRight;
         priceLabelMid.textAlignment = UITextAlignmentRight;
         priceLabelHigh.textAlignment = UITextAlignmentRight;
+        priceLabelLow.backgroundColor = [UIColor clearColor];
+        priceLabelMid.backgroundColor = [UIColor clearColor];
+        priceLabelHigh.backgroundColor = [UIColor clearColor];
+        nameLabel.backgroundColor = [UIColor clearColor];
+        setLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:priceLabelLow];
         [self addSubview:priceLabelMid];
         [self addSubview:priceLabelHigh];
@@ -153,25 +161,38 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void) setCard:(Card *)newCard {
+    card = newCard;
+    if (newCard == nil) {
+        priceLabelLow.text = @"";
+        priceLabelMid.text = @"";
+        priceLabelHigh.text = @"";
+        nameLabel.text = @"";
+        setLabel.text = @"";
+    } else {
+        NSArray *otherEditions = card.otherEditions;
+        NSDictionary *price = [[PriceManager shared] priceForCard:card];  
+        priceLabelLow.text = price ? [NSString stringWithFormat:@"L: $%@", [price objectForKey:@"low"]] : @"";
+        priceLabelMid.text = price ? [NSString stringWithFormat:@"M: $%@", [price objectForKey:@"average"]] : @"";
+        priceLabelHigh.text = price ? [NSString stringWithFormat:@"H: $%@", [price objectForKey:@"high"]] : @"";
+        nameLabel.text = card.displayName;    
+        if (otherEditions.count > 0) {
+            setLabel.text = [NSString stringWithFormat:@"%@ (%d more)", card.setName, otherEditions.count];
+        } else {
+            setLabel.text = card.setName;
+        }
+    }
 }
 
 // ----------------------------------------------------------------------------
 
-- (void) setCard:(Card *)newCard {
-    card = newCard;
-    NSArray *otherEditions = card.otherEditions;
-    NSDictionary *price = [[PriceManager shared] priceForCard:card];  
-    priceLabelLow.text = price ? [NSString stringWithFormat:@"L: $%@", [price objectForKey:@"low"]] : @"";
-    priceLabelMid.text = price ? [NSString stringWithFormat:@"M: $%@", [price objectForKey:@"average"]] : @"";
-    priceLabelHigh.text = price ? [NSString stringWithFormat:@"H: $%@", [price objectForKey:@"high"]] : @"";
-    nameLabel.text = card.displayName;    
-    if (otherEditions.count > 0) {
-        setLabel.text = [NSString stringWithFormat:@"%@ (%d more)", card.setName, otherEditions.count];
-    } else {
-        setLabel.text = card.setName;
-    }
+- (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted animated:animated];
+    priceLabelLow.textColor = 
+    priceLabelMid.textColor =
+    priceLabelHigh.textColor =
+    nameLabel.textColor =
+    setLabel.textColor = highlighted ? [UIColor whiteColor] : [UIColor blackColor];
 }
 
 // ----------------------------------------------------------------------------

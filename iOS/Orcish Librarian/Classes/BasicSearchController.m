@@ -36,13 +36,28 @@
     [super viewDidLoad];
     self.hasBeenFirstResponder = NO;
     self.results = [NSArray array];
-    [self view];
+    self.resultsTable.backgroundColor = self.resultsTable.separatorColor = 
+        [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.resultsTable.scrollsToTop = NO;
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.resultsTable.scrollsToTop = YES;
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+    [super viewDidAppear:animated];    
     [gAppDelegate trackScreen:@"/BasicSearch"];
     if (!self.hasBeenFirstResponder) {
         self.hasBeenFirstResponder = YES;
@@ -114,21 +129,32 @@
     SearchResultCell *cell = (SearchResultCell *) [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell =  [[SearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     } 
-    cell.card = [self.results objectAtIndex:indexPath.row];
+    cell.card = (indexPath.row < self.results.count) ? [self.results objectAtIndex:indexPath.row] : nil;
     return cell;
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [gAppDelegate trackEvent:@"Search Results" action:@"Click" label:[[results objectAtIndex:indexPath.row] displayName]];
-    [gAppDelegate hideMenu];
-    [gAppDelegate hideKeyboard];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (gAppDelegate.rootController.topController == self) {
-        [gAppDelegate showCards:results atPosition:indexPath.row];
+    if (indexPath.row < self.results.count) {
+        [gAppDelegate trackEvent:@"Search Results" action:@"Click" label:[[results objectAtIndex:indexPath.row] displayName]];
+        [gAppDelegate hideMenu];
+        [gAppDelegate hideKeyboard];        
+        if (gAppDelegate.rootController.topController == self) {
+            [gAppDelegate showCards:results atPosition:indexPath.row];
+        }
     }
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = (indexPath.row % 2) ?
+        tableView.separatorColor :    
+        [UIColor whiteColor];
 }
 
 // ----------------------------------------------------------------------------
@@ -148,7 +174,7 @@
 // ----------------------------------------------------------------------------
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.results.count;
+    return MAX(6, self.results.count);
 }
 
 // ----------------------------------------------------------------------------

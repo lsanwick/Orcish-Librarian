@@ -135,6 +135,9 @@
         self.nameLabel.font = [[self class] nameLabelFont];
         self.conditionLabel.font = [[self class] conditionLabelFont];
         self.priceLabel.textAlignment = UITextAlignmentRight;
+        self.priceLabel.backgroundColor = [UIColor clearColor];
+        self.nameLabel.backgroundColor = [UIColor clearColor];
+        self.conditionLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:self.priceLabel];
         [self addSubview:self.nameLabel];
         [self addSubview:self.conditionLabel];
@@ -152,9 +155,15 @@
 
 - (void) setVendor:(NSDictionary *)theVendor {
     vendor = theVendor;
-    self.nameLabel.text = [theVendor objectForKey:@"storeName"];
-    self.conditionLabel.text = [theVendor objectForKey:@"condition"];
-    self.priceLabel.text = [NSString stringWithFormat:@"$%@", [theVendor objectForKey:@"price"]];
+    if (theVendor == nil) {
+        self.nameLabel.text = @"";
+        self.conditionLabel.text = @"";
+        self.priceLabel.text = @"";
+    } else {
+        self.nameLabel.text = [theVendor objectForKey:@"storeName"];
+        self.conditionLabel.text = [theVendor objectForKey:@"condition"];
+        self.priceLabel.text = [NSString stringWithFormat:@"$%@", [theVendor objectForKey:@"price"]];
+    }
 }
 
 // ----------------------------------------------------------------------------
@@ -169,6 +178,15 @@
     self.nameLabel.frame = CGRectMake(kCellPadding, kCellPadding, bounds.size.width - (kCellSpacing + kCellPadding + priceWidth + kCellPadding), nameHeight);
     self.conditionLabel.frame = CGRectMake(kCellPadding, kCellPadding + nameHeight + kCellSpacing, bounds.size.width - (kCellSpacing + kCellPadding + priceWidth + kCellPadding), conditionHeight);
     self.priceLabel.frame = CGRectMake(bounds.size.width - (kCellPadding + priceWidth), (bounds.size.height - priceHeight) / 2.0, priceWidth, priceHeight);
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted animated:animated];
+    priceLabel.textColor = 
+    conditionLabel.textColor =
+    nameLabel.textColor = highlighted ? [UIColor whiteColor] : [UIColor blackColor];
 }
 
 // ----------------------------------------------------------------------------

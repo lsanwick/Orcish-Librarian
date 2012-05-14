@@ -36,12 +36,22 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     [self loadData];
+    self.resultsTable.backgroundColor = self.resultsTable.separatorColor = 
+        [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.resultsTable.scrollsToTop = NO;
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    self.resultsTable.scrollsToTop = YES;
     [gAppDelegate trackScreen:@"/Browse"];
 }
 
@@ -62,6 +72,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
     } 
     cell.textLabel.text = [[self.sets objectAtIndex:indexPath.row] name];
@@ -75,6 +86,14 @@
     [gAppDelegate trackEvent:@"Browse" action:@"Show Set" label:set.name];
     [gAppDelegate showCards:set.cards atPosition:0];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];    
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = (indexPath.row % 2) ?
+        tableView.separatorColor :    
+        [UIColor whiteColor];
 }
 
 // ----------------------------------------------------------------------------

@@ -57,8 +57,16 @@ typedef void (^block_t)(void);
 
 // ----------------------------------------------------------------------------
 
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.scrollView.scrollsToTop = NO;
+}
+
+// ----------------------------------------------------------------------------
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.scrollView.scrollsToTop = YES;
     if (!self.hasAppearedBefore) {
         self.hasAppearedBefore = YES;
         [gAppDelegate trackScreen:@"/CardView"];    
@@ -77,17 +85,6 @@ typedef void (^block_t)(void);
         [self.scrollView scrollRectToVisible:CGRectMake(width * pageOffset, 0, width, height) animated:NO];
         [self scrollViewDidEndDecelerating:self.scrollView];
         self.pagingButton.hidden = self.sequence.count <= 1;
-    }
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) viewWillDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    position = 0;
-    for (int i = 0; i < kPageCount; i++) {
-        CardView *page = [self.pages objectAtIndex:i];
-        [page removeFromSuperview];
     }
 }
 
@@ -140,7 +137,7 @@ typedef void (^block_t)(void);
         CardView *page = [self.pages objectAtIndex:i];
         page.frame = CGRectMake((i-1) * pageWidth, 0, pageWidth, pageHeight);
     }
-    CardView *firstPage = [self.pages  objectAtIndex:0];
+    CardView *firstPage = [self.pages objectAtIndex:0];
     firstPage.frame = CGRectMake((kPageCount-1) * pageWidth, 0, pageWidth, pageHeight);
     [self.pages removeObjectAtIndex:0];
     [pages addObject:firstPage];
@@ -181,7 +178,7 @@ typedef void (^block_t)(void);
         [self.scrollView scrollRectToVisible:CGRectMake(pageWidth * (index + 1), 0 , pageWidth, pageHeight) animated:NO];
     }
     self.position = (view.contentOffset.x / pageWidth) + layoutIndex;
-    [self updatePagingButtons];
+    [self updatePagingButtons];    
 }
 
 // ----------------------------------------------------------------------------

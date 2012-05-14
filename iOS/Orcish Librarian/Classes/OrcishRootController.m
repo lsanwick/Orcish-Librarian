@@ -99,12 +99,13 @@
 // ----------------------------------------------------------------------------
 
 - (void) pushViewController:(UIViewController *)controller animated:(BOOL)animated {
+    [self.controllerStack.lastObject viewWillDisappear:animated];
     [self.controllerStack addObject:controller];
     controller.view.frame = CGRectMake(self.contentView.frame.size.width, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
     controller.view.alpha = 0.0;
     [self.contentView addSubview:controller.view];
     [UIView animateWithDuration:(animated ? kControllerAnimatePeriod : 0.0)
-        animations:^{
+        animations:^{            
             controller.view.frame = CGRectMake(0.0, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
             controller.view.alpha = 1.0;
         }
@@ -119,7 +120,7 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) popViewControllerAnimated:(BOOL)animated {    
+- (void) popViewControllerAnimated:(BOOL)animated {
     UIViewController *controller = self.controllerStack.lastObject;
     [self.controllerStack removeLastObject];
     [self.controllerStack.lastObject viewWillAppear:animated];
@@ -129,8 +130,7 @@
             controller.view.alpha = 0.0;
         } 
         completion:^(BOOL finished){
-            [controller.view removeFromSuperview];
-            
+            [controller.view removeFromSuperview];            
             [self.controllerStack.lastObject viewDidAppear:animated];
         }];        
 }
@@ -158,6 +158,11 @@
 // ----------------------------------------------------------------------------
 
 - (void) presentModalViewController:(UIViewController *)controller animated:(BOOL)animated {
+    if (self.modalControllerStack.count > 0) {
+        [self.modalControllerStack.lastObject viewWillDisappear:animated];
+    } else {
+        [self.controllerStack.lastObject viewWillDisappear:animated];
+    }
     [self.modalControllerStack addObject:controller];
     controller.view.frame = CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);    
     [self.view addSubview:controller.view];
