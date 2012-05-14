@@ -362,7 +362,7 @@ function loadOtherEditions(card) {
 // ----------------------------------------------------------------------------
 
 function loadOtherParts(card) {
-	if (card.otherParts && card.otherParts.length > 0) {
+	if (card.otherParts && card.otherParts.length > 0 && card.setName != 'Ninth Edition') {
         var html = '';
         $.each(card.otherParts, function(i, otherCard) {
 			if (i != 0) { html += '<br />' }
