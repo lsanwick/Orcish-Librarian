@@ -13,7 +13,10 @@
 #import "SetListController.h"
 #import "CardViewController.h"
 #import "CardSequence.h"
+#import "PriceManager.h"
 #import "GANTracker.h"
+
+#define kPriceCachePrunePeriod 120
 
 
 // ----------------------------------------------------------------------------
@@ -25,6 +28,7 @@
 }
 
 - (void) initializeDatabase;
+- (void) initializePriceCache;
 - (void) initializeSearchNames;
 - (void) initializeWindow;
 - (void) initializeAnalytics;
@@ -56,8 +60,17 @@
     [self initializeAnalytics];
     [self dequeueCardViewController];
     [self initializeWindow];    
+    [self initializePriceCache];
     [self trackEvent:@"Application" action:@"Initialize" label:@""];
     return YES;
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) applicationDidReceiveMemoryWarning:(UIApplication *)application {
+    [[PriceManager shared] clearCache];
+    // TODO: wipe search-names text from memory (needs to reload later if absent).
+    //       alternatively, could memory-map the data (mmap or NSData)?
 }
 
 // ----------------------------------------------------------------------------
@@ -125,6 +138,19 @@
         }
     }
     self.searchNames = [NSData dataWithContentsOfFile:writablePath];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) initializePriceCache {
+    [[PriceManager shared] loadCache];
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+    dispatch_source_set_timer(timer, dispatch_time(DISPATCH_TIME_NOW, kPriceCachePrunePeriod * NSEC_PER_SEC), kPriceCachePrunePeriod * NSEC_PER_SEC, kPriceCachePrunePeriod * 0.5 * NSEC_PER_SEC);
+    dispatch_source_set_event_handler(timer, ^{
+        [[PriceManager shared] pruneCache];
+        [[PriceManager shared] saveCache];
+    });
+    dispatch_resume(timer);
 }
 
 // ----------------------------------------------------------------------------

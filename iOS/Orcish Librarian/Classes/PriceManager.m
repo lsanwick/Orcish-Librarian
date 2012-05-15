@@ -12,6 +12,7 @@
 
 
 #define kDownloadBatchSize 3
+#define kMaxCacheAge 172800 // 60 * 60 * 24 * 2 => 48 hours
 
 
 @interface QueuedLookup : NSObject
@@ -24,18 +25,22 @@
 @end
 
 
-@interface PriceManager () {
-    NSMutableArray *queue;
-    NSMutableDictionary *prices;
-    NSUInteger pendingRequests;
-}
+@interface PriceManager () 
 
 - (void) downloadQueuedPrices;
 - (void) beginLookup:(QueuedLookup *)lookup;
 
+@property (nonatomic, strong) NSMutableArray *queue;
+@property (nonatomic, strong) NSMutableDictionary *prices;
+@property (nonatomic, assign) NSUInteger pendingRequests;
+
 @end
 
 @implementation PriceManager
+
+@synthesize queue;
+@synthesize prices;
+@synthesize pendingRequests;
 
 // ----------------------------------------------------------------------------
 //  PUBLIC METHODS
@@ -59,7 +64,7 @@
 // ----------------------------------------------------------------------------
 
 - (NSDictionary *) priceForCard:(Card *)card {
-    return [prices objectForKey:card.pk];
+    return [self.prices objectForKey:card.pk];
 }
 
 // ----------------------------------------------------------------------------
@@ -71,10 +76,47 @@
     } else {
         QueuedLookup *lookup = [[QueuedLookup alloc] init];
         lookup.callback = callback;
-        lookup.card = card;    
-        [queue addObject:lookup];
+        lookup.card = card;
+        [self.queue addObject:lookup];
         [self downloadQueuedPrices];
     }
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) saveCache {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:self.prices forKey:@"prices"];
+    [defaults synchronize];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) loadCache {
+    NSDictionary *cachedPrices = [[NSUserDefaults standardUserDefaults] objectForKey:@"prices"];
+    if (cachedPrices != nil && [cachedPrices isKindOfClass:[NSDictionary class]]) {
+        self.prices = [cachedPrices mutableCopy];
+    }
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) clearCache {
+    self.prices = [NSMutableDictionary dictionary];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) pruneCache {
+    NSDate *now = [NSDate date];
+    NSMutableArray *deadPrices = [NSMutableArray array];
+    for (NSString *pk in self.prices) {
+        NSDate *cacheDate = [[self.prices objectForKey:pk] objectForKey:@"cacheDate"];
+        if ([now timeIntervalSinceDate:cacheDate] > kMaxCacheAge) {
+            [deadPrices addObject:pk];
+        }
+    }
+    [self.prices removeObjectsForKeys:deadPrices];
 }
 
 // ----------------------------------------------------------------------------
@@ -132,6 +174,7 @@
     NSArray *low = [text arrayOfCaptureComponentsMatchedByRegex:@"lowprice&gt;(\\d+\\.\\d+)"];
     if (high.count == 1 && average.count == 1 && low.count == 1 && tcgId.count == 1) {
         return [NSDictionary dictionaryWithObjectsAndKeys:
+            [NSDate date], @"cacheDate",
             [NSString stringWithFormat:@"%.2f", [[[low objectAtIndex:0] objectAtIndex:1] floatValue]], @"low",
             [NSString stringWithFormat:@"%.2f", [[[average objectAtIndex:0] objectAtIndex:1] floatValue]], @"average",
             [NSString stringWithFormat:@"%.2f", [[[high objectAtIndex:0] objectAtIndex:1] floatValue]], @"high",

@@ -18,5 +18,9 @@ typedef void (^PriceCallback)(Card *, NSDictionary *);
 - (NSDictionary *) priceForCard:(Card *)card;
 - (void) requestPriceForCard:(Card *)card withCallback:(PriceCallback)callback;
 - (void) clearPriceRequests;
+- (void) loadCache;
+- (void) saveCache;
+- (void) clearCache;
+- (void) pruneCache;
 
 @end

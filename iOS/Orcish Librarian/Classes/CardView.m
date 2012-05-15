@@ -41,7 +41,11 @@
 
 - (void) setPrice:(NSDictionary *)price forCard:(Card *)theCard {
     NSError *error;
-    NSString *json = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:price options:0 error:&error] encoding:NSUTF8StringEncoding];
+    NSMutableDictionary *priceData = [price mutableCopy];
+    // remove the cache date, because you can't automatically make an NSDate into a JSON object
+    // and we don't need it anyway
+    [priceData removeObjectForKey:@"cacheDate"]; 
+    NSString *json = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:priceData options:0 error:&error] encoding:NSUTF8StringEncoding];
     [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardPrice(%@, %@)", card.pk, json]];
 }
 
