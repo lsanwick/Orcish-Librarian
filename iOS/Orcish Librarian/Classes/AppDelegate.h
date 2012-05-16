@@ -20,9 +20,10 @@
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) OrcishRootController *rootController;
 @property (nonatomic, assign) dispatch_queue_t analyticsQueue;
-@property (nonatomic, assign) dispatch_queue_t dbQueue;
+@property (nonatomic, assign) dispatch_queue_t dataQueue;
 @property (nonatomic, strong) FMDatabase *db;
 @property (nonatomic, strong) NSData *searchNames;
+@property (nonatomic, assign) NSString *databaseVersion;
 
 - (void) hideKeyboard;
 - (void) hideMenu;

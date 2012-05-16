@@ -73,7 +73,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) searchBar:(UISearchBar *)bar textDidChange:(NSString *)searchText {
-    dispatch_async(gAppDelegate.dbQueue, ^{
+    dispatch_async(gAppDelegate.dataQueue, ^{
         NSArray *cards = [Card collapseCardList:[Card findCardsByTitleText:searchText]];
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([bar.text isEqualToString:searchText]) {

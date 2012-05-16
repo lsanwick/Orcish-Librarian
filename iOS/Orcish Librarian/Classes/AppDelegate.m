@@ -14,6 +14,7 @@
 #import "CardViewController.h"
 #import "CardSequence.h"
 #import "PriceManager.h"
+#import "DataManager.h"
 #import "GANTracker.h"
 
 #define kPriceCachePrunePeriod 120
@@ -27,9 +28,8 @@
     CardViewController *queuedController;
 }
 
-- (void) initializeDatabase;
+- (void) initializeData;
 - (void) initializePriceCache;
-- (void) initializeSearchNames;
 - (void) initializeWindow;
 - (void) initializeAnalytics;
 - (CardViewController *) dequeueCardViewController;
@@ -46,17 +46,16 @@
 @synthesize window;
 @synthesize rootController;
 @synthesize analyticsQueue;
-@synthesize dbQueue;
+@synthesize dataQueue;
 @synthesize db;
 @synthesize searchNames;
 
 // ----------------------------------------------------------------------------
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.dbQueue = dispatch_queue_create("info.orcish.db.queue", NULL);
+    self.dataQueue = dispatch_queue_create("info.orcish.db.queue", NULL);
     self.analyticsQueue = dispatch_queue_create("info.orcish.analytics.queue", NULL);    
-    dispatch_async(self.dbQueue, ^{ [self initializeDatabase]; });
-    dispatch_async(self.dbQueue, ^{ [self initializeSearchNames]; });    
+    dispatch_async(self.dataQueue, ^{ [self initializeData]; });
     [self initializeAnalytics];
     [self dequeueCardViewController];
     [self initializeWindow];    
@@ -67,10 +66,30 @@
 
 // ----------------------------------------------------------------------------
 
+- (void) applicationDidBecomeActive:(UIApplication *)application {
+    [[DataManager shared] stageUpdatesFromServer];
+}
+
+// ----------------------------------------------------------------------------
+
 - (void) applicationDidReceiveMemoryWarning:(UIApplication *)application {
     [[PriceManager shared] clearCache];
     // TODO: wipe search-names text from memory (needs to reload later if absent).
     //       alternatively, could memory-map the data (mmap or NSData)?
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSString *) databaseVersion {
+    NSString *version = [[NSUserDefaults standardUserDefaults] objectForKey:@"databaseVersion"];
+    return version ? version : [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) setDatabaseVersion:(NSString *)databaseVersion {
+    [[NSUserDefaults standardUserDefaults] setObject:databaseVersion forKey:@"databaseVersion"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 // ----------------------------------------------------------------------------
@@ -121,27 +140,6 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) initializeSearchNames {
-    NSString *readOnlyPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"card-names.txt"];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *writablePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"card-names.txt"];
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSError *error;
-    // -- FOR DEBUGGING: delete the file from its writable location every time
-    if ([fm fileExistsAtPath:writablePath]) {
-        [fm removeItemAtPath:writablePath error:&error];
-    }
-    // if the file hasn't been copied to a writable location, do that now
-    if (![fm fileExistsAtPath:writablePath]) {
-        if(![fm copyItemAtPath:readOnlyPath toPath:writablePath error:&error]) {
-            NSAssert1(0, @"Failed to to copy card names: '%@'", [error localizedDescription]);
-        }
-    }
-    self.searchNames = [NSData dataWithContentsOfFile:writablePath];
-}
-
-// ----------------------------------------------------------------------------
-
 - (void) initializePriceCache {
     [[PriceManager shared] loadCache];
     dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
@@ -155,23 +153,16 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) initializeDatabase {
-    NSString *readOnlyPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"cards.sqlite3"];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *writablePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"cards.sqlite3"];
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSError *error;
-    // -- FOR DEBUGGING: delete the file from its writable location every time
-    if ([fm fileExistsAtPath:writablePath]) {
-        [fm removeItemAtPath:writablePath error:&error];
+- (void) initializeData {
+    DataManager *dataManager = [DataManager shared];
+    if ([dataManager hasStagedUpdates]) {
+        [dataManager installDataFromStage];
+    } else if(![dataManager hasInstalledData]) {
+        [dataManager installDataFromBundle];
+    } else {
     }
-    // if the file hasn't been copied to a writable location, do that now
-    if (![fm fileExistsAtPath:writablePath]) {
-        if(![fm copyItemAtPath:readOnlyPath toPath:writablePath error:&error]) {
-            NSAssert1(0, @"Failed to to create database: '%@'", [error localizedDescription]);
-        }
-    }
-    self.db = [FMDatabase databaseWithPath:writablePath];
+    self.searchNames = [NSData dataWithContentsOfFile:dataManager.cardNamesTextPath];
+    self.db = [FMDatabase databaseWithPath:dataManager.databasePath];
     [self.db open];
 }
 

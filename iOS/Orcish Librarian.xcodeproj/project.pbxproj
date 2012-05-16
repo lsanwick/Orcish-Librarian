@@ -44,6 +44,7 @@
 		8D7F9755153E5D58001335DA /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F9754153E5D58001335DA /* CardView.m */; };
 		8D95BD1B15263552005B8518 /* NSNull+Wrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D95BD1A15263552005B8518 /* NSNull+Wrap.m */; };
 		8D95BD1F152642D8005B8518 /* PriceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D95BD1E152642D8005B8518 /* PriceManager.m */; };
+		8D9DD8901563130C00C4D02E /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D9DD88F1563130C00C4D02E /* DataManager.m */; };
 		8D9F91B6154456470076FC9C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9F91B5154456470076FC9C /* SystemConfiguration.framework */; };
 		8D9F91BB15450D150076FC9C /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F91B915450D150076FC9C /* sqlite3.c */; };
 		8DA1AFDC155E1F9C0091A368 /* OrcishViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA1AFDB155E1F9C0091A368 /* OrcishViewController.xib */; };
@@ -137,6 +138,8 @@
 		8D95BD1A15263552005B8518 /* NSNull+Wrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+Wrap.m"; sourceTree = "<group>"; };
 		8D95BD1D152642D8005B8518 /* PriceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceManager.h; sourceTree = "<group>"; };
 		8D95BD1E152642D8005B8518 /* PriceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceManager.m; sourceTree = "<group>"; };
+		8D9DD88E1563130C00C4D02E /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		8D9DD88F1563130C00C4D02E /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		8D9F91B5154456470076FC9C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8D9F91B915450D150076FC9C /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
 		8D9F91BA15450D150076FC9C /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
@@ -324,6 +327,8 @@
 				8D95BD1A15263552005B8518 /* NSNull+Wrap.m */,
 				8D150F3B144FF0C700141685 /* OrcishRootController.h */,
 				8D150F3C144FF0C700141685 /* OrcishRootController.m */,
+				8DB1AE83155E03790038F991 /* OrcishViewController.h */,
+				8DB1AE84155E03790038F991 /* OrcishViewController.m */,
 				8D6B5682154DA17A006BFA0C /* PriceListController.h */,
 				8D6B5683154DA17A006BFA0C /* PriceListController.m */,
 				8D95BD1D152642D8005B8518 /* PriceManager.h */,
@@ -336,8 +341,8 @@
 				8D32B0B515293DCC00C0EF2E /* SearchResultCell.m */,
 				8DC308F6155A1BB8007AAD7D /* SetListController.h */,
 				8DC308F7155A1BB8007AAD7D /* SetListController.m */,
-				8DB1AE83155E03790038F991 /* OrcishViewController.h */,
-				8DB1AE84155E03790038F991 /* OrcishViewController.m */,
+				8D9DD88E1563130C00C4D02E /* DataManager.h */,
+				8D9DD88F1563130C00C4D02E /* DataManager.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -603,6 +608,7 @@
 				8DC308F8155A1BB8007AAD7D /* SetListController.m in Sources */,
 				8DC308FB155A2770007AAD7D /* CardSet.m in Sources */,
 				8DB1AE85155E03790038F991 /* OrcishViewController.m in Sources */,
+				8D9DD8901563130C00C4D02E /* DataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
