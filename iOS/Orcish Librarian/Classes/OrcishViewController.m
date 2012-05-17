@@ -114,8 +114,8 @@
     SearchResultCell *cell = (SearchResultCell *) [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell =  [[SearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    } 
+    }     
+    cell.selectionStyle = (indexPath.row < self.cardList.count) ? UITableViewCellSelectionStyleGray : UITableViewCellSelectionStyleNone;
     cell.card = (indexPath.row < self.cardList.count) ? [self.cardList objectAtIndex:indexPath.row] : nil;
     return cell;
 }
