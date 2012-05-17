@@ -25,6 +25,9 @@
 @property (nonatomic, strong) NSData *searchNames;
 @property (nonatomic, assign) NSString *databaseVersion;
 
+- (void) activateDataSources;
+- (void) deactivateDataSources;
+
 - (void) hideKeyboard;
 - (void) hideMenu;
 - (void) showCardList:(NSArray *)cards withTitle:(NSString *)title;

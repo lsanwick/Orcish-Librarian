@@ -48,7 +48,7 @@
                 NSString *currentMinorVersion = [currentVersion stringByReplacingOccurrencesOfRegex:@"^.*?(\\d+)\\s*$" withString:@"$1"];
                 NSString *upgradeMinorVersion = [upgradeVersion stringByReplacingOccurrencesOfRegex:@"^.*?(\\d+)\\s*$" withString:@"$1"];
                 if ([currentMinorVersion compare:upgradeMinorVersion options:NSNumericSearch] == NSOrderedAscending) {
-                    NSURL *databaseUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://orcish.info/librarian/db/cards-%@.sqlite3", upgradeVersion]];
+                    NSURL *databaseUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://direct.orcish.info/librarian/db/cards-%@.sqlite3", upgradeVersion]];
                     NSData *databaseData = [NSData dataWithContentsOfURL:databaseUrl options:0 error:&error];
                     if (databaseData != nil) {
                         if ([self stageData:databaseData forVersion:upgradeVersion]) {

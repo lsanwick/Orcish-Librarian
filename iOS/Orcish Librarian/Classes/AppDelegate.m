@@ -161,9 +161,25 @@
         [dataManager installDataFromBundle];
     } else {
     }
-    self.searchNames = [NSData dataWithContentsOfFile:dataManager.cardNamesTextPath];
+    [self activateDataSources];    
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) activateDataSources {
+    NSError *error;
+    DataManager *dataManager = [DataManager shared];
+    self.searchNames = [NSData dataWithContentsOfFile:dataManager.cardNamesTextPath options:NSDataReadingMappedAlways error:&error];
     self.db = [FMDatabase databaseWithPath:dataManager.databasePath];
     [self.db open];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) deactivateDataSources {
+    [self.db close];
+    self.db = nil;
+    self.searchNames = nil;
 }
 
 // ----------------------------------------------------------------------------
