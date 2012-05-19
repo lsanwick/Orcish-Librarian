@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "OrcishViewController.h"
 
-@interface SetListController : OrcishViewController <UITableViewDataSource, UITableViewDelegate>
-
-@property (strong, nonatomic) IBOutlet UITableView *resultsTable;
+@interface SetListController : OrcishViewController
 
 @end

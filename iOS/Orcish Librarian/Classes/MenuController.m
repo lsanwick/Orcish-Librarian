@@ -9,6 +9,7 @@
 #import "MenuController.h"
 #import "AppDelegate.h"
 #import "Utility.h"
+#import "DataManager.h"
 
 
 @implementation MenuController
@@ -47,6 +48,7 @@
                 @"Browse", 
                 @"Bookmarks", 
                 @"Random Cards", 
+                @"Check for Update",
                 nil],
             nil];
     }
@@ -112,6 +114,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {    
+    [gAppDelegate hideMenu];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString *text = [[[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] uppercaseString];
     
@@ -137,6 +140,13 @@
     else if ([text isEqualToString:@"BROWSE"]) {
         [gAppDelegate trackEvent:@"Menu" action:@"Browse" label:@""];
         [gAppDelegate showBrowseController];
+    }
+    
+    // CHECK FOR UPDATES
+    else if ([text isEqualToString:@"CHECK FOR UPDATE"]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [gDataManager updateFromServer];
+        });
     }
 }
 

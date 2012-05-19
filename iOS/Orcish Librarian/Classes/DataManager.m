@@ -8,14 +8,28 @@
 
 #import "DataManager.h"
 #import "AppDelegate.h"
+#import "FMDatabase.h"
 #import "RegexKitLite.h"
 
+#define MAJOR(v) ([DataManager majorNumberForVersion:(v)])
+#define MINOR(v) ([DataManager minorNumberForVersion:(v)])
 
-@interface DataManager ()
 
-- (BOOL) stageData:(NSData *)data forVersion:(NSString *)version;
-- (BOOL) isDatabaseSane:(FMDatabase *)database;
-- (BOOL) createNameFile:(NSString *)path fromDatabase:(FMDatabase *)database;
+@interface DataManager () {
+    FMDatabase *db;
+    NSData *names;
+}
+
++ (NSString *) majorNumberForVersion:(NSString *)version;
++ (NSString *) minorNumberForVersion:(NSString *)version;
+
+- (BOOL) canUpdateTo:(NSString *)version;
+- (BOOL) createNamesFile:(NSString *)namesPath fromDatabaseFile:(NSString *)dbPath;
+- (void) installDatabaseFile:(NSString *)dbPath andNamesFile:(NSString *)namesPath forVersion:(NSString *)version;
+- (NSString *) dbPath;
+- (NSString *) namesPath;
+
+@property (nonatomic, copy) NSString *version;
 
 @end
 
@@ -35,51 +49,94 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) stageUpdatesFromServer {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSError *error;
-        NSURL *versionUrl = [NSURL URLWithString:@"http://direct.orcish.info/librarian/db/version.txt"];        
-        NSString *upgradeVersion = [NSString stringWithContentsOfURL:versionUrl encoding:NSUTF8StringEncoding error:&error];
-        if (upgradeVersion) {
-            NSString *currentVersion = gAppDelegate.databaseVersion;
-            NSString *currentMajorVersion = [currentVersion stringByReplacingOccurrencesOfRegex:@"^\\s*(\\d+).*$" withString:@"$1"];
-            NSString *upgradeMajorVersion = [upgradeVersion stringByReplacingOccurrencesOfRegex:@"^\\s*(\\d+).*$" withString:@"$1"];
-            if ([currentMajorVersion isEqualToString:upgradeMajorVersion]) {
-                NSString *currentMinorVersion = [currentVersion stringByReplacingOccurrencesOfRegex:@"^.*?(\\d+)\\s*$" withString:@"$1"];
-                NSString *upgradeMinorVersion = [upgradeVersion stringByReplacingOccurrencesOfRegex:@"^.*?(\\d+)\\s*$" withString:@"$1"];
-                if ([currentMinorVersion compare:upgradeMinorVersion options:NSNumericSearch] == NSOrderedAscending) {
-                    NSURL *databaseUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://direct.orcish.info/librarian/db/cards-%@.sqlite3", upgradeVersion]];
-                    NSData *databaseData = [NSData dataWithContentsOfURL:databaseUrl options:0 error:&error];
-                    if (databaseData != nil) {
-                        if ([self stageData:databaseData forVersion:upgradeVersion]) {
-                            [[NSUserDefaults standardUserDefaults] setObject:upgradeVersion forKey:@"stagingVersion"];
-                            [[NSUserDefaults standardUserDefaults] synchronize];
-                            // TODO: alert the UI
-                            NSLog(@"Staged Update Waiting...");
-                        }
-                    }
-                }
-            }
-        }
++ (NSString *) majorNumberForVersion:(NSString *)version {
+    return [version stringByReplacingOccurrencesOfRegex:@"^\\s*(\\d+).*$" withString:@"$1"];
+}
+
+// ----------------------------------------------------------------------------
+
++ (NSString *) minorNumberForVersion:(NSString *)version {
+     return [version stringByReplacingOccurrencesOfRegex:@"^.*?(\\d+)\\s*$" withString:@"$1"];
+}
+
+// ----------------------------------------------------------------------------
+
+- (FMDatabase *) db {
+    return db;
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSData *) names {
+    return names;
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSString *) version {
+    NSString *version = [[NSUserDefaults standardUserDefaults] objectForKey:@"dataVersion"];
+    return version ? version : [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) setVersion:(NSString *)version {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:version forKey:@"dataVersion"];
+    [defaults synchronize];
+}
+
+// ----------------------------------------------------------------------------
+
+- (BOOL) canUpdateTo:(NSString *)version {
+    // major versions must be identical
+    // minor version of update must be higher than existing minor version
+    return [MAJOR(self.version) isEqualToString:MAJOR(version)] &&
+        [MINOR(self.version) compare:MINOR(version) options:NSNumericSearch] == NSOrderedAscending;
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) updateFromServer {
+    
+    NSError *error; 
+
+    NSURL *versionURL = [NSURL URLWithString:@"http://direct.orcish.info/librarian/db/version.txt"];
+    NSString *version = [NSString stringWithContentsOfURL:versionURL encoding:NSUTF8StringEncoding error:&error];
+    if (!version || ![self canUpdateTo:version]) {
+        return;
+    }
+    
+    NSURL *dataURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://direct.orcish.info/librarian/db/cards-%@.sqlite3", version]];
+    NSData *data = [NSData dataWithContentsOfURL:dataURL options:0 error:&error];
+    if (!data) {
+        return;
+    }
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *stagedDbPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]];
+    NSString *stagedNamesPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]];    
+    if (![data writeToFile:stagedDbPath atomically:YES] || ![self createNamesFile:stagedNamesPath fromDatabaseFile:stagedDbPath]) {
+        return;
+    }
+            
+    dispatch_sync(gAppDelegate.dataQueue, ^{
+        [self deactivateDataSources];
+        [self installDatabaseFile:stagedDbPath andNamesFile:stagedNamesPath forVersion:version];
+        [self activateDataSources];
     });
 }
 
 // ----------------------------------------------------------------------------
 
-- (BOOL) hasStagedUpdates {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"stagingVersion"] != nil;
-}
-
-// ----------------------------------------------------------------------------
-
-- (NSString *) databasePath {
+- (NSString *) dbPath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     return [[paths objectAtIndex:0] stringByAppendingPathComponent:@"cards.sqlite3"];    
 }
 
 // ----------------------------------------------------------------------------
 
-- (NSString *) cardNamesTextPath {
+- (NSString *) namesPath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     return [[paths objectAtIndex:0] stringByAppendingPathComponent:@"card-names.txt"];    
 }
@@ -88,94 +145,89 @@
 
 - (BOOL) hasInstalledData {
     NSFileManager *fm = [NSFileManager defaultManager];
-    return ([fm fileExistsAtPath:self.databasePath] && [fm fileExistsAtPath:self.cardNamesTextPath]);
+    return ([fm fileExistsAtPath:self.dbPath] && [fm fileExistsAtPath:self.namesPath]);
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) installDataFromBundle {
-    NSFileManager *fm = [NSFileManager defaultManager];
     NSError *error;
-    NSString *databasePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"cards.sqlite3"];
-    NSString *cardNamesTextPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"card-names.txt"];
-    [fm removeItemAtPath:self.databasePath error:&error];
-    [fm removeItemAtPath:self.cardNamesTextPath error:&error];
-    [fm copyItemAtPath:databasePath toPath:self.databasePath error:&error];
-    [fm copyItemAtPath:cardNamesTextPath toPath:self.cardNamesTextPath error:&error];    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSString *dbPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"cards.sqlite3"];
+    NSString *namesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"card-names.txt"];
+    [fm removeItemAtPath:self.dbPath error:&error];
+    [fm removeItemAtPath:self.namesPath error:&error];
+    [fm copyItemAtPath:dbPath toPath:self.dbPath error:&error];
+    [fm copyItemAtPath:namesPath toPath:self.namesPath error:&error];
 }
 
 // ----------------------------------------------------------------------------
 
-- (void) installDataFromStage {
+- (void) installDatabaseFile:(NSString *)dbPath andNamesFile:(NSString *)namesPath forVersion:(NSString *)version {
     NSError *error;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *stagingVersion = [defaults objectForKey:@"stagingVersion"];
-    if (stagingVersion) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *stagingPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"staging"];
-        NSString *databasePath = [stagingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"cards-%@.sqlite3", stagingVersion]];
-        NSString *cardNamesTextPath = [stagingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"card-names-%@.txt", stagingVersion]];
-        NSFileManager *fm = [NSFileManager defaultManager];
-        [fm removeItemAtPath:self.databasePath error:&error];
-        [fm removeItemAtPath:self.cardNamesTextPath error:&error];
-        if ([fm copyItemAtPath:databasePath toPath:self.databasePath error:&error] && [fm copyItemAtPath:cardNamesTextPath toPath:self.cardNamesTextPath error:&error]) {
-            gAppDelegate.databaseVersion = stagingVersion;
-        }
-        [defaults removeObjectForKey:@"stagingVersion"];
-        [defaults synchronize];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    [fm removeItemAtPath:self.dbPath error:&error];
+    [fm removeItemAtPath:self.namesPath error:&error];
+    if ([fm moveItemAtPath:dbPath toPath:self.dbPath error:&error] && [fm moveItemAtPath:namesPath toPath:self.namesPath error:&error]) {
+        self.version = version;
     }
 }
 
 // ----------------------------------------------------------------------------
 
-- (BOOL) stageData:(NSData *)data forVersion:(NSString *)version {
-    NSError *error;
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *stagingPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"staging"];
-    NSString *dbPath = [stagingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"cards-%@.sqlite3", version]];
-    [fm createDirectoryAtPath:stagingPath withIntermediateDirectories:YES attributes:nil error:&error];
-    if ([data writeToFile:dbPath atomically:YES]) {
-        FMDatabase *stagingDB = [FMDatabase databaseWithPath:dbPath];
-        if ([stagingDB open] && [self isDatabaseSane:stagingDB]) {
-            NSString *namesPath = [stagingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"card-names-%@.txt", version]];            ;
-            if ([fm createFileAtPath:namesPath contents:nil attributes:nil] && [self createNameFile:namesPath fromDatabase:stagingDB]) {
-                [stagingDB close]; 
-                return YES;
-            }
-        } else {
-            [stagingDB close]; 
-        }               
-    }
-    return NO;
-}
-
-// ----------------------------------------------------------------------------
-
-- (BOOL) createNameFile:(NSString *)path fromDatabase:(FMDatabase *)database {
-    NSMutableDictionary *names = [NSMutableDictionary dictionary];
-    NSFileHandle *nameFile = [NSFileHandle fileHandleForWritingAtPath:path];
-    if (!nameFile) {
+- (BOOL) createNamesFile:(NSString *)namesPath fromDatabaseFile:(NSString *)dbPath {
+    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
+    if (![database open]) {
         return NO;
-    } else {
+    }
+    @try {
+        [[NSFileManager defaultManager] createFileAtPath:namesPath contents:nil attributes:nil];
+        NSFileHandle *namesFile = [NSFileHandle fileHandleForWritingAtPath:namesPath];
+        if (!namesFile) {
+            return NO;
+        } 
         NSData *separator = [@"|" dataUsingEncoding:NSUTF8StringEncoding];
+        NSMutableDictionary *allNames = [NSMutableDictionary dictionary];
         FMResultSet *rs = [database executeQuery:@"SELECT search_name, name_hash FROM cards"];    
         while ([rs next]) {
             NSString *name = [rs stringForColumn:@"search_name"];
             NSString *hash = [rs stringForColumn:@"name_hash"];
-            if ([names objectForKey:name] == nil) {
-                [names setObject:[NSNull null] forKey:name];
-                [nameFile writeData:separator];
-                [nameFile writeData:[name dataUsingEncoding:NSUTF8StringEncoding]];
-                [nameFile writeData:separator];
-                [nameFile writeData:[hash dataUsingEncoding:NSUTF8StringEncoding]];
+            if ([allNames objectForKey:name] == nil) {
+                [allNames setObject:[NSNull null] forKey:name];
+                [namesFile writeData:separator];
+                [namesFile writeData:[name dataUsingEncoding:NSUTF8StringEncoding]];
+                [namesFile writeData:separator];
+                [namesFile writeData:[hash dataUsingEncoding:NSUTF8StringEncoding]];
             }
-        }
+        }    
         [rs close];
-        [nameFile writeData:separator];
-        [nameFile closeFile];
+        [namesFile writeData:separator];
+        [namesFile closeFile];
         return YES;
     }
+    @finally {
+        [database close];
+    }    
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) activateDataSources {
+    if (!self.hasInstalledData) {
+        [self installDataFromBundle];
+    }
+    NSError *error;
+    names = [NSData dataWithContentsOfFile:self.namesPath options:NSDataReadingMappedAlways error:&error];
+    db = [FMDatabase databaseWithPath:self.dbPath];
+    [db open];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) deactivateDataSources {
+    [db close];
+    db = nil;
+    names = nil;
 }
 
 // ----------------------------------------------------------------------------

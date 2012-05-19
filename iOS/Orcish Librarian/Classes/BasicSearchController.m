@@ -30,8 +30,6 @@
     [super viewDidLoad];
     self.hasBeenFirstResponder = NO;
     self.cardList = [NSArray array];
-    self.cardListView.backgroundColor = self.cardListView.separatorColor = 
-        [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
 }
 
 // ----------------------------------------------------------------------------
@@ -73,7 +71,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) searchBar:(UISearchBar *)bar textDidChange:(NSString *)searchText {
-    dispatch_async(gAppDelegate.dataQueue, ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSArray *cards = [Card collapseCardList:[Card findCardsByTitleText:searchText]];
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([bar.text isEqualToString:searchText]) {

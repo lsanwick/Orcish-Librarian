@@ -9,6 +9,7 @@
 #import "CardSet.h"
 #import "Card.h"
 #import "AppDelegate.h"
+#import "DataManager.h"
 
 @implementation CardSet
 
@@ -22,8 +23,8 @@
     NSString *sql = 
         @"SELECT    sets.* "
         @"FROM      sets "
-        @"ORDER BY  pk DESC";
-    FMResultSet *rs = [gAppDelegate.db executeQuery:sql];
+        @"ORDER BY  idx DESC";
+    FMResultSet *rs = [gDataManager.db executeQuery:sql];
     while([rs next]) {
         CardSet *set = [[CardSet alloc] init];
         set.pk = [rs stringForColumn:@"pk"];

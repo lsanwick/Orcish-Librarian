@@ -9,17 +9,21 @@
 #import <UIKit/UIKit.h>
 
 
+#define gDataManager ([DataManager shared])
+
+@class FMDatabase;
+
 @interface DataManager : NSObject
 
 + (DataManager *) shared;
 
-- (void) stageUpdatesFromServer;
-- (BOOL) hasStagedUpdates;
 - (BOOL) hasInstalledData;
 - (void) installDataFromBundle;
-- (void) installDataFromStage;
+- (void) updateFromServer;
+- (void) activateDataSources;
+- (void) deactivateDataSources;
 
-@property (nonatomic, readonly) NSString *databasePath;
-@property (nonatomic, readonly) NSString *cardNamesTextPath;
+- (FMDatabase *) db;
+- (NSData *) names;
 
 @end

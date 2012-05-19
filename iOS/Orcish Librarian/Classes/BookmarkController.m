@@ -27,14 +27,6 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) viewDidLoad {
-    [super viewDidLoad];
-    self.cardListView.backgroundColor = self.cardListView.separatorColor = 
-        [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
-}
-
-// ----------------------------------------------------------------------------
-
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self reloadCards];

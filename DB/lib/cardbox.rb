@@ -88,6 +88,7 @@ class CardBox
     # CREATE TABLE sets
     io.puts(sql_create_table(:sets, {
       :pk => :integer,
+      :idx => :integer,
       :name => :varchar_255,
       :type => :integer,
       :tcg => :varchar_255 },
@@ -96,6 +97,7 @@ class CardBox
     io.puts
     io.puts(sql_create_table(:cards, {
       :pk => :integer,
+      :idx => :integer,
       :name => :varchar_255,
       :search_name => :varchar_255,
       :display_name => :varchar_255,
@@ -118,6 +120,8 @@ class CardBox
     ## CREATE INDEXES    
     # bookmarks
     io.puts(sql_create_index(:table => :cards, :column => :gatherer_id))    
+    # random lookup
+    io.puts(sql_create_index(:table => :cards, :column => :idx))    
     # other editions
     io.puts(sql_create_index(:table => :cards, :column => :name_hash))    
     # art variants
@@ -127,21 +131,29 @@ class CardBox
     
     # INSERTs
     io.puts
-    current_set_pk = 0
-    current_card_pk = 0
+    current_card_index = 0
+    current_set_index = 0
     @data[:sets].each do |set_name|
-      current_set_pk = current_set_pk + 1
+      current_set_index = current_set_index + 1
+      current_set_pk = set_name.to_name_hash.to_s
       tcg = @data[:tcg][set_name] || ''
       type = @data[:type][set_name] || ''
-      io.puts(sql_insert_row(:sets, :pk => current_set_pk, :name => set_name, :tcg => tcg, :type => type))
+      io.puts(sql_insert_row(:sets, 
+        :pk => current_set_pk, 
+        :idx => current_set_index, 
+        :name => set_name, 
+        :tcg => tcg, 
+        :type => type
+      ))
       io.puts
       @data[:cards][set_name].each do |card|
-        current_card_pk = current_card_pk + 1
+        current_card_index = current_card_index + 1
         io.puts(sql_insert_row(:cards, card.merge({
           :search_name => card[:name].to_searchable_name,
           :name_hash => card[:name].to_name_hash.to_s,
           :version_count => @data[:names][card[:name]],
-          :pk => current_card_pk,
+          :idx => current_card_index,
+          :pk => "#{set_name} #{card[:name]} #{card[:art_index]}".to_name_hash.to_s,
           :set_pk => current_set_pk
         })))
       end

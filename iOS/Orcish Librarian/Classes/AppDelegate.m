@@ -45,17 +45,13 @@
 
 @synthesize window;
 @synthesize rootController;
-@synthesize analyticsQueue;
 @synthesize dataQueue;
-@synthesize db;
-@synthesize searchNames;
 
 // ----------------------------------------------------------------------------
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.dataQueue = dispatch_queue_create("info.orcish.db.queue", NULL);
-    self.analyticsQueue = dispatch_queue_create("info.orcish.analytics.queue", NULL);    
-    dispatch_async(self.dataQueue, ^{ [self initializeData]; });
+    dataQueue = dispatch_queue_create("info.orcish.db.queue", NULL);
+    [self initializeData];
     [self initializeAnalytics];
     [self dequeueCardViewController];
     [self initializeWindow];    
@@ -67,7 +63,9 @@
 // ----------------------------------------------------------------------------
 
 - (void) applicationDidBecomeActive:(UIApplication *)application {
-    [[DataManager shared] stageUpdatesFromServer];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // [gDataManager updateFromServer];
+    });
 }
 
 // ----------------------------------------------------------------------------
@@ -76,20 +74,6 @@
     [[PriceManager shared] clearCache];
     // TODO: wipe search-names text from memory (needs to reload later if absent).
     //       alternatively, could memory-map the data (mmap or NSData)?
-}
-
-// ----------------------------------------------------------------------------
-
-- (NSString *) databaseVersion {
-    NSString *version = [[NSUserDefaults standardUserDefaults] objectForKey:@"databaseVersion"];
-    return version ? version : [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) setDatabaseVersion:(NSString *)databaseVersion {
-    [[NSUserDefaults standardUserDefaults] setObject:databaseVersion forKey:@"databaseVersion"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 // ----------------------------------------------------------------------------
@@ -154,32 +138,9 @@
 // ----------------------------------------------------------------------------
 
 - (void) initializeData {
-    DataManager *dataManager = [DataManager shared];
-    if ([dataManager hasStagedUpdates]) {
-        [dataManager installDataFromStage];
-    } else if(![dataManager hasInstalledData]) {
-        [dataManager installDataFromBundle];
-    } else {
-    }
-    [self activateDataSources];    
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) activateDataSources {
-    NSError *error;
-    DataManager *dataManager = [DataManager shared];
-    self.searchNames = [NSData dataWithContentsOfFile:dataManager.cardNamesTextPath options:NSDataReadingMappedAlways error:&error];
-    self.db = [FMDatabase databaseWithPath:dataManager.databasePath];
-    [self.db open];
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) deactivateDataSources {
-    [self.db close];
-    self.db = nil;
-    self.searchNames = nil;
+    dispatch_async(gAppDelegate.dataQueue, ^{
+        [gDataManager activateDataSources];
+    });    
 }
 
 // ----------------------------------------------------------------------------
@@ -195,33 +156,25 @@
 // ----------------------------------------------------------------------------
 
 - (void) initializeAnalytics {
-    dispatch_async(self.analyticsQueue, ^{ 
-        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-        NSError *error;
-        [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-18007072-1" dispatchPeriod:10 delegate:nil];
-        [[GANTracker sharedTracker] setCustomVariableAtIndex:1 name:@"version" value:version withError:&error];    
-    });
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSError *error;
+    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-18007072-1" dispatchPeriod:10 delegate:nil];
+    [[GANTracker sharedTracker] setCustomVariableAtIndex:1 name:@"version" value:version withError:&error];
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) trackScreen:(NSString *)path {
     // NSLog(@"TRACK SCREEN (%@)", path);
-    dispatch_async(self.analyticsQueue, ^{ 
-        NSError *error;
-        [[GANTracker sharedTracker] trackPageview:path withError:&error];
-    });
-
+    NSError *error;
+    [[GANTracker sharedTracker] trackPageview:path withError:&error];
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) trackEvent:(NSString *)category action:(NSString *)action label:(NSString *)label {
-    // NSLog(@"TRACK EVENT (%@, %@, %@)", category, action, label);
-    dispatch_async(self.analyticsQueue, ^{ 
-        NSError *error;
-        [[GANTracker sharedTracker] trackEvent:category action:action label:label value:0 withError:&error];
-    });
+    NSError *error;
+    [[GANTracker sharedTracker] trackEvent:category action:action label:label value:0 withError:&error];
 }
 
 // ----------------------------------------------------------------------------
@@ -238,7 +191,6 @@
 // ----------------------------------------------------------------------------
 
 - (void) showRandomCardController {
-    [self hideMenu];
     CardViewController *controller = [self dequeueCardViewController];
     controller.sequence = [CardSequence randomCardSequence];
     controller.position = 0;
@@ -248,7 +200,6 @@
 // ----------------------------------------------------------------------------
 
 - (void) showBasicSearchController {
-    [self hideMenu];
     BasicSearchController *controller = [[BasicSearchController alloc] initWithNibName:nil bundle:nil];
     [controller view];
     [self.rootController setViewController:controller animated:NO];
@@ -257,7 +208,6 @@
 // ----------------------------------------------------------------------------
 
 - (void) showBookmarkController {
-    [self hideMenu];
     BookmarkController *controller = [[BookmarkController alloc] initWithNibName:@"OrcishViewController" bundle:nil];
     [controller view];
     controller.navigationItem.title = @"Bookmarks";
@@ -267,7 +217,6 @@
 // ----------------------------------------------------------------------------
 
 - (void) showBrowseController {
-    [self hideMenu];
     SetListController *controller = [[SetListController alloc] initWithNibName:nil bundle:nil];
     [controller view];
     [self.rootController setViewController:controller animated:NO];
