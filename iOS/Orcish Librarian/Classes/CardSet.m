@@ -18,19 +18,42 @@
 
 // ----------------------------------------------------------------------------
 
++ (NSArray *) findStandardSets {
+    NSMutableArray *sets = [NSMutableArray array];
+    NSString *sql = 
+        @"SELECT    sets.* "
+        @"FROM      sets "
+        @"WHERE     format = 1 "
+        @"ORDER BY  idx DESC ";
+    dispatch_sync(gAppDelegate.dataQueue, ^{
+        FMResultSet *rs = [gDataManager.db executeQuery:sql];
+        while([rs next]) {
+            CardSet *set = [[CardSet alloc] init];
+            set.pk = [rs stringForColumn:@"pk"];
+            set.name = [rs stringForColumn:@"name"];
+            [sets addObject:set];
+        } 
+    });
+    return sets;
+}
+
+// ----------------------------------------------------------------------------
+
 + (NSArray *) findAll {
     NSMutableArray *sets = [NSMutableArray array];
     NSString *sql = 
         @"SELECT    sets.* "
         @"FROM      sets "
-        @"ORDER BY  idx DESC";
-    FMResultSet *rs = [gDataManager.db executeQuery:sql];
-    while([rs next]) {
-        CardSet *set = [[CardSet alloc] init];
-        set.pk = [rs stringForColumn:@"pk"];
-        set.name = [rs stringForColumn:@"name"];
-        [sets addObject:set];
-    } 
+        @"ORDER BY  name ASC";
+    dispatch_sync(gAppDelegate.dataQueue, ^{
+        FMResultSet *rs = [gDataManager.db executeQuery:sql];
+        while([rs next]) {
+            CardSet *set = [[CardSet alloc] init];
+            set.pk = [rs stringForColumn:@"pk"];
+            set.name = [rs stringForColumn:@"name"];
+            [sets addObject:set];
+        } 
+    });
     return sets;
 }
 

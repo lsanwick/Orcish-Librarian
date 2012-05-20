@@ -4,6 +4,14 @@ require 'logger'
 
 module Orcish
   
+  CoreSet = 1
+  ExpansionSet = 2
+  SpecialSet = 3
+  
+  Standard = 1
+  Modern = 2
+  Legacy = 3
+  
   def self.env=(env)
     @env = env.to_s.downcase
   end

@@ -10,6 +10,7 @@
 
 @interface CardSet : NSObject
 
++ (NSArray *) findStandardSets;
 + (NSArray *) findAll;
 
 @property (nonatomic, copy) NSString *name;

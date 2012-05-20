@@ -15,19 +15,22 @@
 
 - (void) loadData;
 
-@property (strong, nonatomic) NSArray *sets;
+@property (strong, nonatomic) NSArray *allSets;
+@property (strong, nonatomic) NSArray *recentSets;
 
 @end
 
 
 @implementation SetListController
 
-@synthesize sets;
+@synthesize allSets;
+@synthesize recentSets;
 
 // ----------------------------------------------------------------------------
 
 - (void) loadData {
-    self.sets = [CardSet findAll];
+    self.allSets = [CardSet findAll];
+    self.recentSets = [CardSet findStandardSets];
 }
 
 // ----------------------------------------------------------------------------
@@ -55,16 +58,18 @@
         cell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-    } 
-    cell.textLabel.text = [[self.sets objectAtIndex:indexPath.row] name];
+    }
+    NSArray *sets = (indexPath.section == 0) ? recentSets : allSets;
+    cell.textLabel.text = [[sets objectAtIndex:indexPath.row] name];
     return cell;
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];    
-    CardSet *set = [self.sets objectAtIndex:indexPath.row];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSArray *sets = (indexPath.section == 0) ? recentSets : allSets;
+    CardSet *set = [sets objectAtIndex:indexPath.row];
     [gAppDelegate trackEvent:@"Browse" action:@"Show Set" label:set.name];
     [gAppDelegate showCardList:set.cards withTitle:set.name];
 }
@@ -80,13 +85,23 @@
 // ----------------------------------------------------------------------------
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {    
-    return 1;
+    return 2;
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return section == 0 ?
+        @"Recent Sets" :
+        @"All Sets";
 }
 
 // ----------------------------------------------------------------------------
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.sets.count;
+    return section == 0 ?
+        self.recentSets.count :
+        self.allSets.count;
 }
 
 // ----------------------------------------------------------------------------
