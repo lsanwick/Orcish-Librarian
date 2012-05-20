@@ -10,18 +10,16 @@ class CardBox
   include SQLMaker
   
   def initialize()
-    @data = { :sets => [ ], :tcg => { }, :type => { }, :format => { }, :cards => { }, :names => { } }
+    @data = { :sets => [ ], :meta => { }, :cards => { }, :names => { } }
   end
   
   def save(path, format = :json)
     self.send("save_as_#{format}", path)
   end
   
-  def add(cards, set, tcg, type, format)
+  def add(cards, set, meta)
     @data[:sets] << set
-    @data[:tcg][set] = tcg
-    @data[:type][set] = type
-    @data[:format][set] = format
+    @data[:meta][set] = meta
     @data[:cards][set] = (@data[:cards][set] || [ ]) + cards
     cards.each do |card|
       if @data[:names][card[:name]].nil?
@@ -139,13 +137,14 @@ class CardBox
     @data[:sets].each do |set_name|
       current_set_index = current_set_index + 1
       current_set_pk = set_name.to_name_hash.to_s
+      meta = (@data[:meta][set_name] || { })
       io.puts(sql_insert_row(:sets, 
         :pk => current_set_pk, 
         :idx => current_set_index, 
         :name => set_name, 
-        :tcg => (@data[:tcg][set_name] || ''), 
-        :type => (@data[:type][set_name] || Orcish::Special),
-        :format => (@data[:format][set_name] || Orcish::Legacy)
+        :tcg => (meta[:tcg] || ''), 
+        :type => (meta[:type] || Orcish::Special),
+        :format => (meta[:format] || Orcish::Legacy)
       ))
       io.puts
       @data[:cards][set_name].each do |card|
