@@ -9,6 +9,7 @@
 #import "PriceManager.h"
 #import "Card.h"
 #import "RegexKitLite.h"
+#import "NSString+URLEncoder.h"
 
 
 #define kDownloadBatchSize 3
@@ -144,10 +145,9 @@
 // ----------------------------------------------------------------------------
 
 - (void) beginLookup:(QueuedLookup *)lookup {
-    NSString *cardName = [lookup.card.displayName stringByReplacingOccurrencesOfRegex:@"^.*\\((.*)\\s\\/\\/\\s(.*)\\)$" withString:@"$1 // $2"];
     NSString *url = [NSString stringWithFormat:@"http://partner.tcgplayer.com/x/phl.asmx/p?pk=ORCSHLBRN&p=%@&s=%@",
-        [cardName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
-        [lookup.card.tcgSetName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];        
+        [lookup.card.tcgName stringByEncodingForURL], [lookup.card.tcgSetName stringByEncodingForURL]];
+    //NSLog(@"%@", url);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData *response = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
         dispatch_async(dispatch_get_main_queue(), ^{

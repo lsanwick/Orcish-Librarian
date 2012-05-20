@@ -24,6 +24,7 @@
 @synthesize displayName;
 @synthesize searchName;
 @synthesize nameHash;
+@synthesize tcgName;
 @synthesize gathererId;
 @synthesize setPk;
 @synthesize setName;
@@ -49,6 +50,7 @@
     card.nameHash = [NSNull wrapNil:[rs stringForColumn:@"name_hash"]];
     card.name = [NSNull wrapNil:[rs stringForColumn:@"name"]];
     card.displayName = [NSNull wrapNil:[rs stringForColumn:@"display_name"]];
+    card.tcgName = [NSNull wrapNil:[rs stringForColumn:@"tcg"]];
     card.gathererId = [NSNull wrapNil:[rs stringForColumn:@"gatherer_id"]];
     card.setPk = [NSNull wrapNil:[rs stringForColumn:@"set_pk"]];
     card.setName = [NSNull wrapNil:[rs stringForColumn:@"set_name"]];

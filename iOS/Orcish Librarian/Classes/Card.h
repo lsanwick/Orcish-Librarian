@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString *displayName;
 @property (nonatomic, strong) NSString *searchName;
 @property (nonatomic, strong) NSString *nameHash;
+@property (nonatomic, strong) NSString *tcgName;
 @property (nonatomic, strong) NSString *gathererId;
 @property (nonatomic, strong) NSString *setPk;
 @property (nonatomic, strong) NSString *setName;

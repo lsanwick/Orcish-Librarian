@@ -344,7 +344,7 @@ function loadCardPhoto(card) {
         var setName = card.setName.replace(/:/g, '');
 		var cardName = card.displayName.replace(/:/g, '');
 		cardName = cardName.replace(/^.*\((.*)\s\/\/\s(.*)\)$/, '$1$2');
-        imageURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(setName) + '/' + encodeURIComponent(cardName) + card.artIndex + '.full.jpg';
+        imageURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(cleanText(setName)) + '/' + encodeURIComponent(cleanText(cardName)) + card.artIndex + '.full.jpg';
     }
     $('.ol-card-image').hide();
     $('<img />')
@@ -471,10 +471,13 @@ function formattedOracleText(card) {
 	// Unhinged has 1/2 mana symbols that look like nonsense
 	// It also has 1/2 P/T modifiers that are represented similarly
 	if (card.setName == 'Unhinged') {
+		text = text.replace(/\{([WBURG])([WBURG])\}/ig, '{$1}{$2}');
+		text = text.replace(/\{o(\d+)o\{1\/2\}\}/g, '{$1}{o{C\/2}}');
 		text = text.replace('{o{1\/2}}', '{o{C\/2}}');
-		text = text.replace(/\{o\{1\/2\*([WBURG])\}\}/, '{o{$1\/2}}');
-		text = text.replace(/\{o\{([WBURGC])\/2\}\}/i, '{$1/2}');
-		text = text.replace(/\+(\d+)\{1\/2\}/g, '+$1½');
+		text = text.replace(/\{o\{1\/2\*([WBURG])\}\}/g, '{o{$1\/2}}');
+		text = text.replace(/\{o\{([WBURGC])\/2\}\}/ig, '{$1/2}');
+		text = text.replace(/\{1\/2\}/g, '½');
+		text = text.replace(/o([0-9WBURGX])o([0-9WBURGX])/g, '{$1}{$2}');
 	}
 
 	// Unglued was never updated with modern markup
@@ -503,7 +506,7 @@ function formattedOracleText(card) {
 	text = text.replace(/\n+/g, '<div class="separator"></div>');
 
 	// italicize certain keywords
-	text = text.replace(/\b(channel|chroma|domain|fateful|hour|grandeur|hellbent|imprint|join forces|kinship|landfall|metalcraft|morbid|radiance|sweep|threshold)\b/i, '<i>$1</i>');
+	text = text.replace(/\b(channel|chroma|domain|fateful\shour|grandeur|hellbent|imprint|join\sforces|kinship|landfall|metalcraft|morbid|radiance|sweep|threshold)\b/i, '<i>$1</i>');
 	
 	// convert hyphen into em-dash
 	text = text.replace(/(\s)-(\s)/, '$1&mdash;$2');
@@ -634,6 +637,24 @@ function formatRarity(code) {
         return 'Special';
     }
 }
+
+// ---------------------------------------------------------------------------- 
+
+function cleanText(text) {
+	var translations = {
+		'Š': 'S', 'š': 's', 'Ð': 'Dj','Ž': 'Z', 'ž': 'z', 'À': 'A', 'Á': 'A', 'Â': 'A', 'Ã': 'A', 'Ä': 'A', 
+		'Å': 'A', 'Æ': 'Ae', 'Ç': 'C', 'È': 'E', 'É': 'E', 'Ê': 'E', 'Ë': 'E', 'Ì': 'I', 'Í': 'I', 'Î': 'I', 
+		'Ï': 'I', 'Ñ': 'N', 'Ò': 'O', 'Ó': 'O', 'Ô': 'O', 'Õ': 'O', 'Ö': 'O', 'Ø': 'O', 'Ù': 'U', 'Ú': 'U', 
+		'Û': 'U', 'Ü': 'U', 'Ý': 'Y', 'Þ': 'B', 'ß': 'Ss','à': 'a', 'á': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 
+		'å': 'a', 'æ': 'ae', 'ç': 'c', 'è': 'e', 'é': 'e', 'ê': 'e', 'ë': 'e', 'ì': 'i', 'í': 'i', 'î': 'i', 
+		'ï': 'i', 'ð': 'o', 'ñ': 'n', 'ò': 'o', 'ó': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ø': 'o', 'ù': 'u', 
+		'ú': 'u', 'û': 'u', 'ý': 'y', 'ý': 'y', 'þ': 'b', 'ÿ': 'y', 'ƒ': 'f' 
+	}
+	for (special in translations) {
+		text = text.replace(new RegExp(special, 'g'), translations[special]);
+	}
+	return text;
+}
  
 // ---------------------------------------------------------------------------- 
 
@@ -645,7 +666,7 @@ $('.ol-bookmark a').click(toggleBookmark);
 })()
 
 if (navigator.userAgent	.indexOf('iPhone') == -1) {
-	Orcish.setCardData({"otherParts":[],"displayName":"Act of Aggression","artIndex":"","tcgSetName":"New Phyrexia","loyalty":null,"name":"Act of Aggression","setName":"New Phyrexia","rarity":"U","power":"","otherEditions":[],"isBookmarked":false,"artist":"Whit Brachna","gathererId":"230076","manaCost":"3(R\/P)(R\/P)","typeLine":"Instant","pk":"18610","collectorNumber":"78","oracleText":"({(r\/p)} can be paid with either {R} or 2 life.)\nGain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.","artVariants":[{"artIndex":"","artist":"Whit Brachna","pk":"18610"}],"toughness":""})
+	Orcish.setCardData({"otherParts":[],"displayName":"\"Ach! Hans, Run!\"","artIndex":"","tcgSetName":"Unhinged","loyalty":null,"name":"Flaccify","setName":"Unhinged","rarity":"C","power":"","otherEditions":[],"isBookmarked":false,"artist":"Tim Hildebrandt","gathererId":"74330","manaCost":"2U","typeLine":"Instant","pk":"4121372870","collectorNumber":"32","oracleText":"Counter target spell unless its controller pays {o3o{1\/2}}.","artVariants":[{"artIndex":"","artist":"Tim Hildebrandt","pk":"4121372870"}],"toughness":""})
 	
 } else {
 	$(function(){

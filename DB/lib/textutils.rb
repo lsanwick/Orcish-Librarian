@@ -17,15 +17,43 @@ class String
     /\s+—\s+/ => ' - ' 
   }
   
+  @@tcg_translations = {
+    '"' => '',
+    'ö' => 'o', 'Ö' => 'O',
+    'Æ' => 'AE', 'æ' => 'ae'
+  }
+  
   def clean()    
-    result = self
+    result = self.dup
     @@translations.each_pair do |search, replace|
       result.gsub!(search, replace)
+    end    
+    result
+  end
+  
+  def tcg_clean()
+    result = self.dup
+    # TCGPlayer expects "Bösium Strip" but not "Jötun Grunt"
+    if result == 'Bösium Strip'
+      return result
     end
+    result.gsub!(/^.*\((.*)\s\/\/\s(.*)\)$/, '\1 // \2');
+    @@tcg_translations.each_pair do |search, replace|
+      result.gsub!(search, replace)
+    end    
     result
   end
   
   def to_display_name()
+    # Gatherer lists "Kill! Destroy!" as "Kill Destroy"
+    if self == 'Kill Destroy'
+      return 'Kill! Destroy!'
+    end
+    # "Erase" from Unhinged is the only card that contains 
+    # literal parentheses in its card name
+    if self == "Erase (Not the Urza's Legacy One)"
+      return self
+    end
     # XXValor (Valor)
     if /^XX(.*)\s\((.*)\)/.match(self) && $1 == $2
       return $1
@@ -42,7 +70,12 @@ class String
     self.gsub(/^XX(.*)\s+\(.*\)$/, '\1')
   end
   
-  def to_normalized_name()    
+  def to_normalized_name() 
+    # "Erase" from Unhinged is the only card that contains 
+    # literal parentheses in its card name
+    if self == "Erase (Not the Urza's Legacy One)"
+      return self
+    end
     # XXValor (Valor)
     if /^XX(.*)\s\((.*)\)/.match(self) && $1 == $2
       return $1
@@ -60,14 +93,18 @@ class String
   end
   
   def to_searchable_name()
-    result = self.upcase                    # all upper-case
-    result = result.gsub(/\(.*?\)/, '')     # remove parethetical text
+    result = self.clean.upcase
+    # "Erase" from Unhinged is the only card that contains 
+    # literal parentheses in its card name
+    if result != "ERASE (NOT THE URZA'S LEGACY ONE)"
+      result = result.gsub(/\(.*?\)/, '')   # remove parethetical text
+    end
     result = result.gsub(/[^A-Z0-9]/, '')   # remove non-alphanumeric characters
     result = result.strip                   # trim whitespace
   end
   
   def to_name_hash()
-    result = self.to_searchable_name
+    result = self.clean.to_searchable_name
     result = (Digest::SHA256.new << result).to_s
     return Zlib::crc32(result)
   end

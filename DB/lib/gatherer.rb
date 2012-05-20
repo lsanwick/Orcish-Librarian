@@ -39,7 +39,7 @@ class Gatherer < Source
     doc = fetch_document("http://gatherer.wizards.com/Pages/Search/Default.aspx?output=checklist&set=%5b%22#{URI.escape(set)}%22%5d")
     doc.search("tr[@class=cardItem]").each do |tr|
       cells = tr.search('td')
-      name = cells[1].at('a').inner_text.strip.clean.to_normalized_name
+      name = cells[1].at('a').inner_text.strip.to_normalized_name
       others = cards[name] = cards[name] || [ ]
       entry = {
         :gatherer_id =>  cells[1].at('a')['href'].gsub(/^.*multiverseid=(\d+)$/, '\1'),
@@ -73,9 +73,9 @@ class Gatherer < Source
       if cells.length == 2
         label = cells[0].inner_text.strip.gsub(/:$/, '')
         value = cells[1]
-        if label == 'Name'
-          current_card[:name] = value.inner_text.strip.clean.to_normalized_name
-          current_card[:display_name] = value.inner_text.strip.clean.to_display_name
+        if label == 'Name'          
+          current_card[:name] = value.inner_text.strip.to_normalized_name
+          current_card[:display_name] = value.inner_text.strip.to_display_name
           current_card[:gatherer_id] = value.at('a')['href'].gsub(/^.*?(\d+)$/, '\1')
         elsif label == 'Pow/Tgh'
           current_card[:power] = value.inner_text.strip.gsub(/^\(([^\/]*(?:\{1\/2\})?)\/([^\/]*(?:\{1\/2\})?)\)/, '\1')
@@ -83,9 +83,9 @@ class Gatherer < Source
         elsif label == 'Loyalty'
           current_card[:loyalty] = value.inner_text.strip.gsub(/^\((.*)\)$/, '\1')
         elsif label == 'Type'
-          current_card[:type_line] = value.inner_text.strip.clean
+          current_card[:type_line] = value.inner_text.strip
         elsif label == 'Rules Text'
-          current_card[:oracle_text] = value.inner_text.strip.clean
+          current_card[:oracle_text] = value.inner_text.strip
         elsif label == 'Cost'
           current_card[:mana_cost] = value.inner_text.strip
         end
