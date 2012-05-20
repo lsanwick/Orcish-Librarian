@@ -31,7 +31,8 @@
     static NSArray *sections = nil;
     if (!sections) {
         sections = [NSArray arrayWithObjects:
-            @"Orcish",
+            @"",
+            @"Orcish Librarian",
             nil];
     }
     return sections;
@@ -45,10 +46,12 @@
         items = [NSArray arrayWithObjects:
             [NSArray arrayWithObjects:
                 @"Basic Search", 
-                @"Browse", 
+                @"Browse Sets", 
                 @"Bookmarks", 
                 @"Random Cards", 
-                @"Check for Update",
+                nil],
+            [NSArray arrayWithObjects:
+                @"About",
                 nil],
             nil];
     }
@@ -87,7 +90,7 @@
 // ----------------------------------------------------------------------------
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return (section == 0) ? 0.0 : 22.0;
+    return ([[self.menuSections objectAtIndex:section] isEqualToString:@""]) ? 0.0f : 22.0f;
 }
 
 // ----------------------------------------------------------------------------
@@ -114,8 +117,6 @@
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {    
-    [gAppDelegate hideMenu];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString *text = [[[self.menuItems objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] uppercaseString];
     
     // HOME (BASIC SEARCH)
@@ -137,17 +138,18 @@
     }
     
     // BROWSE BY SET
-    else if ([text isEqualToString:@"BROWSE"]) {
+    else if ([text isEqualToString:@"BROWSE SETS"]) {
         [gAppDelegate trackEvent:@"Menu" action:@"Browse" label:@""];
         [gAppDelegate showBrowseController];
     }
     
-    // CHECK FOR UPDATES
-    else if ([text isEqualToString:@"CHECK FOR UPDATE"]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [gDataManager updateFromServer];
-        });
+    // ABOUT
+    else if ([text isEqualToString:@"ABOUT"]) {
+        [gAppDelegate showAboutController];
     }
+    
+    [gAppDelegate hideMenu];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 // ----------------------------------------------------------------------------

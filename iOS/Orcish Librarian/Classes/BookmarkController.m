@@ -27,6 +27,13 @@
 
 // ----------------------------------------------------------------------------
 
+- (void) viewDidLoad {
+    [super viewDidLoad];
+    self.navigationItem.title = @"Bookmarks";
+}
+
+// ----------------------------------------------------------------------------
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self reloadCards];

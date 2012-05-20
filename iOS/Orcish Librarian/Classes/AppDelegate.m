@@ -12,6 +12,7 @@
 #import "BookmarkController.h"
 #import "SetListController.h"
 #import "CardViewController.h"
+#import "AboutController.h"
 #import "CardSequence.h"
 #import "PriceManager.h"
 #import "DataManager.h"
@@ -64,7 +65,7 @@
 
 - (void) applicationDidBecomeActive:(UIApplication *)application {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // [gDataManager updateFromServer];
+        [gDataManager updateFromServer];
     });
 }
 
@@ -201,7 +202,6 @@
 
 - (void) showBasicSearchController {
     BasicSearchController *controller = [[BasicSearchController alloc] initWithNibName:nil bundle:nil];
-    [controller view];
     [self.rootController setViewController:controller animated:NO];
 }
 
@@ -209,8 +209,6 @@
 
 - (void) showBookmarkController {
     BookmarkController *controller = [[BookmarkController alloc] initWithNibName:@"OrcishViewController" bundle:nil];
-    [controller view];
-    controller.navigationItem.title = @"Bookmarks";
     [self.rootController setViewController:controller animated:NO];
 }
 
@@ -218,7 +216,13 @@
 
 - (void) showBrowseController {
     SetListController *controller = [[SetListController alloc] initWithNibName:nil bundle:nil];
-    [controller view];
+    [self.rootController setViewController:controller animated:NO];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) showAboutController {
+    AboutController *controller = [[AboutController alloc] initWithNibName:nil bundle:nil];
     [self.rootController setViewController:controller animated:NO];
 }
 

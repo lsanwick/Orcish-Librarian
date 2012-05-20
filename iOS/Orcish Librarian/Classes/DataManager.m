@@ -29,8 +29,6 @@
 - (NSString *) dbPath;
 - (NSString *) namesPath;
 
-@property (nonatomic, copy) NSString *version;
-
 @end
 
 
@@ -88,6 +86,20 @@
 
 // ----------------------------------------------------------------------------
 
+- (NSDate *) lastUpdated {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"lastUpdated"];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) setLastUpdated:(NSDate *)lastUpdated {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:lastUpdated forKey:@"lastUpdated"];
+    [defaults synchronize];
+}
+
+// ----------------------------------------------------------------------------
+
 - (BOOL) canUpdateTo:(NSString *)version {
     // major versions must be identical
     // minor version of update must be higher than existing minor version
@@ -97,34 +109,38 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) updateFromServer {
-    
-    NSError *error; 
+- (void) updateFromServer {    
+    @try {
+        NSError *error; 
 
-    NSURL *versionURL = [NSURL URLWithString:@"http://direct.orcish.info/librarian/db/version.txt"];
-    NSString *version = [NSString stringWithContentsOfURL:versionURL encoding:NSUTF8StringEncoding error:&error];
-    if (!version || ![self canUpdateTo:version]) {
-        return;
+        NSURL *versionURL = [NSURL URLWithString:@"http://direct.orcish.info/librarian/db/version.txt"];
+        NSString *version = [NSString stringWithContentsOfURL:versionURL encoding:NSUTF8StringEncoding error:&error];
+        if (!version || ![self canUpdateTo:version]) {
+            return;
+        }
+        
+        NSURL *dataURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://direct.orcish.info/librarian/db/cards-%@.sqlite3", version]];
+        NSData *data = [NSData dataWithContentsOfURL:dataURL options:0 error:&error];
+        if (!data) {
+            return;
+        }
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *stagedDbPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]];
+        NSString *stagedNamesPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]];    
+        if (![data writeToFile:stagedDbPath atomically:YES] || ![self createNamesFile:stagedNamesPath fromDatabaseFile:stagedDbPath]) {
+            return;
+        }
+                
+        dispatch_sync(gAppDelegate.dataQueue, ^{
+            [self deactivateDataSources];
+            [self installDatabaseFile:stagedDbPath andNamesFile:stagedNamesPath forVersion:version];
+            [self activateDataSources];
+        });
     }
-    
-    NSURL *dataURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://direct.orcish.info/librarian/db/cards-%@.sqlite3", version]];
-    NSData *data = [NSData dataWithContentsOfURL:dataURL options:0 error:&error];
-    if (!data) {
-        return;
+    @finally {
+        self.lastUpdated = [NSDate date];
     }
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *stagedDbPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]];
-    NSString *stagedNamesPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]];    
-    if (![data writeToFile:stagedDbPath atomically:YES] || ![self createNamesFile:stagedNamesPath fromDatabaseFile:stagedDbPath]) {
-        return;
-    }
-            
-    dispatch_sync(gAppDelegate.dataQueue, ^{
-        [self deactivateDataSources];
-        [self installDatabaseFile:stagedDbPath andNamesFile:stagedNamesPath forVersion:version];
-        [self activateDataSources];
-    });
 }
 
 // ----------------------------------------------------------------------------

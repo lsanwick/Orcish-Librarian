@@ -58,6 +58,8 @@
 		8DC308FB155A2770007AAD7D /* CardSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC308FA155A2770007AAD7D /* CardSet.m */; };
 		8DD02111146A2A26008C522A /* BasicSearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD02110146A2A26008C522A /* BasicSearchController.xib */; };
 		8DE5A18915681265005C195A /* NSString+URLEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5A18815681265005C195A /* NSString+URLEncoder.m */; };
+		8DE5A18D15695060005C195A /* AboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5A18C15695060005C195A /* AboutController.m */; };
+		8DE5A18F15695173005C195A /* AboutController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5A18E15695173005C195A /* AboutController.xib */; };
 		8DE5D9921457A02000B6CAAF /* Menu-Section.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9901457A02000B6CAAF /* Menu-Section.png */; };
 		8DE5D9931457A02000B6CAAF /* Menu-Section@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */; };
 		8DE898DA147F32C50024E016 /* SearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE898D9147F32C50024E016 /* SearchCriteria.m */; };
@@ -162,6 +164,9 @@
 		8DD02110146A2A26008C522A /* BasicSearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BasicSearchController.xib; path = Layout/BasicSearchController.xib; sourceTree = "<group>"; };
 		8DE5A18715681265005C195A /* NSString+URLEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoder.h"; sourceTree = "<group>"; };
 		8DE5A18815681265005C195A /* NSString+URLEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoder.m"; sourceTree = "<group>"; };
+		8DE5A18B15695060005C195A /* AboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutController.h; sourceTree = "<group>"; };
+		8DE5A18C15695060005C195A /* AboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutController.m; sourceTree = "<group>"; };
+		8DE5A18E15695173005C195A /* AboutController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutController.xib; path = "Orcish Librarian/Layout/AboutController.xib"; sourceTree = SOURCE_ROOT; };
 		8DE5D9901457A02000B6CAAF /* Menu-Section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section.png"; sourceTree = "<group>"; };
 		8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section@2x.png"; sourceTree = "<group>"; };
 		8DE898D8147F32C50024E016 /* SearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCriteria.h; sourceTree = "<group>"; };
@@ -295,6 +300,7 @@
 		8D150F34144FEC2100141685 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				8DE5A18E15695173005C195A /* AboutController.xib */,
 				8D150F35144FEED800141685 /* OrcishRootController.xib */,
 				8DD02110146A2A26008C522A /* BasicSearchController.xib */,
 				8D0480A214700C42001E183C /* CardViewController.xib */,
@@ -308,6 +314,8 @@
 		8D150F38144FF0C700141685 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8DE5A18B15695060005C195A /* AboutController.h */,
+				8DE5A18C15695060005C195A /* AboutController.m */,
 				8D150F39144FF0C700141685 /* AppDelegate.h */,
 				8D150F3A144FF0C700141685 /* AppDelegate.m */,
 				8DBDB1231466DEC600140217 /* BasicSearchController.h */,
@@ -330,6 +338,8 @@
 				8D1F717F145314D50010C161 /* MenuController.m */,
 				8D95BD1915263552005B8518 /* NSNull+Wrap.h */,
 				8D95BD1A15263552005B8518 /* NSNull+Wrap.m */,
+				8DE5A18715681265005C195A /* NSString+URLEncoder.h */,
+				8DE5A18815681265005C195A /* NSString+URLEncoder.m */,
 				8D150F3B144FF0C700141685 /* OrcishRootController.h */,
 				8D150F3C144FF0C700141685 /* OrcishRootController.m */,
 				8DB1AE83155E03790038F991 /* OrcishViewController.h */,
@@ -346,8 +356,6 @@
 				8D32B0B515293DCC00C0EF2E /* SearchResultCell.m */,
 				8DC308F6155A1BB8007AAD7D /* SetListController.h */,
 				8DC308F7155A1BB8007AAD7D /* SetListController.m */,
-				8DE5A18715681265005C195A /* NSString+URLEncoder.h */,
-				8DE5A18815681265005C195A /* NSString+URLEncoder.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -554,6 +562,7 @@
 				8D6B5687154E3046006BFA0C /* PriceListController.xib in Resources */,
 				8DA1AFDC155E1F9C0091A368 /* OrcishViewController.xib in Resources */,
 				8DA1AFDF155E21C20091A368 /* SetListController.xib in Resources */,
+				8DE5A18F15695173005C195A /* AboutController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,6 +624,7 @@
 				8DB1AE85155E03790038F991 /* OrcishViewController.m in Sources */,
 				8D9DD8901563130C00C4D02E /* DataManager.m in Sources */,
 				8DE5A18915681265005C195A /* NSString+URLEncoder.m in Sources */,
+				8DE5A18D15695060005C195A /* AboutController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
