@@ -23,22 +23,9 @@ class String
     'Æ' => 'AE', 'æ' => 'ae'
   }
   
-  def clean()    
+  def clean()   
     result = self.dup
     @@translations.each_pair do |search, replace|
-      result.gsub!(search, replace)
-    end    
-    result
-  end
-  
-  def tcg_clean()
-    result = self.dup
-    # TCGPlayer expects "Bösium Strip" but not "Jötun Grunt"
-    if result == 'Bösium Strip'
-      return result
-    end
-    result.gsub!(/^.*\((.*)\s\/\/\s(.*)\)$/, '\1 // \2');
-    @@tcg_translations.each_pair do |search, replace|
       result.gsub!(search, replace)
     end    
     result
@@ -70,7 +57,21 @@ class String
     self.gsub(/^XX(.*)\s+\(.*\)$/, '\1')
   end
   
-  def to_normalized_name() 
+  def to_tcg_name()
+    result = self.dup.to_display_name
+    # expects "Bösium Strip" but not "Jötun Grunt"
+    if result == 'Bösium Strip'
+      return result
+    end    
+    # expects "(Assault // Battery)"
+    result.gsub!(/^.*\((.*)\s\/\/\s(.*)\)$/, '\1 // \2');
+    @@tcg_translations.each_pair do |search, replace|
+      result.gsub!(search, replace)
+    end    
+    result
+  end
+  
+  def to_spell_name()     
     # "Erase" from Unhinged is the only card that contains 
     # literal parentheses in its card name
     if self == "Erase (Not the Urza's Legacy One)"
@@ -93,20 +94,20 @@ class String
   end
   
   def to_searchable_name()
-    result = self.clean.upcase
+    result = self.to_display_name.clean.upcase
     # "Erase" from Unhinged is the only card that contains 
     # literal parentheses in its card name
     if result != "ERASE (NOT THE URZA'S LEGACY ONE)"
       result = result.gsub(/\(.*?\)/, '')   # remove parethetical text
     end
     result = result.gsub(/[^A-Z0-9]/, '')   # remove non-alphanumeric characters
-    result = result.strip                   # trim whitespace
+    result
   end
   
   def to_name_hash()
     result = self.clean.to_searchable_name
     result = (Digest::SHA256.new << result).to_s
-    return Zlib::crc32(result)
+    return Zlib::crc32(result).to_s
   end
   
 end

@@ -59,15 +59,13 @@ class CardBox
         @data[:cards][set].each do |card|
           name = card[:name].to_searchable_name
           if names[name].nil?
-            searchable_name = card[:name].to_searchable_name
-            searchable_hash = card[:name].to_name_hash.to_s
-            io.write('|' + searchable_name)
-            io.write('|' + searchable_hash)
-            names[searchable_name] = true
-            if !numbers[searchable_hash].nil?
-              debug("WARNING: repeated search name hash: \"#{searchable_name}\" and \"#{numbers[searchable_hash]}\"")
+            io.write('|' + card[:search_name])
+            io.write('|' + card[:name_hash])
+            names[card[:search_name]] = true
+            if !numbers[card[:name_hash]].nil?
+              debug("WARNING: repeated search name hash: \"#{card[:search_name]}\" and \"#{numbers[card[:name_hash]]}\"")
             end  
-            numbers[searchable_hash] = searchable_name
+            numbers[card[:name_hash]] = card[:search_name]
           end
         end
       end
@@ -150,14 +148,12 @@ class CardBox
       @data[:cards][set_name].each do |card|
         current_card_index = current_card_index + 1
         io.puts(sql_insert_row(:cards, card.merge({
-          :search_name => card[:name].to_searchable_name,
-          :name_hash => card[:name].to_name_hash.to_s,
-          :tcg => card[:name].tcg_clean,
           :version_count => @data[:names][card[:name]],
           :idx => current_card_index,
           :pk => "#{set_name} #{card[:name]} #{card[:art_index]}".to_name_hash.to_s,
           :set_pk => current_set_pk
         })))
+        puts(card[:name])
       end
       io.puts "VACUUM;"
       io.puts

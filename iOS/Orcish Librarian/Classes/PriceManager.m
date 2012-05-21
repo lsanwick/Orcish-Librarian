@@ -147,7 +147,6 @@
 - (void) beginLookup:(QueuedLookup *)lookup {
     NSString *url = [NSString stringWithFormat:@"http://partner.tcgplayer.com/x/phl.asmx/p?pk=ORCSHLBRN&p=%@&s=%@",
         [lookup.card.tcgName stringByEncodingForURL], [lookup.card.tcgSetName stringByEncodingForURL]];
-    //NSLog(@"%@", url);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData *response = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
         dispatch_async(dispatch_get_main_queue(), ^{
