@@ -41,6 +41,12 @@
 		8D6B5684154DA17A006BFA0C /* PriceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B5683154DA17A006BFA0C /* PriceListController.m */; };
 		8D6B5687154E3046006BFA0C /* PriceListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6B5686154E3046006BFA0C /* PriceListController.xib */; };
 		8D6B568E154F7777006BFA0C /* PriceVendorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B568D154F7777006BFA0C /* PriceVendorCell.m */; };
+		8D7C96EF1569D6370088BCB3 /* ExternalSiteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7C96EE1569D6370088BCB3 /* ExternalSiteController.m */; };
+		8D7C96F21569D7850088BCB3 /* ExternalSiteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C96F11569D7850088BCB3 /* ExternalSiteController.xib */; };
+		8D7C96F71569D8160088BCB3 /* Next-Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C96F31569D8160088BCB3 /* Next-Arrow.png */; };
+		8D7C96F81569D8160088BCB3 /* Next-Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C96F41569D8160088BCB3 /* Next-Arrow@2x.png */; };
+		8D7C96F91569D8160088BCB3 /* Previous-Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C96F51569D8160088BCB3 /* Previous-Arrow.png */; };
+		8D7C96FA1569D8160088BCB3 /* Previous-Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C96F61569D8160088BCB3 /* Previous-Arrow@2x.png */; };
 		8D7F9755153E5D58001335DA /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F9754153E5D58001335DA /* CardView.m */; };
 		8D95BD1B15263552005B8518 /* NSNull+Wrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D95BD1A15263552005B8518 /* NSNull+Wrap.m */; };
 		8D95BD1F152642D8005B8518 /* PriceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D95BD1E152642D8005B8518 /* PriceManager.m */; };
@@ -135,6 +141,13 @@
 		8D6B5686154E3046006BFA0C /* PriceListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PriceListController.xib; path = Layout/PriceListController.xib; sourceTree = "<group>"; };
 		8D6B568C154F7777006BFA0C /* PriceVendorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceVendorCell.h; sourceTree = "<group>"; };
 		8D6B568D154F7777006BFA0C /* PriceVendorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceVendorCell.m; sourceTree = "<group>"; };
+		8D7C96ED1569D6370088BCB3 /* ExternalSiteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalSiteController.h; sourceTree = "<group>"; };
+		8D7C96EE1569D6370088BCB3 /* ExternalSiteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExternalSiteController.m; sourceTree = "<group>"; };
+		8D7C96F11569D7850088BCB3 /* ExternalSiteController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExternalSiteController.xib; path = Layout/ExternalSiteController.xib; sourceTree = "<group>"; };
+		8D7C96F31569D8160088BCB3 /* Next-Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Next-Arrow.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Next-Arrow.png"; sourceTree = SOURCE_ROOT; };
+		8D7C96F41569D8160088BCB3 /* Next-Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Next-Arrow@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Next-Arrow@2x.png"; sourceTree = SOURCE_ROOT; };
+		8D7C96F51569D8160088BCB3 /* Previous-Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Previous-Arrow.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Previous-Arrow.png"; sourceTree = SOURCE_ROOT; };
+		8D7C96F61569D8160088BCB3 /* Previous-Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Previous-Arrow@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Previous-Arrow@2x.png"; sourceTree = SOURCE_ROOT; };
 		8D7F9753153E5D58001335DA /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
 		8D7F9754153E5D58001335DA /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
 		8D95BD1915263552005B8518 /* NSNull+Wrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+Wrap.h"; sourceTree = "<group>"; };
@@ -300,6 +313,7 @@
 		8D150F34144FEC2100141685 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				8D7C96F11569D7850088BCB3 /* ExternalSiteController.xib */,
 				8DE5A18E15695173005C195A /* AboutController.xib */,
 				8D150F35144FEED800141685 /* OrcishRootController.xib */,
 				8DD02110146A2A26008C522A /* BasicSearchController.xib */,
@@ -314,6 +328,8 @@
 		8D150F38144FF0C700141685 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8D7C96ED1569D6370088BCB3 /* ExternalSiteController.h */,
+				8D7C96EE1569D6370088BCB3 /* ExternalSiteController.m */,
 				8DE5A18B15695060005C195A /* AboutController.h */,
 				8DE5A18C15695060005C195A /* AboutController.m */,
 				8D150F39144FF0C700141685 /* AppDelegate.h */,
@@ -375,6 +391,10 @@
 		8D1F7167145252460010C161 /* Toolbar Icons */ = {
 			isa = PBXGroup;
 			children = (
+				8D7C96F31569D8160088BCB3 /* Next-Arrow.png */,
+				8D7C96F41569D8160088BCB3 /* Next-Arrow@2x.png */,
+				8D7C96F51569D8160088BCB3 /* Previous-Arrow.png */,
+				8D7C96F61569D8160088BCB3 /* Previous-Arrow@2x.png */,
 				8D40B9861473E13D00F3A4EC /* Down.png */,
 				8D3049481474A82300928A5A /* Down@2x.png */,
 				8D40B9871473E13D00F3A4EC /* Up.png */,
@@ -563,6 +583,11 @@
 				8DA1AFDC155E1F9C0091A368 /* OrcishViewController.xib in Resources */,
 				8DA1AFDF155E21C20091A368 /* SetListController.xib in Resources */,
 				8DE5A18F15695173005C195A /* AboutController.xib in Resources */,
+				8D7C96F21569D7850088BCB3 /* ExternalSiteController.xib in Resources */,
+				8D7C96F71569D8160088BCB3 /* Next-Arrow.png in Resources */,
+				8D7C96F81569D8160088BCB3 /* Next-Arrow@2x.png in Resources */,
+				8D7C96F91569D8160088BCB3 /* Previous-Arrow.png in Resources */,
+				8D7C96FA1569D8160088BCB3 /* Previous-Arrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +650,7 @@
 				8D9DD8901563130C00C4D02E /* DataManager.m in Sources */,
 				8DE5A18915681265005C195A /* NSString+URLEncoder.m in Sources */,
 				8DE5A18D15695060005C195A /* AboutController.m in Sources */,
+				8D7C96EF1569D6370088BCB3 /* ExternalSiteController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

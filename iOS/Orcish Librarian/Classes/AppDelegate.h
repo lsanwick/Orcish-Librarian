@@ -27,6 +27,7 @@
 - (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position;
 - (void) showCard:(Card *)card;
 - (void) showPriceModalForProductId:(NSString *)productId;
+- (void) launchExternalSite:(NSURL *)URL;
 
 - (void) showBasicSearchController;
 - (void) showBookmarkController;

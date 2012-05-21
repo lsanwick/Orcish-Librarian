@@ -16,6 +16,7 @@
 #import "CardSequence.h"
 #import "PriceManager.h"
 #import "DataManager.h"
+#import "ExternalSiteController.h"
 #import "GANTracker.h"
 
 #define kPriceCachePrunePeriod 120
@@ -87,6 +88,15 @@
 
 - (void) hideKeyboard {
     [self.window.rootViewController.view endEditing:TRUE];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) launchExternalSite:(NSURL *)URL {
+    ExternalSiteController *controller = [[ExternalSiteController alloc] initWithNibName:nil bundle:nil];
+    [controller view];
+    controller.URL = URL;
+    [self.rootController presentModalViewController:controller animated:YES];
 }
 
 // ----------------------------------------------------------------------------
