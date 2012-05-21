@@ -153,7 +153,6 @@ class CardBox
           :pk => "#{set_name} #{card[:name]} #{card[:art_index]}".to_name_hash.to_s,
           :set_pk => current_set_pk
         })))
-        puts(card[:name])
       end
       io.puts "VACUUM;"
       io.puts
