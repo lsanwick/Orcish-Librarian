@@ -182,13 +182,4 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    [super setHighlighted:highlighted animated:animated];
-    priceLabel.textColor = 
-    conditionLabel.textColor =
-    nameLabel.textColor = highlighted ? [UIColor whiteColor] : [UIColor blackColor];
-}
-
-// ----------------------------------------------------------------------------
-
 @end

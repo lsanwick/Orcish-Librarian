@@ -28,7 +28,9 @@
 
 @synthesize webView;
 @synthesize tableView;
+@synthesize successView;
 @synthesize loadingView;
+@synthesize sectionHeader;
 @synthesize timeoutView;
 @synthesize retryButton;
 @synthesize foilButton;
@@ -83,8 +85,9 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.tableView.backgroundColor = self.tableView.separatorColor = 
-        [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];
+    self.tableView.separatorColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
+    // self.tableView.tableHeaderView = self.sectionHeader;
 }
 
 // ----------------------------------------------------------------------------
@@ -147,6 +150,14 @@
 }
 
 // ----------------------------------------------------------------------------
+
+- (IBAction) tcgButtonTapped:(id)sender {
+    [gAppDelegate trackEvent:@"All Prices" action:@"Show TCGPlayer" label:@""];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:
+        [NSString stringWithFormat:@"http://store.tcgplayer.com/product.aspx?id=%@&partner=ORCSHLBRN", self.productId]]];    
+}
+
+// ----------------------------------------------------------------------------
 //  UITableViewDelegate
 // ----------------------------------------------------------------------------
 
@@ -162,26 +173,27 @@
 
 // ----------------------------------------------------------------------------
 
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 36.0f;
+}
+
+// ----------------------------------------------------------------------------
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return self.sectionHeader;
+}
+
+// ----------------------------------------------------------------------------
+
 - (UITableViewCell *) tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"PriceVendorCell";
     PriceVendorCell *cell = (PriceVendorCell *) [aTableView dequeueReusableCellWithIdentifier:identifier];    
     if (cell == nil) {
         cell =  [[PriceVendorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }     
     cell.vendor = (indexPath.row < self.currentPrices.count) ? [self.currentPrices objectAtIndex:indexPath.row] : nil;
     return cell;
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [aTableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row < self.currentPrices.count) {        
-        [gAppDelegate trackEvent:@"All Prices" action:@"Show TCGPlayer" label:@""];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:
-            [NSString stringWithFormat:@"http://store.tcgplayer.com/product.aspx?id=%@&partner=ORCSHLBRN", productId]]];
-    }
 }
 
 // ----------------------------------------------------------------------------
