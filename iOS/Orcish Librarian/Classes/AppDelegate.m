@@ -22,6 +22,16 @@
 #define kPriceCachePrunePeriod 120
 
 
+typedef enum {
+    kBasicSearch = 1,
+    kAdvancedSearch = 2,
+    kBrowseSets = 3,
+    kBookmarks = 4,
+    kRandomCards = 5,
+    kAbout = 6
+} TopLevelCategory;
+
+
 // ----------------------------------------------------------------------------
 //  Private Methods
 // ----------------------------------------------------------------------------
@@ -36,6 +46,8 @@
 - (void) initializeAnalytics;
 - (CardViewController *) dequeueCardViewController;
 
+@property (nonatomic, assign) TopLevelCategory topLevel;
+
 @end
 
 
@@ -48,6 +60,7 @@
 @synthesize window;
 @synthesize rootController;
 @synthesize dataQueue;
+@synthesize topLevel;
 
 // ----------------------------------------------------------------------------
 
@@ -202,38 +215,53 @@
 // ----------------------------------------------------------------------------
 
 - (void) showRandomCardController {
-    CardViewController *controller = [self dequeueCardViewController];
-    controller.sequence = [CardSequence randomCardSequence];
-    controller.position = 0;
-    [self.rootController setViewController:controller animated:NO];
+    if (self.topLevel != kRandomCards) {
+        self.topLevel = kRandomCards;
+        CardViewController *controller = [self dequeueCardViewController];
+        controller.sequence = [CardSequence randomCardSequence];
+        controller.position = 0;
+        [self.rootController setViewController:controller animated:NO];
+    }
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) showBasicSearchController {
-    BasicSearchController *controller = [[BasicSearchController alloc] initWithNibName:nil bundle:nil];
-    [self.rootController setViewController:controller animated:NO];
+    if (self.topLevel != kBasicSearch) {
+        self.topLevel = kBasicSearch;
+        BasicSearchController *controller = [[BasicSearchController alloc] initWithNibName:nil bundle:nil];
+        [self.rootController setViewController:controller animated:NO];
+    }
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) showBookmarkController {
-    BookmarkController *controller = [[BookmarkController alloc] initWithNibName:@"OrcishViewController" bundle:nil];
-    [self.rootController setViewController:controller animated:NO];
+    if (self.topLevel != kBookmarks) {
+        self.topLevel = kBookmarks;
+        BookmarkController *controller = [[BookmarkController alloc] initWithNibName:@"OrcishViewController" bundle:nil];
+        [self.rootController setViewController:controller animated:NO];
+    }
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) showBrowseController {
-    SetListController *controller = [[SetListController alloc] initWithNibName:nil bundle:nil];
-    [self.rootController setViewController:controller animated:NO];
+    if (self.topLevel != kBrowseSets) {
+        self.topLevel = kBrowseSets;
+        SetListController *controller = [[SetListController alloc] initWithNibName:nil bundle:nil];
+        [self.rootController setViewController:controller animated:NO];
+    }
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) showAboutController {
-    AboutController *controller = [[AboutController alloc] initWithNibName:nil bundle:nil];
-    [self.rootController setViewController:controller animated:NO];
+    if (self.topLevel != kAbout) {
+        self.topLevel = kAbout;
+        AboutController *controller = [[AboutController alloc] initWithNibName:nil bundle:nil];
+        [self.rootController setViewController:controller animated:NO];
+    }
 }
 
 // ----------------------------------------------------------------------------
