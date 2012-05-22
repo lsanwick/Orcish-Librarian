@@ -39,8 +39,9 @@
     navigationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu-Button"] 
         style:UIBarButtonItemStyleBordered target:self action:@selector(navigationButtonTapped:)];
     [self.navigationItem setLeftBarButtonItem:navigationButton];
-    self.cardListView.backgroundColor = self.cardListView.separatorColor = 
-        [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
+    self.cardListView.separatorColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];        
+    self.cardListView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];
+    
 }
 
 // ----------------------------------------------------------------------------
