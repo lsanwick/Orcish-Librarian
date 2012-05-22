@@ -94,7 +94,7 @@ typedef void (^block_t)(void);
 - (IBAction) pagingButtonTapped:(id)sender {
     CGFloat pageWidth = self.scrollView.frame.size.width;
     CGFloat pageHeight = self.scrollView.frame.size.height;
-    CGFloat x = self.scrollView.contentOffset.x + (self.pagingButton.selectedSegmentIndex == 0 ? pageWidth : -pageWidth);
+    CGFloat x = self.scrollView.contentOffset.x + (self.pagingButton.selectedSegmentIndex == 0 ? -pageWidth : pageWidth);
     [UIView animateWithDuration:0.3
         animations:^{            
             [self.scrollView scrollRectToVisible:CGRectMake(x, 0, pageWidth, pageHeight) animated:NO];
@@ -108,8 +108,8 @@ typedef void (^block_t)(void);
 
 - (void) updatePagingButtons {
     self.navigationItem.title = [[self.sequence cardAtPosition:self.position] displayName];
-    [self.pagingButton setEnabled:((self.position + 1) < self.sequence.count) forSegmentAtIndex:0];
-    [self.pagingButton setEnabled:(self.position > 0) forSegmentAtIndex:1];    
+    [self.pagingButton setEnabled:((self.position + 1) < self.sequence.count) forSegmentAtIndex:1];
+    [self.pagingButton setEnabled:(self.position > 0) forSegmentAtIndex:0];    
 }
 
 // ----------------------------------------------------------------------------

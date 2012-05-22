@@ -31,12 +31,8 @@
 		8D1F717A14525BF00010C161 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D1F717714525BF00010C161 /* Icon@2x.png */; };
 		8D1F7180145314D50010C161 /* MenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1F717F145314D50010C161 /* MenuController.m */; };
 		8D1F71821453C4ED0010C161 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1F71811453C4ED0010C161 /* Utility.m */; };
-		8D30494A1474A82300928A5A /* Down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3049481474A82300928A5A /* Down@2x.png */; };
-		8D30494B1474A82300928A5A /* Up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D3049491474A82300928A5A /* Up@2x.png */; };
 		8D32B0B615293DCC00C0EF2E /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D32B0B515293DCC00C0EF2E /* SearchResultCell.m */; };
 		8D40B9851473543A00F3A4EC /* Linen-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9841473543A00F3A4EC /* Linen-Background.png */; };
-		8D40B9881473E13D00F3A4EC /* Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9861473E13D00F3A4EC /* Down.png */; };
-		8D40B9891473E13D00F3A4EC /* Up.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9871473E13D00F3A4EC /* Up.png */; };
 		8D5012C3146F5CA300D463D6 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5012C2146F5CA300D463D6 /* Card.m */; };
 		8D6B5684154DA17A006BFA0C /* PriceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B5683154DA17A006BFA0C /* PriceListController.m */; };
 		8D6B5687154E3046006BFA0C /* PriceListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6B5686154E3046006BFA0C /* PriceListController.xib */; };
@@ -55,6 +51,10 @@
 		8D9F91BB15450D150076FC9C /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D9F91B915450D150076FC9C /* sqlite3.c */; };
 		8DA1AFDC155E1F9C0091A368 /* OrcishViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA1AFDB155E1F9C0091A368 /* OrcishViewController.xib */; };
 		8DA1AFDF155E21C20091A368 /* SetListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DA1AFDE155E21C20091A368 /* SetListController.xib */; };
+		8DA1E03B156B323B0061C698 /* Next-Card-Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA1E037156B323B0061C698 /* Next-Card-Arrow.png */; };
+		8DA1E03C156B323B0061C698 /* Next-Card-Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA1E038156B323B0061C698 /* Next-Card-Arrow@2x.png */; };
+		8DA1E03D156B323B0061C698 /* Previous-Card-Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA1E039156B323B0061C698 /* Previous-Card-Arrow.png */; };
+		8DA1E03E156B323B0061C698 /* Previous-Card-Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA1E03A156B323B0061C698 /* Previous-Card-Arrow@2x.png */; };
 		8DB1AE85155E03790038F991 /* OrcishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB1AE84155E03790038F991 /* OrcishViewController.m */; };
 		8DBDB1251466DEC600140217 /* BasicSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB1241466DEC600140217 /* BasicSearchController.m */; };
 		8DC308EC1555ED32007AAD7D /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC308EB1555ED32007AAD7D /* libGoogleAnalytics.a */; };
@@ -127,13 +127,9 @@
 		8D1F717F145314D50010C161 /* MenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuController.m; sourceTree = "<group>"; };
 		8D1F71811453C4ED0010C161 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		8D1F71831453C5630010C161 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
-		8D3049481474A82300928A5A /* Down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Down@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Down@2x.png"; sourceTree = SOURCE_ROOT; };
-		8D3049491474A82300928A5A /* Up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Up@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Up@2x.png"; sourceTree = SOURCE_ROOT; };
 		8D32B0B415293DCC00C0EF2E /* SearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultCell.h; sourceTree = "<group>"; };
 		8D32B0B515293DCC00C0EF2E /* SearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultCell.m; sourceTree = "<group>"; };
 		8D40B9841473543A00F3A4EC /* Linen-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Linen-Background.png"; sourceTree = "<group>"; };
-		8D40B9861473E13D00F3A4EC /* Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Down.png; path = "Orcish Librarian/Assets/Toolbar Icons/Down.png"; sourceTree = SOURCE_ROOT; };
-		8D40B9871473E13D00F3A4EC /* Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Up.png; path = "Orcish Librarian/Assets/Toolbar Icons/Up.png"; sourceTree = SOURCE_ROOT; };
 		8D5012C1146F5CA300D463D6 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		8D5012C2146F5CA300D463D6 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Card.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8D6B5682154DA17A006BFA0C /* PriceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceListController.h; sourceTree = "<group>"; };
@@ -161,6 +157,10 @@
 		8D9F91BA15450D150076FC9C /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		8DA1AFDB155E1F9C0091A368 /* OrcishViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OrcishViewController.xib; path = Layout/OrcishViewController.xib; sourceTree = "<group>"; };
 		8DA1AFDE155E21C20091A368 /* SetListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SetListController.xib; path = Layout/SetListController.xib; sourceTree = "<group>"; };
+		8DA1E037156B323B0061C698 /* Next-Card-Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Next-Card-Arrow.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Next-Card-Arrow.png"; sourceTree = SOURCE_ROOT; };
+		8DA1E038156B323B0061C698 /* Next-Card-Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Next-Card-Arrow@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Next-Card-Arrow@2x.png"; sourceTree = SOURCE_ROOT; };
+		8DA1E039156B323B0061C698 /* Previous-Card-Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Previous-Card-Arrow.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Previous-Card-Arrow.png"; sourceTree = SOURCE_ROOT; };
+		8DA1E03A156B323B0061C698 /* Previous-Card-Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Previous-Card-Arrow@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Previous-Card-Arrow@2x.png"; sourceTree = SOURCE_ROOT; };
 		8DB1AE83155E03790038F991 /* OrcishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrcishViewController.h; sourceTree = "<group>"; };
 		8DB1AE84155E03790038F991 /* OrcishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrcishViewController.m; sourceTree = "<group>"; };
 		8DBDB1231466DEC600140217 /* BasicSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicSearchController.h; sourceTree = "<group>"; };
@@ -391,14 +391,14 @@
 		8D1F7167145252460010C161 /* Toolbar Icons */ = {
 			isa = PBXGroup;
 			children = (
+				8DA1E037156B323B0061C698 /* Next-Card-Arrow.png */,
+				8DA1E038156B323B0061C698 /* Next-Card-Arrow@2x.png */,
+				8DA1E039156B323B0061C698 /* Previous-Card-Arrow.png */,
+				8DA1E03A156B323B0061C698 /* Previous-Card-Arrow@2x.png */,
 				8D7C96F31569D8160088BCB3 /* Next-Arrow.png */,
 				8D7C96F41569D8160088BCB3 /* Next-Arrow@2x.png */,
 				8D7C96F51569D8160088BCB3 /* Previous-Arrow.png */,
 				8D7C96F61569D8160088BCB3 /* Previous-Arrow@2x.png */,
-				8D40B9861473E13D00F3A4EC /* Down.png */,
-				8D3049481474A82300928A5A /* Down@2x.png */,
-				8D40B9871473E13D00F3A4EC /* Up.png */,
-				8D3049491474A82300928A5A /* Up@2x.png */,
 				8D0480AA1470AC3A001E183C /* Back-Button.png */,
 				8D0480A81470ABBF001E183C /* Back-Button@2x.png */,
 				8D1F717014525BE50010C161 /* Menu-Button.png */,
@@ -573,10 +573,6 @@
 				8D0480A91470ABBF001E183C /* Back-Button@2x.png in Resources */,
 				8D0480AB1470AC3A001E183C /* Back-Button.png in Resources */,
 				8D40B9851473543A00F3A4EC /* Linen-Background.png in Resources */,
-				8D40B9881473E13D00F3A4EC /* Down.png in Resources */,
-				8D40B9891473E13D00F3A4EC /* Up.png in Resources */,
-				8D30494A1474A82300928A5A /* Down@2x.png in Resources */,
-				8D30494B1474A82300928A5A /* Up@2x.png in Resources */,
 				8D1DE81214775E1200D2A3C4 /* HTML in Resources */,
 				8DE898E314832D820024E016 /* card-names.txt in Resources */,
 				8D6B5687154E3046006BFA0C /* PriceListController.xib in Resources */,
@@ -588,6 +584,10 @@
 				8D7C96F81569D8160088BCB3 /* Next-Arrow@2x.png in Resources */,
 				8D7C96F91569D8160088BCB3 /* Previous-Arrow.png in Resources */,
 				8D7C96FA1569D8160088BCB3 /* Previous-Arrow@2x.png in Resources */,
+				8DA1E03B156B323B0061C698 /* Next-Card-Arrow.png in Resources */,
+				8DA1E03C156B323B0061C698 /* Next-Card-Arrow@2x.png in Resources */,
+				8DA1E03D156B323B0061C698 /* Previous-Card-Arrow.png in Resources */,
+				8DA1E03E156B323B0061C698 /* Previous-Card-Arrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
