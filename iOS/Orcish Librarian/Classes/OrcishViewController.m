@@ -48,6 +48,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.cardListView deselectRowAtIndexPath:[self.cardListView indexPathForSelectedRow] animated:animated];
     if (gAppDelegate.rootController.controllerStack.count > 1) {
         navigationButton.image = [UIImage imageNamed:@"Back-Button"];
     } else {
@@ -105,6 +106,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [gAppDelegate hideKeyboard];
     [gAppDelegate hideMenu];
 }
 
@@ -118,7 +120,7 @@
     if (cell == nil) {
         cell =  [[SearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }     
-    cell.selectionStyle = (indexPath.row < self.cardList.count) ? UITableViewCellSelectionStyleGray : UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = (indexPath.row < self.cardList.count) ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
     cell.card = (indexPath.row < self.cardList.count) ? [self.cardList objectAtIndex:indexPath.row] : nil;
     return cell;
 }
@@ -137,8 +139,7 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath { 
     [gAppDelegate showCards:self.cardList atPosition:indexPath.row];
 }
 

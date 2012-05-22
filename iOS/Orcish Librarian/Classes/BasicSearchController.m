@@ -36,14 +36,12 @@
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.cardListView.scrollsToTop = NO;
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.cardListView.scrollsToTop = YES;
 }
 
 // ----------------------------------------------------------------------------
@@ -55,15 +53,6 @@
         self.hasBeenFirstResponder = YES;
         [self.searchBar becomeFirstResponder];
     }
-}
-
-// ----------------------------------------------------------------------------
-//  UIScrollViewDelegate
-// ----------------------------------------------------------------------------
-
-- (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [gAppDelegate hideKeyboard];
-    [gAppDelegate hideMenu];
 }
 
 // ----------------------------------------------------------------------------
@@ -104,13 +93,10 @@
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row < self.cardList.count) {
-        [gAppDelegate trackEvent:@"Search Results" action:@"Click" label:[[self.cardList objectAtIndex:indexPath.row] displayName]];
-        [gAppDelegate hideMenu];
-        [gAppDelegate hideKeyboard];        
-        if (gAppDelegate.rootController.topController == self) {
+    if (indexPath.row < self.cardList.count) {        
+        if (gAppDelegate.rootController.topController == self) {            
             [gAppDelegate showCards:self.cardList atPosition:indexPath.row];
+            [gAppDelegate trackEvent:@"Search Results" action:@"Click" label:[[self.cardList objectAtIndex:indexPath.row] displayName]];
         }
     }
 }

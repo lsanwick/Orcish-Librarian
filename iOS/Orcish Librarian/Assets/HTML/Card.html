@@ -209,16 +209,16 @@
     <div class="ol-header ol-block">
 		<div class="ol-bookmark"><a href="javascript:void(0)">★</a></div>
         <div class="ol-card-name">Card Name</div>
-        <div class="ol-set-name"><a href="set://self">Card Set - Rarity</a></div>
+        <div class="ol-set-name"><a href="javascript:void(0)" onclick="Orcish.sendMessage('set', 'self')">Card Set - Rarity</a></div>
 		<div class="ol-card-data">
         	<span class="ol-card-type">Type &ndash; Subtype</span> 
 			<span class="ol-card-ptl"></span>
 		</div>
         <div class="ol-mana-cost">Mana Cost</div>
 		<div class="ol-prices">
-			<span class="ol-price ol-price-low">Low: <a href="tcg://show">$6.50</a></span>
-			<span class="ol-price ol-price-med">Med: <a href="tcg://show">$7.20</a></span>
-			<span class="ol-price ol-price-high">High: <a href="tcg://show">$13.99</a></span>
+			<span class="ol-price ol-price-low">Low: <a href="javascript:void(0)" onclick="Orcish.sendMessage('tcg', 'show')">$6.50</a></span>
+			<span class="ol-price ol-price-med">Med: <a href="javascript:void(0)" onclick="Orcish.sendMessage('tcg', 'show')">$7.20</a></span>
+			<span class="ol-price ol-price-high">High: <a href="javascript:void(0)" onclick="Orcish.sendMessage('tcg', 'show')">$13.99</a></span>
 			<div class="ol-attribution">Prices courtesy of TCGPlayer.com</div>
 		</div>
 		<div class="ol-missing-prices">
@@ -260,7 +260,7 @@
     </div>
 
 	<div class="ol-gatherer ol-block">
-        <a href="gatherer://go">Open Gatherer Page</a>
+        <a href="javascript:void(0)" onclick="Orcish.sendMessage('gatherer', 'go')">Open Gatherer Page</a>
     </div>
     
 </div>
@@ -269,10 +269,12 @@
 var Orcish = { };    
 (function(){
     
+var MESSAGE_LOCK_TIMEOUT = 2000;
 var PRICE_REQUEST_TIMEOUT = 5000;
 var priceRequestTimer = null;
 var currentCardPk = null;
 var cardPrice = null;
+var messageLock = false;
  
 // ----------------------------------------------------------------------------
  
@@ -305,8 +307,20 @@ Orcish.setCardPrice = function(cardPk, price) {
 		$('.ol-price-low a').text('$' + price.low)
 		$('.ol-price-med a').text('$' + price.average)
 		$('.ol-price-high a').text('$' + price.high)
-		$('.ol-price a').attr('href', 'tcg://' + price.tcgId);
+		$('.ol-price a').attr('onclick', "Orcish.sendMessage('tcg', " + price.tcgId + ")");
 		$('.ol-prices').show();
+	}
+}
+
+// ----------------------------------------------------------------------------
+
+Orcish.sendMessage = function() {
+	var path = Array.prototype.slice.call(arguments).join('/');
+	path = path.replace('/', '://');
+	if (!messageLock) {
+		setTimeout(function(){ messageLock = false }, MESSAGE_LOCK_TIMEOUT);
+		messageLock = true;
+		window.location = path;
 	}
 }
 
@@ -371,7 +385,7 @@ function loadOtherEditions(card) {
         var html = '';
         $.each(card.otherEditions, function(i, edition) {
             if (i != 0) { html += '<br />' }   
-            html += '<a href="set://' + edition.setPk + '">' + edition.setName + '</a>';
+            html += '<a href="javascript:void(0)" onclick="Orcish.sendMessage(\'set\', ' + edition.setPk + ')">' + edition.setName + '</a>';
         });
         $('.ol-other-editions').show().find('.ol-block').html(html);
     } else {
@@ -386,7 +400,7 @@ function loadOtherParts(card) {
         var html = '';
         $.each(card.otherParts, function(i, otherCard) {
 			if (i != 0) { html += '<br />' }
-			html += '<a href="card://' + otherCard.pk +'">' + otherCard.displayName + '</a>';
+			html += '<a href="javascript:void(0)" onclick="Orcish.sendMessage(\'card\', ' + otherCard.pk +')">' + otherCard.displayName + '</a>';
         });
         $('.ol-other-parts').show().find('.ol-block').html(html);
     } else {
@@ -404,7 +418,7 @@ function loadArtVariants(card) {
 			var variant = card.artVariants[i];
 			if (variant.pk == card.pk) { continue }			
 			if (!first) { html += '<br />' } else { first = false }
-			html += '<a href="card://' + variant.pk +'">Variant #' + (i + 1) + '</a>';
+			html += '<a href="javascript:void(0)" onclick="Orcish.sendMessage(\'card\', ' + variant.pk +')">Variant #' + (i + 1) + '</a>';
 		}
         $('.ol-other-art').show().find('.ol-block').html(html);
     } else {
@@ -444,7 +458,7 @@ function reloadPrice() {
 	$('.ol-loading-prices').show();
 	clearTimeout(priceRequestTimer);
 	priceRequestTimer = setTimeout(pricesNotLoadedInTime, PRICE_REQUEST_TIMEOUT);
-	window.location = 'price://reload';
+	Orcish.sendMessage('price', 'reload');
 }
 
 // ----------------------------------------------------------------------------
@@ -460,8 +474,8 @@ function pricesNotLoadedInTime() {
 function toggleBookmark() {
 	var bookmarkIcon = $('.ol-bookmark');
 	var value = bookmarkIcon.hasClass('active') ? 'off' : 'on';
-	setTimeout(function(){ window.location = 'bookmark://' + value }, 10);
 	bookmarkIcon.toggleClass('active');
+	Orcish.sendMessage('bookmark', value);
 }
 
 // ----------------------------------------------------------------------------
@@ -677,7 +691,7 @@ if (navigator.userAgent	.indexOf('iPhone') == -1) {
 	
 } else {
 	$(function(){
-		window.location = 'done://loading';
+		Orcish.sendMessage('done', 'loading');
 	});
 }
     

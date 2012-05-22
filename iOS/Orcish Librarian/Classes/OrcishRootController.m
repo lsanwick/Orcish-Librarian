@@ -99,6 +99,8 @@
 // ----------------------------------------------------------------------------
 
 - (void) pushViewController:(UIViewController *)controller animated:(BOOL)animated {
+    [gAppDelegate hideMenu];
+    [gAppDelegate hideKeyboard];
     [self.controllerStack.lastObject viewWillDisappear:animated];
     [self.controllerStack addObject:controller];
     controller.view.frame = CGRectMake(self.contentView.frame.size.width, 0.0, self.contentView.frame.size.width, self.contentView.frame.size.height);    
@@ -138,6 +140,8 @@
 // ----------------------------------------------------------------------------
 
 - (void) setViewController:(UIViewController *)controller animated:(BOOL)animated {
+    [gAppDelegate hideMenu];
+    [gAppDelegate hideKeyboard];
     for (UIView *subview in self.contentView.subviews) {
         [subview removeFromSuperview];
     }
@@ -158,6 +162,8 @@
 // ----------------------------------------------------------------------------
 
 - (void) presentModalViewController:(UIViewController *)controller animated:(BOOL)animated {
+    [gAppDelegate hideMenu];
+    [gAppDelegate hideKeyboard];
     if (self.modalControllerStack.count > 0) {
         [self.modalControllerStack.lastObject viewWillDisappear:animated];
     } else {

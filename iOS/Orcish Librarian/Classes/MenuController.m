@@ -149,6 +149,7 @@
     }
     
     [gAppDelegate hideMenu];
+    [gAppDelegate hideKeyboard];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

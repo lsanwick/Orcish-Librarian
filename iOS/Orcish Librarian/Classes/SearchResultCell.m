@@ -136,7 +136,12 @@
         priceLabelMid = [[UILabel alloc] init];
         priceLabelHigh = [[UILabel alloc] init];
         nameLabel = [[UILabel alloc] init];
-        setLabel = [[UILabel alloc] init];
+        setLabel = [[UILabel alloc] init];        
+        priceLabelLow.highlightedTextColor = [UIColor whiteColor];
+        priceLabelMid.highlightedTextColor = [UIColor whiteColor];
+        priceLabelHigh.highlightedTextColor = [UIColor whiteColor];
+        nameLabel.highlightedTextColor = [UIColor whiteColor];
+        setLabel.highlightedTextColor = [UIColor whiteColor];
         priceLabelLow.font = [[self class] priceLabelFont];
         priceLabelMid.font = [[self class] priceLabelFont];
         priceLabelHigh.font = [[self class] priceLabelFont];
@@ -186,6 +191,7 @@
 
 // ----------------------------------------------------------------------------
 
+/*
 - (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     priceLabelLow.textColor = 
@@ -194,6 +200,7 @@
     nameLabel.textColor =
     setLabel.textColor = highlighted ? [UIColor whiteColor] : [UIColor blackColor];
 }
+ */
 
 // ----------------------------------------------------------------------------
 

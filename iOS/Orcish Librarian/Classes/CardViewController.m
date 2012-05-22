@@ -59,7 +59,6 @@ typedef void (^block_t)(void);
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.scrollView.scrollsToTop = NO;
 }
 
 // ----------------------------------------------------------------------------
@@ -67,7 +66,6 @@ typedef void (^block_t)(void);
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self scrollAllViewsToTop];
-    self.scrollView.scrollsToTop = YES;
     if (!self.hasAppearedBefore) {
         self.hasAppearedBefore = YES;
         [gAppDelegate trackScreen:@"/CardView"];    
@@ -152,14 +150,6 @@ typedef void (^block_t)(void);
     for (int i = 0; i < kPageCount; i++) {
         [[[self.pages objectAtIndex:i] scrollView] setContentOffset:CGPointMake(0, 0) animated:NO];
     }
-}
-
-// ----------------------------------------------------------------------------
-//  UIScrollViewDelegate
-// ----------------------------------------------------------------------------
-
-- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
-    [gAppDelegate hideMenu];
 }
 
 // ----------------------------------------------------------------------------

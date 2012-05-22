@@ -87,14 +87,12 @@
     [super viewDidLoad];
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];
     self.tableView.separatorColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
-    // self.tableView.tableHeaderView = self.sectionHeader;
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.webView.scrollView.scrollsToTop = NO;
     [gAppDelegate trackScreen:@"/CardView/Prices"];
 }
 

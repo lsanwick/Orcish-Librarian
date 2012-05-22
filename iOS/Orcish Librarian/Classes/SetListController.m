@@ -56,7 +56,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
     }
     NSArray *sets = (indexPath.section == 0) ? recentSets : allSets;
@@ -67,7 +66,6 @@
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSArray *sets = (indexPath.section == 0) ? recentSets : allSets;
     CardSet *set = [sets objectAtIndex:indexPath.row];
     [gAppDelegate trackEvent:@"Browse" action:@"Show Set" label:set.name];
