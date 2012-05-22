@@ -30,7 +30,7 @@
         NSDateFormatter *format = [[NSDateFormatter alloc] init];
         format.dateStyle = NSDateFormatterMediumStyle;
         NSString *formattedDate = [format stringFromDate:gDataManager.lastUpdated];
-        self.lastUpdated.text = [NSString stringWithFormat:@"Last updated on %@", formattedDate];
+        self.lastUpdated.text = [NSString stringWithFormat:@"Last checked on %@", formattedDate];
     }
 }
 
