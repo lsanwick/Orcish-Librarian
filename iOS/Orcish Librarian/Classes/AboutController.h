@@ -13,6 +13,8 @@
 
 - (IBAction) urlTapped:(id)sender;
 
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet UIView *innerContent;
 @property (nonatomic, strong) IBOutlet UILabel *version;
 @property (nonatomic, strong) IBOutlet UILabel *lastUpdated;
 

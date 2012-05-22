@@ -42,8 +42,8 @@ typedef void (^block_t)(void);
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    scrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];
-    scrollView.bounces = YES;    
+    self.scrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];
+    self.scrollView.bounces = YES;    
     NSURL *cardURL = [NSURL fileURLWithPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"HTML/Card.html"]];    
     self.pages = [NSMutableArray arrayWithCapacity:kPageCount];
     for (int i = 0; i < kPageCount; i++) {

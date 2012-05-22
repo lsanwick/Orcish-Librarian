@@ -18,6 +18,17 @@
 
 @synthesize version;
 @synthesize lastUpdated;
+@synthesize innerContent;
+@synthesize scrollView;
+
+// ----------------------------------------------------------------------------
+
+- (void) viewDidLoad {
+    [super viewDidLoad];
+    self.scrollView.alwaysBounceVertical = YES;
+    self.scrollView.alwaysBounceHorizontal = NO;
+    self.scrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];
+}
 
 // ----------------------------------------------------------------------------
 
