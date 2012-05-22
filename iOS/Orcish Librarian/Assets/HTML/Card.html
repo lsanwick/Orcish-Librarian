@@ -19,6 +19,10 @@
 		color: #6F789B;
 	}
     
+	.ol-content {
+		visibility: hidden;
+	}
+
     .ol-header {
 		position: relative;
     }
@@ -199,7 +203,8 @@
 
 </style>
 </head>
-<body>
+<body>	
+<div class="ol-content">
 	
     <div class="ol-header ol-block">
 		<div class="ol-bookmark"><a href="javascript:void(0)">★</a></div>
@@ -258,6 +263,7 @@
         <a href="gatherer://go">Open Gatherer Page</a>
     </div>
     
+</div>
 <script>
     
 var Orcish = { };    
@@ -273,7 +279,7 @@ var cardPrice = null;
 Orcish.setCardData = function(card) {
 	if (card.pk != currentCardPk) {
 		cardPrice = null;
-		currentCardPk = card.pk;
+		currentCardPk = card.pk;		
 	    $('.ol-card-name').text(card.displayName);
 	    $('.ol-set-name a').text(card.setName + ' — ' + formatRarity(card.rarity));
 		$('.ol-mana-cost').html(formattedManaCost(card));
@@ -285,6 +291,7 @@ Orcish.setCardData = function(card) {
 		loadOtherParts(card);
 	    loadArtVariants(card);
 		waitForPrice(card);
+		$('.ol-content').css('visibility', 'visible');
 	}
 }
 
