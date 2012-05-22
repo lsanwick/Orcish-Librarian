@@ -81,4 +81,10 @@
 
 // ----------------------------------------------------------------------------
 
+- (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return (indexPath.row < self.cardList.count);
+}
+
+// ----------------------------------------------------------------------------
+
 @end
