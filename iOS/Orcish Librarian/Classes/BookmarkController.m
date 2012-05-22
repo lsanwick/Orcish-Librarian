@@ -75,7 +75,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [[self.cardList objectAtIndex:indexPath.row] setIsBookmarked:NO];
         [self reloadCards];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];        
     }  
 }
 
