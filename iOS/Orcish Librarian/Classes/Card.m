@@ -337,7 +337,8 @@
             @"AND      cards.name_hash = ? "
             @"AND      cards.pk != ? "
             @"AND     (cards.art_index = '' OR cards.art_index = 1) "
-            @"AND      sets.pk != ? ",
+            @"AND      sets.pk != ? " 
+            @"ORDER BY sets.idx DESC",
             self.nameHash,
             self.pk,
             self.setPk];
