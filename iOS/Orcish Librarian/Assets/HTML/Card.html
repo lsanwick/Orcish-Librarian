@@ -99,6 +99,10 @@
     .ol-other-art {
         display: none;
     }
+
+	.ol-other-art .ol-active {
+		color: #bbb;
+	}
     
     .ol-card-image img {
         width: 280px;
@@ -139,7 +143,8 @@
 	
 	.ol-other-editions,
 	.ol-other-parts,
-    .ol-other-art {
+    .ol-other-art, 
+	.ol-other-art li {
 		font-size: 13px;
 		line-height: 1.5em;
 	}
@@ -149,6 +154,12 @@
 	.ol-other-parts a,
     .ol-other-art a {
 		text-decoration: none;
+	}
+	
+	.ol-other-art ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
 	}
 	
 	.ol-gatherer { 
@@ -291,7 +302,6 @@ Orcish.setCardData = function(card) {
 	    loadCardPhoto(card);
 		loadOtherEditions(card);
 		loadOtherParts(card);
-	    loadArtVariants(card);
 		waitForPrice(card);
 		$('.ol-content').css('visibility', 'visible');
 	}
@@ -357,25 +367,41 @@ function loadOracleText(card) {
 // ----------------------------------------------------------------------------
  
 function loadCardPhoto(card) {
-    var isPlane = card.typeLine.match(/^Plane -/);
-    var imageURL = '';
-    if (card.typeLine == 'Scheme' || isPlane) {
-        imageURL = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=' + encodeURIComponent(card.gathererId);
-    } else {
-        var setName = card.setName.replace(/:/g, '');
-		var cardName = card.displayName.replace(/:/g, '');
-		cardName = cardName.replace(/^.*\((.*)\s\/\/\s(.*)\)$/, '$1$2');
-        imageURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(cleanText(setName)) + '/' + encodeURIComponent(cleanText(cardName)) + card.artIndex + '.full.jpg';
-    }
-    $('.ol-card-image').hide();
-    $('<img />')
-		.load(onImageLoaded)
-		.error(onImageMissing)
-		.attr('gathererId', card.gathererId)
-        .attr('src', imageURL)
-        .appendTo($('.ol-card-image').empty())        
-        .wrap($('<div></div>')
-        .addClass(isPlane ? 'plane' : ''));
+	
+	$('.ol-other-art').hide();
+	var imageContainer = $('.ol-card-image').html('');
+	imageContainer.hide();
+    
+	var setName = card.setName.replace(/:/g, '');
+	var cardName = card.displayName.replace(/:/g, '').replace(/^.*\((.*)\s\/\/\s(.*)\)$/, '$1$2');
+	var highResURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(cleanText(setName)) + '/' + encodeURIComponent(cleanText(cardName)) + card.artIndex + '.full.jpg';
+	var lowResURL = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=' + card.gathererId;
+    
+	var imageElement = $('<img />').hide().appendTo(imageContainer);
+	
+	// successful load handler
+	imageElement.load(function() {
+		imageElement.unbind('load');
+		var currentSrc = imageElement.attr('src');
+		if (currentSrc == highResURL) {
+			loadArtVariants(card);
+		}
+		imageElement.show();
+		imageContainer.show();		
+	})
+	
+	// error handler
+	imageElement.error(function() {
+		imageElement.unbind('error');
+		var currentSrc = imageElement.attr('src');
+		if (currentSrc == highResURL) {
+			imageElement.attr('src', lowResURL);
+		} else if (currentSrc == lowResURL){
+			imageElement.remove();
+		}
+	})
+        
+	imageElement.attr('src', highResURL);
 }
 
 // ----------------------------------------------------------------------------
@@ -412,32 +438,48 @@ function loadOtherParts(card) {
  
 function loadArtVariants(card) {
     if (card.artVariants && card.artVariants.length > 1) {
-        var html = '';
-		var first = true;
+		var list = $('<ul />');
 		for (var i = 0; i < card.artVariants.length; i++) {
-			var variant = card.artVariants[i];
-			if (variant.pk == card.pk) { continue }			
-			if (!first) { html += '<br />' } else { first = false }
-			html += '<a href="javascript:void(0)" onclick="Orcish.sendMessage(\'card\', ' + variant.pk +')">Variant #' + (i + 1) + '</a>';
+			(function(variant) {
+				var listItem = $('<li />').text('Variant #' + (i + 1));
+				if (variant.pk == card.pk) {
+					listItem.addClass('ol-active');
+				}
+				listItem.appendTo(list);
+				listItem.click(function(){
+					$('.ol-other-art li').removeClass('ol-active');
+					listItem.addClass('ol-active');
+					loadArtVariant(card, variant.artIndex);
+				});
+			})(card.artVariants[i]);
 		}
-        $('.ol-other-art').show().find('.ol-block').html(html);
-    } else {
-        $('.ol-other-art').hide();
+		$('.ol-other-art').show().find('.ol-block').empty().append(list);        
     }
 }
 
 // ----------------------------------------------------------------------------
 
-function onImageLoaded() {
-	$('.ol-card-image').show();
-}
-
-// ----------------------------------------------------------------------------
-
-function onImageMissing() {
-	var gathererId = $(this).attr('gathererId');
-	$(this).attr('src',
-		'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=' + gathererId);	
+function loadArtVariant(card, artIndex) {
+	var imageContainer = $('.ol-card-image');
+	$('html, body').animate({ scrollTop: imageContainer.offset().top - 10 });		
+	var existingImage = imageContainer.find('img');
+	var setName = card.setName.replace(/:/g, '');
+	var cardName = card.displayName.replace(/:/g, '').replace(/^.*\((.*)\s\/\/\s(.*)\)$/, '$1$2');
+	var highResURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(cleanText(setName)) + '/' + encodeURIComponent(cleanText(cardName)) + artIndex + '.full.jpg';    
+	var imageElement = $('<img />').attr('src', highResURL)
+	existingImage.css({ opacity: 0.2 });
+	imageElement
+		.load(function() {
+			imageElement.unbind('load');
+			imageContainer.show();
+			existingImage.attr('src', highResURL);
+			existingImage.css({ opacity: 1.0 });
+		})
+		.error(function() {
+			imageElement.unbind('error');	
+			existingImage.css({ opacity: 1.0 });
+			imageContainer.hide();
+		});
 }
 
 // ----------------------------------------------------------------------------
@@ -687,8 +729,7 @@ $('.ol-bookmark a').click(toggleBookmark);
 })()
 
 if (navigator.userAgent	.indexOf('iPhone') == -1) {
-	Orcish.setCardData({"otherParts":[{"pk":"2008796387","displayName":"Battery (Assault \/\/ Battery)"}],"displayName":"Assault (Assault \/\/ Battery)","artIndex":"","tcgSetName":"Planechase","loyalty":null,"name":"Assault","setName":"Planechase","rarity":"U","power":"","otherEditions":[],"isBookmarked":false,"artist":"Ben Thompson","gathererId":"205409","manaCost":"R","typeLine":"Sorcery","pk":"3211727157","collectorNumber":"103","oracleText":"Assault deals 2 damage to target creature or player.","artVariants":[{"artIndex":"","artist":"Ben Thompson","pk":"3211727157"}],"toughness":""})
-	
+	Orcish.setCardData({"otherParts":[],"displayName":"Hymn to Tourach","artIndex":"1","tcgSetName":"Fallen Empires","loyalty":null,"name":"Hymn to Tourach","setName":"Fallen Empires","rarity":"C","power":"","otherEditions":[],"isBookmarked":false,"artist":"Scott Kirschner","gathererId":"1851","manaCost":"BB","typeLine":"Sorcery","pk":"1282653776","collectorNumber":"","oracleText":"Target player discards two cards at random.","artVariants":[{"artIndex":"1","artist":"Scott Kirschner","pk":"1282653776"},{"artIndex":"2","artist":"Quinton Hoover","pk":"2274767213"},{"artIndex":"3","artist":"Susan Van Camp","pk":"2068412148"},{"artIndex":"4","artist":"Liz Danforth","pk":"4134532144"}],"toughness":""})	
 } else {
 	$(function(){
 		Orcish.sendMessage('done', 'loading');

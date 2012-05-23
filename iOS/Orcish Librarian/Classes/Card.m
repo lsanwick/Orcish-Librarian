@@ -141,6 +141,7 @@
         // order order criteria we've got set up.
         [orderClauses addObject:@"search_name ASC"];
         [orderClauses addObject:@"set_idx DESC"];
+        [orderClauses addObject:@"art_index ASC"];
     }
     
     // construct & execute the SQL query
