@@ -17,7 +17,7 @@ class Gatherer < Source
     checklist.each_pair do |name, cards_with_name|
       spoiler_entry = spoiler[name]
       if spoiler_entry.nil?
-        debug("WARNING: No spoiler entry for #{name}")
+        debug("[WARNING] No spoiler entry for #{name}")
       else
         cards_with_name.each do |card|
           card = card.clone
@@ -43,12 +43,17 @@ class Gatherer < Source
         :artist => cells[2].inner_text,
         :collector_number => cells[0].inner_text,
         :rarity => cells[4].inner_text
-      }
-      if (others.length == 0 || others[0][:collector_number] != entry[:collector_number] || entry[:collector_number] == '')
-        others << entry  
+      }   
+      if (others.length == 0 || 
+          entry[:collector_number] != others[0][:collector_number] || 
+          entry[:rarity] == 'L' || 
+          (set != 'Apocalypse' && set != 'Invasion'))
+        others << entry      
+      else
+        debug("[WARNING] #{entry[:name]} has a duplicate collector's number (#{entry[:collector_number]})")
       end
     end
-    cards.each_pair do |name, card|
+    cards.each_pair do |name, card|      
       if card.length > 1
         for i in 0 ... card.length
           card[i][:art_index] = (i + 1)
