@@ -83,12 +83,6 @@
 }
 
 // ----------------------------------------------------------------------------
-
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return MAX(6, self.cardList.count);
-}
-
-// ----------------------------------------------------------------------------
 //  UITableViewDelegate
 // ----------------------------------------------------------------------------
 
@@ -100,7 +94,12 @@
         }
     }
 }
+    
+// ----------------------------------------------------------------------------
+    
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return MAX(6, self.cardList.count);
+}
 
 // ----------------------------------------------------------------------------
-
 @end

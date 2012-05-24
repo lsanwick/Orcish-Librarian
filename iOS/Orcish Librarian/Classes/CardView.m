@@ -81,9 +81,8 @@
     else if ([URL.scheme isEqualToString:@"set"]) {        
         if ([URL.host isEqualToString:@"self"]) {
             // show the current card's set
-            NSArray *cards = [Card collapseCardList:[Card findCardsBySet:self.card.setPk]];
             [gAppDelegate trackEvent:@"Card View" action:@"Show Set" label:self.card.setName];
-            [gAppDelegate showCards:cards atPosition:0];
+            [gAppDelegate showCardList:[Card findCardsBySet:self.card.setPk] withTitle:self.card.setName];
         } else {
             // show the set from the current card's equivalent
             NSArray *cards = [Card collapseCardList:[Card findCardsBySet:URL.host]];
