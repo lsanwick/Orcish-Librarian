@@ -87,8 +87,6 @@ typedef enum {
 
 - (void) applicationDidReceiveMemoryWarning:(UIApplication *)application {
     [[PriceManager shared] clearCache];
-    // TODO: wipe search-names text from memory (needs to reload later if absent).
-    //       alternatively, could memory-map the data (mmap or NSData)?
 }
 
 // ----------------------------------------------------------------------------
@@ -182,14 +180,13 @@ typedef enum {
 - (void) initializeAnalytics {
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     NSError *error;
-    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-18007072-1" dispatchPeriod:10 delegate:nil];
+    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-18007072-2" dispatchPeriod:10 delegate:nil];
     [[GANTracker sharedTracker] setCustomVariableAtIndex:1 name:@"version" value:version withError:&error];
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) trackScreen:(NSString *)path {
-    // NSLog(@"TRACK SCREEN (%@)", path);
     NSError *error;
     [[GANTracker sharedTracker] trackPageview:path withError:&error];
 }
