@@ -305,12 +305,15 @@
     dispatch_sync(gAppDelegate.dataQueue, ^{
         FMResultSet *rs = [gDataManager.db executeQuery:
             @"SELECT   cards.* "
-            @"FROM     cards "
+            @"FROM     cards, sets "
             @"WHERE    cards.set_pk = ? "
+            @"AND      cards.set_pk = sets.pk "
             @"AND      cards.collector_number == ? "
             @"AND      cards.collector_number != '' "
             @"AND      cards.pk != ? "
-            @"AND      cards.rarity = ? ",
+            @"AND      cards.rarity = ? "
+            @"AND      cards.rarity != 'L' "
+            @"AND      sets.name != 'Planeshift' ",
             self.setPk,
             self.collectorNumber,
             self.pk,
