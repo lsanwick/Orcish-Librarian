@@ -93,7 +93,6 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [gAppDelegate trackScreen:@"/CardView/Prices"];
 }
 
 // ----------------------------------------------------------------------------
@@ -121,10 +120,8 @@
 
 - (IBAction) foilButtonTapped:(id)sender {
     if (self.showFoilsOnly) {
-        [gAppDelegate trackEvent:@"All Prices" action:@"Show All" label:@""];
         [self.foilButton setTitle:@"Foils"];
     } else {
-        [gAppDelegate trackEvent:@"All Prices" action:@"Show Foils" label:@""];
         [self.foilButton setTitle:@"Any"];
     }
     self.showFoilsOnly = !self.showFoilsOnly;
@@ -143,7 +140,6 @@
 // ----------------------------------------------------------------------------
 
 - (IBAction) doneButtonTapped:(id)sender {
-    [gAppDelegate trackEvent:@"All Prices" action:@"Done" label:@""];
     [gAppDelegate.rootController dismissModalViewControllerAnimated:YES];
 }
 

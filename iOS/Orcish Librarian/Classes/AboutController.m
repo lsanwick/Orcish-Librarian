@@ -48,6 +48,7 @@
 // ----------------------------------------------------------------------------
 
 - (IBAction) urlTapped:(id)sender {
+    [gAppDelegate trackEvent:@"About Screen" action:@"Launch Orcish Homepage" label:@""];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://orcish.info"]];
 }
 

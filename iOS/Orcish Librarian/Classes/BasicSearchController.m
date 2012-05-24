@@ -48,7 +48,6 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];    
-    [gAppDelegate trackScreen:@"/BasicSearch"];
     if (!self.hasBeenFirstResponder) {
         self.hasBeenFirstResponder = YES;
         [self.searchBar becomeFirstResponder];
@@ -89,8 +88,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < self.cardList.count) {        
         if (gAppDelegate.rootController.topController == self) {            
-            [gAppDelegate showCards:self.cardList atPosition:indexPath.row];
-            [gAppDelegate trackEvent:@"Search Results" action:@"Click" label:[[self.cardList objectAtIndex:indexPath.row] displayName]];
+            [gAppDelegate showCards:self.cardList atPosition:indexPath.row];            
         }
     }
 }

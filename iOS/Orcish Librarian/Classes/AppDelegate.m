@@ -43,7 +43,6 @@ typedef enum {
 - (void) initializeData;
 - (void) initializePriceCache;
 - (void) initializeWindow;
-- (void) initializeAnalytics;
 - (CardViewController *) dequeueCardViewController;
 
 @property (nonatomic, assign) TopLevelCategory topLevel;
@@ -67,20 +66,25 @@ typedef enum {
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     dataQueue = dispatch_queue_create("info.orcish.db.queue", NULL);
     [self initializeData];
-    [self initializeAnalytics];
     [self dequeueCardViewController];
     [self initializeWindow];    
     [self initializePriceCache];
-    [self trackEvent:@"Application" action:@"Initialize" label:@""];
     return YES;
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) applicationDidBecomeActive:(UIApplication *)application {
+    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-18007072-2" dispatchPeriod:10 delegate:nil];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [gDataManager updateFromServer];
     });
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) applicationDidEnterBackground:(UIApplication *)application {
+    [[GANTracker sharedTracker] stopTracker];
 }
 
 // ----------------------------------------------------------------------------
@@ -177,18 +181,10 @@ typedef enum {
 
 // ----------------------------------------------------------------------------
 
-- (void) initializeAnalytics {
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    NSError *error;
-    [[GANTracker sharedTracker] startTrackerWithAccountID:@"UA-18007072-2" dispatchPeriod:10 delegate:nil];
-    [[GANTracker sharedTracker] setCustomVariableAtIndex:1 name:@"version" value:version withError:&error];
-}
-
-// ----------------------------------------------------------------------------
-
 - (void) trackScreen:(NSString *)path {
     NSError *error;
     [[GANTracker sharedTracker] trackPageview:path withError:&error];
+    NSLog(@"Track Screen: %@", path);
 }
 
 // ----------------------------------------------------------------------------
@@ -196,6 +192,7 @@ typedef enum {
 - (void) trackEvent:(NSString *)category action:(NSString *)action label:(NSString *)label {
     NSError *error;
     [[GANTracker sharedTracker] trackEvent:category action:action label:label value:0 withError:&error];
+    NSLog(@"Track Event: %@, %@, %@", category, action, label);
 }
 
 // ----------------------------------------------------------------------------

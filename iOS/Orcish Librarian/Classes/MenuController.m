@@ -139,12 +139,13 @@
     
     // BROWSE BY SET
     else if ([text isEqualToString:@"BROWSE SETS"]) {
-        [gAppDelegate trackEvent:@"Menu" action:@"Browse" label:@""];
+        [gAppDelegate trackEvent:@"Menu" action:@"Browse Sets" label:@""];
         [gAppDelegate showBrowseController];
     }
     
     // ABOUT
     else if ([text isEqualToString:@"ABOUT"]) {
+        [gAppDelegate trackEvent:@"Menu" action:@"About" label:@""];
         [gAppDelegate showAboutController];
     }
     

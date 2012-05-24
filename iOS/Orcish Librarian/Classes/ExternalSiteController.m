@@ -90,6 +90,7 @@
 - (void) actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     self.activeActionSheet = nil;
     if(buttonIndex == 0) {
+        [gAppDelegate trackEvent:@"External Site" action:@"Launch in Safari" label:webView.request.URL.host];
         [[UIApplication sharedApplication] openURL:webView.request.URL];
     }
 }

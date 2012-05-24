@@ -81,12 +81,10 @@
     else if ([URL.scheme isEqualToString:@"set"]) {        
         if ([URL.host isEqualToString:@"self"]) {
             // show the current card's set
-            [gAppDelegate trackEvent:@"Card View" action:@"Show Set" label:self.card.setName];
             [gAppDelegate showCardList:[Card findCardsBySet:self.card.setPk] withTitle:self.card.setName];
         } else {
             // show the set from the current card's equivalent
             NSArray *cards = [Card collapseCardList:[Card findCardsBySet:URL.host]];
-            [gAppDelegate trackEvent:@"Card View" action:@"Show Other Editions" label:self.card.displayName];
             [gAppDelegate showCards:cards atPosition:[cards indexOfObjectPassingTest:^(Card *test, NSUInteger index, BOOL *stop) {
                 return (BOOL) ([self.card.nameHash isEqualToString:test.nameHash] ? (*stop = YES) : NO);
             }]];
@@ -98,21 +96,19 @@
         NSString *pk = URL.host;
         Card *newCard = [Card findCardByPk:pk];
         if (newCard != nil) {
-            [gAppDelegate trackEvent:@"Card View" action:@"Show Card" label:newCard.displayName];
             [gAppDelegate showCard:newCard];
         } 
     } 
     
     // LAUNCH GATHERER
     else if ([URL.scheme isEqualToString:@"gatherer"]) {
-        [gAppDelegate trackEvent:@"Card View" action:@"Show Gatherer" label:self.card.displayName];
+        [gAppDelegate trackEvent:@"Card View" action:@"Show Gatherer" label:@""];
         [gAppDelegate launchExternalSite:[NSURL URLWithString:[NSString stringWithFormat:
             @"http://gatherer.wizards.com/Pages/Card/Discussion.aspx?multiverseid=%@", self.card.gathererId]]];
     } 
     
     // RELOAD PRICES
     else if ([URL.scheme isEqualToString:@"price"]) {
-        [gAppDelegate trackEvent:@"Card View" action:@"Reload Prices" label:self.card.displayName];
         [[PriceManager shared] requestPriceForCard:self.card withCallback:^(Card *theCard, NSDictionary *price) {
             [self setPrice:price forCard:theCard];
         }];
@@ -120,14 +116,13 @@
     
     // SHOW "ALL PRICES" MODAL
     else if ([URL.scheme isEqualToString:@"tcg"]) {
-        [gAppDelegate trackEvent:@"Card View" action:@"All Prices" label:self.card.displayName];
+        [gAppDelegate trackEvent:@"Card View" action:@"Show All Prices" label:@""];
         [gAppDelegate showPriceModalForProductId:URL.host];
     } 
     
     // TOGGLE BOOKMARK 
     else if ([URL.scheme isEqualToString:@"bookmark"]) {        
         self.card.isBookmarked = [URL.host isEqualToString:@"on"];
-        [gAppDelegate trackEvent:@"Card View" action:@"Set Bookmark" label:(self.card.isBookmarked ? @"On" : @"Off")];
     }
     
     // UNKNOWN COMMAND

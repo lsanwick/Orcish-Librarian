@@ -60,7 +60,6 @@
 
 - (void) navigationButtonTapped:(id)sender {
     if (gAppDelegate.rootController.controllerStack.count > 1) {
-        [gAppDelegate trackEvent:@"Navigation" action:@"Back" label:@""];
         [gAppDelegate.rootController popViewControllerAnimated:YES];
     } else if (gAppDelegate.rootController.menuIsVisible) {
         [gAppDelegate.rootController hideMenu];

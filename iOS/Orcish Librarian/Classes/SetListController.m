@@ -44,7 +44,6 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [gAppDelegate trackScreen:@"/Browse"];
 }
 
 // ----------------------------------------------------------------------------
@@ -68,7 +67,6 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *sets = (indexPath.section == 0) ? recentSets : allSets;
     CardSet *set = [sets objectAtIndex:indexPath.row];
-    [gAppDelegate trackEvent:@"Browse" action:@"Show Set" label:set.name];
     [gAppDelegate showCardList:set.cards withTitle:set.name];
 }
 

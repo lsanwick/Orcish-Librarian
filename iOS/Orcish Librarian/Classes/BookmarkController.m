@@ -44,7 +44,6 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [gAppDelegate trackScreen:@"/Bookmarks"];
 }
 
 // ----------------------------------------------------------------------------
@@ -60,8 +59,6 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < self.cardList.count) {
-        Card *card = [self.cardList objectAtIndex:indexPath.row];
-        [gAppDelegate trackEvent:@"Bookmarks" action:@"Show Card" label:card.displayName];
         [gAppDelegate showCards:self.cardList atPosition:indexPath.row];
     }
 }

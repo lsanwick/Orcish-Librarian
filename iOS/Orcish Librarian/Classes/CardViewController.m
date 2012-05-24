@@ -68,7 +68,6 @@ typedef void (^block_t)(void);
     [self scrollAllViewsToTop];
     if (!self.hasAppearedBefore) {
         self.hasAppearedBefore = YES;
-        [gAppDelegate trackScreen:@"/CardView"];    
         CGFloat width = self.scrollView.frame.size.width;
         CGFloat height = self.scrollView.frame.size.height;    
         NSUInteger pageCount = MIN(kPageCount, self.sequence.count);
