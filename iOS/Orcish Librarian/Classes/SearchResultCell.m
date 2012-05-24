@@ -42,6 +42,7 @@
 @implementation SearchResultCell
 
 @synthesize card;
+@synthesize hidesCount;
 
 // ----------------------------------------------------------------------------
 
@@ -114,17 +115,6 @@
 
 + (CGFloat) height {
     return 62;
-    /*
-    return MAX(
-        // combined height of the left-hand rows
-        kCellPadding + 
-        [self nameLabelHeight] + 
-        kCellSpacing + 
-        [self setLabelHeight] + 
-        kCellPadding,
-        // combined height of the right-hand rows
-        [self priceLabelHeight] * 3.0);
-     */ 
 }
 
 // ----------------------------------------------------------------------------
@@ -181,26 +171,13 @@
         priceLabelMid.text = price ? [NSString stringWithFormat:@"M: $%@", [price objectForKey:@"average"]] : @"";
         priceLabelHigh.text = price ? [NSString stringWithFormat:@"H: $%@", [price objectForKey:@"high"]] : @"";
         nameLabel.text = card.displayName;    
-        if (otherEditions.count > 0) {
+        if (otherEditions.count > 0 && !self.hidesCount) {
             setLabel.text = [NSString stringWithFormat:@"%@ (%d more)", card.setName, otherEditions.count];
         } else {
             setLabel.text = card.setName;
         }
     }
 }
-
-// ----------------------------------------------------------------------------
-
-/*
-- (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-    [super setHighlighted:highlighted animated:animated];
-    priceLabelLow.textColor = 
-    priceLabelMid.textColor =
-    priceLabelHigh.textColor =
-    nameLabel.textColor =
-    setLabel.textColor = highlighted ? [UIColor whiteColor] : [UIColor blackColor];
-}
- */
 
 // ----------------------------------------------------------------------------
 

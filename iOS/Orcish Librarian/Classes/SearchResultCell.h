@@ -15,5 +15,6 @@
 + (CGFloat) height;
 
 @property (nonatomic, strong) Card *card;
+@property (nonatomic, assign) BOOL hidesCount;
 
 @end
