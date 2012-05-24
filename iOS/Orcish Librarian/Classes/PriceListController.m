@@ -11,7 +11,7 @@
 #import "PriceVendorCell.h"
 #import "RegexKitLite.h"
 
-#define kRequestTimeout 10
+#define kRequestTimeout 15
 
 @interface PriceListController ()
 
