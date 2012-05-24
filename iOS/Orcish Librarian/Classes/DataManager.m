@@ -11,8 +11,9 @@
 #import "FMDatabase.h"
 #import "RegexKitLite.h"
 
-#define MAJOR(v) ([DataManager majorNumberForVersion:(v)])
-#define MINOR(v) ([DataManager minorNumberForVersion:(v)])
+#define MAJOR(v)  ([DataManager majorNumberForVersion:(v)])
+#define MINOR(v)  ([DataManager minorNumberForVersion:(v)])
+
 
 
 @interface DataManager () {
@@ -72,8 +73,13 @@
 // ----------------------------------------------------------------------------
 
 - (NSString *) version {
-    NSString *version = [[NSUserDefaults standardUserDefaults] objectForKey:@"dataVersion"];
-    return version ? version : [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *bundleVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *currentVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"dataVersion"];
+    if (!currentVersion || [MAJOR(currentVersion) compare:MAJOR(bundleVersion) options:NSNumericSearch] == NSOrderedAscending) {
+        return bundleVersion;
+    } else {
+        return currentVersion;
+    }
 }
 
 // ----------------------------------------------------------------------------
@@ -113,13 +119,14 @@
     @try {
         NSError *error; 
 
-        NSURL *versionURL = [NSURL URLWithString:@"http://direct.orcish.info/librarian/db/version.txt"];
+        NSURL *versionURL = [NSURL URLWithString:@"https://s3.amazonaws.com/orcish/database/version.txt"];
         NSString *version = [NSString stringWithContentsOfURL:versionURL encoding:NSUTF8StringEncoding error:&error];
         if (!version || ![self canUpdateTo:version]) {
             return;
         }
         
-        NSURL *dataURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://direct.orcish.info/librarian/db/cards-%@.sqlite3", version]];
+        NSLog(@"Downloading new data from server");
+        NSURL *dataURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3.amazonaws.com/orcish/database/cards-%@.sqlite3", version]];
         NSData *data = [NSData dataWithContentsOfURL:dataURL options:0 error:&error];
         if (!data) {
             return;
@@ -134,6 +141,7 @@
                 
         dispatch_sync(gAppDelegate.dataQueue, ^{
             [self deactivateDataSources];
+            self.version = version;
             [self installDatabaseFile:stagedDbPath andNamesFile:stagedNamesPath forVersion:version];
             [self activateDataSources];
         });
@@ -147,7 +155,7 @@
 
 - (NSString *) dbPath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    return [[paths objectAtIndex:0] stringByAppendingPathComponent:@"cards.sqlite3"];    
+    return [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"cards-%@.sqlite3", self.version]];
 }
 
 // ----------------------------------------------------------------------------
@@ -167,6 +175,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) installDataFromBundle {
+    NSLog(@"Installing packaged data from bundle");
     NSError *error;
     NSFileManager *fm = [NSFileManager defaultManager];
     NSString *dbPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"cards.sqlite3"];
@@ -180,13 +189,13 @@
 // ----------------------------------------------------------------------------
 
 - (void) installDatabaseFile:(NSString *)dbPath andNamesFile:(NSString *)namesPath forVersion:(NSString *)version {
+    NSLog(@"Installing downloaded data");
     NSError *error;
     NSFileManager *fm = [NSFileManager defaultManager];
     [fm removeItemAtPath:self.dbPath error:&error];
     [fm removeItemAtPath:self.namesPath error:&error];
-    if ([fm moveItemAtPath:dbPath toPath:self.dbPath error:&error] && [fm moveItemAtPath:namesPath toPath:self.namesPath error:&error]) {
-        self.version = version;
-    }
+    [fm moveItemAtPath:dbPath toPath:self.dbPath error:&error];
+    [fm moveItemAtPath:namesPath toPath:self.namesPath error:&error];
 }
 
 // ----------------------------------------------------------------------------

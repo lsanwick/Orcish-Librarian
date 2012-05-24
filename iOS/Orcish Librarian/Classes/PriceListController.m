@@ -232,7 +232,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) webViewDidFinishLoad:(UIWebView *)theWebView {
-    [self.webView stringByEvaluatingJavaScriptFromString:@"(function(){ var s = document.createElement('script'); s.src = 'http://orcish.info/librarian/prices.js'; document.getElementsByTagName('head')[0].appendChild(s); })()"];
+    [self.webView stringByEvaluatingJavaScriptFromString:@"(function(){ var s = document.createElement('script'); s.src = 'http://d1g6xmf8vayz1g.cloudfront.net/scripts/prices.js'; document.getElementsByTagName('head')[0].appendChild(s); })()"];
 }
 
 // ----------------------------------------------------------------------------

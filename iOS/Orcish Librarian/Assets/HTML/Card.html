@@ -280,6 +280,7 @@
 var Orcish = { };    
 (function(){
     
+var IMAGE_ROOT = 'http://d1g6xmf8vayz1g.cloudfront.net/images/';
 var MESSAGE_LOCK_TIMEOUT = 2000;
 var PRICE_REQUEST_TIMEOUT = 5000;
 var priceRequestTimer = null;
@@ -374,7 +375,7 @@ function loadCardPhoto(card) {
     
 	var setName = card.setName.replace(/:/g, '');
 	var cardName = card.displayName.replace(/:/g, '').replace(/^.*\((.*)\s\/\/\s(.*)\)$/, '$1$2');
-	var highResURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(cleanText(setName)) + '/' + encodeURIComponent(cleanText(cardName)) + card.artIndex + '.full.jpg';
+	var highResURL = IMAGE_ROOT + encodeURIComponent(cleanText(setName)) + '/' + encodeURIComponent(cleanText(cardName)) + card.artIndex + '.full.jpg';
 	var lowResURL = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=' + card.gathererId;
     
 	var imageElement = $('<img />').hide().appendTo(imageContainer);
@@ -465,7 +466,7 @@ function loadArtVariant(card, artIndex) {
 	var existingImage = imageContainer.find('img');
 	var setName = card.setName.replace(/:/g, '');
 	var cardName = card.displayName.replace(/:/g, '').replace(/^.*\((.*)\s\/\/\s(.*)\)$/, '$1$2');
-	var highResURL = 'http://orcish.info/librarian/images/' + encodeURIComponent(cleanText(setName)) + '/' + encodeURIComponent(cleanText(cardName)) + artIndex + '.full.jpg';    
+	var highResURL = IMAGE_ROOT + encodeURIComponent(cleanText(setName)) + '/' + encodeURIComponent(cleanText(cardName)) + artIndex + '.full.jpg';    
 	var imageElement = $('<img />').attr('src', highResURL)
 	existingImage.css({ opacity: 0.2 });
 	imageElement
