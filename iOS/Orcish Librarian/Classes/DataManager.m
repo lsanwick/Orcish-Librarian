@@ -119,14 +119,14 @@
     @try {
         NSError *error; 
 
-        NSURL *versionURL = [NSURL URLWithString:@"https://s3.amazonaws.com/orcish/database/version.txt"];
+        NSURL *versionURL = [NSURL URLWithString:@"http://d1g6xmf8vayz1g.cloudfront.net/database/version.txt"];
         NSString *version = [NSString stringWithContentsOfURL:versionURL encoding:NSUTF8StringEncoding error:&error];
         if (!version || ![self canUpdateTo:version]) {
             return;
         }
         
         NSLog(@"Downloading new data from server");
-        NSURL *dataURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://s3.amazonaws.com/orcish/database/cards-%@.sqlite3", version]];
+        NSURL *dataURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://d1g6xmf8vayz1g.cloudfront.net/database/cards-%@.sqlite3", version]];
         NSData *data = [NSData dataWithContentsOfURL:dataURL options:0 error:&error];
         if (!data) {
             return;
