@@ -28,6 +28,7 @@
 @implementation OrcishViewController
 
 @dynamic navigationItem;
+@synthesize shouldCollapseResults;
 @synthesize parentViewController;
 @synthesize cardList;
 @synthesize cardListView;
@@ -36,6 +37,7 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    self.shouldCollapseResults = YES;
     navigationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu-Button"] 
         style:UIBarButtonItemStyleBordered target:self action:@selector(navigationButtonTapped:)];
     [self.navigationItem setLeftBarButtonItem:navigationButton];
@@ -85,8 +87,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) setCardList:(NSArray *)cards {
-    cards = [[self class] collapsedResults:cards];
-    cardList = cards;
+    cardList = self.shouldCollapseResults ? [[self class] collapsedResults:cards] : cards;
     [self.cardListView reloadData];
     [[PriceManager shared] clearPriceRequests];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kPriceRequestDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{

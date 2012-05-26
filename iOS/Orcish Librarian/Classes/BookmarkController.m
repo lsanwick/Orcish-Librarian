@@ -30,6 +30,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Bookmarks";
+    self.shouldCollapseResults = NO;
 }
 
 // ----------------------------------------------------------------------------
