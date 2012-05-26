@@ -38,6 +38,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     [self loadData];
+    self.cardListView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];
 }
 
 // ----------------------------------------------------------------------------

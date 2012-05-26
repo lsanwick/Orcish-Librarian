@@ -42,7 +42,7 @@
         style:UIBarButtonItemStyleBordered target:self action:@selector(navigationButtonTapped:)];
     [self.navigationItem setLeftBarButtonItem:navigationButton];
     self.cardListView.separatorColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];        
-    self.cardListView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];
+    self.cardListView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Card-Rows"]];
     
 }
 
@@ -154,7 +154,7 @@
 // ----------------------------------------------------------------------------
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return MAX(7, self.cardList.count);
+    return MAX(1, self.cardList.count);
 }
 
 // ----------------------------------------------------------------------------
