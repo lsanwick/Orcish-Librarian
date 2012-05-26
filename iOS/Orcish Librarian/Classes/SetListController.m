@@ -38,7 +38,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     [self loadData];
-    self.cardListView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];
+    self.cardListView.rowHeight = 44.0f;
 }
 
 // ----------------------------------------------------------------------------

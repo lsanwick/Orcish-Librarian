@@ -50,18 +50,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) reloadCards {
-    self.cardList = [[Card findBookmarkedCards] sortedArrayUsingDescriptors:[NSArray arrayWithObject:
-        [[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES]]];
-}
-
-// ----------------------------------------------------------------------------
-//  UITableViewDelegate
-// ----------------------------------------------------------------------------
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < self.cardList.count) {
-        [gAppDelegate showCards:self.cardList atPosition:indexPath.row];
-    }
+    self.cardList = [Card findBookmarkedCards]; // [[Card findBookmarkedCards] sortedArrayUsingDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES]]];
 }
 
 // ----------------------------------------------------------------------------
@@ -69,16 +58,18 @@
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [[self.cardList objectAtIndex:indexPath.row] setIsBookmarked:NO];
-        [self reloadCards];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {    
+        Card *card = [self.cardList objectAtIndex:indexPath.row];
+        [card setIsBookmarked:NO];
+        [self setCardList:[Card findBookmarkedCards] reloadTable:NO];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }  
 }
 
 // ----------------------------------------------------------------------------
 
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return (indexPath.row < self.cardList.count);
+    return YES;
 }
 
 // ----------------------------------------------------------------------------

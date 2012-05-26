@@ -86,10 +86,8 @@
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < self.cardList.count) {        
-        if (gAppDelegate.rootController.topController == self) {            
-            [gAppDelegate showCards:self.cardList atPosition:indexPath.row];            
-        }
+    if (gAppDelegate.rootController.topController == self) {            
+        [gAppDelegate showCards:self.cardList atPosition:indexPath.row];            
     }
 }
     

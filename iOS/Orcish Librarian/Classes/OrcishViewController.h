@@ -12,6 +12,8 @@
 
 @interface OrcishViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
+- (void) setCardList:(NSArray *)card reloadTable:(BOOL)reloadTable;
+
 @property (nonatomic, assign) BOOL shouldCollapseResults;
 @property (nonatomic, strong) NSArray *cardList;
 @property (nonatomic, strong) IBOutlet UITableView *cardListView;

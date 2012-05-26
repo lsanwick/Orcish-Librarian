@@ -85,8 +85,7 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];
-    self.tableView.separatorColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
+    self.tableView.rowHeight = [PriceVendorCell height];
 }
 
 // ----------------------------------------------------------------------------
@@ -162,7 +161,7 @@
 // ----------------------------------------------------------------------------
 
 - (NSInteger) tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section {
-    return MAX(7, self.currentPrices.count);
+    return self.currentPrices.count;
 }
 
 // ----------------------------------------------------------------------------
@@ -186,16 +185,8 @@
         cell =  [[PriceVendorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }     
-    cell.vendor = (indexPath.row < self.currentPrices.count) ? [self.currentPrices objectAtIndex:indexPath.row] : nil;
+    cell.vendor = [self.currentPrices objectAtIndex:indexPath.row];
     return cell;
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) tableView:(UITableView *)aTableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = (indexPath.row % 2) ?
-        tableView.separatorColor :    
-        [UIColor whiteColor];
 }
 
 // ----------------------------------------------------------------------------

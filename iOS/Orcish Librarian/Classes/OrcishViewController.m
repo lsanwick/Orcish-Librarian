@@ -38,12 +38,10 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     self.shouldCollapseResults = YES;
+    self.cardListView.rowHeight = [SearchResultCell height];
     navigationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu-Button"] 
         style:UIBarButtonItemStyleBordered target:self action:@selector(navigationButtonTapped:)];
     [self.navigationItem setLeftBarButtonItem:navigationButton];
-    self.cardListView.separatorColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];        
-    self.cardListView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Card-Rows"]];
-    
 }
 
 // ----------------------------------------------------------------------------
@@ -86,9 +84,11 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) setCardList:(NSArray *)cards {
+- (void) setCardList:(NSArray *)cards reloadTable:(BOOL)reloadTable {
     cardList = self.shouldCollapseResults ? [[self class] collapsedResults:cards] : cards;
-    [self.cardListView reloadData];
+    if (reloadTable) {
+        [self.cardListView reloadData];
+    }
     [[PriceManager shared] clearPriceRequests];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kPriceRequestDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if (self.cardList == cards && cards.count > 0) {
@@ -99,6 +99,12 @@
             }
         }
     });
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) setCardList:(NSArray *)cards {
+    [self setCardList:cards reloadTable:YES];
 }
 
 // ----------------------------------------------------------------------------
@@ -120,8 +126,7 @@
     if (cell == nil) {
         cell =  [[SearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }     
-    cell.selectionStyle = (indexPath.row < self.cardList.count) ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
-    cell.card = (indexPath.row < self.cardList.count) ? [self.cardList objectAtIndex:indexPath.row] : nil;
+    cell.card = [self.cardList objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -129,12 +134,6 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:indexPath {
     return [SearchResultCell height];
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = (indexPath.row % 2) ? tableView.separatorColor : [UIColor whiteColor];
 }
 
 // ----------------------------------------------------------------------------
@@ -154,7 +153,7 @@
 // ----------------------------------------------------------------------------
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return MAX(1, self.cardList.count);
+    return self.cardList.count;
 }
 
 // ----------------------------------------------------------------------------

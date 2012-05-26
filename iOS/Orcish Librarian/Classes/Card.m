@@ -173,15 +173,15 @@
 + (NSArray *) findBookmarkedCards {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *bookmarks = [defaults objectForKey:@"bookmarks"];
-    NSString *gathererIds = [[bookmarks allKeys] componentsJoinedByString:@","];    
+    NSString *primaryKeys = [[bookmarks allKeys] componentsJoinedByString:@","];    
     NSString *sql = [NSString stringWithFormat:
         @"SELECT    cards.*, "
         @"          sets.name AS set_name, "
         @"          sets.tcg AS tcg_set_name "
         @"FROM      cards, sets "
         @"WHERE     cards.set_pk = sets.pk "
-        @"AND       cards.gatherer_id IN (%@) ",
-        gathererIds];
+        @"AND       cards.pk IN (%@) ",
+        primaryKeys];
     NSMutableArray *cards = [NSMutableArray array];
     dispatch_sync(gAppDelegate.dataQueue, ^{
         FMResultSet *rs = [gDataManager.db executeQuery:sql];
@@ -360,7 +360,7 @@
 - (BOOL) isBookmarked {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *bookmarks = [defaults objectForKey:@"bookmarks"];
-    return ([bookmarks objectForKey:self.gathererId] != nil);
+    return ([bookmarks objectForKey:self.pk] != nil);
 }
 
 // ----------------------------------------------------------------------------
@@ -370,9 +370,9 @@
     NSSet *existing = [defaults objectForKey:@"bookmarks"];
     NSMutableDictionary *bookmarks = existing ? [existing mutableCopy] : [NSMutableDictionary dictionary];
     if (bookmarked) {
-        [bookmarks setObject:[NSNumber numberWithBool:YES] forKey:self.gathererId];
+        [bookmarks setObject:[NSNumber numberWithBool:YES] forKey:self.pk];
     } else {
-        [bookmarks removeObjectForKey:self.gathererId];
+        [bookmarks removeObjectForKey:self.pk];
     }
     [defaults setObject:bookmarks forKey:@"bookmarks"];
     [defaults synchronize];
