@@ -49,13 +49,13 @@
 - (Card *) cardAtPosition:(NSUInteger)position {
     if (self.random) {
         NSNumber *positionAsObject = [NSNumber numberWithUnsignedInteger:position];        
-        NSString *pk = [self.randomCards objectForKey:positionAsObject];
-        if (pk == nil) {
+        id pk = [self.randomCards objectForKey:positionAsObject];
+        if (!pk) {
             Card *randomCard = [Card findRandomCard];
-            [self.randomCards setObject:randomCard.pk forKey:positionAsObject];
+            [self.randomCards setObject:[NSNumber numberWithUnsignedInteger:randomCard.pk] forKey:positionAsObject];
             return randomCard;
         } else {
-            return [Card findCardByPk:pk];   
+            return [Card findCardByPk:[pk unsignedIntegerValue]];   
         }
     } else {
         return [self.cards objectAtIndex:position];

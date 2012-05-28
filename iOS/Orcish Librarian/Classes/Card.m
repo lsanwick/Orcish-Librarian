@@ -45,14 +45,14 @@
 
 + (Card *) cardForResultSet:(FMResultSet *)rs {
     Card *card = [NSNull wrapNil:[[Card alloc] init]];
-    card.pk = [NSNull wrapNil:[rs stringForColumn:@"pk"]];
+    card.pk = (NSUInteger) [rs longForColumn:@"pk"];
     card.searchName = [NSNull wrapNil:[rs stringForColumn:@"search_name"]];
-    card.nameHash = [NSNull wrapNil:[rs stringForColumn:@"name_hash"]];
+    card.nameHash = (NSUInteger) [rs longForColumn:@"name_hash"];
     card.name = [NSNull wrapNil:[rs stringForColumn:@"name"]];
     card.displayName = [NSNull wrapNil:[rs stringForColumn:@"display_name"]];
     card.tcgName = [NSNull wrapNil:[rs stringForColumn:@"tcg"]];
-    card.gathererId = [NSNull wrapNil:[rs stringForColumn:@"gatherer_id"]];
-    card.setPk = [NSNull wrapNil:[rs stringForColumn:@"set_pk"]];
+    card.gathererId = (NSUInteger) [rs longForColumn:@"gatherer_id"];
+    card.setPk = (NSUInteger) [rs longForColumn:@"set_pk"];
     card.setName = [NSNull wrapNil:[rs stringForColumn:@"set_name"]];
     card.tcgSetName = [NSNull wrapNil:[rs stringForColumn:@"tcg_set_name"]];
     card.collectorNumber = [NSNull wrapNil:[rs stringForColumn:@"collector_number"]];
@@ -93,9 +93,9 @@
 
 // ----------------------------------------------------------------------------
 
-+ (NSArray *) findCardsBySet:(NSString *)setPk {
++ (NSArray *) findCardsBySet:(NSUInteger)setPk {
     SearchCriteria *criteria = [[SearchCriteria alloc] init];
-    criteria.sets = [NSArray arrayWithObject:setPk];
+    criteria.sets = [NSArray arrayWithObject:[NSNumber numberWithUnsignedInteger:setPk]];
     return [self findCards:criteria];
 }
 
@@ -213,7 +213,7 @@
 
 // ----------------------------------------------------------------------------
 
-+ (Card *) findCardByPk:(NSString *)pk {
++ (Card *) findCardByPk:(NSUInteger)pk {
     NSString *sql = 
         @"SELECT    cards.*, "
         @"          sets.name AS set_name, "
@@ -224,7 +224,7 @@
     __block Card *card = nil;
     dispatch_sync(gAppDelegate.dataQueue, ^{
         FMResultSet *rs = [gDataManager.db executeQuery:sql withArgumentsInArray:
-            [NSArray arrayWithObject:pk]];        
+            [NSArray arrayWithObject:[NSNumber numberWithUnsignedInteger:pk]]];        
         card = [rs next] ? [self cardForResultSet:rs] : nil;
     });
     return card;
@@ -285,8 +285,8 @@
             @"WHERE    cards.set_pk = ? "
             @"AND      cards.name_hash == ? "
             @"ORDER BY cards.art_index ASC",
-            self.setPk,
-            self.nameHash];
+            [NSNumber numberWithUnsignedInteger:self.setPk],
+            [NSNumber numberWithUnsignedInteger:self.nameHash]];
         while([rs next]) {
             [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
                 [rs stringForColumn:@"artist"], @"artist",
@@ -314,9 +314,9 @@
             @"AND      cards.rarity = ? "
             @"AND      cards.rarity != 'L' "
             @"AND      sets.name != 'Planeshift' ",
-            self.setPk,
+            [NSNumber numberWithUnsignedInteger:self.setPk],
             self.collectorNumber,
-            self.pk,
+            [NSNumber numberWithUnsignedInteger:self.pk],
             self.rarity];
         while([rs next]) {
             [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -342,9 +342,9 @@
             @"AND     (cards.art_index = '' OR cards.art_index = 1) "
             @"AND      sets.pk != ? " 
             @"ORDER BY sets.idx DESC",
-            self.nameHash,
-            self.pk,
-            self.setPk];
+            [NSNumber numberWithUnsignedInteger:self.nameHash],
+            [NSNumber numberWithUnsignedInteger:self.pk],
+            [NSNumber numberWithUnsignedInteger:self.setPk]];
         while([rs next]) {
             [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
                 [rs stringForColumn:@"set_name"], @"setName",
@@ -360,7 +360,7 @@
 - (BOOL) isBookmarked {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *bookmarks = [defaults objectForKey:@"bookmarks"];
-    return ([bookmarks objectForKey:self.pk] != nil);
+    return ([bookmarks objectForKey:[[NSNumber numberWithUnsignedInteger:self.pk] stringValue]] != nil);
 }
 
 // ----------------------------------------------------------------------------
@@ -370,9 +370,9 @@
     NSSet *existing = [defaults objectForKey:@"bookmarks"];
     NSMutableDictionary *bookmarks = existing ? [existing mutableCopy] : [NSMutableDictionary dictionary];
     if (bookmarked) {
-        [bookmarks setObject:[NSNumber numberWithBool:YES] forKey:self.pk];
+        [bookmarks setObject:[NSNumber numberWithBool:YES] forKey:[[NSNumber numberWithInteger:self.pk] stringValue]];
     } else {
-        [bookmarks removeObjectForKey:self.pk];
+        [bookmarks removeObjectForKey:[[NSNumber numberWithUnsignedInteger:self.pk] stringValue]];
     }
     [defaults setObject:bookmarks forKey:@"bookmarks"];
     [defaults synchronize];
@@ -383,25 +383,24 @@
 - (NSString *) toJSON {
     NSError *error;
     NSDictionary *source = [NSDictionary dictionaryWithObjectsAndKeys:
-        self.pk,                                     @"pk",
-        self.gathererId,                             @"gathererId",
-        self.name,                                   @"name",
-        self.displayName,                            @"displayName",
-        self.setName,                                @"setName",
-        self.tcgSetName,                             @"tcgSetName",
-        self.collectorNumber,                        @"collectorNumber",
-        self.artist,                                 @"artist",
-        self.artIndex,                               @"artIndex",
-        self.manaCost,                               @"manaCost",
-        self.oracleText,                             @"oracleText",
-        self.rarity,                                 @"rarity",
-        self.typeLine,                               @"typeLine",
-        self.power,                                  @"power",
-        self.toughness,                              @"toughness",
-        self.loyalty,                                @"loyalty",
-        self.otherEditions,                          @"otherEditions",
-        self.otherParts,                             @"otherParts",
-        self.artVariants,                            @"artVariants",
+        [NSNumber numberWithUnsignedInteger:self.pk], @"pk",
+        [NSNumber numberWithUnsignedInteger:self.gathererId], @"gathererId",
+        self.name, @"name",
+        self.displayName, @"displayName",
+        self.setName, @"setName",
+        self.tcgSetName, @"tcgSetName",
+        self.artist, @"artist",
+        self.artIndex, @"artIndex",
+        self.manaCost, @"manaCost",
+        self.oracleText, @"oracleText",
+        self.rarity, @"rarity",
+        self.typeLine, @"typeLine",
+        self.power, @"power",
+        self.toughness, @"toughness",
+        self.loyalty, @"loyalty",
+        self.otherEditions, @"otherEditions",
+        self.otherParts, @"otherParts",
+        self.artVariants, @"artVariants",
         [NSNumber numberWithBool:self.isBookmarked], @"isBookmarked",
         nil];
     return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:source 

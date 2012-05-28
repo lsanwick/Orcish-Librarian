@@ -13,8 +13,8 @@
 + (NSArray *) findStandardSets;
 + (NSArray *) findAll;
 
+@property (nonatomic, assign) NSUInteger pk;
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *pk;
 @property (nonatomic, readonly) NSArray *cards;
 
 @end

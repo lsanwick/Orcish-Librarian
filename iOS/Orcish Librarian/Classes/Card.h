@@ -14,14 +14,15 @@
 
 @interface Card : NSObject 
 
-@property (nonatomic, strong) NSString *pk;
+@property (nonatomic, assign) NSUInteger versionCount;
+@property (nonatomic, assign) NSUInteger pk;
+@property (nonatomic, assign) NSUInteger nameHash;
+@property (nonatomic, assign) NSUInteger gathererId;
+@property (nonatomic, assign) NSUInteger setPk;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *displayName;
 @property (nonatomic, strong) NSString *searchName;
-@property (nonatomic, strong) NSString *nameHash;
 @property (nonatomic, strong) NSString *tcgName;
-@property (nonatomic, strong) NSString *gathererId;
-@property (nonatomic, strong) NSString *setPk;
 @property (nonatomic, strong) NSString *setName;
 @property (nonatomic, strong) NSString *tcgSetName;
 @property (nonatomic, strong) NSString *collectorNumber;
@@ -34,7 +35,6 @@
 @property (nonatomic, strong) NSString *power;
 @property (nonatomic, strong) NSString *toughness;
 @property (nonatomic, strong) NSString *loyalty;
-@property (nonatomic, assign) NSUInteger versionCount;
 @property (nonatomic, readonly) NSArray *artVariants;
 @property (nonatomic, readonly) NSArray *otherEditions;
 @property (nonatomic, readonly) NSArray *otherParts;
@@ -44,11 +44,11 @@
 + (Card *) cardForResultSet:(FMResultSet *)resultSet;
 + (NSArray *) collapseCardList:(NSArray *)cards;
 + (NSArray *) findCardsByTitleText:(NSString *)text;
-+ (NSArray *) findCardsBySet:(NSString *)setPk;
++ (NSArray *) findCardsBySet:(NSUInteger)setPk;
 + (NSArray *) findCards:(SearchCriteria *)criteria;
 + (NSArray *) findNameHashesByText:(NSString *)text;
 + (NSArray *) findBookmarkedCards;
-+ (Card *) findCardByPk:(NSString *)pk;
++ (Card *) findCardByPk:(NSUInteger)pk;
 + (Card *) findRandomCard;
 
 - (NSString *) toJSON;

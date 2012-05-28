@@ -65,7 +65,7 @@
 // ----------------------------------------------------------------------------
 
 - (NSDictionary *) priceForCard:(Card *)card {
-    return [self.prices objectForKey:card.pk];
+    return [self.prices objectForKey:[[NSNumber numberWithUnsignedInteger:card.pk] stringValue]];
 }
 
 // ----------------------------------------------------------------------------
@@ -154,7 +154,7 @@
             if (response != nil) {
                 NSDictionary *price = [self priceForResponse:response];
                 if (price != nil) {
-                    [prices setObject:price forKey:lookup.card.pk];
+                    [prices setObject:price forKey:[[NSNumber numberWithUnsignedInteger:lookup.card.pk] stringValue]];
                     lookup.callback(lookup.card, price);
                 }
             }

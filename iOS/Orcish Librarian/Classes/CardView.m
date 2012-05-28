@@ -46,7 +46,7 @@
     // and we don't need it anyway
     [priceData removeObjectForKey:@"cacheDate"]; 
     NSString *json = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:priceData options:0 error:&error] encoding:NSUTF8StringEncoding];
-    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardPrice(%@, %@)", card.pk, json]];
+    [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"Orcish.setCardPrice(%@, %@)", [NSNumber numberWithUnsignedInteger:card.pk], json]];
 }
 
 // ----------------------------------------------------------------------------
@@ -84,16 +84,17 @@
             [gAppDelegate showCardList:[Card findCardsBySet:self.card.setPk] withTitle:self.card.setName];
         } else {
             // show the set from the current card's equivalent
-            NSArray *cards = [Card collapseCardList:[Card findCardsBySet:URL.host]];
+            NSUInteger setPk = (NSUInteger) [URL.host longLongValue];
+            NSArray *cards = [Card collapseCardList:[Card findCardsBySet:setPk]];
             [gAppDelegate showCards:cards atPosition:[cards indexOfObjectPassingTest:^(Card *test, NSUInteger index, BOOL *stop) {
-                return (BOOL) ([self.card.nameHash isEqualToString:test.nameHash] ? (*stop = YES) : NO);
+                return (BOOL) (self.card.nameHash == test.nameHash ? (*stop = YES) : NO);
             }]];
         }
     } 
     
     // SHOW SPECIFIC CARD
     else if ([URL.scheme isEqualToString:@"card"]) {        
-        NSString *pk = URL.host;
+        NSUInteger pk = (NSUInteger) [URL.host longLongValue];
         Card *newCard = [Card findCardByPk:pk];
         if (newCard != nil) {
             [gAppDelegate showCard:newCard];
@@ -104,7 +105,8 @@
     else if ([URL.scheme isEqualToString:@"gatherer"]) {
         [gAppDelegate trackEvent:@"Card View" action:@"Show Gatherer" label:@""];
         [gAppDelegate launchExternalSite:[NSURL URLWithString:[NSString stringWithFormat:
-            @"http://gatherer.wizards.com/Pages/Card/Discussion.aspx?multiverseid=%@", self.card.gathererId]]];
+            @"http://gatherer.wizards.com/Pages/Card/Discussion.aspx?multiverseid=%@", 
+            [NSNumber numberWithUnsignedInteger:self.card.gathererId]]]];
     } 
     
     // RELOAD PRICES

@@ -29,7 +29,7 @@
         FMResultSet *rs = [gDataManager.db executeQuery:sql];
         while([rs next]) {
             CardSet *set = [[CardSet alloc] init];
-            set.pk = [rs stringForColumn:@"pk"];
+            set.pk = (NSUInteger) [rs longForColumn:@"pk"];
             set.name = [rs stringForColumn:@"name"];
             [sets addObject:set];
         } 
@@ -49,7 +49,7 @@
         FMResultSet *rs = [gDataManager.db executeQuery:sql];
         while([rs next]) {
             CardSet *set = [[CardSet alloc] init];
-            set.pk = [rs stringForColumn:@"pk"];
+            set.pk = (NSUInteger) [rs longForColumn:@"pk"];
             set.name = [rs stringForColumn:@"name"];
             [sets addObject:set];
         } 
