@@ -21,6 +21,7 @@ typedef void (^block_t)(void);
 @interface CardViewController ()
 
 - (void) scrollAllViewsToTop;
+- (void) resizeCardViews;
 
 @property (nonatomic, assign) NSUInteger layoutIndex;
 @property (nonatomic, strong) NSMutableArray *pages;
@@ -68,22 +69,34 @@ typedef void (^block_t)(void);
     [self scrollAllViewsToTop];
     if (!self.hasAppearedBefore) {
         self.hasAppearedBefore = YES;
-        CGFloat width = self.scrollView.frame.size.width;
-        CGFloat height = self.scrollView.frame.size.height;    
-        NSUInteger pageCount = MIN(kPageCount, self.sequence.count);
-        self.layoutIndex = MIN(self.position, (self.sequence.count - pageCount));
-        for (int i = 0; i < pageCount; i++) {
-            CardView *page = [self.pages objectAtIndex:i];
-            [self.scrollView addSubview:page];
-            page.frame = CGRectMake(width * i, 0, width, height);
-            page.card = [self.sequence cardAtPosition:self.layoutIndex+i];
-        }
-        self.scrollView.contentSize = CGSizeMake(width * MIN(self.sequence.count, kPageCount), height);
-        NSUInteger pageOffset = position - self.layoutIndex;
-        [self.scrollView scrollRectToVisible:CGRectMake(width * pageOffset, 0, width, height) animated:NO];
+        [self resizeCardViews];
         [self scrollViewDidEndDecelerating:self.scrollView];
         self.pagingButton.hidden = self.sequence.count <= 1;
     }
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) resizeCardViews {
+    CGFloat width = self.scrollView.frame.size.width;
+    CGFloat height = self.scrollView.frame.size.height;    
+    NSUInteger pageCount = MIN(kPageCount, self.sequence.count);
+    self.layoutIndex = MIN(self.position, (self.sequence.count - pageCount));
+    for (int i = 0; i < pageCount; i++) {
+        CardView *page = [self.pages objectAtIndex:i];
+        [self.scrollView addSubview:page];
+        page.frame = CGRectMake(width * i, 0, width, height);
+        page.card = [self.sequence cardAtPosition:self.layoutIndex+i];
+    }
+    self.scrollView.contentSize = CGSizeMake(width * MIN(self.sequence.count, kPageCount), height);
+    NSUInteger pageOffset = position - self.layoutIndex;
+    [self.scrollView scrollRectToVisible:CGRectMake(width * pageOffset, 0, width, height) animated:NO];
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [self resizeCardViews];
 }
 
 // ----------------------------------------------------------------------------

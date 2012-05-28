@@ -16,7 +16,7 @@
 @property (strong, nonatomic) NSMutableArray *controllerStack;
 @property (strong, nonatomic) IBOutlet UITableView *menuView;
 @property (strong, nonatomic) IBOutlet MenuController *menuController;
-@property (strong, nonatomic) IBOutlet UIView *dropShadowView;
+@property (strong, nonatomic) IBOutlet UIView *dropShadow;
 @property (strong, nonatomic) IBOutlet UIView *slideView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 

@@ -125,7 +125,7 @@
             return;
         }
         
-        NSLog(@"Downloading new data from server");
+        // NSLog(@"Downloading new data from server");
         NSURL *dataURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://d1g6xmf8vayz1g.cloudfront.net/database/cards-%@.sqlite3", version]];
         NSData *data = [NSData dataWithContentsOfURL:dataURL options:0 error:&error];
         if (!data) {
@@ -175,7 +175,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) installDataFromBundle {
-    NSLog(@"Installing packaged data from bundle");
+    // NSLog(@"Installing packaged data from bundle");
     NSError *error;
     NSFileManager *fm = [NSFileManager defaultManager];
     NSString *dbPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"cards.sqlite3"];
@@ -189,7 +189,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) installDatabaseFile:(NSString *)dbPath andNamesFile:(NSString *)namesPath forVersion:(NSString *)version {
-    NSLog(@"Installing downloaded data");
+    // NSLog(@"Installing downloaded data");
     NSError *error;
     NSFileManager *fm = [NSFileManager defaultManager];
     [fm removeItemAtPath:self.dbPath error:&error];

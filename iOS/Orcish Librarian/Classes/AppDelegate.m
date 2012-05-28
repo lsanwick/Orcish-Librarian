@@ -184,7 +184,7 @@ typedef enum {
 - (void) trackScreen:(NSString *)path {
     NSError *error;
     [[GANTracker sharedTracker] trackPageview:path withError:&error];
-    NSLog(@"Track Screen: %@", path);
+    // NSLog(@"Track Screen: %@", path);
 }
 
 // ----------------------------------------------------------------------------
@@ -192,7 +192,7 @@ typedef enum {
 - (void) trackEvent:(NSString *)category action:(NSString *)action label:(NSString *)label {
     NSError *error;
     [[GANTracker sharedTracker] trackEvent:category action:action label:label value:0 withError:&error];
-    NSLog(@"Track Event: %@, %@, %@", category, action, label);
+    // NSLog(@"Track Event: %@, %@, %@", category, action, label);
 }
 
 // ----------------------------------------------------------------------------

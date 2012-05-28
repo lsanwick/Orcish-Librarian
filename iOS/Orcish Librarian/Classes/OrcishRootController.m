@@ -31,7 +31,7 @@
 
 @synthesize menuView;
 @synthesize menuController;
-@synthesize dropShadowView;
+@synthesize dropShadow;
 @synthesize slideView;
 @synthesize contentView;
 @synthesize controllerStack;
@@ -53,12 +53,12 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     [menuController viewDidLoad];
-    dropShadowView.layer.masksToBounds = NO;
-    dropShadowView.layer.cornerRadius = 0.0;
-    dropShadowView.layer.shadowOffset = CGSizeMake(-5, 0);
-    dropShadowView.layer.shadowRadius = 5;
-    dropShadowView.layer.shadowOpacity = 0.5;
-    dropShadowView.layer.shouldRasterize = YES; 
+    self.dropShadow.layer.masksToBounds = NO;
+    self.dropShadow.layer.cornerRadius = 0.0;
+    self.dropShadow.layer.shadowOffset = CGSizeMake(-5, 0);
+    self.dropShadow.layer.shadowRadius = 5;
+    self.dropShadow.layer.shadowOpacity = 0.5;
+    self.dropShadow.layer.shouldRasterize = YES; 
 }
 
 // ----------------------------------------------------------------------------
@@ -93,7 +93,7 @@
 // ----------------------------------------------------------------------------
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 // ----------------------------------------------------------------------------
@@ -199,6 +199,18 @@
             [controller.view removeFromSuperview];
             [revealed viewDidAppear:animated];
         }];           
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    for (UIViewController *controller in self.modalControllerStack) {
+        [controller willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    }
+    for (UIViewController *controller in self.controllerStack) {
+        [controller willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    }
 }
 
 // ----------------------------------------------------------------------------

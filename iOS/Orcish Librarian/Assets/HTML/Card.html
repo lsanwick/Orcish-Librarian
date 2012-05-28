@@ -109,6 +109,20 @@
         border-radius: 2px;
     }
 
+	/* iPhone Landscape */
+	@media only screen and (min-width: 480px) {
+		.ol-card-image img {
+			width: 440px;
+		}
+	}
+	
+	/* iPad+ */
+	@media only screen and (min-width: 520px) {
+		.ol-card-image img {
+			width: 480px;
+		}
+	}
+
 	.ol-oracle-text {
 		line-height: 1.2em;
 	}
@@ -181,7 +195,7 @@
 			color-stop(0.50, #ffffff),
 			to(#d6d6d6));
 		border: 0px solid #ffbf00;
-		border-radius: 5px;
+		border-radius: 3px;
 		box-shadow:
 			0px 1px 3px rgba(000,000,000,0.5),
 			inset 0px 0px 3px rgba(255,255,255,1);
@@ -729,7 +743,7 @@ $('.ol-bookmark a').click(toggleBookmark);
  
 })()
 
-if (navigator.userAgent	.indexOf('iPhone') == -1) {
+if (navigator.userAgent.indexOf('iPhone') == -1 && navigator.userAgent.indexOf('iOS') == -1 && navigator.userAgent.indexOf('iPad') == -1) {
 	Orcish.setCardData({"otherParts":[],"displayName":"Hymn to Tourach","artIndex":"1","tcgSetName":"Fallen Empires","loyalty":null,"name":"Hymn to Tourach","setName":"Fallen Empires","rarity":"C","power":"","otherEditions":[],"isBookmarked":false,"artist":"Scott Kirschner","gathererId":"1851","manaCost":"BB","typeLine":"Sorcery","pk":"1282653776","collectorNumber":"","oracleText":"Target player discards two cards at random.","artVariants":[{"artIndex":"1","artist":"Scott Kirschner","pk":"1282653776"},{"artIndex":"2","artist":"Quinton Hoover","pk":"2274767213"},{"artIndex":"3","artist":"Susan Van Camp","pk":"2068412148"},{"artIndex":"4","artist":"Liz Danforth","pk":"4134532144"}],"toughness":""})	
 } else {
 	$(function(){

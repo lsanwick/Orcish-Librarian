@@ -58,6 +58,12 @@
 
 // ----------------------------------------------------------------------------
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
+}
+
+// ----------------------------------------------------------------------------
+
 - (void) navigationButtonTapped:(id)sender {
     if (gAppDelegate.rootController.controllerStack.count > 1) {
         [gAppDelegate.rootController popViewControllerAnimated:YES];
