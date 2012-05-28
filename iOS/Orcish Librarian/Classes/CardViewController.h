@@ -18,7 +18,6 @@
 
 - (IBAction) pagingButtonTapped:(id)sender;
 
-@property (strong, nonatomic) CardSequence *sequence;
 @property (assign, nonatomic) NSUInteger position;
 
 @end

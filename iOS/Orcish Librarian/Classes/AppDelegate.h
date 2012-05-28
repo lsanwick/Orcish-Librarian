@@ -13,6 +13,7 @@
 #define gAppDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
 @class CardViewController;
+@class CardSequence;
 @class Card;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -23,8 +24,8 @@
 
 - (void) hideKeyboard;
 - (void) hideMenu;
-- (void) showCardList:(NSArray *)cards withTitle:(NSString *)title;
-- (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position;
+- (void) showCardList:(CardSequence *)cards withTitle:(NSString *)title;
+- (void) showCards:(CardSequence *)cards atPosition:(NSUInteger)position;
 - (void) showCard:(Card *)card;
 - (void) showPriceModalForProductId:(NSString *)productId;
 - (void) launchExternalSite:(NSURL *)URL;

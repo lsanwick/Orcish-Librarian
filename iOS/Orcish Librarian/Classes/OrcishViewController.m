@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "PriceManager.h"
 #import "Card.h"
+#import "CardSequence.h"
 
 #define kPriceRequestDelay  1.5
 
@@ -20,8 +21,6 @@
     UIBarButtonItem *navigationButton;
 }
     
-+ (NSArray *) collapsedResults:(NSArray *)cards;
-
 @end
 
 
@@ -30,7 +29,7 @@
 @dynamic navigationItem;
 @synthesize shouldCollapseResults;
 @synthesize parentViewController;
-@synthesize cardList;
+@synthesize sequence;
 @synthesize cardListView;
 
 // ----------------------------------------------------------------------------
@@ -90,15 +89,16 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) setCardList:(NSArray *)cards reloadTable:(BOOL)reloadTable {
-    cardList = self.shouldCollapseResults ? [[self class] collapsedResults:cards] : cards;
+- (void) setSequence:(CardSequence *)theSequence reloadTable:(BOOL)reloadTable {
+    sequence = theSequence;
     if (reloadTable) {
         [self.cardListView reloadData];
     }
     [[PriceManager shared] clearPriceRequests];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kPriceRequestDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        if (self.cardList == cards && cards.count > 0) {
-            for (Card *card in cards.reverseObjectEnumerator) {
+        if (self.sequence == theSequence && theSequence.count > 0) {
+            for (int i = theSequence.count - 1; i >= 0; i--) {
+                Card *card = [theSequence cardAtPosition:i];
                 [[PriceManager shared] requestPriceForCard:card withCallback:^(Card *card, NSDictionary *prices){
                     [self.cardListView reloadData];
                 }];         
@@ -109,8 +109,8 @@
 
 // ----------------------------------------------------------------------------
 
-- (void) setCardList:(NSArray *)cards {
-    [self setCardList:cards reloadTable:YES];
+- (void) setSequence:(CardSequence *)theSequence {
+    [self setSequence:theSequence reloadTable:YES];
 }
 
 // ----------------------------------------------------------------------------
@@ -132,7 +132,7 @@
     if (cell == nil) {
         cell =  [[SearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }     
-    cell.card = [self.cardList objectAtIndex:indexPath.row];
+    cell.card = [self.sequence cardAtPosition:indexPath.row];
     return cell;
 }
 
@@ -145,7 +145,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath { 
-    [gAppDelegate showCards:self.cardList atPosition:indexPath.row];
+    [gAppDelegate showCards:self.sequence atPosition:indexPath.row];
 }
 
 // ----------------------------------------------------------------------------
@@ -159,7 +159,7 @@
 // ----------------------------------------------------------------------------
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.cardList.count;
+    return self.sequence.count;
 }
 
 // ----------------------------------------------------------------------------

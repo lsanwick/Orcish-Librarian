@@ -8,6 +8,7 @@
 
 #import "BookmarkController.h"
 #import "CardViewController.h"
+#import "CardSequence.h"
 #import "AppDelegate.h"
 #import "PriceManager.h"
 #import "Card.h"
@@ -50,7 +51,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) reloadCards {
-    self.cardList = [Card findBookmarkedCards]; // [[Card findBookmarkedCards] sortedArrayUsingDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES]]];
+    self.sequence = [Card findBookmarkedCards];
 }
 
 // ----------------------------------------------------------------------------
@@ -59,9 +60,9 @@
 
 - (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {    
-        Card *card = [self.cardList objectAtIndex:indexPath.row];
+        Card *card = [self.sequence cardAtPosition:indexPath.row];
         [card setIsBookmarked:NO];
-        [self setCardList:[Card findBookmarkedCards] reloadTable:NO];
+        [self setSequence:[Card findBookmarkedCards] reloadTable:NO];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }  
 }

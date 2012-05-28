@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class CardSequence;
+
 @interface CardSet : NSObject
 
 + (NSArray *) findStandardSets;
@@ -15,6 +17,6 @@
 
 @property (nonatomic, assign) NSUInteger pk;
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, readonly) NSArray *cards;
+@property (nonatomic, readonly) CardSequence *cards;
 
 @end

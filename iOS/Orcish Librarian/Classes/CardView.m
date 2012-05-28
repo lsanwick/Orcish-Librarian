@@ -85,10 +85,7 @@
         } else {
             // show the set from the current card's equivalent
             NSUInteger setPk = (NSUInteger) [URL.host longLongValue];
-            NSArray *cards = [Card collapseCardList:[Card findCardsBySet:setPk]];
-            [gAppDelegate showCards:cards atPosition:[cards indexOfObjectPassingTest:^(Card *test, NSUInteger index, BOOL *stop) {
-                return (BOOL) (self.card.nameHash == test.nameHash ? (*stop = YES) : NO);
-            }]];
+            [gAppDelegate showCards:[Card findCardsBySet:setPk] atPosition:0];
         }
     } 
     

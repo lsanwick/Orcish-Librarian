@@ -59,7 +59,7 @@
 
 // ----------------------------------------------------------------------------
 
-- (NSArray *) cards {
+- (CardSequence *) cards {
     return [Card findCardsBySet:self.pk];
 }
 

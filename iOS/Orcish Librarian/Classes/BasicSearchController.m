@@ -8,6 +8,7 @@
 
 #import "BasicSearchController.h"
 #import "CardViewController.h"
+#import "CardSequence.h"
 #import "AppDelegate.h"
 #import "PriceManager.h"
 #import "Card.h"
@@ -29,7 +30,6 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     self.hasBeenFirstResponder = NO;
-    self.cardList = [NSArray array];
 }
 
 // ----------------------------------------------------------------------------
@@ -60,10 +60,10 @@
 
 - (void) searchBar:(UISearchBar *)bar textDidChange:(NSString *)searchText {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSArray *cards = [Card collapseCardList:[Card findCardsByTitleText:searchText]];
+        CardSequence *sequence = [Card findCardsByTitleText:searchText];
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([bar.text isEqualToString:searchText]) {
-                self.cardList = cards;
+                self.sequence = sequence;
             }
         });
     });
@@ -87,7 +87,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (gAppDelegate.rootController.topController == self) {            
-        [gAppDelegate showCards:self.cardList atPosition:indexPath.row];            
+        [gAppDelegate showCards:self.sequence atPosition:indexPath.row];         
     }
 }
     

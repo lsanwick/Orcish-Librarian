@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @class OrcishRootController;
+@class CardSequence;
 
 @interface OrcishViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
-- (void) setCardList:(NSArray *)card reloadTable:(BOOL)reloadTable;
+- (void) setSequence:(CardSequence *)sequence reloadTable:(BOOL)reloadTable;
 
 @property (nonatomic, assign) BOOL shouldCollapseResults;
-@property (nonatomic, strong) NSArray *cardList;
+@property (nonatomic, strong) CardSequence *sequence;
 @property (nonatomic, strong) IBOutlet UITableView *cardListView;
 @property (nonatomic, strong) IBOutlet UINavigationItem *navigationItem;
 

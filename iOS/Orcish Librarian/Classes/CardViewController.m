@@ -31,7 +31,6 @@ typedef void (^block_t)(void);
 
 @implementation CardViewController 
 
-@synthesize sequence;
 @synthesize position;
 @synthesize layoutIndex;
 @synthesize pages;
@@ -152,7 +151,7 @@ typedef void (^block_t)(void);
     firstPage.frame = CGRectMake((kPageCount-1) * pageWidth, 0, pageWidth, pageHeight);
     [self.pages removeObjectAtIndex:0];
     [pages addObject:firstPage];
-    firstPage.card = [sequence cardAtPosition:self.layoutIndex+kPageCount];
+    firstPage.card = [self.sequence cardAtPosition:self.layoutIndex+kPageCount];
     self.layoutIndex = self.layoutIndex + 1;
 }
 

@@ -8,13 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class FMResultSet;
 @class SearchCriteria;
+@class CardSequence;
 
 
 @interface Card : NSObject 
 
-@property (nonatomic, assign) NSUInteger versionCount;
 @property (nonatomic, assign) NSUInteger pk;
 @property (nonatomic, assign) NSUInteger nameHash;
 @property (nonatomic, assign) NSUInteger gathererId;
@@ -41,13 +40,11 @@
 
 @property (nonatomic, assign) BOOL isBookmarked;
 
-+ (Card *) cardForResultSet:(FMResultSet *)resultSet;
-+ (NSArray *) collapseCardList:(NSArray *)cards;
-+ (NSArray *) findCardsByTitleText:(NSString *)text;
-+ (NSArray *) findCardsBySet:(NSUInteger)setPk;
-+ (NSArray *) findCards:(SearchCriteria *)criteria;
 + (NSArray *) findNameHashesByText:(NSString *)text;
-+ (NSArray *) findBookmarkedCards;
++ (CardSequence *) findCardsByTitleText:(NSString *)text;
++ (CardSequence *) findCardsBySet:(NSUInteger)setPk;
++ (CardSequence *) findCards:(SearchCriteria *)criteria;
++ (CardSequence *) findBookmarkedCards;
 + (Card *) findCardByPk:(NSUInteger)pk;
 + (Card *) findRandomCard;
 

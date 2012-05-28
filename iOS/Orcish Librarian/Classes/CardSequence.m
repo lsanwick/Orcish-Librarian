@@ -14,7 +14,6 @@
 @interface CardSequence()
 
 @property (nonatomic, strong) NSArray *cards;
-@property (nonatomic, assign) BOOL random;
 @property (nonatomic, strong) NSMutableDictionary *randomCards;
 
 @end
@@ -24,13 +23,11 @@
 
 @synthesize cards;
 @synthesize randomCards;
-@synthesize random;
 
 // ----------------------------------------------------------------------------
 
 + (CardSequence *) sequenceWithCards:(NSArray *)cards {
     CardSequence *sequence = [[CardSequence alloc] init];
-    sequence.random = NO;
     sequence.cards = cards;
     return sequence;
 }
@@ -39,7 +36,6 @@
 
 + (CardSequence *) randomCardSequence {
     CardSequence *sequence = [[CardSequence alloc] init];
-    sequence.random = YES;
     sequence.randomCards = [NSMutableDictionary dictionary];
     return sequence;
 }
@@ -47,7 +43,7 @@
 // ----------------------------------------------------------------------------
 
 - (Card *) cardAtPosition:(NSUInteger)position {
-    if (self.random) {
+    if (self.randomCards) {
         NSNumber *positionAsObject = [NSNumber numberWithUnsignedInteger:position];        
         id pk = [self.randomCards objectForKey:positionAsObject];
         if (!pk) {
@@ -65,7 +61,7 @@
 // ----------------------------------------------------------------------------
 
 - (NSUInteger) count {
-    if (self.random) {
+    if (self.randomCards) {
         return kRandomSequenceLength;
     } else {
         return self.cards.count;

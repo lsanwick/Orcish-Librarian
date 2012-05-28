@@ -10,12 +10,19 @@
 #import "FMDatabase.h"
 #import "AppDelegate.h"
 #import "DataManager.h"
+#import "CardSequence.h"
 #import "Card.h"
 #import "SearchCriteria.h"
 #import "NSNull+Wrap.h"
 
 #define kMinimumSearchCharacters 3
 #define kMaxSearchNames 5
+
+@interface Card ()
+
++ (Card *) cardForResultSet:(FMResultSet *)resultSet;
+
+@end
 
 @implementation Card
 
@@ -39,7 +46,6 @@
 @synthesize power;
 @synthesize toughness;
 @synthesize loyalty;
-@synthesize versionCount;
 
 // ----------------------------------------------------------------------------
 
@@ -65,27 +71,12 @@
     card.power = [NSNull wrapNil:[rs stringForColumn:@"power"]];
     card.toughness = [NSNull wrapNil:[rs stringForColumn:@"toughness"]];
     card.loyalty = [NSNull wrapNil:[rs stringForColumn:@"loyalty"]];
-    card.versionCount = [rs intForColumn:@"version_count"];
     return card;
 }
 
 // ----------------------------------------------------------------------------
 
-+ (NSArray *) collapseCardList:(NSArray *)cards {
-    NSMutableArray *results = [NSMutableArray arrayWithCapacity:cards.count];
-    NSMutableDictionary *names = [NSMutableDictionary dictionaryWithCapacity:cards.count];
-    for (Card *card in cards) {
-        if ([names objectForKey:card.displayName] == nil) {
-            [results addObject:card];
-            [names setObject:card forKey:card.displayName];
-        }
-    }
-    return results;
-}
-
-// ----------------------------------------------------------------------------
-
-+ (NSArray *) findCardsByTitleText:(NSString *)text {
++ (CardSequence *) findCardsByTitleText:(NSString *)text {
     SearchCriteria *criteria = [[SearchCriteria alloc] init];
     criteria.nameText = text;
     return [self findCards:criteria];
@@ -93,7 +84,7 @@
 
 // ----------------------------------------------------------------------------
 
-+ (NSArray *) findCardsBySet:(NSUInteger)setPk {
++ (CardSequence *) findCardsBySet:(NSUInteger)setPk {
     SearchCriteria *criteria = [[SearchCriteria alloc] init];
     criteria.sets = [NSArray arrayWithObject:[NSNumber numberWithUnsignedInteger:setPk]];
     return [self findCards:criteria];
@@ -101,7 +92,7 @@
 
 // ----------------------------------------------------------------------------
 
-+ (NSArray *) findCards:(SearchCriteria *)criteria {
++ (CardSequence *) findCards:(SearchCriteria *)criteria {
     
     NSMutableArray *searchClauses = [NSMutableArray array];
     NSMutableArray *searchParams = [NSMutableArray array];
@@ -165,12 +156,12 @@
             [cards addObject:[self cardForResultSet:rs]];
         }
     });
-    return cards;
+    return [CardSequence sequenceWithCards:cards];
 }
 
 // ----------------------------------------------------------------------------
 
-+ (NSArray *) findBookmarkedCards {
++ (CardSequence *) findBookmarkedCards {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *bookmarks = [defaults objectForKey:@"bookmarks"];
     NSString *primaryKeys = [[bookmarks allKeys] componentsJoinedByString:@","];    
@@ -189,7 +180,7 @@
             [cards addObject:[Card cardForResultSet:rs]];
         }
     });
-    return cards;
+    return [CardSequence sequenceWithCards:cards];
 }
 
 // ----------------------------------------------------------------------------
@@ -245,7 +236,7 @@
 // ----------------------------------------------------------------------------
 
 + (NSArray *) findNameHashesByText:(NSString *)text {
-    NSMutableArray *searchNames = [NSMutableArray array];
+    NSMutableArray *hashes = [NSMutableArray array];
     if (text.length < kMinimumSearchCharacters) { return [NSArray array]; }
     dispatch_sync(gAppDelegate.dataQueue, ^{
         NSData *textData = [text dataUsingEncoding:NSUTF8StringEncoding];
@@ -262,97 +253,17 @@
             pkEnd = ++pkStart;
             while (blobText[pkEnd] != '|') { ++pkEnd; }        
             scope = NSMakeRange(pkEnd, blob.length - pkEnd);
-            [searchNames addObject:[[NSString alloc] initWithBytes:&blobText[pkStart] length:(pkEnd-pkStart) encoding:NSUTF8StringEncoding]];
+            NSString *hashAsString = [[NSString alloc] initWithBytes:&blobText[pkStart] length:(pkEnd-pkStart) encoding:NSUTF8StringEncoding];
+            [hashes addObject:[NSNumber numberWithUnsignedInteger:[hashAsString longLongValue]]];
         }
     });
-    return searchNames;
+    return hashes;
 }
 
 // ----------------------------------------------------------------------------
 
 - (NSString *) description {
     return [NSString stringWithFormat:@"%@ (%@)", self.displayName, self.setName];
-}
-
-// ----------------------------------------------------------------------------
-
-- (NSArray *) artVariants {
-    NSMutableArray *cards = [NSMutableArray array];
-    dispatch_sync(gAppDelegate.dataQueue, ^{
-        FMResultSet *rs = [gDataManager.db executeQuery:
-            @"SELECT   cards.* "
-            @"FROM     cards "
-            @"WHERE    cards.set_pk = ? "
-            @"AND      cards.name_hash == ? "
-            @"ORDER BY cards.art_index ASC",
-            [NSNumber numberWithUnsignedInteger:self.setPk],
-            [NSNumber numberWithUnsignedInteger:self.nameHash]];
-        while([rs next]) {
-            [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                [rs stringForColumn:@"artist"], @"artist",
-                [rs stringForColumn:@"art_index"], @"artIndex",
-                [rs stringForColumn:@"pk"], @"pk", 
-                nil]];
-        }
-    });
-    return cards;    
-}
-
-// ----------------------------------------------------------------------------
-
-- (NSArray *) otherParts {
-    NSMutableArray *cards = [NSMutableArray array];
-    dispatch_sync(gAppDelegate.dataQueue, ^{
-        FMResultSet *rs = [gDataManager.db executeQuery:
-            @"SELECT   cards.* "
-            @"FROM     cards, sets "
-            @"WHERE    cards.set_pk = ? "
-            @"AND      cards.set_pk = sets.pk "
-            @"AND      cards.collector_number == ? "
-            @"AND      cards.collector_number != '' "
-            @"AND      cards.pk != ? "
-            @"AND      cards.rarity = ? "
-            @"AND      cards.rarity != 'L' "
-            @"AND      sets.name != 'Planeshift' ",
-            [NSNumber numberWithUnsignedInteger:self.setPk],
-            self.collectorNumber,
-            [NSNumber numberWithUnsignedInteger:self.pk],
-            self.rarity];
-        while([rs next]) {
-            [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                [rs stringForColumn:@"display_name"], @"displayName",
-                [rs stringForColumn:@"pk"], @"pk", 
-                nil]];
-        }
-    });
-    return cards;
-}
- 
-// ----------------------------------------------------------------------------
-
-- (NSArray *) otherEditions {
-    NSMutableArray *cards = [NSMutableArray array];
-    dispatch_sync(gAppDelegate.dataQueue, ^{
-        FMResultSet *rs = [gDataManager.db executeQuery:
-            @"SELECT   sets.pk AS set_pk, sets.name AS set_name "
-            @"FROM     cards, sets "
-            @"WHERE    cards.set_pk = sets.pk "
-            @"AND      cards.name_hash = ? "
-            @"AND      cards.pk != ? "
-            @"AND     (cards.art_index = '' OR cards.art_index = 1) "
-            @"AND      sets.pk != ? " 
-            @"ORDER BY sets.idx DESC",
-            [NSNumber numberWithUnsignedInteger:self.nameHash],
-            [NSNumber numberWithUnsignedInteger:self.pk],
-            [NSNumber numberWithUnsignedInteger:self.setPk]];
-        while([rs next]) {
-            [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                [rs stringForColumn:@"set_name"], @"setName",
-                [rs stringForColumn:@"set_pk"], @"setPk", 
-                nil]];
-        }
-    });
-    return cards;
 }
 
 // ----------------------------------------------------------------------------
@@ -405,6 +316,87 @@
         nil];
     return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:source 
         options:0 error:&error] encoding:NSUTF8StringEncoding];
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSArray *) otherParts {
+    NSMutableArray *cards = [NSMutableArray array];
+    dispatch_sync(gAppDelegate.dataQueue, ^{
+        FMResultSet *rs = [gDataManager.db executeQuery:
+            @"SELECT   cards.* "
+            @"FROM     cards, sets "
+            @"WHERE    cards.set_pk = ? "
+            @"AND      cards.set_pk = sets.pk "
+            @"AND      cards.collector_number == ? "
+            @"AND      cards.collector_number != '' "
+            @"AND      cards.pk != ? "
+            @"AND      cards.rarity = ? "
+            @"AND      cards.rarity != 'L' "
+            @"AND      sets.name != 'Planeshift' ",
+            [NSNumber numberWithUnsignedInteger:self.setPk],
+            self.collectorNumber,
+            [NSNumber numberWithUnsignedInteger:self.pk],
+            self.rarity];
+        while([rs next]) {
+            [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                [rs stringForColumn:@"display_name"], @"displayName",
+                [rs stringForColumn:@"pk"], @"pk", 
+                nil]];
+        }
+    });
+    return cards;
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSArray *) otherEditions {
+    NSMutableArray *cards = [NSMutableArray array];
+    dispatch_sync(gAppDelegate.dataQueue, ^{
+        FMResultSet *rs = [gDataManager.db executeQuery:
+            @"SELECT   sets.pk AS set_pk, sets.name AS set_name "
+            @"FROM     cards, sets "
+            @"WHERE    cards.set_pk = sets.pk "
+            @"AND      cards.name_hash = ? "
+            @"AND      cards.pk != ? "
+            @"AND     (cards.art_index = '' OR cards.art_index = 1) "
+            @"AND      sets.pk != ? " 
+            @"ORDER BY sets.idx DESC",
+            [NSNumber numberWithUnsignedInteger:self.nameHash],
+            [NSNumber numberWithUnsignedInteger:self.pk],
+            [NSNumber numberWithUnsignedInteger:self.setPk]];
+        while([rs next]) {
+            [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                [rs stringForColumn:@"set_name"], @"setName",
+                [rs stringForColumn:@"set_pk"], @"setPk", 
+                nil]];
+        }
+    });
+    return cards;
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSArray *) artVariants {
+    NSMutableArray *cards = [NSMutableArray array];
+    dispatch_sync(gAppDelegate.dataQueue, ^{
+        FMResultSet *rs = [gDataManager.db executeQuery:
+            @"SELECT   cards.* "
+            @"FROM     cards "
+            @"WHERE    cards.set_pk = ? "
+            @"AND      cards.name_hash == ? "
+            @"ORDER BY cards.art_index ASC",
+            [NSNumber numberWithUnsignedInteger:self.setPk],
+            [NSNumber numberWithUnsignedInteger:self.nameHash]];
+        while([rs next]) {
+            [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                [rs stringForColumn:@"artist"], @"artist",
+                [rs stringForColumn:@"art_index"], @"artIndex",
+                [rs stringForColumn:@"pk"], @"pk", 
+                nil]];
+        }
+    });
+    return cards;    
 }
 
 // ----------------------------------------------------------------------------

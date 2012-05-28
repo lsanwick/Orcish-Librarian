@@ -116,19 +116,19 @@ typedef enum {
 
 // ----------------------------------------------------------------------------
 
-- (void) showCardList:(NSArray *)cards withTitle:(NSString *)title {
+- (void) showCardList:(CardSequence *)sequence withTitle:(NSString *)title {
     OrcishViewController *controller = [[OrcishViewController alloc] initWithNibName:nil bundle:nil];
     [controller view];
-    controller.cardList = cards;
+    controller.sequence = sequence;
     controller.navigationItem.title = title;
     [self.rootController pushViewController:controller animated:YES];
 }
 
 // ----------------------------------------------------------------------------
 
-- (void) showCards:(NSArray *)cards atPosition:(NSUInteger)position {    
+- (void) showCards:(CardSequence *)sequence atPosition:(NSUInteger)position {    
     CardViewController *controller = [self dequeueCardViewController];
-    controller.sequence = [CardSequence sequenceWithCards:cards];
+    controller.sequence = sequence;
     controller.position = position;
     [self.rootController pushViewController:controller animated:YES];
 }
@@ -136,7 +136,7 @@ typedef enum {
 // ----------------------------------------------------------------------------
 
 - (void) showCard:(Card *)card {
-    [self showCards:[NSArray arrayWithObject:card] atPosition:0];    
+    [self showCards:[CardSequence sequenceWithCards:[NSArray arrayWithObject:card]] atPosition:0];    
 }
 
 // ----------------------------------------------------------------------------
