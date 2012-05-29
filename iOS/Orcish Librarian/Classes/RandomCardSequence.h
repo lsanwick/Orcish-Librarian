@@ -1,13 +1,13 @@
 //
-//  CardSequence.m
+//  RandomCardSequence.h
 //  Orcish Librarian
 //
 //  Created by Stewart Ulm on 5/28/12.
 //  Copyright (c) 2012 Orcish. All rights reserved.
 //
 
-#import "CardSequence.h"
+#import <Foundation/Foundation.h>
 
-@implementation CardSequence
+@interface RandomCardSequence : NSObject
 
 @end
