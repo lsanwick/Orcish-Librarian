@@ -266,7 +266,7 @@
     NSSet *existing = [defaults objectForKey:@"bookmarks"];
     NSMutableDictionary *bookmarks = existing ? [existing mutableCopy] : [NSMutableDictionary dictionary];
     if (bookmarked) {
-        [bookmarks setObject:[NSNumber numberWithBool:YES] forKey:[[NSNumber numberWithInteger:self.pk] stringValue]];
+        [bookmarks setObject:[NSNumber numberWithBool:YES] forKey:[[NSNumber numberWithUnsignedInteger:self.pk] stringValue]];
     } else {
         [bookmarks removeObjectForKey:[[NSNumber numberWithUnsignedInteger:self.pk] stringValue]];
     }
