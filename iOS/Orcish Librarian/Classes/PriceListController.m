@@ -166,18 +166,6 @@
 
 // ----------------------------------------------------------------------------
 
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 36.0f;
-}
-
-// ----------------------------------------------------------------------------
-
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return self.sectionHeader;
-}
-
-// ----------------------------------------------------------------------------
-
 - (UITableViewCell *) tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"PriceVendorCell";
     PriceVendorCell *cell = (PriceVendorCell *) [aTableView dequeueReusableCellWithIdentifier:identifier];    
