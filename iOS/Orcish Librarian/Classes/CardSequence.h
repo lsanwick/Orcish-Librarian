@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class Card;
+
 @interface CardSequence : NSObject
+
+- (Card *) cardAtPosition:(NSUInteger)position;
+- (NSUInteger) count;
 
 @end

@@ -13,7 +13,8 @@
 #import "SetListController.h"
 #import "CardViewController.h"
 #import "AboutController.h"
-#import "CardSequence.h"
+#import "StaticCardSequence.h"
+#import "RandomCardSequence.h"
 #import "PriceManager.h"
 #import "DataManager.h"
 #import "ExternalSiteController.h"
@@ -135,8 +136,8 @@ typedef enum {
 
 // ----------------------------------------------------------------------------
 
-- (void) showCard:(Card *)card {
-    [self showCards:[CardSequence sequenceWithCards:[NSArray arrayWithObject:card]] atPosition:0];    
+- (void) showCard:(Card *)card {    
+    [self showCards:[[StaticCardSequence alloc] initWithCards:[NSArray arrayWithObject:card]] atPosition:0];    
 }
 
 // ----------------------------------------------------------------------------
@@ -212,7 +213,7 @@ typedef enum {
     if (self.topLevel != kRandomCards) {
         self.topLevel = kRandomCards;
         CardViewController *controller = [self dequeueCardViewController];
-        controller.sequence = [CardSequence randomCardSequence];
+        controller.sequence = [[RandomCardSequence alloc] init];
         controller.position = 0;
         [self.rootController setViewController:controller animated:NO];
     }

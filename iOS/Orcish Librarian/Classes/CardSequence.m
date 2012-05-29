@@ -7,7 +7,27 @@
 //
 
 #import "CardSequence.h"
+#import "Card.h"
 
 @implementation CardSequence
+
+// ----------------------------------------------------------------------------
+
+- (Card *) cardAtPosition:(NSUInteger)position {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+        reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
+        userInfo:nil];
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSUInteger) count {
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+        reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
+        userInfo:nil];
+}
+
+// ----------------------------------------------------------------------------
+
 
 @end

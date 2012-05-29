@@ -10,7 +10,7 @@
 #import "FMDatabase.h"
 #import "AppDelegate.h"
 #import "DataManager.h"
-#import "CardSequence.h"
+#import "StaticCardSequence.h"
 #import "Card.h"
 #import "SearchCriteria.h"
 #import "NSNull+Wrap.h"
@@ -156,7 +156,7 @@
             [cards addObject:[self cardForResultSet:rs]];
         }
     });
-    return [CardSequence sequenceWithCards:cards];
+    return [[StaticCardSequence alloc] initWithCards:cards];
 }
 
 // ----------------------------------------------------------------------------
@@ -180,7 +180,7 @@
             [cards addObject:[Card cardForResultSet:rs]];
         }
     });
-    return [CardSequence sequenceWithCards:cards];
+    return [[StaticCardSequence alloc] initWithCards:cards];
 }
 
 // ----------------------------------------------------------------------------
