@@ -14,6 +14,7 @@
 
 + (CGFloat) height;
 
+@property (nonatomic, assign) BOOL shouldDisplayPricesInResults;
 @property (nonatomic, strong) Card *card;
 @property (nonatomic, assign) BOOL hidesCount;
 

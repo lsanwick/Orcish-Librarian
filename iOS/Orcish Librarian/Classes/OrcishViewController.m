@@ -28,7 +28,7 @@
 
 @dynamic navigationItem;
 @synthesize shouldCollapseResults;
-@synthesize shouldLoadAllPrices;
+@synthesize shouldDisplayPricesInResults;
 @synthesize parentViewController;
 @synthesize sequence;
 @synthesize cardListView;
@@ -121,6 +121,7 @@
     SearchResultCell *cell = (SearchResultCell *) [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell =  [[SearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.shouldDisplayPricesInResults = self.shouldDisplayPricesInResults;
     }     
     cell.card = [self.sequence cardAtPosition:indexPath.row];
     return cell;

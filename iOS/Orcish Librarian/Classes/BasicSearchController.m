@@ -32,6 +32,7 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    self.shouldDisplayPricesInResults = YES;
     self.hasBeenFirstResponder = NO;
 }
 

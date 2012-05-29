@@ -41,6 +41,7 @@
 
 @implementation SearchResultCell
 
+@synthesize shouldDisplayPricesInResults;
 @synthesize card;
 @synthesize hidesCount;
 
@@ -167,9 +168,12 @@
     } else {
         NSArray *otherEditions = card.otherEditions;
         NSDictionary *price = [[PriceManager shared] priceForCard:card];  
-        priceLabelLow.text = price ? [NSString stringWithFormat:@"L: $%@", [price objectForKey:@"low"]] : @"";
-        priceLabelMid.text = price ? [NSString stringWithFormat:@"M: $%@", [price objectForKey:@"average"]] : @"";
-        priceLabelHigh.text = price ? [NSString stringWithFormat:@"H: $%@", [price objectForKey:@"high"]] : @"";
+        priceLabelLow.text = (price && self.shouldDisplayPricesInResults) ? 
+            [NSString stringWithFormat:@"L: $%@", [price objectForKey:@"low"]] : @"";
+        priceLabelMid.text = (price && self.shouldDisplayPricesInResults) ? 
+            [NSString stringWithFormat:@"M: $%@", [price objectForKey:@"average"]] : @"";
+        priceLabelHigh.text = (price && self.shouldDisplayPricesInResults) ? 
+            [NSString stringWithFormat:@"H: $%@", [price objectForKey:@"high"]] : @"";
         nameLabel.text = card.displayName;    
         if (otherEditions.count > 0 && !self.hidesCount) {
             setLabel.text = [NSString stringWithFormat:@"%@ (%d more)", card.setName, otherEditions.count];
