@@ -95,7 +95,7 @@ class Gatherer < Source
         end
       else
         # disregard token cards
-        is_token = (current_card[:type_line] == "Creature - #{current_card[:name]}" || current_card[:type_line] == "Creature — #{current_card[:name]}") && (current_card[:mana_cost].nil? || current_card[:mana_cost] == '')
+        is_token = (current_card[:name] == 'Hornet' || current_card[:type_line] == "Creature - #{current_card[:name]}" || current_card[:type_line] == "Creature — #{current_card[:name]}") && (current_card[:mana_cost].nil? || current_card[:mana_cost] == '')
         cards[current_card[:name]] = current_card unless is_token
         current_card = { }
       end
