@@ -58,6 +58,13 @@
 
 // ----------------------------------------------------------------------------
 
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.sequence dehydrate];
+}
+
+// ----------------------------------------------------------------------------
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
 }

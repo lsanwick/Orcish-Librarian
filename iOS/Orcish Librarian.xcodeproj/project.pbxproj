@@ -35,6 +35,7 @@
 		8D32B0B615293DCC00C0EF2E /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D32B0B515293DCC00C0EF2E /* SearchResultCell.m */; };
 		8D40B9851473543A00F3A4EC /* Linen-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9841473543A00F3A4EC /* Linen-Background.png */; };
 		8D5012C3146F5CA300D463D6 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5012C2146F5CA300D463D6 /* Card.m */; };
+		8D61423E157478F800482546 /* QueryCardSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D61423D157478F800482546 /* QueryCardSequence.m */; };
 		8D6B5684154DA17A006BFA0C /* PriceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B5683154DA17A006BFA0C /* PriceListController.m */; };
 		8D6B5687154E3046006BFA0C /* PriceListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D6B5686154E3046006BFA0C /* PriceListController.xib */; };
 		8D6B568E154F7777006BFA0C /* PriceVendorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B568D154F7777006BFA0C /* PriceVendorCell.m */; };
@@ -136,6 +137,8 @@
 		8D40B9841473543A00F3A4EC /* Linen-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Linen-Background.png"; sourceTree = "<group>"; };
 		8D5012C1146F5CA300D463D6 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		8D5012C2146F5CA300D463D6 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Card.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		8D61423C157478F800482546 /* QueryCardSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCardSequence.h; sourceTree = "<group>"; };
+		8D61423D157478F800482546 /* QueryCardSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryCardSequence.m; sourceTree = "<group>"; };
 		8D6B5682154DA17A006BFA0C /* PriceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceListController.h; sourceTree = "<group>"; };
 		8D6B5683154DA17A006BFA0C /* PriceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceListController.m; sourceTree = "<group>"; };
 		8D6B5686154E3046006BFA0C /* PriceListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PriceListController.xib; path = Layout/PriceListController.xib; sourceTree = "<group>"; };
@@ -384,6 +387,8 @@
 				8DEFE4411548FA43009AB624 /* StaticCardSequence.m */,
 				8DA5F093157424650094F888 /* CardSequence.h */,
 				8DA5F094157424660094F888 /* CardSequence.m */,
+				8D61423C157478F800482546 /* QueryCardSequence.h */,
+				8D61423D157478F800482546 /* QueryCardSequence.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -667,6 +672,7 @@
 				8D7C96EF1569D6370088BCB3 /* ExternalSiteController.m in Sources */,
 				8DA5F092157420A60094F888 /* RandomCardSequence.m in Sources */,
 				8DA5F095157424670094F888 /* CardSequence.m in Sources */,
+				8D61423E157478F800482546 /* QueryCardSequence.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

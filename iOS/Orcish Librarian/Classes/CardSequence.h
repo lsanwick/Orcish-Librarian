@@ -14,5 +14,7 @@
 
 - (Card *) cardAtPosition:(NSUInteger)position;
 - (NSUInteger) count;
+- (void) hydrate;
+- (void) dehydrate;
 
 @end

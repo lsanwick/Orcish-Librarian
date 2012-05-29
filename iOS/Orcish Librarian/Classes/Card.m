@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "DataManager.h"
 #import "StaticCardSequence.h"
+#import "QueryCardSequence.h"
 #import "Card.h"
 #import "SearchCriteria.h"
 #import "NSNull+Wrap.h"
@@ -19,8 +20,6 @@
 #define kMaxSearchNames 5
 
 @interface Card ()
-
-+ (Card *) cardForResultSet:(FMResultSet *)resultSet;
 
 @end
 
@@ -148,15 +147,8 @@
         @"ORDER BY  %@",                     
         [searchClauses componentsJoinedByString:@" AND "],
         [orderClauses componentsJoinedByString:@", "]];
-    
-    NSMutableArray *cards = [NSMutableArray array];
-    dispatch_sync(gAppDelegate.dataQueue, ^{
-        FMResultSet *rs = [gDataManager.db executeQuery:sql withArgumentsInArray:[searchParams arrayByAddingObjectsFromArray:orderParams]];        
-        while ([rs next]) {
-            [cards addObject:[self cardForResultSet:rs]];
-        }
-    });
-    return [[StaticCardSequence alloc] initWithCards:cards];
+        
+    return [[QueryCardSequence alloc] initWithQuery:sql argumentsInArray:[searchParams arrayByAddingObjectsFromArray:orderParams]];
 }
 
 // ----------------------------------------------------------------------------
@@ -173,14 +165,7 @@
         @"WHERE     cards.set_pk = sets.pk "
         @"AND       cards.pk IN (%@) ",
         primaryKeys];
-    NSMutableArray *cards = [NSMutableArray array];
-    dispatch_sync(gAppDelegate.dataQueue, ^{
-        FMResultSet *rs = [gDataManager.db executeQuery:sql];
-        while([rs next]) {
-            [cards addObject:[Card cardForResultSet:rs]];
-        }
-    });
-    return [[StaticCardSequence alloc] initWithCards:cards];
+    return [[QueryCardSequence alloc] initWithQuery:sql];
 }
 
 // ----------------------------------------------------------------------------

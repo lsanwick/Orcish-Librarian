@@ -10,6 +10,7 @@
 
 @class SearchCriteria;
 @class CardSequence;
+@class FMResultSet;
 
 
 @interface Card : NSObject 
@@ -47,6 +48,7 @@
 + (CardSequence *) findBookmarkedCards;
 + (Card *) findCardByPk:(NSUInteger)pk;
 + (Card *) findRandomCard;
++ (Card *) cardForResultSet:(FMResultSet *)resultSet;
 
 - (NSString *) toJSON;
 
