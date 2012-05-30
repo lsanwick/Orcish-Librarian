@@ -204,7 +204,7 @@
     [revealed viewWillAppear:animated];
     [UIView animateWithDuration:(animated ? kModalAnimatePeriod : 0.0) 
         animations:^{        
-            controller.view.frame = CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);    
+            controller.view.frame = CGRectMake(0.0, self.view.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height);    
         } 
         completion:^(BOOL finished){
             [controller.view removeFromSuperview];
