@@ -22,6 +22,7 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
+    self.webView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];
     NSURL *aboutURL = [NSURL fileURLWithPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"HTML/About.html"]];
     [self.webView loadRequest:[NSURLRequest requestWithURL:aboutURL]];
 }
