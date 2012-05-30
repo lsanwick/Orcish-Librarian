@@ -15,7 +15,6 @@
 
 - (void) setSequence:(CardSequence *)sequence reloadTable:(BOOL)reloadTable;
 
-@property (nonatomic, assign) BOOL shouldCollapseResults;
 @property (nonatomic, assign) BOOL shouldDisplayPricesInResults;
 @property (nonatomic, strong) CardSequence *sequence;
 @property (nonatomic, strong) IBOutlet UITableView *cardListView;

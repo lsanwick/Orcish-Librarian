@@ -27,7 +27,6 @@
 @implementation OrcishViewController
 
 @dynamic navigationItem;
-@synthesize shouldCollapseResults;
 @synthesize shouldDisplayPricesInResults;
 @synthesize parentViewController;
 @synthesize sequence;
@@ -37,7 +36,6 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.shouldCollapseResults = YES;
     self.cardListView.rowHeight = [SearchResultCell height];
     navigationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu-Button"] 
         style:UIBarButtonItemStyleBordered target:self action:@selector(navigationButtonTapped:)];

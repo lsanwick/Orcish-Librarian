@@ -125,7 +125,7 @@
     
     if (searchClauses.count == 0) {
         // don't bother running the search if there's no search criteria
-        return [NSArray array];
+        return [[StaticCardSequence alloc] initWithCards:[NSArray array]];
     } else {
         // otherwise, the default search order is appended to the end of whatever
         // order order criteria we've got set up.
@@ -165,7 +165,7 @@
         @"WHERE     cards.set_pk = sets.pk "
         @"AND       cards.pk IN (%@) ",
         primaryKeys];
-    return [[QueryCardSequence alloc] initWithQuery:sql];
+    return [[QueryCardSequence alloc] initWithQuery:sql argumentsInArray:nil collapse:NO];
 }
 
 // ----------------------------------------------------------------------------

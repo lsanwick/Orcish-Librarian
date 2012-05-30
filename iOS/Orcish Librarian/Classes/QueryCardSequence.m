@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) NSString *sql;
 @property (nonatomic, strong) NSArray *arguments;
+@property (nonatomic, assign) BOOL collapse;
 @property (nonatomic, strong) NSArray *cards;
 @property (nonatomic, assign) BOOL hydrated;
 
@@ -25,21 +26,29 @@
 
 @synthesize sql;
 @synthesize arguments;
+@synthesize collapse;
 @synthesize cards;
 @synthesize hydrated;
 
 // ----------------------------------------------------------------------------
 
 - (id) initWithQuery:(NSString *)theSql {
-    return [self initWithQuery:theSql argumentsInArray:[NSArray array]];
+    return [self initWithQuery:theSql argumentsInArray:nil collapse:YES];
 }
 
 // ----------------------------------------------------------------------------
 
 - (id) initWithQuery:(NSString *)theSql argumentsInArray:(NSArray *)theArguments {
+    return [self initWithQuery:theSql argumentsInArray:theArguments collapse:YES];
+}
+
+// ----------------------------------------------------------------------------
+
+- (id) initWithQuery:(NSString *)theSql argumentsInArray:(NSArray *)theArguments collapse:(BOOL)shouldCollapse {
     if (self = [super init]) {
+        self.collapse = shouldCollapse; 
         self.sql = theSql;
-        self.arguments = [theArguments copy];
+        self.arguments = theArguments ? [theArguments copy] : [NSArray array];
     }
     return self;
 }
@@ -66,15 +75,24 @@
 
 - (void) hydrate {
     if (!self.hydrated) {
+        NSMutableSet *names;
+        if (self.collapse) {
+            names = [NSMutableSet set];
+        }
         NSMutableArray *results = [NSMutableArray array];
         dispatch_sync(gAppDelegate.dataQueue, ^{
             FMResultSet *rs = [gDataManager.db executeQuery:self.sql withArgumentsInArray:self.arguments];
             while ([rs next]) {
-                [results addObject:[Card cardForResultSet:rs]];
+                Card *card = [Card cardForResultSet:rs];
+                if (!self.collapse || ![names containsObject:card.name]) {
+                    [results addObject:card];
+                    if (self.collapse) {
+                        [names addObject:card.name];
+                    }
+                } 
             }
         });
         self.cards = [results copy];
-        NSLog(@"Hydrating (%d cards)", self.cards.count);
         self.hydrated = YES;
     }
 }
@@ -83,7 +101,6 @@
 
 - (void) dehydrate {
     if (self.hydrated) {
-        NSLog(@"Dehydrating (%d cards)", self.cards.count);
         self.cards = nil;
         self.hydrated = NO;
     }
