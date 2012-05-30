@@ -233,7 +233,7 @@
 									<int key="type">2</int>
 									<double key="pointSize">15</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="227308770">
+								<object class="NSFont" key="IBUIFont" id="227757005">
 									<string key="NSName">Helvetica-Bold</string>
 									<double key="NSSize">15</double>
 									<int key="NSfFlags">16</int>
@@ -291,7 +291,7 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIButton" id="466519714">
 								<reference key="NSNextResponder" ref="42502280"/>
-								<int key="NSvFlags">274</int>
+								<int key="NSvFlags">276</int>
 								<string key="NSFrameSize">{239, 36}</string>
 								<reference key="NSSuperview" ref="42502280"/>
 								<reference key="NSWindow"/>
@@ -312,7 +312,7 @@
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="1050465570"/>
 								<reference key="IBUIFontDescription" ref="838041703"/>
-								<reference key="IBUIFont" ref="227308770"/>
+								<reference key="IBUIFont" ref="227757005"/>
 							</object>
 							<object class="IBUIView" id="158257244">
 								<reference key="NSNextResponder" ref="42502280"/>
