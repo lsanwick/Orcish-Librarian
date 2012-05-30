@@ -9,13 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "OrcishViewController.h"
 
-@interface AboutController : OrcishViewController
+@interface AboutController : OrcishViewController <UIScrollViewDelegate, UIWebViewDelegate>
 
-- (IBAction) urlTapped:(id)sender;
-
-@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, strong) IBOutlet UIView *innerContent;
-@property (nonatomic, strong) IBOutlet UILabel *version;
-@property (nonatomic, strong) IBOutlet UILabel *lastUpdated;
+@property (nonatomic, strong) IBOutlet UIWebView *webView;
 
 @end

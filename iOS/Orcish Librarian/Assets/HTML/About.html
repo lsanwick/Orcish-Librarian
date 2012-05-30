@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+<style>
+
+body {
+    margin: 0;
+    padding: 20px 20px 20px 20px;
+    background: #f2f2f2;
+	color: #392222;
+    font-family: sans-serif;
+    -webkit-text-size-adjust: none;
+}
+
+a {
+	color: #6F789B;
+}
+
+.ol-about {
+	max-width: 768px;
+}
+
+.ol-about .ol-header {
+	position: relative;
+	font-size: 36px;
+	font-weight: bold;
+	padding-right: 100px;
+}
+
+.ol-about .ol-header .ol-title {
+	font-size: 36px;
+}
+
+.ol-about .ol-header .ol-version {
+	position: absolute;
+	bottom: 3px;
+	right: 0;
+	font-size: 22px;
+}
+
+.ol-credits {
+	border: 1px solid #989898;
+	border-width: 1px 0;
+	margin: 15px 0;
+	padding: 15px 0;
+}
+
+.ol-credits .ol-by {
+	margin-bottom: 4px;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.ol-credits .ol-site {
+	font-size: 20px;
+}
+
+.ol-update-info {
+	max-width: 500px;
+	font-size: 15px;
+}
+
+.ol-last-update {
+	visibility: hidden;
+	font-size: 13px;
+	color: #989898;
+}
+
+.ol-thanks {
+	padding-top: 25px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.ol-legal {
+	font-size: 10px;
+}
+
+</style>
+</head>
+<body>
+<div class="ol-about">
+	<div class="ol-header">
+		<div class="ol-title">Orcish Librarian</div>
+		<div class="ol-version">v.2.0</div>
+	</div>
+	<div class="ol-credits">
+		<div class="ol-by">By Stewart Ulm</div>
+		<div class="ol-site"><a href="orcish://home">http://orcish.info</a></div>
+	</div>
+	<div class="ol-update-info">
+		<p>This app automatically downloads card updates as they become available.</p>
+		<p class="ol-last-update">Last updated: ???</p>
+	</div>	
+	<div class="ol-thanks">
+		<p>Special thanks to Mike Brum and Ben McCloskey</p>
+	</div>
+	<div class="ol-legal">
+		<p>Magic: the Gathering is ™ and ⓒ Wizards of the Coast, Inc, a subsidiary of Hasbro, Inc.</p>
+	</div>
+</div>	
+<script>
+
+function $$(selector, el) {
+    if (!el) { el = document }
+    return Array.prototype.slice.call(el.querySelectorAll(selector));
+}
+
+function $(selector, el) {  
+     if (!el) { el = document }
+     return el.querySelector(selector);
+}
+
+var About = {
+	
+	setVersion: function(version) {
+		$('.ol-version').innerText = version;
+	},
+	
+	setLastUpdate: function(lastUpdate) {
+		$('.ol-last-update').style.visibility = 'visible';
+		$('.ol-last-update').innerText = lastUpdate;
+	}
+	
+};
+
+</script>
+</body>
+</html>

@@ -6,226 +6,218 @@
 <script src="jquery.js"></script>
 <style>
 
-    body {
-        margin: 0;
-        padding: 10px;
-        background: #d8dce6;
-        color: #42464d;
-        font-family: sans-serif;
-        -webkit-text-size-adjust: none;
-    }
+   body {
+       margin: 0;
+       padding: 10px;
+       background: #d8dce6;
+       color: #42464d;
+       font-family: sans-serif;
+       -webkit-text-size-adjust: none;
+   }
 
-	a {
-		color: #6F789B;
-	}
-    
-	.ol-content {
-		visibility: hidden;
-	}
-
-    .ol-header {
-		position: relative;
-    }
-    
-    .ol-block {
-        padding: 10px;
-        margin: 0 0 15px 0;
-        border: 1px solid #ccc;
-        background: #fff;
-        border-radius: 3px;
-        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.15);
-        font-size: 14px;
-    }
-    
-    .ol-card-name {
-        padding: 0;
-        margin: 0 0 4px 0;
-        font-size: 17px;
-        font-weight: bold;
-    }
-    
-    .ol-set-name {
-        margin-top: 3px;
-        font-size: 12px;
-        color: #7f848b;
-    }
-
-	.ol-set-name a {
-		text-decoration: none;
-	}
-    
-	.ol-card-data {
-		margin-top: 3px;
-        font-size: 14px;
-        font-weight: bold;
-        color: #7f848b;
-	}
-
-	.ol-mana-cost {
-		margin-top: 5px;
-	}
-
-	.ol-mana-cost img {
-	    margin-right: 2px;
-	    height: 18px;
-	}
-
-	.ol-loading-prices,
-	.ol-missing-prices, 
-    .ol-prices {
-		display: none;
-		margin: 10px 0 0 0;
-	    font-size: 70%;
-	}
-	
-	.ol-prices .ol-price {
-		display: inline-block;
-		margin-right: 10px;
-	}
-	
-	.ol-prices .ol-attribution {
-		margin-top: 5px;
-		font-size: 10px;
-	}
-	
-	.ol-price a {
-		font-weight: bold;
-	}
-
-    .ol-card-image,
-    .ol-oracle-text,
-    .ol-other-editions,
-	.ol-other-parts,
-    .ol-other-art {
-        display: none;
-    }
-
-	.ol-other-art .ol-active {
-		color: #bbb;
-	}
-    
-    .ol-card-image img {
-        width: 280px;
-        border-radius: 2px;
-    }
-
-	/* iPhone Landscape */
-	@media only screen and (min-width: 480px) {
-		.ol-card-image img {
-			width: 440px;
-		}
-	}
-	
-	/* iPad+ */
-	@media only screen and (min-width: 520px) {
-		.ol-card-image img {
-			width: 480px;
-		}
-	}
-
-	.ol-oracle-text {
-		line-height: 1.2em;
-	}
-	
-	.ol-oracle-text .separator {
-		height: 10px;
-		overflow: hidden;
-	}	
-
-	.ol-oracle-text img {
-	    position: relative;
-	    top: 2px;
-	    margin-right: 2px;
-	    width: 15px;
-	    height: 15px;
-	}
-	
-	.ol-oracle-text .level-info {
-	    margin-left: 10px;
-	}
-
-	.ol-oracle-text .level-info .details { 
-	    margin: -5px 0 10px 0;
-	    line-height: 1.2em;
-	}
-
-	.ol-oracle-text .level-info h4 {
-	    margin-top: 20px;
-	    margin-left: -10px;
-	}
-	
-	
-	.ol-other-editions,
-	.ol-other-parts,
-    .ol-other-art, 
-	.ol-other-art li {
-		font-size: 13px;
-		line-height: 1.5em;
-	}
-	
-	.ol-gatherer a,
-	.ol-other-editions a,
-	.ol-other-parts a,
-    .ol-other-art a {
-		text-decoration: none;
-	}
-	
-	.ol-other-art ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-	
-	.ol-gatherer { 
-		font-size: 14px; 
-		font-weight: bold;
-	}
-	
-	.ol-bookmark a {
-		position: absolute;
-		right: 8px;
-		bottom: 8px;
-		padding: 4px 3px 3px 3px;	
-		text-align: center;
-		font-size: 22px;
-		line-height: 22px;
-		background: -webkit-gradient(
-			linear, left top, left bottom, 
-			from(#ffffff),
-			color-stop(0.50, #ffffff),
-			to(#d6d6d6));
-		border: 0px solid #ffbf00;
-		border-radius: 3px;
-		box-shadow:
-			0px 1px 3px rgba(000,000,000,0.5),
-			inset 0px 0px 3px rgba(255,255,255,1);
-		text-shadow:
-			0px -1px 0px rgba(000,000,000,0.1),
-			0px 1px 0px rgba(255,255,255,1);
-		color: #ddd;
-		text-decoration: none;
-	}
-		
-	.ol-bookmark.active a {
-		color: #a00;
-	}
-	
-	.subtitle {
-		margin: 17px 0 8px 8px;
-		font-size: 16px;
-		font-weight: bold;
-		color: #646F7C;
-		text-shadow: 1px 1px 1px white;
-	}
-    
-@media only screen and (-webkit-min-device-pixel-ratio: 2) {
-/* --------------------------------------------------
-//   styles for retina display   
-// ------------------------------------------------- */
-    
-        
+a {
+	color: #6F789B;
+}
+   
+.ol-content {
+	visibility: hidden;
 }
 
+   .ol-header {
+	position: relative;
+   }
+   
+   .ol-block {
+       padding: 10px;
+       margin: 0 0 15px 0;
+       border: 1px solid #ccc;
+       background: #fff;
+       border-radius: 3px;
+       box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.15);
+       font-size: 14px;
+   }
+   
+   .ol-card-name {
+       padding: 0;
+       margin: 0 0 4px 0;
+       font-size: 17px;
+       font-weight: bold;
+   }
+   
+   .ol-set-name {
+       margin-top: 3px;
+       font-size: 12px;
+       color: #7f848b;
+   }
+
+.ol-set-name a {
+	text-decoration: none;
+}
+   
+.ol-card-data {
+	margin-top: 3px;
+       font-size: 14px;
+       font-weight: bold;
+       color: #7f848b;
+}
+
+.ol-mana-cost {
+	margin-top: 5px;
+}
+
+.ol-mana-cost img {
+    margin-right: 2px;
+    height: 18px;
+}
+
+.ol-loading-prices,
+.ol-missing-prices, 
+   .ol-prices {
+	display: none;
+	margin: 10px 0 0 0;
+    font-size: 70%;
+}
+
+.ol-prices .ol-price {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.ol-prices .ol-attribution {
+	margin-top: 5px;
+	font-size: 10px;
+}
+
+.ol-price a {
+	font-weight: bold;
+}
+
+.ol-card-image,
+.ol-oracle-text,
+.ol-other-editions,
+.ol-other-parts,
+.ol-other-art {
+	display: none;
+}
+
+.ol-other-art .ol-active {
+	color: #bbb;
+}
+   
+   .ol-card-image img {
+       width: 280px;
+       border-radius: 2px;
+   }
+
+/* iPhone Landscape */
+@media only screen and (min-width: 480px) {
+	.ol-card-image img {
+		width: 440px;
+	}
+}
+
+/* iPad+ */
+@media only screen and (min-width: 520px) {
+	.ol-card-image img {
+		width: 480px;
+	}
+}
+
+.ol-oracle-text {
+	line-height: 1.2em;
+}
+
+.ol-oracle-text .separator {
+	height: 10px;
+	overflow: hidden;
+}	
+
+.ol-oracle-text img {
+    position: relative;
+    top: 2px;
+    margin-right: 2px;
+    width: 15px;
+    height: 15px;
+}
+
+.ol-oracle-text .level-info {
+    margin-left: 10px;
+}
+
+.ol-oracle-text .level-info .details { 
+    margin: -5px 0 10px 0;
+    line-height: 1.2em;
+}
+
+.ol-oracle-text .level-info h4 {
+    margin-top: 20px;
+    margin-left: -10px;
+}
+
+
+.ol-other-editions,
+.ol-other-parts,
+   .ol-other-art, 
+.ol-other-art li {
+	font-size: 13px;
+	line-height: 1.5em;
+}
+
+.ol-gatherer a,
+.ol-other-editions a,
+.ol-other-parts a,
+   .ol-other-art a {
+	text-decoration: none;
+}
+
+.ol-other-art ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ol-gatherer { 
+	font-size: 14px; 
+	font-weight: bold;
+}
+
+.ol-bookmark a {
+	position: absolute;
+	right: 8px;
+	bottom: 8px;
+	padding: 4px 3px 3px 3px;	
+	text-align: center;
+	font-size: 22px;
+	line-height: 22px;
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#ffffff),
+		color-stop(0.50, #ffffff),
+		to(#d6d6d6));
+	border: 0px solid #ffbf00;
+	border-radius: 3px;
+	box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 3px rgba(255,255,255,1);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.1),
+		0px 1px 0px rgba(255,255,255,1);
+	color: #ddd;
+	text-decoration: none;
+}
+	
+.ol-bookmark.active a {
+	color: #a00;
+}
+
+.ol-subtitle {
+	margin: 17px 0 8px 8px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #646F7C;
+	text-shadow: 1px 1px 1px white;
+}
+    
 </style>
 </head>
 <body>	
@@ -261,25 +253,25 @@
     </div>
     
     <div class="ol-oracle-text">
-        <div class="subtitle">Oracle Text:</div>
+        <div class="ol-subtitle">Oracle Text:</div>
         <div class="ol-block">
         </div>
     </div>
     
     <div class="ol-other-art">
-		<div class="subtitle">Other Art:</div>
+		<div class="ol-subtitle">Other Art:</div>
 		<div class="ol-block">
 		</div>
     </div>
 
     <div class="ol-other-parts">
-		<div class="subtitle">Other Parts:</div>
+		<div class="ol-subtitle">Other Parts:</div>
 		<div class="ol-block">
 		</div>
     </div>
 	
     <div class="ol-other-editions">
-		<div class="subtitle">Other Editions:</div>
+		<div class="ol-subtitle">Other Editions:</div>
 		<div class="ol-block">			
 		</div>
     </div>

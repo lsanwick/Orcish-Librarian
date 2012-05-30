@@ -16,40 +16,57 @@
 
 @implementation AboutController
 
-@synthesize version;
-@synthesize lastUpdated;
-@synthesize innerContent;
-@synthesize scrollView;
+@synthesize webView;
 
 // ----------------------------------------------------------------------------
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.scrollView.alwaysBounceVertical = YES;
-    self.scrollView.alwaysBounceHorizontal = NO;
-    self.scrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Linen-Background"]];
+    NSURL *aboutURL = [NSURL fileURLWithPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"HTML/About.html"]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:aboutURL]];
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.version.text = [NSString stringWithFormat:@"v.%@", 
-        [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
-    self.lastUpdated.hidden = !gDataManager.lastUpdated;
-    if (gDataManager.lastUpdated) {
-        NSDateFormatter *format = [[NSDateFormatter alloc] init];
-        format.dateStyle = NSDateFormatterMediumStyle;
-        NSString *formattedDate = [format stringFromDate:gDataManager.lastUpdated];
-        self.lastUpdated.text = [NSString stringWithFormat:@"Last checked on %@", formattedDate];
+}
+
+// ----------------------------------------------------------------------------
+//  UIWebViewDelegate
+// ----------------------------------------------------------------------------
+
+- (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSURL *URL = request.URL;    
+    
+    // DONE LOADING WEBVIEW
+    if ([URL.scheme isEqualToString:@"orcish"]) {
+        [gAppDelegate trackEvent:@"About Screen" action:@"Launch Orcish Homepage" label:@""];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://orcish.info"]];
+    } 
+    
+    else {
+        return YES;
     }
+    
+    return NO;
 }
 
 // ----------------------------------------------------------------------------
 
-- (IBAction) urlTapped:(id)sender {
-    [gAppDelegate trackEvent:@"About Screen" action:@"Launch Orcish Homepage" label:@""];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://orcish.info"]];
+- (void) webViewDidFinishLoad:(UIWebView *)webView {    
+    NSString *setVersion = [NSString stringWithFormat:@"About.setVersion('v.%@');", 
+        [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+    [self.webView stringByEvaluatingJavaScriptFromString:setVersion];
+    if (gDataManager.lastUpdated) {
+        NSDateFormatter *format = [[NSDateFormatter alloc] init];
+        format.dateStyle = NSDateFormatterMediumStyle;
+        NSString *formattedDate = [format stringFromDate:gDataManager.lastUpdated];
+        NSString *lastUpdateText = [NSString stringWithFormat:@"Last checked on %@", formattedDate];
+        NSString *setLastUpdate = [NSString stringWithFormat:@"About.setLastUpdate('%@');",
+            [lastUpdateText stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"]];
+        [self.webView stringByEvaluatingJavaScriptFromString:setLastUpdate];
+    }
 }
 
 // ----------------------------------------------------------------------------
