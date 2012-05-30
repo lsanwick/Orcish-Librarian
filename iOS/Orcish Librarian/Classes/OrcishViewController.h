@@ -14,6 +14,7 @@
 @interface OrcishViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 - (void) setSequence:(CardSequence *)sequence reloadTable:(BOOL)reloadTable;
+- (void) resetNavigationButton;
 
 @property (nonatomic, assign) BOOL shouldDisplayPricesInResults;
 @property (nonatomic, strong) CardSequence *sequence;

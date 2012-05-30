@@ -14,7 +14,6 @@
 #import "Utility.h"
 
 
-#define kMaxControllerStackDepth 10
 #define kMenuAnimatePeriod 0.25
 #define kControllerAnimatePeriod 0.3
 #define kModalAnimatePeriod 0.4
@@ -37,6 +36,22 @@
 @synthesize controllerStack;
 @synthesize menuIsVisible;
 @synthesize modalControllerStack;
+
+// ----------------------------------------------------------------------------
+
+- (void) didReceiveMemoryWarning {
+    if (self.controllerStack.count > 2) {
+        while (self.controllerStack.count > 2) {
+            [[[self.controllerStack objectAtIndex:0] view] removeFromSuperview];
+            [self.controllerStack removeObjectAtIndex:0];
+            [self.topController resetNavigationButton];
+        }
+    } else if (self.controllerStack.count == 2) {
+        [[[self.controllerStack objectAtIndex:0] view] removeFromSuperview];
+        [self.controllerStack removeObjectAtIndex:0];
+        [self.topController resetNavigationButton];
+    }
+}
 
 // ----------------------------------------------------------------------------
 
@@ -114,10 +129,6 @@
         completion:^(BOOL finished){
 
         }];
-    if (self.controllerStack.count > kMaxControllerStackDepth) {
-        [[[self.controllerStack objectAtIndex:0] view] removeFromSuperview];
-        [self.controllerStack removeObjectAtIndex:0];
-    }
 }
 
 // ----------------------------------------------------------------------------
@@ -215,7 +226,7 @@
 
 // ----------------------------------------------------------------------------
 
-- (UIViewController *) topController {
+- (OrcishViewController *) topController {
     return self.controllerStack.lastObject;
 }
 

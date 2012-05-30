@@ -47,24 +47,29 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.cardListView deselectRowAtIndexPath:[self.cardListView indexPathForSelectedRow] animated:animated];
-    if (gAppDelegate.rootController.controllerStack.count > 1) {
-        navigationButton.image = [UIImage imageNamed:@"Back-Button"];
-    } else {
-        navigationButton.image = [UIImage imageNamed:@"Menu-Button"];
-    }
+    [self resetNavigationButton];
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.sequence dehydrate];
 }
 
 // ----------------------------------------------------------------------------
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) resetNavigationButton {
+    if (gAppDelegate.rootController.controllerStack.count > 1) {
+        navigationButton.image = [UIImage imageNamed:@"Back-Button"];
+    } else {
+        navigationButton.image = [UIImage imageNamed:@"Menu-Button"];
+    }   
 }
 
 // ----------------------------------------------------------------------------

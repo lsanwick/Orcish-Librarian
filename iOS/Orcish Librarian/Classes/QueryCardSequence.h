@@ -13,7 +13,5 @@
 - (id) initWithQuery:(NSString *)sql;
 - (id) initWithQuery:(NSString *)sql argumentsInArray:(NSArray *)arguments;
 - (id) initWithQuery:(NSString *)sql argumentsInArray:(NSArray *)arguments collapse:(BOOL)collapse;
-- (void) hydrate;
-- (void) dehydrate;
 
 @end

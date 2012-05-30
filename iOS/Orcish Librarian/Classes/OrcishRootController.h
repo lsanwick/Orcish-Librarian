@@ -10,6 +10,7 @@
 
 @class MenuController;
 @class CardViewController;
+@class OrcishViewController;
 
 @interface OrcishRootController : UIViewController
 
@@ -20,7 +21,7 @@
 @property (strong, nonatomic) IBOutlet UIView *slideView;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
-@property (readonly, nonatomic) UIViewController *topController;
+@property (readonly, nonatomic) OrcishViewController *topController;
 @property (assign, nonatomic) BOOL menuIsVisible;
 
 - (void) pushViewController:(UIViewController *)controller animated:(BOOL)animated;
