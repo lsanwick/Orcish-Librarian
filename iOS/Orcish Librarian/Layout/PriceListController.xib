@@ -136,11 +136,11 @@
 					</object>
 					<object class="IBUIView" id="113630796">
 						<reference key="NSNextResponder" ref="556521027"/>
-						<int key="NSvFlags">274</int>
+						<int key="NSvFlags">319</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIActivityIndicatorView" id="810551293">
 								<reference key="NSNextResponder" ref="113630796"/>
-								<int key="NSvFlags">288</int>
+								<int key="NSvFlags">301</int>
 								<string key="NSFrame">{{142, 143}, {37, 37}}</string>
 								<reference key="NSSuperview" ref="113630796"/>
 								<reference key="NSWindow"/>
@@ -170,11 +170,11 @@
 					</object>
 					<object class="IBUIView" id="949394675">
 						<reference key="NSNextResponder" ref="556521027"/>
-						<int key="NSvFlags">-2147483360</int>
+						<int key="NSvFlags">-2147483374</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUILabel" id="635738309">
 								<reference key="NSNextResponder" ref="949394675"/>
-								<int key="NSvFlags">288</int>
+								<int key="NSvFlags">290</int>
 								<string key="NSFrame">{{60, 154}, {201, 113}}</string>
 								<reference key="NSSuperview" ref="949394675"/>
 								<reference key="NSWindow"/>
@@ -211,7 +211,7 @@
 							</object>
 							<object class="IBUIButton" id="364070988">
 								<reference key="NSNextResponder" ref="949394675"/>
-								<int key="NSvFlags">288</int>
+								<int key="NSvFlags">293</int>
 								<string key="NSFrame">{{56, 269}, {208, 37}}</string>
 								<reference key="NSSuperview" ref="949394675"/>
 								<reference key="NSWindow"/>
@@ -233,7 +233,7 @@
 									<int key="type">2</int>
 									<double key="pointSize">15</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="227757005">
+								<object class="NSFont" key="IBUIFont" id="1028575894">
 									<string key="NSName">Helvetica-Bold</string>
 									<double key="NSSize">15</double>
 									<int key="NSfFlags">16</int>
@@ -241,7 +241,7 @@
 							</object>
 							<object class="IBUILabel" id="246949318">
 								<reference key="NSNextResponder" ref="949394675"/>
-								<int key="NSvFlags">288</int>
+								<int key="NSvFlags">290</int>
 								<string key="NSFrame">{{98, 42}, {124, 109}}</string>
 								<reference key="NSSuperview" ref="949394675"/>
 								<reference key="NSWindow"/>
@@ -312,7 +312,7 @@
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="1050465570"/>
 								<reference key="IBUIFontDescription" ref="838041703"/>
-								<reference key="IBUIFont" ref="227757005"/>
+								<reference key="IBUIFont" ref="1028575894"/>
 							</object>
 							<object class="IBUIView" id="158257244">
 								<reference key="NSNextResponder" ref="42502280"/>
