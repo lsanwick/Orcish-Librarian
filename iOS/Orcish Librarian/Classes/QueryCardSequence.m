@@ -73,6 +73,15 @@
 
 // ----------------------------------------------------------------------------
 
+- (NSUInteger) positionOfCardMatchingName:(NSString *)name {
+    [self hydrate];
+    return [self.cards indexOfObjectPassingTest:^(Card *test, NSUInteger index, BOOL *stop) {
+        return (BOOL) ([name isEqualToString:test.name] ? (*stop = YES) : NO);
+    }];
+}
+
+// ----------------------------------------------------------------------------
+
 - (void) hydrate {
     if (!self.hydrated) {
         NSMutableSet *names;

@@ -8,6 +8,7 @@
 
 #import "CardView.h"
 #import "Card.h"
+#import "QueryCardSequence.h"
 #import "AppDelegate.h"
 #import "PriceManager.h"
 
@@ -85,7 +86,8 @@
         } else {
             // show the set from the current card's equivalent
             NSUInteger setPk = (NSUInteger) [URL.host longLongValue];
-            [gAppDelegate showCards:[Card findCardsBySet:setPk] atPosition:0];
+            CardSequence *sequence = [Card findCardsBySet:setPk];
+            [gAppDelegate showCards:sequence atPosition:[sequence positionOfCardMatchingName:self.card.name]];
         }
     } 
     
