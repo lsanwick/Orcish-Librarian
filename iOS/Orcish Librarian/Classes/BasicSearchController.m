@@ -59,23 +59,6 @@
 }
 
 // ----------------------------------------------------------------------------
-
-- (void) setSequence:(CardSequence *)theSequence reloadTable:(BOOL)reloadTable {
-    [super setSequence:theSequence reloadTable:reloadTable];
-    [[PriceManager shared] clearPriceRequests];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kPriceRequestDelay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        if (self.sequence == theSequence && theSequence.count > 0) {
-            for (int i = theSequence.count - 1; i >= 0; i--) {
-                Card *card = [theSequence cardAtPosition:i];
-                [[PriceManager shared] requestPriceForCard:card withCallback:^(Card *card, NSDictionary *prices){
-                    [self.cardListView reloadData];
-                }];         
-            }
-        }
-    });
-}
-
-// ----------------------------------------------------------------------------
 //  UISearchBarDelegate
 // ----------------------------------------------------------------------------
 

@@ -31,6 +31,7 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Bookmarks";
+    self.shouldDisplayPricesInResults = YES;
 }
 
 // ----------------------------------------------------------------------------
