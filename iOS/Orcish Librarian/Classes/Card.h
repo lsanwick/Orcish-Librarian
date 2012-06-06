@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class SearchCriteria;
+#define kMinimumSearchCharacters 3
+
 @class CardSequence;
 @class FMResultSet;
-
 
 @interface Card : NSObject 
 
@@ -41,10 +41,9 @@
 
 @property (nonatomic, assign) BOOL isBookmarked;
 
-+ (NSArray *) findNameHashesByText:(NSString *)text;
 + (CardSequence *) findCardsByTitleText:(NSString *)text;
 + (CardSequence *) findCardsBySet:(NSUInteger)setPk;
-+ (CardSequence *) findCards:(SearchCriteria *)criteria;
++ (CardSequence *) findCards:(NSArray *)facets;
 + (CardSequence *) findBookmarkedCards;
 + (Card *) findCardByPk:(NSUInteger)pk;
 + (Card *) findRandomCard;

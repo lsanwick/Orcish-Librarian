@@ -45,7 +45,8 @@
     if (!items) {
         items = [NSArray arrayWithObjects:
             [NSArray arrayWithObjects:
-                @"Basic Search", 
+                @"Basic Search",
+                @"Advanced Search",
                 @"Browse Sets", 
                 @"Bookmarks", 
                 @"Random Cards", 
@@ -124,6 +125,12 @@
         [gAppDelegate trackEvent:@"Menu" action:@"Basic Search" label:@""];
         [gAppDelegate showBasicSearchController];
     } 
+    
+    // ADVANCED SEARCH
+    if ([text isEqualToString:@"ADVANCED SEARCH"]) {
+        [gAppDelegate trackEvent:@"Menu" action:@"Advanced Search" label:@""];
+        [gAppDelegate showAdvancedSearchController];
+    }
     
     // BOOKMARKS
     else if ([text isEqualToString:@"BOOKMARKS"]) {

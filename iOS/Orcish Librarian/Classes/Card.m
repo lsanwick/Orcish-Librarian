@@ -13,11 +13,8 @@
 #import "StaticCardSequence.h"
 #import "QueryCardSequence.h"
 #import "Card.h"
-#import "SearchCriteria.h"
+#import "SearchFacet.h"
 #import "NSNull+Wrap.h"
-
-#define kMinimumSearchCharacters 3
-#define kMaxSearchNames 5
 
 @interface Card ()
 
@@ -76,51 +73,26 @@
 // ----------------------------------------------------------------------------
 
 + (CardSequence *) findCardsByTitleText:(NSString *)text {
-    SearchCriteria *criteria = [[SearchCriteria alloc] init];
-    criteria.nameText = text;
-    return [self findCards:criteria];
+    return [self findCards:[NSArray arrayWithObject:[SearchFacet facetWithTitleText:text]]];
 }
 
 // ----------------------------------------------------------------------------
 
 + (CardSequence *) findCardsBySet:(NSUInteger)setPk {
-    SearchCriteria *criteria = [[SearchCriteria alloc] init];
-    criteria.sets = [NSArray arrayWithObject:[NSNumber numberWithUnsignedInteger:setPk]];
-    return [self findCards:criteria];
+    return [self findCards:[NSArray arrayWithObject:[SearchFacet facetWithSet:setPk]]];
 }
 
 // ----------------------------------------------------------------------------
 
-+ (CardSequence *) findCards:(SearchCriteria *)criteria {
++ (CardSequence *) findCards:(NSArray *)facets {
     
     NSMutableArray *searchClauses = [NSMutableArray array];
     NSMutableArray *searchParams = [NSMutableArray array];
     NSMutableArray *orderClauses = [NSMutableArray array];
     NSMutableArray *orderParams = [NSMutableArray array];
     
-    // name
-    if (criteria.nameText != nil && criteria.nameText.length >= kMinimumSearchCharacters) {
-        NSArray *nameHashes = [self findNameHashesByText:criteria.nameText];
-        if (nameHashes.count > 0) {
-            NSMutableArray *marks = [NSMutableArray arrayWithCapacity:nameHashes.count];
-            for (int i = 0; i < nameHashes.count; i++) {
-                [marks addObject:@"?"];
-            }
-            [searchClauses addObject:[NSString stringWithFormat:@"cards.name_hash IN (%@)", [marks componentsJoinedByString:@", "]]];
-            [searchParams addObjectsFromArray:nameHashes];
-            [orderClauses addObject:[NSString stringWithFormat:@"(SUBSTR(cards.search_name, 0, %d) = ?) DESC", criteria.nameText.length + 1]];
-            [orderParams addObject:criteria.nameText];
-        }
-    }
-    
-    // set
-    if (criteria.sets != nil && criteria.sets.count > 0) {
-        NSMutableArray *marks = [NSMutableArray arrayWithCapacity:criteria.sets.count];
-        for (int i = 0; i < criteria.sets.count; i++) {
-            [marks addObject:@"?"];
-        }
-        [searchClauses addObject:[NSString stringWithFormat:@"cards.set_pk IN (%@)", [marks componentsJoinedByString:@", "]]];
-        [searchParams addObjectsFromArray:criteria.sets];
+    for (SearchFacet *facet in facets) {
+        [facet updateSearchClauses:searchClauses withParams:searchParams andOrderClauses:orderClauses withParams:orderParams];
     }
     
     if (searchClauses.count == 0) {
@@ -147,7 +119,7 @@
         @"ORDER BY  %@",                     
         [searchClauses componentsJoinedByString:@" AND "],
         [orderClauses componentsJoinedByString:@", "]];
-        
+    
     return [[QueryCardSequence alloc] initWithQuery:sql argumentsInArray:[searchParams arrayByAddingObjectsFromArray:orderParams]];
 }
 
@@ -170,81 +142,24 @@
 
 // ----------------------------------------------------------------------------
 
-+ (Card *) findCardByIdx:(NSString *)idx {
-    NSString *sql = 
-        @"SELECT    cards.*, "
-        @"          sets.name AS set_name, "
-        @"          sets.tcg AS tcg_set_name "
-        @"FROM      cards, sets "
-        @"WHERE     cards.set_pk = sets.pk "
-        @"AND       cards.idx = ? ";
-    __block Card *result = nil;
-    dispatch_sync(gAppDelegate.dataQueue, ^{
-        FMResultSet *rs = [gDataManager.db executeQuery:sql withArgumentsInArray:
-            [NSArray arrayWithObject:idx]];
-        result = [rs next] ? [self cardForResultSet:rs] : nil;
-    });
-    return result;
-}
-
-// ----------------------------------------------------------------------------
-
 + (Card *) findCardByPk:(NSUInteger)pk {
-    NSString *sql = 
-        @"SELECT    cards.*, "
-        @"          sets.name AS set_name, "
-        @"          sets.tcg AS tcg_set_name "
-        @"FROM      cards, sets "
-        @"WHERE     cards.set_pk = sets.pk "
-        @"AND       cards.pk = ? ";
-    __block Card *card = nil;
-    dispatch_sync(gAppDelegate.dataQueue, ^{
-        FMResultSet *rs = [gDataManager.db executeQuery:sql withArgumentsInArray:
-            [NSArray arrayWithObject:[NSNumber numberWithUnsignedInteger:pk]]];        
-        card = [rs next] ? [self cardForResultSet:rs] : nil;
-    });
-    return card;
+    CardSequence *sequence = [Card findCards:[NSArray arrayWithObject:[SearchFacet facetWithCard:pk]]];
+    return (sequence.count) > 0 ? [sequence cardAtPosition:0] : nil;
 }
 
 // ----------------------------------------------------------------------------
 
 + (Card *) findRandomCard {
-    __block NSNumber *idx = nil;
+    __block NSUInteger idx;
     dispatch_sync(gAppDelegate.dataQueue, ^{
         FMResultSet *rs = [gDataManager.db executeQuery:@"SELECT MAX(idx) FROM cards"];
         [rs next];
-        idx = [NSNumber numberWithInt:(arc4random() % [rs intForColumnIndex:0]) + 1];        
+        idx = (arc4random() % [rs longForColumnIndex:0]) + 1;        
     });
-    return [self findCardByIdx:[idx stringValue]];
+    CardSequence *sequence = [Card findCards:[NSArray arrayWithObject:[SearchFacet facetWithIndex:idx]]];
+    return (sequence.count) > 0 ? [sequence cardAtPosition:0] : nil;
 }
-
-// ----------------------------------------------------------------------------
-
-+ (NSArray *) findNameHashesByText:(NSString *)text {
-    NSMutableArray *hashes = [NSMutableArray array];
-    if (text.length < kMinimumSearchCharacters) { return [NSArray array]; }
-    dispatch_sync(gAppDelegate.dataQueue, ^{
-        NSData *textData = [text dataUsingEncoding:NSUTF8StringEncoding];
-        NSData *blob = gDataManager.names;
-        const char *blobText = blob.bytes;
-        NSRange scope = NSMakeRange(0, blob.length);
-        NSRange instance;
-        NSUInteger pkStart, pkEnd;
-        while (true) {
-            instance = [blob rangeOfData:textData options:0 range:scope];
-            if(instance.location == NSNotFound) { break; }
-            pkStart = instance.location;
-            while (blobText[pkStart] != '|') { ++pkStart; }
-            pkEnd = ++pkStart;
-            while (blobText[pkEnd] != '|') { ++pkEnd; }        
-            scope = NSMakeRange(pkEnd, blob.length - pkEnd);
-            NSString *hashAsString = [[NSString alloc] initWithBytes:&blobText[pkStart] length:(pkEnd-pkStart) encoding:NSUTF8StringEncoding];
-            [hashes addObject:[NSNumber numberWithUnsignedInteger:[hashAsString longLongValue]]];
-        }
-    });
-    return hashes;
-}
-
+ 
 // ----------------------------------------------------------------------------
 
 - (NSString *) description {

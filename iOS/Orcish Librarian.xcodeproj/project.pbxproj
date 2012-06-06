@@ -66,13 +66,16 @@
 		8DC308F51558C9DC007AAD7D /* BookmarkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC308F41558C9DC007AAD7D /* BookmarkController.m */; };
 		8DC308F8155A1BB8007AAD7D /* SetListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC308F7155A1BB8007AAD7D /* SetListController.m */; };
 		8DC308FB155A2770007AAD7D /* CardSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC308FA155A2770007AAD7D /* CardSet.m */; };
+		8DC7D6F2157C5BC200EB0C8C /* Orcish-Emblem.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DC7D6F1157C5BC200EB0C8C /* Orcish-Emblem.png */; };
+		8DCD7CF4157BA58F0088E8C5 /* AdvancedSearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DCD7CF3157BA58F0088E8C5 /* AdvancedSearchController.xib */; };
+		8DCD7CF9157BB5B80088E8C5 /* AdvancedSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCD7CF8157BB5B80088E8C5 /* AdvancedSearchController.m */; };
 		8DD02111146A2A26008C522A /* BasicSearchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD02110146A2A26008C522A /* BasicSearchController.xib */; };
 		8DE5A18915681265005C195A /* NSString+URLEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5A18815681265005C195A /* NSString+URLEncoder.m */; };
 		8DE5A18D15695060005C195A /* AboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5A18C15695060005C195A /* AboutController.m */; };
 		8DE5A18F15695173005C195A /* AboutController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5A18E15695173005C195A /* AboutController.xib */; };
 		8DE5D9921457A02000B6CAAF /* Menu-Section.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9901457A02000B6CAAF /* Menu-Section.png */; };
 		8DE5D9931457A02000B6CAAF /* Menu-Section@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */; };
-		8DE898DA147F32C50024E016 /* SearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE898D9147F32C50024E016 /* SearchCriteria.m */; };
+		8DE898DA147F32C50024E016 /* SearchFacet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE898D9147F32C50024E016 /* SearchFacet.m */; };
 		8DE898E314832D820024E016 /* card-names.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8DE898E214832D820024E016 /* card-names.txt */; };
 		8DE898E71484645F0024E016 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE898E61484645F0024E016 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DE898E9148473CF0024E016 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE898E8148473CE0024E016 /* libicucore.dylib */; };
@@ -192,6 +195,10 @@
 		8DC308F7155A1BB8007AAD7D /* SetListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetListController.m; sourceTree = "<group>"; };
 		8DC308F9155A276F007AAD7D /* CardSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardSet.h; sourceTree = "<group>"; };
 		8DC308FA155A2770007AAD7D /* CardSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CardSet.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		8DC7D6F1157C5BC200EB0C8C /* Orcish-Emblem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Orcish-Emblem.png"; sourceTree = "<group>"; };
+		8DCD7CF3157BA58F0088E8C5 /* AdvancedSearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AdvancedSearchController.xib; path = Layout/AdvancedSearchController.xib; sourceTree = "<group>"; };
+		8DCD7CF7157BB5B80088E8C5 /* AdvancedSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedSearchController.h; sourceTree = "<group>"; };
+		8DCD7CF8157BB5B80088E8C5 /* AdvancedSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedSearchController.m; sourceTree = "<group>"; };
 		8DD02110146A2A26008C522A /* BasicSearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BasicSearchController.xib; path = Layout/BasicSearchController.xib; sourceTree = "<group>"; };
 		8DE5A18715681265005C195A /* NSString+URLEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoder.h"; sourceTree = "<group>"; };
 		8DE5A18815681265005C195A /* NSString+URLEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoder.m"; sourceTree = "<group>"; };
@@ -200,8 +207,8 @@
 		8DE5A18E15695173005C195A /* AboutController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutController.xib; path = "Orcish Librarian/Layout/AboutController.xib"; sourceTree = SOURCE_ROOT; };
 		8DE5D9901457A02000B6CAAF /* Menu-Section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section.png"; sourceTree = "<group>"; };
 		8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section@2x.png"; sourceTree = "<group>"; };
-		8DE898D8147F32C50024E016 /* SearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCriteria.h; sourceTree = "<group>"; };
-		8DE898D9147F32C50024E016 /* SearchCriteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCriteria.m; sourceTree = "<group>"; };
+		8DE898D8147F32C50024E016 /* SearchFacet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFacet.h; sourceTree = "<group>"; };
+		8DE898D9147F32C50024E016 /* SearchFacet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFacet.m; sourceTree = "<group>"; };
 		8DE898E214832D820024E016 /* card-names.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "card-names.txt"; path = "../../../DB/data/card-names.txt"; sourceTree = "<group>"; };
 		8DE898E51484645F0024E016 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		8DE898E61484645F0024E016 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
@@ -344,6 +351,7 @@
 				8D6B5686154E3046006BFA0C /* PriceListController.xib */,
 				8DA1AFDB155E1F9C0091A368 /* OrcishViewController.xib */,
 				8DA1AFDE155E21C20091A368 /* SetListController.xib */,
+				8DCD7CF3157BA58F0088E8C5 /* AdvancedSearchController.xib */,
 			);
 			name = Layout;
 			sourceTree = "<group>";
@@ -351,46 +359,29 @@
 		8D150F38144FF0C700141685 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8DE5A18B15695060005C195A /* AboutController.h */,
-				8DE5A18C15695060005C195A /* AboutController.m */,
+				8DCD7CF6157BAECF0088E8C5 /* Controllers */,
 				8D150F39144FF0C700141685 /* AppDelegate.h */,
 				8D150F3A144FF0C700141685 /* AppDelegate.m */,
-				8DBDB1231466DEC600140217 /* BasicSearchController.h */,
-				8DBDB1241466DEC600140217 /* BasicSearchController.m */,
-				8DC308F31558C9DC007AAD7D /* BookmarkController.h */,
-				8DC308F41558C9DC007AAD7D /* BookmarkController.m */,
 				8D5012C1146F5CA300D463D6 /* Card.h */,
 				8D5012C2146F5CA300D463D6 /* Card.m */,
 				8DC308F9155A276F007AAD7D /* CardSet.h */,
 				8DC308FA155A2770007AAD7D /* CardSet.m */,
 				8D7F9753153E5D58001335DA /* CardView.h */,
 				8D7F9754153E5D58001335DA /* CardView.m */,
-				8D0480A514700CDD001E183C /* CardViewController.h */,
-				8D0480A614700CDD001E183C /* CardViewController.m */,
 				8D9DD88E1563130C00C4D02E /* DataManager.h */,
 				8D9DD88F1563130C00C4D02E /* DataManager.m */,
-				8D7C96ED1569D6370088BCB3 /* ExternalSiteController.h */,
-				8D7C96EE1569D6370088BCB3 /* ExternalSiteController.m */,
-				8D1F717E145314D50010C161 /* MenuController.h */,
-				8D1F717F145314D50010C161 /* MenuController.m */,
 				8D95BD1915263552005B8518 /* NSNull+Wrap.h */,
 				8D95BD1A15263552005B8518 /* NSNull+Wrap.m */,
 				8DE5A18715681265005C195A /* NSString+URLEncoder.h */,
 				8DE5A18815681265005C195A /* NSString+URLEncoder.m */,
-				8D150F3B144FF0C700141685 /* OrcishRootController.h */,
-				8D150F3C144FF0C700141685 /* OrcishRootController.m */,
-				8DB1AE83155E03790038F991 /* OrcishViewController.h */,
-				8DB1AE84155E03790038F991 /* OrcishViewController.m */,
-				8D6B5682154DA17A006BFA0C /* PriceListController.h */,
-				8D6B5683154DA17A006BFA0C /* PriceListController.m */,
 				8D95BD1D152642D8005B8518 /* PriceManager.h */,
 				8D95BD1E152642D8005B8518 /* PriceManager.m */,
 				8D6B568C154F7777006BFA0C /* PriceVendorCell.h */,
 				8D6B568D154F7777006BFA0C /* PriceVendorCell.m */,
 				8DA5F090157420A40094F888 /* RandomCardSequence.h */,
 				8DA5F091157420A50094F888 /* RandomCardSequence.m */,
-				8DE898D8147F32C50024E016 /* SearchCriteria.h */,
-				8DE898D9147F32C50024E016 /* SearchCriteria.m */,
+				8DE898D8147F32C50024E016 /* SearchFacet.h */,
+				8DE898D9147F32C50024E016 /* SearchFacet.m */,
 				8D32B0B415293DCC00C0EF2E /* SearchResultCell.h */,
 				8D32B0B515293DCC00C0EF2E /* SearchResultCell.m */,
 				8DC308F6155A1BB8007AAD7D /* SetListController.h */,
@@ -469,6 +460,33 @@
 			path = Other/GANT;
 			sourceTree = "<group>";
 		};
+		8DCD7CF6157BAECF0088E8C5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8DE5A18B15695060005C195A /* AboutController.h */,
+				8DE5A18C15695060005C195A /* AboutController.m */,
+				8DBDB1231466DEC600140217 /* BasicSearchController.h */,
+				8DBDB1241466DEC600140217 /* BasicSearchController.m */,
+				8DC308F31558C9DC007AAD7D /* BookmarkController.h */,
+				8DC308F41558C9DC007AAD7D /* BookmarkController.m */,
+				8D0480A514700CDD001E183C /* CardViewController.h */,
+				8D0480A614700CDD001E183C /* CardViewController.m */,
+				8D7C96ED1569D6370088BCB3 /* ExternalSiteController.h */,
+				8D7C96EE1569D6370088BCB3 /* ExternalSiteController.m */,
+				8D1F717E145314D50010C161 /* MenuController.h */,
+				8D1F717F145314D50010C161 /* MenuController.m */,
+				8D150F3B144FF0C700141685 /* OrcishRootController.h */,
+				8D150F3C144FF0C700141685 /* OrcishRootController.m */,
+				8DB1AE83155E03790038F991 /* OrcishViewController.h */,
+				8DB1AE84155E03790038F991 /* OrcishViewController.m */,
+				8D6B5682154DA17A006BFA0C /* PriceListController.h */,
+				8D6B5683154DA17A006BFA0C /* PriceListController.m */,
+				8DCD7CF7157BB5B80088E8C5 /* AdvancedSearchController.h */,
+				8DCD7CF8157BB5B80088E8C5 /* AdvancedSearchController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		8DE898E41484645F0024E016 /* RegexKitLite */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,6 +522,7 @@
 		8DEDA2621453CD5A0094D837 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8DC7D6F1157C5BC200EB0C8C /* Orcish-Emblem.png */,
 				8D40B9841473543A00F3A4EC /* Linen-Background.png */,
 				8DE5D9901457A02000B6CAAF /* Menu-Section.png */,
 				8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */,
@@ -639,6 +658,8 @@
 				8DFC708A1576899300B36CF0 /* Default-Landscape@2x~ipad.png in Resources */,
 				8DFC708B1576899300B36CF0 /* Default-Portrait~ipad.png in Resources */,
 				8DFC708C1576899300B36CF0 /* Default-Portrait@2x~ipad.png in Resources */,
+				8DCD7CF4157BA58F0088E8C5 /* AdvancedSearchController.xib in Resources */,
+				8DC7D6F2157C5BC200EB0C8C /* Orcish-Emblem.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,7 +705,7 @@
 				8DED6463146F374500A787F4 /* FMResultSet.m in Sources */,
 				8D5012C3146F5CA300D463D6 /* Card.m in Sources */,
 				8D0480A714700CDD001E183C /* CardViewController.m in Sources */,
-				8DE898DA147F32C50024E016 /* SearchCriteria.m in Sources */,
+				8DE898DA147F32C50024E016 /* SearchFacet.m in Sources */,
 				8DE898E71484645F0024E016 /* RegexKitLite.m in Sources */,
 				8D95BD1B15263552005B8518 /* NSNull+Wrap.m in Sources */,
 				8D95BD1F152642D8005B8518 /* PriceManager.m in Sources */,
@@ -705,6 +726,7 @@
 				8DA5F092157420A60094F888 /* RandomCardSequence.m in Sources */,
 				8DA5F095157424670094F888 /* CardSequence.m in Sources */,
 				8D61423E157478F800482546 /* QueryCardSequence.m in Sources */,
+				8DCD7CF9157BB5B80088E8C5 /* AdvancedSearchController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

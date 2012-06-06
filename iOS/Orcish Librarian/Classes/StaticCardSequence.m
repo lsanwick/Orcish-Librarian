@@ -44,4 +44,12 @@
 
 // ----------------------------------------------------------------------------
 
+- (NSUInteger) positionOfCardMatchingName:(NSString *)name {
+    return [self.cards indexOfObjectPassingTest:^(Card *test, NSUInteger index, BOOL *stop) {
+        return (BOOL) ([name isEqualToString:test.name] ? (*stop = YES) : NO);
+    }];
+}
+
+// ----------------------------------------------------------------------------
+
 @end

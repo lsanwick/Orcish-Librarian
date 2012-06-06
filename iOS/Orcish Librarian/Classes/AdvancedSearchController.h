@@ -8,6 +8,13 @@
 
 #import "OrcishViewController.h"
 
+
 @interface AdvancedSearchController : OrcishViewController
+
+- (IBAction) addButtonTapped:(id)sender;
+- (IBAction) resetButtonTapped:(id)sender;
+- (IBAction) searchButtonTapped:(id)sender;
+
+@property (nonatomic, strong) IBOutlet UIView *emptyScreen;
 
 @end

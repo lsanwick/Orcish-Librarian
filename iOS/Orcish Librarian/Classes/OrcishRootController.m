@@ -40,6 +40,10 @@
 // ----------------------------------------------------------------------------
 
 - (void) didReceiveMemoryWarning {
+    if (self.controllerStack.count < 2) {
+        return;
+    }
+    [gAppDelegate clearCategory];
     if (self.controllerStack.count > 2) {
         while (self.controllerStack.count > 2) {
             [[[self.controllerStack objectAtIndex:0] view] removeFromSuperview];

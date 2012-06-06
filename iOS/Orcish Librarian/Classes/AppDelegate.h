@@ -29,8 +29,10 @@
 - (void) showCard:(Card *)card;
 - (void) showPriceModalForProductId:(NSString *)productId;
 - (void) launchExternalSite:(NSURL *)URL;
+- (void) clearCategory;
 
 - (void) showBasicSearchController;
+- (void) showAdvancedSearchController;
 - (void) showBookmarkController;
 - (void) showRandomCardController;
 - (void) showBrowseController;

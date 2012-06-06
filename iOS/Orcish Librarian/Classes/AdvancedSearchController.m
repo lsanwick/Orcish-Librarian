@@ -10,34 +10,40 @@
 
 @interface AdvancedSearchController ()
 
+@property (nonatomic, strong) NSMutableArray *criteria;
+
 @end
 
 @implementation AdvancedSearchController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+@synthesize emptyScreen;
+@synthesize criteria;
+
+// ----------------------------------------------------------------------------
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.emptyScreen.hidden = (self.criteria.count > 0);
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+// ----------------------------------------------------------------------------
+
+- (IBAction) addButtonTapped:(id)sender {
+    NSLog(@"Add");
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+// ----------------------------------------------------------------------------
+
+- (IBAction) resetButtonTapped:(id)sender {
+    NSLog(@"Reset");    
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+// ----------------------------------------------------------------------------
+
+- (IBAction) searchButtonTapped:(id)sender {
+    NSLog(@"Search");
 }
+
+// ----------------------------------------------------------------------------
 
 @end

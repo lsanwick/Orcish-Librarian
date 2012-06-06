@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BasicSearchController.h"
+#import "AdvancedSearchController.h"
 #import "PriceListController.h"
 #import "BookmarkController.h"
 #import "SetListController.h"
@@ -209,6 +210,12 @@ typedef enum {
 
 // ----------------------------------------------------------------------------
 
+- (void) clearCategory {
+    self.topLevel = kNilOptions;
+}
+
+// ----------------------------------------------------------------------------
+
 - (void) showRandomCardController {
     if (self.topLevel != kRandomCards) {
         self.topLevel = kRandomCards;
@@ -225,6 +232,16 @@ typedef enum {
     if (self.topLevel != kBasicSearch) {
         self.topLevel = kBasicSearch;
         BasicSearchController *controller = [[BasicSearchController alloc] initWithNibName:nil bundle:nil];
+        [self.rootController setViewController:controller animated:NO];
+    }
+}
+
+// ----------------------------------------------------------------------------
+
+- (void) showAdvancedSearchController {
+    if (self.topLevel != kAdvancedSearch) {
+        self.topLevel = kAdvancedSearch;
+        AdvancedSearchController *controller = [[AdvancedSearchController alloc] initWithNibName:nil bundle:nil];
         [self.rootController setViewController:controller animated:NO];
     }
 }
