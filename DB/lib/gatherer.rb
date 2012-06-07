@@ -132,6 +132,7 @@ class Gatherer < Source
     "Planechase" => { :tcg => "Planechase", :type => SpecialSet },
     "Archenemy" => { :tcg => "Archenemy", :type => SpecialSet },
     "Magic: The Gathering-Commander" => { :tcg => "Commander", :type => SpecialSet },
+    "Planechase 2012 Edition" => { :tcg => "Planechase 2012", :type => SpecialSet },
     
     # core and expansion sets
     "Limited Edition Alpha"         => { :tcg => "Alpha Edition", :type => CoreSet, :format => Legacy },
