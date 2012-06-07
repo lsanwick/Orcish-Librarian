@@ -28,7 +28,6 @@
 
 @dynamic navigationItem;
 @synthesize shouldDisplayPricesInResults;
-@synthesize parentViewController;
 @synthesize sequence;
 @synthesize cardListView;
 
