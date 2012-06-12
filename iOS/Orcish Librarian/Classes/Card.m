@@ -135,7 +135,8 @@
         @"          sets.tcg AS tcg_set_name "
         @"FROM      cards, sets "
         @"WHERE     cards.set_pk = sets.pk "
-        @"AND       cards.pk IN (%@) ",
+        @"AND       cards.pk IN (%@) "
+        @"ORDER BY  cards.search_name ASC, sets.idx DESC, cards.art_index ASC",
         primaryKeys];
     return [[QueryCardSequence alloc] initWithQuery:sql argumentsInArray:nil collapse:NO];
 }
