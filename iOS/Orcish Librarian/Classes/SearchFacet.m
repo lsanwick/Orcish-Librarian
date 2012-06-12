@@ -49,7 +49,7 @@
 
 + (SearchFacet *) facetWithTitleText:(NSString *)text {
     SearchFacet *facet = [[SearchFacet alloc] initWithCategory:kSearchFacetTitleText];
-    [facet.storage setObject:text forKey:@"titleText"];
+    [facet.storage setObject:[self sanitizedSearchString:text] forKey:@"titleText"];
     return facet;
 }
 
