@@ -87,6 +87,7 @@ class CardBox
       :pk => :integer,
       :idx => :integer,
       :name => :varchar_255,
+      :display_name => :varchar_255,
       :type => :integer,
       :format => :integer,
       :tcg => :varchar_255 },
@@ -140,6 +141,7 @@ class CardBox
         :pk => current_set_pk, 
         :idx => current_set_index, 
         :name => set_name, 
+        :display_name => (meta[:display] || set_name),
         :tcg => (meta[:tcg] || ''), 
         :type => (meta[:type] || Orcish::Special),
         :format => (meta[:format] || Orcish::Legacy)

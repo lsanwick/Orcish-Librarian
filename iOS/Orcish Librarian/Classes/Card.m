@@ -31,6 +31,7 @@
 @synthesize gathererId;
 @synthesize setPk;
 @synthesize setName;
+@synthesize setDisplayName;
 @synthesize tcgSetName;
 @synthesize collectorNumber;
 @synthesize artist;
@@ -56,6 +57,7 @@
     card.gathererId = (NSUInteger) [rs longForColumn:@"gatherer_id"];
     card.setPk = (NSUInteger) [rs longForColumn:@"set_pk"];
     card.setName = [NSNull wrapNil:[rs stringForColumn:@"set_name"]];
+    card.setDisplayName = [NSNull wrapNil:[rs stringForColumn:@"set_display_name"]];
     card.tcgSetName = [NSNull wrapNil:[rs stringForColumn:@"tcg_set_name"]];
     card.collectorNumber = [NSNull wrapNil:[rs stringForColumn:@"collector_number"]];
     card.artist = [NSNull wrapNil:[rs stringForColumn:@"artist"]];
@@ -109,6 +111,7 @@
     // construct & execute the SQL query
     NSString *sql = [NSString stringWithFormat:
         @"SELECT    cards.*, "
+        @"          sets.display_name AS set_display_name, "
         @"          sets.name AS set_name, "
         @"          sets.pk AS set_pk, "
         @"          sets.idx AS set_idx, "
@@ -132,6 +135,7 @@
     NSString *sql = [NSString stringWithFormat:
         @"SELECT    cards.*, "
         @"          sets.name AS set_name, "
+        @"          sets.display_name AS set_display_name, "
         @"          sets.tcg AS tcg_set_name "
         @"FROM      cards, sets "
         @"WHERE     cards.set_pk = sets.pk "
@@ -200,6 +204,7 @@
         self.name, @"name",
         self.displayName, @"displayName",
         self.setName, @"setName",
+        self.setDisplayName, @"setDisplayName",
         self.tcgSetName, @"tcgSetName",
         self.artist, @"artist",
         self.artIndex, @"artIndex",
@@ -255,7 +260,9 @@
     NSMutableArray *cards = [NSMutableArray array];
     dispatch_sync(gAppDelegate.dataQueue, ^{
         FMResultSet *rs = [gDataManager.db executeQuery:
-            @"SELECT   sets.pk AS set_pk, sets.name AS set_name "
+            @"SELECT   sets.pk AS set_pk, "
+            @"         sets.name AS set_name, "
+            @"         sets.display_name AS set_display_name "
             @"FROM     cards, sets "
             @"WHERE    cards.set_pk = sets.pk "
             @"AND      cards.name_hash = ? "
@@ -269,6 +276,7 @@
         while([rs next]) {
             [cards addObject:[NSDictionary dictionaryWithObjectsAndKeys:
                 [rs stringForColumn:@"set_name"], @"setName",
+                [rs stringForColumn:@"set_display_name"], @"setDisplayName",
                 [rs stringForColumn:@"set_pk"], @"setPk", 
                 nil]];
         }

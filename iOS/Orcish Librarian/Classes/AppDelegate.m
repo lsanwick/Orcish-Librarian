@@ -65,6 +65,12 @@ typedef enum {
 
 // ----------------------------------------------------------------------------
 
+- (NSString *) version {
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+}
+
+// ----------------------------------------------------------------------------
+
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     dataQueue = dispatch_queue_create("info.orcish.db.queue", NULL);
     [self initializeData];

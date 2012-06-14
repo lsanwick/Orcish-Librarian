@@ -14,6 +14,7 @@
 @implementation CardSet
 
 @synthesize name;
+@synthesize displayName;
 @synthesize pk;
 
 // ----------------------------------------------------------------------------
@@ -31,6 +32,7 @@
             CardSet *set = [[CardSet alloc] init];
             set.pk = (NSUInteger) [rs longForColumn:@"pk"];
             set.name = [rs stringForColumn:@"name"];
+            set.displayName = [rs stringForColumn:@"display_name"];
             [sets addObject:set];
         } 
     });
@@ -44,13 +46,14 @@
     NSString *sql = 
         @"SELECT    sets.* "
         @"FROM      sets "
-        @"ORDER BY  name ASC";
+        @"ORDER BY  display_name ASC";
     dispatch_sync(gAppDelegate.dataQueue, ^{
         FMResultSet *rs = [gDataManager.db executeQuery:sql];
         while([rs next]) {
             CardSet *set = [[CardSet alloc] init];
             set.pk = (NSUInteger) [rs longForColumn:@"pk"];
             set.name = [rs stringForColumn:@"name"];
+            set.displayName = [rs stringForColumn:@"display_name"];
             [sets addObject:set];
         } 
     });

@@ -21,6 +21,7 @@
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) OrcishRootController *rootController;
 @property (nonatomic, readonly) dispatch_queue_t dataQueue;
+@property (nonatomic, readonly) NSString *version;
 
 - (void) hideKeyboard;
 - (void) hideMenu;

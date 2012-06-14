@@ -26,7 +26,7 @@
 - (FMDatabase *) db;
 - (NSData *) names;
 
-@property (nonatomic, copy) NSString *version;
+@property (nonatomic, copy) NSString *dataVersion;
 @property (nonatomic, copy) NSDate *lastUpdated;
 
 @end

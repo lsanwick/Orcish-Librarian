@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSString *searchName;
 @property (nonatomic, strong) NSString *tcgName;
 @property (nonatomic, strong) NSString *setName;
+@property (nonatomic, strong) NSString *setDisplayName;
 @property (nonatomic, strong) NSString *tcgSetName;
 @property (nonatomic, strong) NSString *collectorNumber;
 @property (nonatomic, strong) NSString *artist;

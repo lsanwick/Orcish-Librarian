@@ -59,7 +59,7 @@
         cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
     }
     NSArray *sets = (indexPath.section == 0) ? recentSets : allSets;
-    cell.textLabel.text = [[sets objectAtIndex:indexPath.row] name];
+    cell.textLabel.text = [[sets objectAtIndex:indexPath.row] displayName];
     return cell;
 }
 
@@ -68,7 +68,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *sets = (indexPath.section == 0) ? recentSets : allSets;
     CardSet *set = [sets objectAtIndex:indexPath.row];
-    [gAppDelegate showCardList:set.cards withTitle:set.name];
+    [gAppDelegate showCardList:set.cards withTitle:set.displayName];
 }
 
 // ----------------------------------------------------------------------------

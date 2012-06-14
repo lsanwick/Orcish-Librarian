@@ -17,6 +17,7 @@
 
 @property (nonatomic, assign) NSUInteger pk;
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *displayName;
 @property (nonatomic, readonly) CardSequence *cards;
 
 @end

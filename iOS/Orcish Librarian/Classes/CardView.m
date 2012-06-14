@@ -82,7 +82,7 @@
     else if ([URL.scheme isEqualToString:@"set"]) {        
         if ([URL.host isEqualToString:@"self"]) {
             // show the current card's set
-            [gAppDelegate showCardList:[Card findCardsBySet:self.card.setPk] withTitle:self.card.setName];
+            [gAppDelegate showCardList:[Card findCardsBySet:self.card.setPk] withTitle:self.card.setDisplayName];
         } else {
             // show the set from the current card's equivalent
             NSUInteger setPk = (NSUInteger) [URL.host longLongValue];
