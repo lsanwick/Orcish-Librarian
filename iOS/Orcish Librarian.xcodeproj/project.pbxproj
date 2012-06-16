@@ -151,8 +151,8 @@
 		8D6B5682154DA17A006BFA0C /* PriceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PriceListController.h; path = Controllers/PriceListController.h; sourceTree = "<group>"; };
 		8D6B5683154DA17A006BFA0C /* PriceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PriceListController.m; path = Controllers/PriceListController.m; sourceTree = "<group>"; };
 		8D6B5686154E3046006BFA0C /* PriceListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PriceListController.xib; path = Layout/PriceListController.xib; sourceTree = "<group>"; };
-		8D6B568C154F7777006BFA0C /* PriceVendorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; name = PriceVendorCell.h; path = Views/PriceVendorCell.h; sourceTree = "<group>"; };
-		8D6B568D154F7777006BFA0C /* PriceVendorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; name = PriceVendorCell.m; path = Views/PriceVendorCell.m; sourceTree = "<group>"; };
+		8D6B568C154F7777006BFA0C /* PriceVendorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PriceVendorCell.h; path = Views/PriceVendorCell.h; sourceTree = "<group>"; };
+		8D6B568D154F7777006BFA0C /* PriceVendorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PriceVendorCell.m; path = Views/PriceVendorCell.m; sourceTree = "<group>"; };
 		8D7C96ED1569D6370088BCB3 /* ExternalSiteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExternalSiteController.h; path = Controllers/ExternalSiteController.h; sourceTree = "<group>"; };
 		8D7C96EE1569D6370088BCB3 /* ExternalSiteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExternalSiteController.m; path = Controllers/ExternalSiteController.m; sourceTree = "<group>"; };
 		8D7C96F11569D7850088BCB3 /* ExternalSiteController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExternalSiteController.xib; path = Layout/ExternalSiteController.xib; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		8D7C96F51569D8160088BCB3 /* Previous-Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Previous-Arrow.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Previous-Arrow.png"; sourceTree = SOURCE_ROOT; };
 		8D7C96F61569D8160088BCB3 /* Previous-Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Previous-Arrow@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Previous-Arrow@2x.png"; sourceTree = SOURCE_ROOT; };
 		8D7F9753153E5D58001335DA /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardView.h; path = Views/CardView.h; sourceTree = "<group>"; };
-		8D7F9754153E5D58001335DA /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; name = CardView.m; path = Views/CardView.m; sourceTree = "<group>"; };
+		8D7F9754153E5D58001335DA /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardView.m; path = Views/CardView.m; sourceTree = "<group>"; };
 		8D95BD1915263552005B8518 /* NSNull+Wrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+Wrap.h"; sourceTree = "<group>"; };
 		8D95BD1A15263552005B8518 /* NSNull+Wrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+Wrap.m"; sourceTree = "<group>"; };
 		8D95BD1D152642D8005B8518 /* PriceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceManager.h; sourceTree = "<group>"; };
