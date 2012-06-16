@@ -17,6 +17,7 @@
     NSData *names;
 }
 
+- (void) deleteExistingDataFiles;
 - (BOOL) createNamesFile:(NSString *)namesPath fromDatabaseFile:(NSString *)dbPath;
 - (void) installDatabaseFile:(NSString *)dbPath andNamesFile:(NSString *)namesPath forVersion:(NSString *)version;
 - (NSString *) dbPath;
@@ -152,6 +153,18 @@
 
 // ----------------------------------------------------------------------------
 
+- (void) deleteExistingDataFiles {
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docPath = [paths objectAtIndex:0];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    for (NSString *file in [fm contentsOfDirectoryAtPath:docPath error:&error]) {
+        [fm removeItemAtPath:[docPath stringByAppendingPathComponent:file] error:&error];
+    }
+}
+
+// ----------------------------------------------------------------------------
+
 - (void) installDatabaseFile:(NSString *)dbPath andNamesFile:(NSString *)namesPath forVersion:(NSString *)version {
     NSError *error;
     NSFileManager *fm = [NSFileManager defaultManager];
@@ -202,6 +215,7 @@
 
 - (void) activateDataSources {
     if (!self.hasInstalledData) {
+        [self deleteExistingDataFiles];
         [self installDataFromBundle];
     }
     NSError *error;
