@@ -108,8 +108,8 @@
 
 /* Begin PBXFileReference section */
 		8D0480A214700C42001E183C /* CardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardViewController.xib; path = Layout/CardViewController.xib; sourceTree = "<group>"; };
-		8D0480A514700CDD001E183C /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardViewController.h; sourceTree = "<group>"; };
-		8D0480A614700CDD001E183C /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardViewController.m; sourceTree = "<group>"; };
+		8D0480A514700CDD001E183C /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardViewController.h; path = Controllers/CardViewController.h; sourceTree = "<group>"; };
+		8D0480A614700CDD001E183C /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardViewController.m; path = Controllers/CardViewController.m; sourceTree = "<group>"; };
 		8D0480A81470ABBF001E183C /* Back-Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Back-Button@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Back-Button@2x.png"; sourceTree = SOURCE_ROOT; };
 		8D0480AA1470AC3A001E183C /* Back-Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Back-Button.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Back-Button.png"; sourceTree = SOURCE_ROOT; };
 		8D150EEF144FD41800141685 /* Orcish Librarian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Orcish Librarian.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,8 +128,8 @@
 		8D150F35144FEED800141685 /* OrcishRootController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OrcishRootController.xib; path = Layout/OrcishRootController.xib; sourceTree = "<group>"; };
 		8D150F39144FF0C700141685 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		8D150F3A144FF0C700141685 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		8D150F3B144FF0C700141685 /* OrcishRootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrcishRootController.h; sourceTree = "<group>"; };
-		8D150F3C144FF0C700141685 /* OrcishRootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrcishRootController.m; sourceTree = "<group>"; };
+		8D150F3B144FF0C700141685 /* OrcishRootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrcishRootController.h; path = Controllers/OrcishRootController.h; sourceTree = "<group>"; };
+		8D150F3C144FF0C700141685 /* OrcishRootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrcishRootController.m; path = Controllers/OrcishRootController.m; sourceTree = "<group>"; };
 		8D19052D156F3B7E00289EE9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		8D1DE81114775E1200D2A3C4 /* HTML */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HTML; sourceTree = "<group>"; };
 		8D1F717014525BE50010C161 /* Menu-Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Menu-Button.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Menu-Button.png"; sourceTree = SOURCE_ROOT; };
@@ -137,8 +137,8 @@
 		8D1F717514525BF00010C161 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		8D1F717614525BF00010C161 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		8D1F717714525BF00010C161 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		8D1F717E145314D50010C161 /* MenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuController.h; sourceTree = "<group>"; };
-		8D1F717F145314D50010C161 /* MenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuController.m; sourceTree = "<group>"; };
+		8D1F717E145314D50010C161 /* MenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuController.h; path = Controllers/MenuController.h; sourceTree = "<group>"; };
+		8D1F717F145314D50010C161 /* MenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuController.m; path = Controllers/MenuController.m; sourceTree = "<group>"; };
 		8D1F71811453C4ED0010C161 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		8D1F71831453C5630010C161 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		8D32B0B415293DCC00C0EF2E /* SearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultCell.h; sourceTree = "<group>"; };
@@ -148,20 +148,20 @@
 		8D5012C2146F5CA300D463D6 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Card.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8D61423C157478F800482546 /* QueryCardSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCardSequence.h; sourceTree = "<group>"; };
 		8D61423D157478F800482546 /* QueryCardSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryCardSequence.m; sourceTree = "<group>"; };
-		8D6B5682154DA17A006BFA0C /* PriceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceListController.h; sourceTree = "<group>"; };
-		8D6B5683154DA17A006BFA0C /* PriceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceListController.m; sourceTree = "<group>"; };
+		8D6B5682154DA17A006BFA0C /* PriceListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PriceListController.h; path = Controllers/PriceListController.h; sourceTree = "<group>"; };
+		8D6B5683154DA17A006BFA0C /* PriceListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PriceListController.m; path = Controllers/PriceListController.m; sourceTree = "<group>"; };
 		8D6B5686154E3046006BFA0C /* PriceListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PriceListController.xib; path = Layout/PriceListController.xib; sourceTree = "<group>"; };
-		8D6B568C154F7777006BFA0C /* PriceVendorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceVendorCell.h; sourceTree = "<group>"; };
-		8D6B568D154F7777006BFA0C /* PriceVendorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceVendorCell.m; sourceTree = "<group>"; };
-		8D7C96ED1569D6370088BCB3 /* ExternalSiteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalSiteController.h; sourceTree = "<group>"; };
-		8D7C96EE1569D6370088BCB3 /* ExternalSiteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExternalSiteController.m; sourceTree = "<group>"; };
+		8D6B568C154F7777006BFA0C /* PriceVendorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; name = PriceVendorCell.h; path = Views/PriceVendorCell.h; sourceTree = "<group>"; };
+		8D6B568D154F7777006BFA0C /* PriceVendorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; name = PriceVendorCell.m; path = Views/PriceVendorCell.m; sourceTree = "<group>"; };
+		8D7C96ED1569D6370088BCB3 /* ExternalSiteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExternalSiteController.h; path = Controllers/ExternalSiteController.h; sourceTree = "<group>"; };
+		8D7C96EE1569D6370088BCB3 /* ExternalSiteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExternalSiteController.m; path = Controllers/ExternalSiteController.m; sourceTree = "<group>"; };
 		8D7C96F11569D7850088BCB3 /* ExternalSiteController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExternalSiteController.xib; path = Layout/ExternalSiteController.xib; sourceTree = "<group>"; };
 		8D7C96F31569D8160088BCB3 /* Next-Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Next-Arrow.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Next-Arrow.png"; sourceTree = SOURCE_ROOT; };
 		8D7C96F41569D8160088BCB3 /* Next-Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Next-Arrow@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Next-Arrow@2x.png"; sourceTree = SOURCE_ROOT; };
 		8D7C96F51569D8160088BCB3 /* Previous-Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Previous-Arrow.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Previous-Arrow.png"; sourceTree = SOURCE_ROOT; };
 		8D7C96F61569D8160088BCB3 /* Previous-Arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Previous-Arrow@2x.png"; path = "Orcish Librarian/Assets/Toolbar Icons/Previous-Arrow@2x.png"; sourceTree = SOURCE_ROOT; };
-		8D7F9753153E5D58001335DA /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
-		8D7F9754153E5D58001335DA /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
+		8D7F9753153E5D58001335DA /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardView.h; path = Views/CardView.h; sourceTree = "<group>"; };
+		8D7F9754153E5D58001335DA /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; name = CardView.m; path = Views/CardView.m; sourceTree = "<group>"; };
 		8D95BD1915263552005B8518 /* NSNull+Wrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+Wrap.h"; sourceTree = "<group>"; };
 		8D95BD1A15263552005B8518 /* NSNull+Wrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+Wrap.m"; sourceTree = "<group>"; };
 		8D95BD1D152642D8005B8518 /* PriceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceManager.h; sourceTree = "<group>"; };
@@ -182,28 +182,28 @@
 		8DA5F091157420A50094F888 /* RandomCardSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomCardSequence.m; sourceTree = "<group>"; };
 		8DA5F093157424650094F888 /* CardSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardSequence.h; sourceTree = "<group>"; };
 		8DA5F094157424660094F888 /* CardSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardSequence.m; sourceTree = "<group>"; };
-		8DB1AE83155E03790038F991 /* OrcishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrcishViewController.h; sourceTree = "<group>"; };
-		8DB1AE84155E03790038F991 /* OrcishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrcishViewController.m; sourceTree = "<group>"; };
-		8DBDB1231466DEC600140217 /* BasicSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicSearchController.h; sourceTree = "<group>"; };
-		8DBDB1241466DEC600140217 /* BasicSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicSearchController.m; sourceTree = "<group>"; };
+		8DB1AE83155E03790038F991 /* OrcishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrcishViewController.h; path = Controllers/OrcishViewController.h; sourceTree = "<group>"; };
+		8DB1AE84155E03790038F991 /* OrcishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrcishViewController.m; path = Controllers/OrcishViewController.m; sourceTree = "<group>"; };
+		8DBDB1231466DEC600140217 /* BasicSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicSearchController.h; path = Controllers/BasicSearchController.h; sourceTree = "<group>"; };
+		8DBDB1241466DEC600140217 /* BasicSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BasicSearchController.m; path = Controllers/BasicSearchController.m; sourceTree = "<group>"; };
 		8DC308EA1555ED32007AAD7D /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
 		8DC308EB1555ED32007AAD7D /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		8DC308EE1555F518007AAD7D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		8DC308F31558C9DC007AAD7D /* BookmarkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkController.h; sourceTree = "<group>"; };
-		8DC308F41558C9DC007AAD7D /* BookmarkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkController.m; sourceTree = "<group>"; };
-		8DC308F6155A1BB8007AAD7D /* SetListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetListController.h; sourceTree = "<group>"; };
-		8DC308F7155A1BB8007AAD7D /* SetListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetListController.m; sourceTree = "<group>"; };
+		8DC308F31558C9DC007AAD7D /* BookmarkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookmarkController.h; path = Controllers/BookmarkController.h; sourceTree = "<group>"; };
+		8DC308F41558C9DC007AAD7D /* BookmarkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookmarkController.m; path = Controllers/BookmarkController.m; sourceTree = "<group>"; };
+		8DC308F6155A1BB8007AAD7D /* SetListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetListController.h; path = Controllers/SetListController.h; sourceTree = "<group>"; };
+		8DC308F7155A1BB8007AAD7D /* SetListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetListController.m; path = Controllers/SetListController.m; sourceTree = "<group>"; };
 		8DC308F9155A276F007AAD7D /* CardSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardSet.h; sourceTree = "<group>"; };
 		8DC308FA155A2770007AAD7D /* CardSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CardSet.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8DC7D6F1157C5BC200EB0C8C /* Orcish-Emblem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Orcish-Emblem.png"; sourceTree = "<group>"; };
 		8DCD7CF3157BA58F0088E8C5 /* AdvancedSearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AdvancedSearchController.xib; path = Layout/AdvancedSearchController.xib; sourceTree = "<group>"; };
-		8DCD7CF7157BB5B80088E8C5 /* AdvancedSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedSearchController.h; sourceTree = "<group>"; };
-		8DCD7CF8157BB5B80088E8C5 /* AdvancedSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedSearchController.m; sourceTree = "<group>"; };
+		8DCD7CF7157BB5B80088E8C5 /* AdvancedSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdvancedSearchController.h; path = Controllers/Advanced/AdvancedSearchController.h; sourceTree = "<group>"; };
+		8DCD7CF8157BB5B80088E8C5 /* AdvancedSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdvancedSearchController.m; path = Controllers/Advanced/AdvancedSearchController.m; sourceTree = "<group>"; };
 		8DD02110146A2A26008C522A /* BasicSearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BasicSearchController.xib; path = Layout/BasicSearchController.xib; sourceTree = "<group>"; };
 		8DE5A18715681265005C195A /* NSString+URLEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoder.h"; sourceTree = "<group>"; };
 		8DE5A18815681265005C195A /* NSString+URLEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoder.m"; sourceTree = "<group>"; };
-		8DE5A18B15695060005C195A /* AboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutController.h; sourceTree = "<group>"; };
-		8DE5A18C15695060005C195A /* AboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutController.m; sourceTree = "<group>"; };
+		8DE5A18B15695060005C195A /* AboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutController.h; path = Controllers/AboutController.h; sourceTree = "<group>"; };
+		8DE5A18C15695060005C195A /* AboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutController.m; path = Controllers/AboutController.m; sourceTree = "<group>"; };
 		8DE5A18E15695173005C195A /* AboutController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutController.xib; path = "Orcish Librarian/Layout/AboutController.xib"; sourceTree = SOURCE_ROOT; };
 		8DE5D9901457A02000B6CAAF /* Menu-Section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section.png"; sourceTree = "<group>"; };
 		8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section@2x.png"; sourceTree = "<group>"; };
@@ -261,6 +261,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D000B69158CD71A00511083 /* Advanced */ = {
+			isa = PBXGroup;
+			children = (
+				8DCD7CF7157BB5B80088E8C5 /* AdvancedSearchController.h */,
+				8DCD7CF8157BB5B80088E8C5 /* AdvancedSearchController.m */,
+			);
+			name = Advanced;
+			sourceTree = "<group>";
+		};
+		8D000B6A158CD74600511083 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8D7F9753153E5D58001335DA /* CardView.h */,
+				8D7F9754153E5D58001335DA /* CardView.m */,
+				8D6B568C154F7777006BFA0C /* PriceVendorCell.h */,
+				8D6B568D154F7777006BFA0C /* PriceVendorCell.m */,
+				8D32B0B415293DCC00C0EF2E /* SearchResultCell.h */,
+				8D32B0B515293DCC00C0EF2E /* SearchResultCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		8D150EE4144FD41800141685 = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +381,7 @@
 		8D150F38144FF0C700141685 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8D000B6A158CD74600511083 /* Views */,
 				8DCD7CF6157BAECF0088E8C5 /* Controllers */,
 				8D150F39144FF0C700141685 /* AppDelegate.h */,
 				8D150F3A144FF0C700141685 /* AppDelegate.m */,
@@ -366,8 +389,6 @@
 				8D5012C2146F5CA300D463D6 /* Card.m */,
 				8DC308F9155A276F007AAD7D /* CardSet.h */,
 				8DC308FA155A2770007AAD7D /* CardSet.m */,
-				8D7F9753153E5D58001335DA /* CardView.h */,
-				8D7F9754153E5D58001335DA /* CardView.m */,
 				8D9DD88E1563130C00C4D02E /* DataManager.h */,
 				8D9DD88F1563130C00C4D02E /* DataManager.m */,
 				8D95BD1915263552005B8518 /* NSNull+Wrap.h */,
@@ -376,16 +397,10 @@
 				8DE5A18815681265005C195A /* NSString+URLEncoder.m */,
 				8D95BD1D152642D8005B8518 /* PriceManager.h */,
 				8D95BD1E152642D8005B8518 /* PriceManager.m */,
-				8D6B568C154F7777006BFA0C /* PriceVendorCell.h */,
-				8D6B568D154F7777006BFA0C /* PriceVendorCell.m */,
 				8DA5F090157420A40094F888 /* RandomCardSequence.h */,
 				8DA5F091157420A50094F888 /* RandomCardSequence.m */,
 				8DE898D8147F32C50024E016 /* SearchFacet.h */,
 				8DE898D9147F32C50024E016 /* SearchFacet.m */,
-				8D32B0B415293DCC00C0EF2E /* SearchResultCell.h */,
-				8D32B0B515293DCC00C0EF2E /* SearchResultCell.m */,
-				8DC308F6155A1BB8007AAD7D /* SetListController.h */,
-				8DC308F7155A1BB8007AAD7D /* SetListController.m */,
 				8DA5F08F15741F670094F888 /* StaticCardSequence.h */,
 				8DEFE4411548FA43009AB624 /* StaticCardSequence.m */,
 				8DA5F093157424650094F888 /* CardSequence.h */,
@@ -463,6 +478,9 @@
 		8DCD7CF6157BAECF0088E8C5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8D000B69158CD71A00511083 /* Advanced */,
+				8DC308F6155A1BB8007AAD7D /* SetListController.h */,
+				8DC308F7155A1BB8007AAD7D /* SetListController.m */,
 				8DE5A18B15695060005C195A /* AboutController.h */,
 				8DE5A18C15695060005C195A /* AboutController.m */,
 				8DBDB1231466DEC600140217 /* BasicSearchController.h */,
@@ -481,8 +499,6 @@
 				8DB1AE84155E03790038F991 /* OrcishViewController.m */,
 				8D6B5682154DA17A006BFA0C /* PriceListController.h */,
 				8D6B5683154DA17A006BFA0C /* PriceListController.m */,
-				8DCD7CF7157BB5B80088E8C5 /* AdvancedSearchController.h */,
-				8DCD7CF8157BB5B80088E8C5 /* AdvancedSearchController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
