@@ -12,4 +12,6 @@
 
 - (void) resetNavigationButton;
 
+@property (nonatomic, strong) IBOutlet UINavigationItem *navigationItem;
+
 @end

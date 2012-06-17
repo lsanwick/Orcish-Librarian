@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 Orcish. All rights reserved.
 //
 
-#import "OrcishSequenceController.h"
+#import "OrcishViewController.h"
 
     
-@interface AdvancedSearchController : OrcishSequenceController
+@interface AdvancedSearchController : OrcishViewController
 
 - (IBAction) resetButtonTapped:(id)sender;
 - (IBAction) searchButtonTapped:(id)sender;

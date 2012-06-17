@@ -19,7 +19,6 @@
 
 @implementation OrcishSequenceController
 
-@dynamic navigationItem;
 @synthesize shouldDisplayPricesInResults;
 @synthesize sequence;
 @synthesize cardListView;

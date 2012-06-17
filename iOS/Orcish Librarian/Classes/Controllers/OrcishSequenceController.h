@@ -19,6 +19,5 @@
 @property (nonatomic, assign) BOOL shouldDisplayPricesInResults;
 @property (nonatomic, strong) CardSequence *sequence;
 @property (nonatomic, strong) IBOutlet UITableView *cardListView;
-@property (nonatomic, strong) IBOutlet UINavigationItem *navigationItem;
 
 @end

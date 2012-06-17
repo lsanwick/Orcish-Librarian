@@ -17,6 +17,8 @@
 
 @implementation OrcishViewController
 
+@dynamic navigationItem;
+
 // ----------------------------------------------------------------------------
 
 - (void) viewDidLoad {
