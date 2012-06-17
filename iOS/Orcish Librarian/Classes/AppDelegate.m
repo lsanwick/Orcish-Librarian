@@ -125,7 +125,7 @@ typedef enum {
 // ----------------------------------------------------------------------------
 
 - (void) showCardList:(CardSequence *)sequence withTitle:(NSString *)title {
-    OrcishViewController *controller = [[OrcishViewController alloc] initWithNibName:nil bundle:nil];
+    OrcishSequenceController *controller = [[OrcishSequenceController alloc] initWithNibName:nil bundle:nil];
     [controller view];
     controller.sequence = sequence;
     controller.navigationItem.title = title;
@@ -257,7 +257,7 @@ typedef enum {
 - (void) showBookmarkController {
     if (self.topLevel != kBookmarks) {
         self.topLevel = kBookmarks;
-        BookmarkController *controller = [[BookmarkController alloc] initWithNibName:@"OrcishViewController" bundle:nil];
+        BookmarkController *controller = [[BookmarkController alloc] initWithNibName:@"OrcishSequenceController" bundle:nil];
         [self.rootController setViewController:controller animated:NO];
     }
 }

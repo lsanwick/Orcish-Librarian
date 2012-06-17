@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OrcishViewController.h"
 
-@interface ExternalSiteController : OrcishViewController <UIActionSheetDelegate, UIWebViewDelegate> 
+@interface ExternalSiteController : UIViewController <UIActionSheetDelegate, UIWebViewDelegate> 
 
 - (void) updateBrowserButtons;
 - (IBAction) doneButtonClicked:(id)sender;

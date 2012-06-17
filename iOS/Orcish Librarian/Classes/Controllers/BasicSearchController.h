@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OrcishViewController.h"
+#import "OrcishSequenceController.h"
 
-@interface BasicSearchController : OrcishViewController
+@interface BasicSearchController : OrcishSequenceController
 
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 

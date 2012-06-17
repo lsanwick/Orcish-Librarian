@@ -7,37 +7,52 @@
 //
 
 #import "OrcishViewController.h"
+#import "AppDelegate.h"
 
-@interface OrcishViewController ()
+@interface OrcishViewController () {
+    UIBarButtonItem *navigationButton;
+}
 
 @end
 
 @implementation OrcishViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+// ----------------------------------------------------------------------------
 
-- (void)viewDidLoad
-{
+- (void) viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    navigationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu-Button"] 
+        style:UIBarButtonItemStyleBordered target:self action:@selector(navigationButtonTapped:)];
+    [self.navigationItem setLeftBarButtonItem:navigationButton];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self resetNavigationButton];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+// ----------------------------------------------------------------------------
+
+- (void) resetNavigationButton {
+    if (gAppDelegate.rootController.controllerStack.count > 1) {
+        navigationButton.image = [UIImage imageNamed:@"Back-Button"];
+    } else {
+        navigationButton.image = [UIImage imageNamed:@"Menu-Button"];
+    }   
 }
+
+// ----------------------------------------------------------------------------
+
+- (void) navigationButtonTapped:(id)sender {
+    if (gAppDelegate.rootController.controllerStack.count > 1) {
+        [gAppDelegate.rootController popViewControllerAnimated:YES];
+    } else if (gAppDelegate.rootController.menuIsVisible) {
+        [gAppDelegate.rootController hideMenu];
+    } else {
+        [gAppDelegate.rootController showMenu];
+    }
+}
+
+// ----------------------------------------------------------------------------
 
 @end

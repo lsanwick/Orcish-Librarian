@@ -1,5 +1,5 @@
 //
-//  SearchCriteriaSelectionController.h
+//  FacetSelectionController.h
 //  Orcish Librarian
 //
 //  Created by Stewart Ulm on 6/16/12.
@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrcishSequenceController.h"
 
-@interface SearchCriteriaSelectionController : OrcishViewController
+@class AdvancedSearchController;
+
+@interface FacetSelectionController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+- (IBAction) cancelTapped:(id)sender;
+
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) AdvancedSearchController *searchController;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  FacetCustomizationController.h
+//  FacetOptionsController.h
 //  Orcish Librarian
 //
 //  Created by Stewart Ulm on 6/16/12.
@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FacetCustomizationController : UIViewController
+
+@class AdvancedSearchController;
+
+@interface FacetOptionsController : UIViewController
+
+@property (nonatomic, strong) AdvancedSearchController *searchController;
 
 @end

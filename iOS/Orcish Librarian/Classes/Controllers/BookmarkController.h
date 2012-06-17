@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OrcishViewController.h"
+#import "OrcishSequenceController.h"
 
 @class CardViewController;
 
-@interface BookmarkController : OrcishViewController
+@interface BookmarkController : OrcishSequenceController
 
 @end

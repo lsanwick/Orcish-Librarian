@@ -207,15 +207,15 @@
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">BookmarkController</string>
-					<string key="superclassName">OrcishViewController</string>
+					<string key="superclassName">OrcishSequenceController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/BookmarkController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">OrcishViewController</string>
-					<string key="superclassName">UIViewController</string>
+					<string key="className">OrcishSequenceController</string>
+					<string key="superclassName">OrcishViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="cardListView">UITableView</string>
 						<string key="navigationItem">UINavigationItem</string>
@@ -230,6 +230,14 @@
 							<string key="candidateClassName">UINavigationItem</string>
 						</object>
 					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/OrcishSequenceController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">OrcishViewController</string>
+					<string key="superclassName">UIViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/OrcishViewController.h</string>

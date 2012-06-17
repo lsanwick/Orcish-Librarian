@@ -1,5 +1,5 @@
 //
-//  OrcishViewController.h
+//  OrcishSequenceController.h
 //  Orcish Librarian
 //
 //  Created by Stewart Ulm on 5/11/12.
@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrcishViewController.h"
 
 @class OrcishRootController;
 @class CardSequence;
 
-@interface OrcishViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+@interface OrcishSequenceController : OrcishViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 - (void) setSequence:(CardSequence *)sequence reloadTable:(BOOL)reloadTable;
-- (void) resetNavigationButton;
 
 @property (nonatomic, assign) BOOL shouldDisplayPricesInResults;
 @property (nonatomic, strong) CardSequence *sequence;

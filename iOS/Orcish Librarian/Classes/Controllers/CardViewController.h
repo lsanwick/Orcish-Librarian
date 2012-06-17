@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OrcishViewController.h"
+#import "OrcishSequenceController.h"
 
 @class CardSequence;
 
-@interface CardViewController : OrcishViewController <UIScrollViewDelegate, UIWebViewDelegate> 
+@interface CardViewController : OrcishSequenceController <UIScrollViewDelegate, UIWebViewDelegate> 
 
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *pagingButton;

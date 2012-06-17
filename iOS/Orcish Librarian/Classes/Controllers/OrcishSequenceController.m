@@ -1,12 +1,12 @@
 //
-//  OrcishViewController.m
+//  OrcishSequenceController.m
 //  Orcish Librarian
 //
 //  Created by Stewart Ulm on 5/11/12.
 //  Copyright (c) 2012 Orcish. All rights reserved.
 //
 
-#import "OrcishViewController.h"
+#import "OrcishSequenceController.h"
 #import "OrcishRootController.h"
 #import "SearchResultCell.h"
 #import "AppDelegate.h"
@@ -17,14 +17,7 @@
 #define kPriceRequestDelay  1.5
 
 
-@interface OrcishViewController () {
-    UIBarButtonItem *navigationButton;
-}
-    
-@end
-
-
-@implementation OrcishViewController
+@implementation OrcishSequenceController
 
 @dynamic navigationItem;
 @synthesize shouldDisplayPricesInResults;
@@ -36,9 +29,6 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     self.cardListView.rowHeight = [SearchResultCell height];
-    navigationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu-Button"] 
-        style:UIBarButtonItemStyleBordered target:self action:@selector(navigationButtonTapped:)];
-    [self.navigationItem setLeftBarButtonItem:navigationButton];
 }
 
 // ----------------------------------------------------------------------------
@@ -46,13 +36,6 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.cardListView deselectRowAtIndexPath:[self.cardListView indexPathForSelectedRow] animated:animated];
-    [self resetNavigationButton];
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
 }
 
 // ----------------------------------------------------------------------------
@@ -62,28 +45,6 @@
         return YES;
     } else {
         return toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
-    }
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) resetNavigationButton {
-    if (gAppDelegate.rootController.controllerStack.count > 1) {
-        navigationButton.image = [UIImage imageNamed:@"Back-Button"];
-    } else {
-        navigationButton.image = [UIImage imageNamed:@"Menu-Button"];
-    }   
-}
-
-// ----------------------------------------------------------------------------
-
-- (void) navigationButtonTapped:(id)sender {
-    if (gAppDelegate.rootController.controllerStack.count > 1) {
-        [gAppDelegate.rootController popViewControllerAnimated:YES];
-    } else if (gAppDelegate.rootController.menuIsVisible) {
-        [gAppDelegate.rootController hideMenu];
-    } else {
-        [gAppDelegate.rootController showMenu];
     }
 }
 

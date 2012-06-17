@@ -10,4 +10,6 @@
 
 @interface OrcishViewController : UIViewController
 
+- (void) resetNavigationButton;
+
 @end

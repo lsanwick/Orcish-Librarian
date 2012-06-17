@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OrcishViewController.h"
+#import "OrcishSequenceController.h"
 
 @interface PriceListController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIWebViewDelegate>
 

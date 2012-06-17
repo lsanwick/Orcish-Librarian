@@ -234,7 +234,7 @@
 
 // ----------------------------------------------------------------------------
 
-- (OrcishViewController *) topController {
+- (OrcishSequenceController *) topController {
     return self.controllerStack.lastObject;
 }
 

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OrcishViewController.h"
+#import "OrcishSequenceController.h"
 
-@interface SetListController : OrcishViewController
+@interface SetListController : OrcishSequenceController
 
 @end

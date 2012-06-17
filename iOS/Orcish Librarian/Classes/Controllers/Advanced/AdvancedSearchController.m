@@ -7,6 +7,8 @@
 //
 
 #import "AdvancedSearchController.h"
+#import "FacetSelectionController.h"
+#import "AppDelegate.h"
 
 @interface AdvancedSearchController ()
 
@@ -16,20 +18,12 @@
 
 @implementation AdvancedSearchController
 
-@synthesize emptyScreen;
 @synthesize criteria;
 
 // ----------------------------------------------------------------------------
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.emptyScreen.hidden = (self.criteria.count > 0);
-}
-
-// ----------------------------------------------------------------------------
-
-- (IBAction) addButtonTapped:(id)sender {
-    NSLog(@"Add");
 }
 
 // ----------------------------------------------------------------------------
