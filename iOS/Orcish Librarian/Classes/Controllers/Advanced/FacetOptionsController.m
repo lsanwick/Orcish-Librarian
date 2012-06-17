@@ -1,18 +1,18 @@
 //
-//  OrcishViewController.m
+//  FacetCustomizationController.m
 //  Orcish Librarian
 //
 //  Created by Stewart Ulm on 6/16/12.
 //  Copyright (c) 2012 Orcish. All rights reserved.
 //
 
-#import "OrcishViewController.h"
+#import "FacetCustomizationController.h"
 
-@interface OrcishViewController ()
+@interface FacetCustomizationController ()
 
 @end
 
-@implementation OrcishViewController
+@implementation FacetCustomizationController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
