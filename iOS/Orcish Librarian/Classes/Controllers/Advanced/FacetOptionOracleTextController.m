@@ -1,43 +1,82 @@
 //
-//  FacetOptionTextController.m
+//  FacetOptionOracleTextController.m
 //  Orcish Librarian
 //
 //  Created by Stewart Ulm on 6/17/12.
 //  Copyright (c) 2012 Orcish. All rights reserved.
 //
 
-#import "FacetOptionTextController.h"
+#import "FacetOptionOracleTextController.h"
+#import "SearchFacet.h"
 
-@interface FacetOptionTextController ()
+@interface FacetOptionOracleTextController ()
+
+@property (nonatomic, strong) UITextField *textField;
 
 @end
 
-@implementation FacetOptionTextController
+@implementation FacetOptionOracleTextController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize textField;
 
-- (void)viewDidLoad
-{
+// ----------------------------------------------------------------------------
+
+- (void) viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.textField = [[UITextField alloc] initWithFrame:CGRectZero];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+// ----------------------------------------------------------------------------
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.textField becomeFirstResponder];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+// ----------------------------------------------------------------------------
+
+- (SearchFacet *) createFacet {
+    return [SearchFacet facetWithTitleText:self.textField.text];
 }
+
+// ----------------------------------------------------------------------------
+//  UITableViewDelegate and UITableViewDataSource
+// ----------------------------------------------------------------------------
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)aTableView {
+    return 1;
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSInteger) tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @"Text to search for:";
+}
+
+// ----------------------------------------------------------------------------
+
+- (UITableViewCell *) tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifier = @"FacetOptionCell";
+    UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:identifier];    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.textField.frame = CGRectMake(
+            cell.contentView.bounds.origin.x + 20.0, 
+            cell.contentView.bounds.origin.y + 12.0, 
+            cell.contentView.bounds.size.width - 36.0, 
+            23.0);
+        [cell addSubview:self.textField];
+    }         
+    return cell;
+}
+
+// ----------------------------------------------------------------------------
 
 @end

@@ -8,10 +8,16 @@
 
 #import "OrcishViewController.h"
 
-    
-@interface AdvancedSearchController : OrcishViewController
+
+@class SearchFacet;    
+
+@interface AdvancedSearchController : OrcishViewController <UITableViewDataSource, UITableViewDelegate>
+
+- (void) addFacet:(SearchFacet *)facet;
 
 - (IBAction) resetButtonTapped:(id)sender;
 - (IBAction) searchButtonTapped:(id)sender;
+
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 @end

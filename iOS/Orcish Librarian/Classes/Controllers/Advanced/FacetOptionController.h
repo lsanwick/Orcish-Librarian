@@ -1,5 +1,5 @@
 //
-//  FacetOptionsController.h
+//  FacetOptionController.h
 //  Orcish Librarian
 //
 //  Created by Stewart Ulm on 6/16/12.
@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrcishViewController.h"
 
 
 @class AdvancedSearchController;
 
-@interface FacetOptionsController : UIViewController
+@interface FacetOptionController : OrcishViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) AdvancedSearchController *searchController;
+- (IBAction) doneButtonTapped:(id)sender;
+
+- (void) setTitle:(NSString *)title;
+
+@property (nonatomic, weak) AdvancedSearchController *searchController;
 
 @end

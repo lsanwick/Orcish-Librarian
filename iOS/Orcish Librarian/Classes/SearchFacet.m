@@ -49,7 +49,7 @@
 
 + (SearchFacet *) facetWithTitleText:(NSString *)text {
     SearchFacet *facet = [[SearchFacet alloc] initWithCategory:kSearchFacetTitleText];
-    [facet.storage setObject:[self sanitizedSearchString:text] forKey:@"titleText"];
+    [facet.storage setObject:text forKey:@"titleText"];
     return facet;
 }
 
@@ -171,7 +171,7 @@
             
         // title text
         case kSearchFacetTitleText: {
-            NSString *text = [self.storage objectForKey:@"titleText"];
+            NSString *text = [[self class] sanitizedSearchString:[self.storage objectForKey:@"titleText"]];
             if (text != nil && text.length >= kMinimumSearchCharacters) {
                 NSArray *nameHashes = [self findNameHashesByText:text];
                 if (nameHashes.count > 0) {
@@ -188,7 +188,26 @@
             break;            
         }
             
-        // 
+        // oracle text
+        case kSearchFacetOracleText: {            
+            /*
+            NSString *text = [self.storage objectForKey:@"oracleText"];
+            if (text != nil && text.length >= kMinimumSearchCharacters) {
+                NSArray *nameHashes = [self findNameHashesByOracleText:text];
+                if (nameHashes.count > 0) {
+                    NSMutableArray *marks = [NSMutableArray arrayWithCapacity:nameHashes.count];
+                    for (int i = 0; i < nameHashes.count; i++) {
+                        [marks addObject:@"?"];
+                    }
+                    [searchClauses addObject:[NSString stringWithFormat:@"cards.name_hash IN (%@)", [marks componentsJoinedByString:@", "]]];
+                    [searchParams addObjectsFromArray:nameHashes];
+                    [orderClauses addObject:[NSString stringWithFormat:@"(SUBSTR(cards.search_name, 0, %d) = ?) DESC", text.length + 1]];
+                    [orderParams addObject:text];
+                }
+            }
+            */
+            break;
+        }
 
         default:
             break;
@@ -237,6 +256,16 @@
         }
     });
     return hashes;
+}
+
+// ----------------------------------------------------------------------------
+
+- (NSString *) description {
+    if (self.category == kSearchFacetTitleText) {
+        NSString *text = [self.storage objectForKey:@"titleText"];
+        return [NSString stringWithFormat:@"Title: \"%@\"", text]; 
+    }
+    return @"Unknown Search Criteria";
 }
 
 // ----------------------------------------------------------------------------

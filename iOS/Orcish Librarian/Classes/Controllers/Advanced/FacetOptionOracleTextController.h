@@ -1,5 +1,5 @@
 //
-//  FacetOptionTextController.h
+//  FacetOptionOracleTextController.h
 //  Orcish Librarian
 //
 //  Created by Stewart Ulm on 6/17/12.
@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FacetOptionController.h"
 
-@interface FacetOptionTextController : UIViewController
+@interface FacetOptionOracleTextController : FacetOptionController
+
 
 @end
