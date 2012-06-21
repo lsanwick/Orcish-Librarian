@@ -262,8 +262,7 @@
 
 - (NSString *) description {
     if (self.category == kSearchFacetTitleText) {
-        NSString *text = [self.storage objectForKey:@"titleText"];
-        return [NSString stringWithFormat:@"Title: \"%@\"", text]; 
+        return [self.storage objectForKey:@"titleText"];
     }
     return @"Unknown Search Criteria";
 }

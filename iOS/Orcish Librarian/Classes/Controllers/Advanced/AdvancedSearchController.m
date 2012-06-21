@@ -30,18 +30,6 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     self.facets = [NSMutableArray array];
-    self.facetNames = [NSArray arrayWithObjects:
-        @"Card Text",
-        @"Colors",
-        @"Type",
-        @"Set",
-        @"Format",
-        @"Rarity",
-        @"Converted Mana Cost",
-        @"Power",
-        @"Toughness",
-        @"Name",
-        nil];
 }
 
 // ----------------------------------------------------------------------------
@@ -54,15 +42,18 @@
 // ----------------------------------------------------------------------------
 
 - (void) addFacet:(SearchFacet *)facet {
-    [self.facets addObject:facet];
-    [self.tableView reloadData];
+
 }
 
 // ----------------------------------------------------------------------------
 
 - (IBAction) resetButtonTapped:(id)sender {
-    [self.facets removeAllObjects];
-    [self.tableView reloadData];
+    if (self.facets.count > 0) {
+        [self.tableView beginUpdates];
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationTop];
+            [self.facets removeAllObjects];
+        [self.tableView endUpdates];
+    }        
 }
 
 // ----------------------------------------------------------------------------
@@ -77,67 +68,41 @@
 // ----------------------------------------------------------------------------
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)aTableView {
-    return (self.facets.count > 0 ? 2 : 1);
+    return 1;
 }
 
 // ----------------------------------------------------------------------------
 
 - (NSInteger) tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0 && self.facets.count > 0) {
-        return self.facets.count;
-    } else {
-        return self.facetNames.count;
-    }
+    return 0;
 }
 
 // ----------------------------------------------------------------------------
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (self.facets.count > 0 && section == 0) {
-        return @"Current Criteria";
-    } else {
-        return @"Add Criteria";
-    }
+    return nil;
 }
 
 // ----------------------------------------------------------------------------
 
 - (UITableViewCell *) tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *facetNameIdentifier = @"FacetNameCell";
-    static NSString *facetIdentifier = @"FacetCell";
+    return nil;
+}
+
+// ----------------------------------------------------------------------------
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.facets.count > 0 && indexPath.section == 0) {
-        UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:facetIdentifier];    
-        if (cell == nil) {
-            cell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:facetIdentifier];
-        }         
-        SearchFacet *facet = [self.facets objectAtIndex:indexPath.row];
-        cell.textLabel.text = facet.description;
-        return cell;
-    } else {        
-        UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:facetNameIdentifier];    
-        if (cell == nil) {
-            cell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:facetNameIdentifier];
-        }         
-        cell.textLabel.text = [self.facetNames objectAtIndex:indexPath.row];
-        return cell;
-    }    
+        return 56.0;
+    } else {
+        return 44.0;
+    }
 }
 
 // ----------------------------------------------------------------------------
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.facets.count > 0 && indexPath.section == 0) {
-        NSLog(@"Selected a facet. NOT ALLOWED YET");
-    } else {
-        NSString *facet = [self.facetNames objectAtIndex:indexPath.row];
-        if ([facet isEqualToString:@"Card Text"]) {
-            FacetOptionController *controller = [[FacetOptionOracleTextController alloc] init];
-            [controller view];
-            controller.searchController = self;
-            controller.title = facet;
-            [gAppDelegate.rootController pushViewController:controller animated:YES];
-        }
-    }    
+
 }
 
 // ----------------------------------------------------------------------------
