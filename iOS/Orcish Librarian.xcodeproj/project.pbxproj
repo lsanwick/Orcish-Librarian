@@ -112,8 +112,8 @@
 
 /* Begin PBXFileReference section */
 		8D01AFBD158E656D00090E47 /* FacetOptionController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FacetOptionController.xib; path = Layout/FacetOptionController.xib; sourceTree = "<group>"; };
-		8D01AFBF158EACBA00090E47 /* FacetOptionOracleTextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacetOptionOracleTextController.h; path = Controllers/Advanced/FacetOptionOracleTextController.h; sourceTree = "<group>"; };
-		8D01AFC0158EACBA00090E47 /* FacetOptionOracleTextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacetOptionOracleTextController.m; path = Controllers/Advanced/FacetOptionOracleTextController.m; sourceTree = "<group>"; };
+		8D01AFBF158EACBA00090E47 /* FacetOptionOracleTextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacetOptionOracleTextController.h; path = Advanced/Controllers/FacetOptionOracleTextController.h; sourceTree = "<group>"; };
+		8D01AFC0158EACBA00090E47 /* FacetOptionOracleTextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacetOptionOracleTextController.m; path = Advanced/Controllers/FacetOptionOracleTextController.m; sourceTree = "<group>"; };
 		8D0480A214700C42001E183C /* CardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardViewController.xib; path = Layout/CardViewController.xib; sourceTree = "<group>"; };
 		8D0480A514700CDD001E183C /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardViewController.h; path = Controllers/CardViewController.h; sourceTree = "<group>"; };
 		8D0480A614700CDD001E183C /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardViewController.m; path = Controllers/CardViewController.m; sourceTree = "<group>"; };
@@ -148,8 +148,8 @@
 		8D1F717F145314D50010C161 /* MenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuController.m; path = Controllers/MenuController.m; sourceTree = "<group>"; };
 		8D1F71811453C4ED0010C161 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		8D1F71831453C5630010C161 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
-		8D2A4A1D158D023B0092ACDF /* FacetOptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacetOptionController.h; path = Controllers/Advanced/FacetOptionController.h; sourceTree = "<group>"; };
-		8D2A4A1E158D023B0092ACDF /* FacetOptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacetOptionController.m; path = Controllers/Advanced/FacetOptionController.m; sourceTree = "<group>"; };
+		8D2A4A1D158D023B0092ACDF /* FacetOptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacetOptionController.h; path = Advanced/Controllers/FacetOptionController.h; sourceTree = "<group>"; };
+		8D2A4A1E158D023B0092ACDF /* FacetOptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacetOptionController.m; path = Advanced/Controllers/FacetOptionController.m; sourceTree = "<group>"; };
 		8D321C56158D6E150006A145 /* OrcishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrcishViewController.h; path = Controllers/OrcishViewController.h; sourceTree = "<group>"; };
 		8D321C57158D6E150006A145 /* OrcishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrcishViewController.m; path = Controllers/OrcishViewController.m; sourceTree = "<group>"; };
 		8D32B0B415293DCC00C0EF2E /* SearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultCell.h; sourceTree = "<group>"; };
@@ -208,8 +208,8 @@
 		8DC308FA155A2770007AAD7D /* CardSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CardSet.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8DC7D6F1157C5BC200EB0C8C /* Orcish-Emblem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Orcish-Emblem.png"; sourceTree = "<group>"; };
 		8DCD7CF3157BA58F0088E8C5 /* AdvancedSearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AdvancedSearchController.xib; path = Layout/AdvancedSearchController.xib; sourceTree = "<group>"; };
-		8DCD7CF7157BB5B80088E8C5 /* AdvancedSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdvancedSearchController.h; path = Controllers/Advanced/AdvancedSearchController.h; sourceTree = "<group>"; };
-		8DCD7CF8157BB5B80088E8C5 /* AdvancedSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdvancedSearchController.m; path = Controllers/Advanced/AdvancedSearchController.m; sourceTree = "<group>"; };
+		8DCD7CF7157BB5B80088E8C5 /* AdvancedSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdvancedSearchController.h; path = Advanced/Controllers/AdvancedSearchController.h; sourceTree = "<group>"; };
+		8DCD7CF8157BB5B80088E8C5 /* AdvancedSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AdvancedSearchController.m; path = Advanced/Controllers/AdvancedSearchController.m; sourceTree = "<group>"; };
 		8DD02110146A2A26008C522A /* BasicSearchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BasicSearchController.xib; path = Layout/BasicSearchController.xib; sourceTree = "<group>"; };
 		8DE5A18715681265005C195A /* NSString+URLEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoder.h"; sourceTree = "<group>"; };
 		8DE5A18815681265005C195A /* NSString+URLEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoder.m"; sourceTree = "<group>"; };
@@ -218,8 +218,8 @@
 		8DE5A18E15695173005C195A /* AboutController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutController.xib; path = "Orcish Librarian/Layout/AboutController.xib"; sourceTree = SOURCE_ROOT; };
 		8DE5D9901457A02000B6CAAF /* Menu-Section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section.png"; sourceTree = "<group>"; };
 		8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section@2x.png"; sourceTree = "<group>"; };
-		8DE898D8147F32C50024E016 /* SearchFacet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFacet.h; sourceTree = "<group>"; };
-		8DE898D9147F32C50024E016 /* SearchFacet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFacet.m; sourceTree = "<group>"; };
+		8DE898D8147F32C50024E016 /* SearchFacet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchFacet.h; path = Advanced/SearchFacet.h; sourceTree = "<group>"; };
+		8DE898D9147F32C50024E016 /* SearchFacet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchFacet.m; path = Advanced/SearchFacet.m; sourceTree = "<group>"; };
 		8DE898E214832D820024E016 /* card-names.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "card-names.txt"; path = "../../../DB/data/card-names.txt"; sourceTree = "<group>"; };
 		8DE898E51484645F0024E016 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		8DE898E61484645F0024E016 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
@@ -272,19 +272,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8D000B69158CD71A00511083 /* Advanced */ = {
-			isa = PBXGroup;
-			children = (
-				8DCD7CF7157BB5B80088E8C5 /* AdvancedSearchController.h */,
-				8DCD7CF8157BB5B80088E8C5 /* AdvancedSearchController.m */,
-				8D2A4A1D158D023B0092ACDF /* FacetOptionController.h */,
-				8D2A4A1E158D023B0092ACDF /* FacetOptionController.m */,
-				8D01AFBF158EACBA00090E47 /* FacetOptionOracleTextController.h */,
-				8D01AFC0158EACBA00090E47 /* FacetOptionOracleTextController.m */,
-			);
-			name = Advanced;
-			sourceTree = "<group>";
-		};
 		8D000B6A158CD74600511083 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +384,7 @@
 		8D150F38144FF0C700141685 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8DDB535E1592B325003DABEE /* Advanced */,
 				8D000B6A158CD74600511083 /* Views */,
 				8DCD7CF6157BAECF0088E8C5 /* Controllers */,
 				8D150F39144FF0C700141685 /* AppDelegate.h */,
@@ -415,8 +403,6 @@
 				8D95BD1E152642D8005B8518 /* PriceManager.m */,
 				8DA5F090157420A40094F888 /* RandomCardSequence.h */,
 				8DA5F091157420A50094F888 /* RandomCardSequence.m */,
-				8DE898D8147F32C50024E016 /* SearchFacet.h */,
-				8DE898D9147F32C50024E016 /* SearchFacet.m */,
 				8DA5F08F15741F670094F888 /* StaticCardSequence.h */,
 				8DEFE4411548FA43009AB624 /* StaticCardSequence.m */,
 				8DA5F093157424650094F888 /* CardSequence.h */,
@@ -494,7 +480,6 @@
 		8DCD7CF6157BAECF0088E8C5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8D000B69158CD71A00511083 /* Advanced */,
 				8DC308F6155A1BB8007AAD7D /* SetListController.h */,
 				8DC308F7155A1BB8007AAD7D /* SetListController.m */,
 				8DE5A18B15695060005C195A /* AboutController.h */,
@@ -517,6 +502,29 @@
 				8D6B5683154DA17A006BFA0C /* PriceListController.m */,
 				8D321C56158D6E150006A145 /* OrcishViewController.h */,
 				8D321C57158D6E150006A145 /* OrcishViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		8DDB535E1592B325003DABEE /* Advanced */ = {
+			isa = PBXGroup;
+			children = (
+				8DE898D8147F32C50024E016 /* SearchFacet.h */,
+				8DE898D9147F32C50024E016 /* SearchFacet.m */,
+				8DDB53601592B338003DABEE /* Controllers */,
+			);
+			name = Advanced;
+			sourceTree = "<group>";
+		};
+		8DDB53601592B338003DABEE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8DCD7CF7157BB5B80088E8C5 /* AdvancedSearchController.h */,
+				8DCD7CF8157BB5B80088E8C5 /* AdvancedSearchController.m */,
+				8D2A4A1D158D023B0092ACDF /* FacetOptionController.h */,
+				8D2A4A1E158D023B0092ACDF /* FacetOptionController.m */,
+				8D01AFBF158EACBA00090E47 /* FacetOptionOracleTextController.h */,
+				8D01AFC0158EACBA00090E47 /* FacetOptionOracleTextController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

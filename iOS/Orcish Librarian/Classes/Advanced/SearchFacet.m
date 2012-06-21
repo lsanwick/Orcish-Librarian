@@ -31,6 +31,12 @@
 
 // ----------------------------------------------------------------------------
 
++ (NSString *) stringFromCategory:(SearchFacetCategory)category {    
+    return @"Unknown Facet";
+}
+
+// ----------------------------------------------------------------------------
+
 + (SearchFacet *) facetWithCard:(NSUInteger)cardPk {
     SearchFacet *facet = [[SearchFacet alloc] initWithCategory:kSearchFacetCard];
     [facet.storage setObject:[NSNumber numberWithUnsignedInteger:cardPk] forKey:@"cardPk"];

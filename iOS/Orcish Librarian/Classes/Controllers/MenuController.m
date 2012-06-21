@@ -46,7 +46,7 @@
         items = [NSArray arrayWithObjects:
             [NSArray arrayWithObjects:
                 @"Basic Search",
-                //@"Advanced Search",
+                @"Advanced Search",
                 @"Browse Sets", 
                 @"Bookmarks", 
                 @"Random Cards", 

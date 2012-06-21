@@ -80,6 +80,7 @@ typedef enum {
 + (SearchFacet *) facetWithPower:(NSUInteger)power;
 + (SearchFacet *) facetWithToughness:(NSUInteger)toughness;
 + (SearchFacet *) facetWithConvertedManaCost:(NSUInteger)cost;
++ (NSString *) stringFromCategory:(SearchFacetCategory)category;
 
 - (void) updateSearchClauses:(NSMutableArray *)searchClauses withParams:(NSMutableArray *)searchParams andOrderClauses:(NSMutableArray *)orderClauses withParams:(NSMutableArray *)orderParams;
 
