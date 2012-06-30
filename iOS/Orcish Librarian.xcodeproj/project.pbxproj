@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D01AFBE158E656D00090E47 /* FacetOptionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D01AFBD158E656D00090E47 /* FacetOptionController.xib */; };
-		8D01AFC1158EACBA00090E47 /* FacetOptionOracleTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D01AFC0158EACBA00090E47 /* FacetOptionOracleTextController.m */; };
+		8D01AFC1158EACBA00090E47 /* FacetOptionTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D01AFC0158EACBA00090E47 /* FacetOptionTextController.m */; };
 		8D0480A314700C42001E183C /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D0480A214700C42001E183C /* CardViewController.xib */; };
 		8D0480A714700CDD001E183C /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0480A614700CDD001E183C /* CardViewController.m */; };
 		8D0480A91470ABBF001E183C /* Back-Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D0480A81470ABBF001E183C /* Back-Button@2x.png */; };
@@ -38,6 +38,7 @@
 		8D321C58158D6E160006A145 /* OrcishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D321C57158D6E150006A145 /* OrcishViewController.m */; };
 		8D32B0B615293DCC00C0EF2E /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D32B0B515293DCC00C0EF2E /* SearchResultCell.m */; };
 		8D40B9851473543A00F3A4EC /* Linen-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9841473543A00F3A4EC /* Linen-Background.png */; };
+		8D4566F5159AA9690053FFA8 /* FacetCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4566F4159AA9690053FFA8 /* FacetCategory.m */; };
 		8D5012C3146F5CA300D463D6 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5012C2146F5CA300D463D6 /* Card.m */; };
 		8D61423E157478F800482546 /* QueryCardSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D61423D157478F800482546 /* QueryCardSequence.m */; };
 		8D6B5684154DA17A006BFA0C /* PriceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B5683154DA17A006BFA0C /* PriceListController.m */; };
@@ -79,7 +80,7 @@
 		8DE5A18F15695173005C195A /* AboutController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5A18E15695173005C195A /* AboutController.xib */; };
 		8DE5D9921457A02000B6CAAF /* Menu-Section.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9901457A02000B6CAAF /* Menu-Section.png */; };
 		8DE5D9931457A02000B6CAAF /* Menu-Section@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */; };
-		8DE898DA147F32C50024E016 /* SearchFacet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE898D9147F32C50024E016 /* SearchFacet.m */; };
+		8DE898DA147F32C50024E016 /* Facet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE898D9147F32C50024E016 /* Facet.m */; };
 		8DE898E314832D820024E016 /* card-names.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8DE898E214832D820024E016 /* card-names.txt */; };
 		8DE898E71484645F0024E016 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE898E61484645F0024E016 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DE898E9148473CF0024E016 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE898E8148473CE0024E016 /* libicucore.dylib */; };
@@ -112,8 +113,8 @@
 
 /* Begin PBXFileReference section */
 		8D01AFBD158E656D00090E47 /* FacetOptionController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FacetOptionController.xib; path = Layout/FacetOptionController.xib; sourceTree = "<group>"; };
-		8D01AFBF158EACBA00090E47 /* FacetOptionOracleTextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacetOptionOracleTextController.h; path = Advanced/Controllers/FacetOptionOracleTextController.h; sourceTree = "<group>"; };
-		8D01AFC0158EACBA00090E47 /* FacetOptionOracleTextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacetOptionOracleTextController.m; path = Advanced/Controllers/FacetOptionOracleTextController.m; sourceTree = "<group>"; };
+		8D01AFBF158EACBA00090E47 /* FacetOptionTextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacetOptionTextController.h; path = Advanced/Controllers/FacetOptionTextController.h; sourceTree = "<group>"; };
+		8D01AFC0158EACBA00090E47 /* FacetOptionTextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacetOptionTextController.m; path = Advanced/Controllers/FacetOptionTextController.m; sourceTree = "<group>"; };
 		8D0480A214700C42001E183C /* CardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardViewController.xib; path = Layout/CardViewController.xib; sourceTree = "<group>"; };
 		8D0480A514700CDD001E183C /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardViewController.h; path = Controllers/CardViewController.h; sourceTree = "<group>"; };
 		8D0480A614700CDD001E183C /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardViewController.m; path = Controllers/CardViewController.m; sourceTree = "<group>"; };
@@ -155,6 +156,8 @@
 		8D32B0B415293DCC00C0EF2E /* SearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultCell.h; sourceTree = "<group>"; };
 		8D32B0B515293DCC00C0EF2E /* SearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultCell.m; sourceTree = "<group>"; };
 		8D40B9841473543A00F3A4EC /* Linen-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Linen-Background.png"; sourceTree = "<group>"; };
+		8D4566F3159AA9690053FFA8 /* FacetCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacetCategory.h; path = Advanced/FacetCategory.h; sourceTree = "<group>"; };
+		8D4566F4159AA9690053FFA8 /* FacetCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacetCategory.m; path = Advanced/FacetCategory.m; sourceTree = "<group>"; };
 		8D5012C1146F5CA300D463D6 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		8D5012C2146F5CA300D463D6 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Card.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8D61423C157478F800482546 /* QueryCardSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCardSequence.h; sourceTree = "<group>"; };
@@ -218,8 +221,8 @@
 		8DE5A18E15695173005C195A /* AboutController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AboutController.xib; path = "Orcish Librarian/Layout/AboutController.xib"; sourceTree = SOURCE_ROOT; };
 		8DE5D9901457A02000B6CAAF /* Menu-Section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section.png"; sourceTree = "<group>"; };
 		8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section@2x.png"; sourceTree = "<group>"; };
-		8DE898D8147F32C50024E016 /* SearchFacet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchFacet.h; path = Advanced/SearchFacet.h; sourceTree = "<group>"; };
-		8DE898D9147F32C50024E016 /* SearchFacet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchFacet.m; path = Advanced/SearchFacet.m; sourceTree = "<group>"; };
+		8DE898D8147F32C50024E016 /* Facet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Facet.h; path = Advanced/Facet.h; sourceTree = "<group>"; };
+		8DE898D9147F32C50024E016 /* Facet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Facet.m; path = Advanced/Facet.m; sourceTree = "<group>"; };
 		8DE898E214832D820024E016 /* card-names.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "card-names.txt"; path = "../../../DB/data/card-names.txt"; sourceTree = "<group>"; };
 		8DE898E51484645F0024E016 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		8DE898E61484645F0024E016 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
@@ -509,9 +512,11 @@
 		8DDB535E1592B325003DABEE /* Advanced */ = {
 			isa = PBXGroup;
 			children = (
-				8DE898D8147F32C50024E016 /* SearchFacet.h */,
-				8DE898D9147F32C50024E016 /* SearchFacet.m */,
 				8DDB53601592B338003DABEE /* Controllers */,
+				8DE898D8147F32C50024E016 /* Facet.h */,
+				8DE898D9147F32C50024E016 /* Facet.m */,
+				8D4566F3159AA9690053FFA8 /* FacetCategory.h */,
+				8D4566F4159AA9690053FFA8 /* FacetCategory.m */,
 			);
 			name = Advanced;
 			sourceTree = "<group>";
@@ -523,8 +528,8 @@
 				8DCD7CF8157BB5B80088E8C5 /* AdvancedSearchController.m */,
 				8D2A4A1D158D023B0092ACDF /* FacetOptionController.h */,
 				8D2A4A1E158D023B0092ACDF /* FacetOptionController.m */,
-				8D01AFBF158EACBA00090E47 /* FacetOptionOracleTextController.h */,
-				8D01AFC0158EACBA00090E47 /* FacetOptionOracleTextController.m */,
+				8D01AFBF158EACBA00090E47 /* FacetOptionTextController.h */,
+				8D01AFC0158EACBA00090E47 /* FacetOptionTextController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -748,7 +753,7 @@
 				8DED6463146F374500A787F4 /* FMResultSet.m in Sources */,
 				8D5012C3146F5CA300D463D6 /* Card.m in Sources */,
 				8D0480A714700CDD001E183C /* CardViewController.m in Sources */,
-				8DE898DA147F32C50024E016 /* SearchFacet.m in Sources */,
+				8DE898DA147F32C50024E016 /* Facet.m in Sources */,
 				8DE898E71484645F0024E016 /* RegexKitLite.m in Sources */,
 				8D95BD1B15263552005B8518 /* NSNull+Wrap.m in Sources */,
 				8D95BD1F152642D8005B8518 /* PriceManager.m in Sources */,
@@ -772,7 +777,8 @@
 				8DCD7CF9157BB5B80088E8C5 /* AdvancedSearchController.m in Sources */,
 				8D2A4A1F158D023B0092ACDF /* FacetOptionController.m in Sources */,
 				8D321C58158D6E160006A145 /* OrcishViewController.m in Sources */,
-				8D01AFC1158EACBA00090E47 /* FacetOptionOracleTextController.m in Sources */,
+				8D01AFC1158EACBA00090E47 /* FacetOptionTextController.m in Sources */,
+				8D4566F5159AA9690053FFA8 /* FacetCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

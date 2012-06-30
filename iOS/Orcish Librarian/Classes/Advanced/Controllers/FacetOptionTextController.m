@@ -1,63 +1,42 @@
 //
-//  FacetOptionController.m
+//  FacetOptionTextController.m
 //  Orcish Librarian
 //
-//  Created by Stewart Ulm on 6/16/12.
+//  Created by Stewart Ulm on 6/17/12.
 //  Copyright (c) 2012 Orcish. All rights reserved.
 //
 
-#import "FacetOptionController.h"
-#import "AppDelegate.h"
-#import "AdvancedSearchController.h"
+#import "FacetOptionTextController.h"
 #import "Facet.h"
 
-@interface FacetOptionController ()
+@interface FacetOptionTextController ()
 
-- (Facet *) createFacet;
+@property (nonatomic, strong) UITextField *textField;
 
 @end
 
-@implementation FacetOptionController
+@implementation FacetOptionTextController
 
-@synthesize doneButton;
-@synthesize searchController;
-@synthesize facet;
+@synthesize textField;
 
 // ----------------------------------------------------------------------------
 
-- (id) init {
-    if (self = [super initWithNibName:@"FacetOptionController" bundle:nil]) {
-        [self view]; // immediately load view from XIB
-    }
-    return self;
+- (void) viewDidLoad {
+    [super viewDidLoad];
+    self.textField = [[UITextField alloc] initWithFrame:CGRectZero];
 }
 
 // ----------------------------------------------------------------------------
 
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.doneButton.title = (self.facet == nil ? @"Add" : @"Save");
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.textField becomeFirstResponder];
 }
 
 // ----------------------------------------------------------------------------
 
-- (void) setTitle:(NSString *)title {
-    self.navigationItem.title = title;
-}
-
-// ----------------------------------------------------------------------------
-
-- (IBAction) doneButtonTapped:(id)sender {
-    [self.searchController addFacet:[self createFacet]];
-    [gAppDelegate.rootController popViewControllerAnimated:YES];
-}
-
-// ----------------------------------------------------------------------------
-
-- (SearchFacet *) createFacet {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
-        reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
-        userInfo:nil];
+- (Facet *) createFacet {
+    return [Facet facetWithTitleText:self.textField.text];
 }
 
 // ----------------------------------------------------------------------------
@@ -71,13 +50,13 @@
 // ----------------------------------------------------------------------------
 
 - (NSInteger) tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return 1;
 }
 
 // ----------------------------------------------------------------------------
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return nil;
+    return @"Text to search for:";
 }
 
 // ----------------------------------------------------------------------------
@@ -86,7 +65,14 @@
     static NSString *identifier = @"FacetOptionCell";
     UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:identifier];    
     if (cell == nil) {
-        cell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.textField.frame = CGRectMake(
+            cell.contentView.bounds.origin.x + 20.0, 
+            cell.contentView.bounds.origin.y + 12.0, 
+            cell.contentView.bounds.size.width - 36.0, 
+            23.0);
+        [cell addSubview:self.textField];
     }         
     return cell;
 }

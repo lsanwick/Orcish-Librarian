@@ -13,7 +13,7 @@
 #import "StaticCardSequence.h"
 #import "QueryCardSequence.h"
 #import "Card.h"
-#import "SearchFacet.h"
+#import "Facet.h"
 #import "NSNull+Wrap.h"
 
 @interface Card ()
@@ -75,13 +75,13 @@
 // ----------------------------------------------------------------------------
 
 + (CardSequence *) findCardsByTitleText:(NSString *)text {
-    return [self findCards:[NSArray arrayWithObject:[SearchFacet facetWithTitleText:text]]];
+    return [self findCards:[NSArray arrayWithObject:[Facet facetWithTitleText:text]]];
 }
 
 // ----------------------------------------------------------------------------
 
 + (CardSequence *) findCardsBySet:(NSUInteger)setPk {
-    return [self findCards:[NSArray arrayWithObject:[SearchFacet facetWithSet:setPk]]];
+    return [self findCards:[NSArray arrayWithObject:[Facet facetWithSet:setPk]]];
 }
 
 // ----------------------------------------------------------------------------
@@ -93,7 +93,7 @@
     NSMutableArray *orderClauses = [NSMutableArray array];
     NSMutableArray *orderParams = [NSMutableArray array];
     
-    for (SearchFacet *facet in facets) {
+    for (Facet *facet in facets) {
         [facet updateSearchClauses:searchClauses withParams:searchParams andOrderClauses:orderClauses withParams:orderParams];
     }
     
@@ -148,7 +148,7 @@
 // ----------------------------------------------------------------------------
 
 + (Card *) findCardByPk:(NSUInteger)pk {
-    CardSequence *sequence = [Card findCards:[NSArray arrayWithObject:[SearchFacet facetWithCard:pk]]];
+    CardSequence *sequence = [Card findCards:[NSArray arrayWithObject:[Facet facetWithCard:pk]]];
     return (sequence.count) > 0 ? [sequence cardAtPosition:0] : nil;
 }
 
@@ -161,7 +161,7 @@
         [rs next];
         idx = (arc4random() % [rs longForColumnIndex:0]) + 1;        
     });
-    CardSequence *sequence = [Card findCards:[NSArray arrayWithObject:[SearchFacet facetWithIndex:idx]]];
+    CardSequence *sequence = [Card findCards:[NSArray arrayWithObject:[Facet facetWithIndex:idx]]];
     return (sequence.count) > 0 ? [sequence cardAtPosition:0] : nil;
 }
  

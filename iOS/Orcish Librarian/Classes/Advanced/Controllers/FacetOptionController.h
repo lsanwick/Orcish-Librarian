@@ -11,6 +11,7 @@
 
 
 @class AdvancedSearchController;
+@class SearchFacet;
 
 @interface FacetOptionController : OrcishViewController <UITableViewDataSource, UITableViewDelegate>
 
@@ -18,6 +19,8 @@
 
 - (void) setTitle:(NSString *)title;
 
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *doneButton;
 @property (nonatomic, weak) AdvancedSearchController *searchController;
+@property (nonatomic, strong) SearchFacet *facet;
 
 @end

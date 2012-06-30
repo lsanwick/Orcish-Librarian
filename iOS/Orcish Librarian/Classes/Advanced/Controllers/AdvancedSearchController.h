@@ -9,15 +9,17 @@
 #import "OrcishViewController.h"
 
 
-@class SearchFacet;    
+@class Facet;    
 
 @interface AdvancedSearchController : OrcishViewController <UITableViewDataSource, UITableViewDelegate>
 
-- (void) addFacet:(SearchFacet *)facet;
+- (void) addFacet:(Facet *)facet;
 
 - (IBAction) resetButtonTapped:(id)sender;
 - (IBAction) searchButtonTapped:(id)sender;
 
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *searchButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *resetButton;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 @end
