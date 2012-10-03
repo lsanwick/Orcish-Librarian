@@ -122,10 +122,12 @@ class Gatherer < Source
     "Duel Decks: Knights vs. Dragons"               => { :tcg => "Duel Decks: Knights vs Dragons", :type => SpecialSet },
     "Duel Decks: Ajani vs. Nicol Bolas"             => { :tcg => "Duel Decks: Ajani vs. Nicol Bolas", :type => SpecialSet },
     "Duel Decks: Venser vs. Koth"                   => { :tcg => "Duel Decks: Venser vs. Koth", :type => SpecialSet },
+    "Duel Decks: Izzet vs. Golgari"                 => { :tcg => "Duel Decks: Izzet vs. Golgari", :type => SpecialSet },
     "From the Vault: Dragons"                       => { :tcg => "From the Vault: Dragons", :type => SpecialSet },
     "From the Vault: Exiled"                        => { :tcg => "From the Vault: Exiled", :type => SpecialSet },
     "From the Vault: Relics"                        => { :tcg => "From the Vault: Relics", :type => SpecialSet },
     "From the Vault: Legends"                       => { :tcg => "From the Vault: Legends", :type => SpecialSet },
+    "From the Vault: Realms"                        => { :tcg => "From the Vault: Realms", :type => SpecialSet },
     "Premium Deck Series: Slivers"                  => { :tcg => "Premium Deck Series: Slivers", :type => SpecialSet },
     "Premium Deck Series: Fire and Lightning"       => { :tcg => "Premium Deck Series: Fire and Lightning", :type => SpecialSet },
     "Premium Deck Series: Graveborn"                => { :tcg => "Premium Deck Series: Graveborn", :type => SpecialSet },
@@ -203,13 +205,15 @@ class Gatherer < Source
     "Worldwake"                     => { :tcg => "Worldwake", :type => ExpansionSet, :format => Modern },
     "Rise of the Eldrazi"           => { :tcg => "Rise of the Eldrazi", :type => ExpansionSet, :format => Modern },
     "Magic 2011"                    => { :tcg => "Magic 2011 (M11)", :type => CoreSet, :format => Modern },
-    "Scars of Mirrodin"             => { :tcg => "Scars of Mirrodin", :type => ExpansionSet, :format => Standard },
-    "Mirrodin Besieged"             => { :tcg => "Mirrodin Besieged", :type => ExpansionSet, :format => Standard },
-    "New Phyrexia"                  => { :tcg => "New Phyrexia", :type => ExpansionSet, :format => Standard },
-    "Magic 2012"                    => { :tcg => "Magic 2012 (M12)", :type => CoreSet, :format => Standard },
+    "Scars of Mirrodin"             => { :tcg => "Scars of Mirrodin", :type => ExpansionSet, :format => Modern },
+    "Mirrodin Besieged"             => { :tcg => "Mirrodin Besieged", :type => ExpansionSet, :format => Modern },
+    "New Phyrexia"                  => { :tcg => "New Phyrexia", :type => ExpansionSet, :format => Modern },
+    "Magic 2012"                    => { :tcg => "Magic 2012 (M12)", :type => CoreSet, :format => Modern },
     "Innistrad"                     => { :tcg => "Innistrad", :type => ExpansionSet, :format => Standard },
     "Dark Ascension"                => { :tcg => "Dark Ascension", :type => ExpansionSet, :format => Standard },
-    "Avacyn Restored"               => { :tcg => "Avacyn Restored", :type => ExpansionSet, :format => Standard }
+    "Avacyn Restored"               => { :tcg => "Avacyn Restored", :type => ExpansionSet, :format => Standard },
+    "Magic 2013"                    => { :tcg => "Magic 2013 (M13)", :type => CoreSet, :format => Standard },
+    "Return to Ravnica"             => { :tcg => "Return to Ravnica", :type => CoreSet, :format => Standard }
   }
       
 end
