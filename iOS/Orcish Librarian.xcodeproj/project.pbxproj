@@ -39,6 +39,7 @@
 		8D32B0B615293DCC00C0EF2E /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D32B0B515293DCC00C0EF2E /* SearchResultCell.m */; };
 		8D40B9851473543A00F3A4EC /* Linen-Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D40B9841473543A00F3A4EC /* Linen-Background.png */; };
 		8D4566F5159AA9690053FFA8 /* FacetCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4566F4159AA9690053FFA8 /* FacetCategory.m */; };
+		8D4D2C9A161287C600C0890F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D4D2C99161287C600C0890F /* Default-568h@2x.png */; };
 		8D5012C3146F5CA300D463D6 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5012C2146F5CA300D463D6 /* Card.m */; };
 		8D61423E157478F800482546 /* QueryCardSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D61423D157478F800482546 /* QueryCardSequence.m */; };
 		8D6B5684154DA17A006BFA0C /* PriceListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B5683154DA17A006BFA0C /* PriceListController.m */; };
@@ -158,6 +159,7 @@
 		8D40B9841473543A00F3A4EC /* Linen-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Linen-Background.png"; sourceTree = "<group>"; };
 		8D4566F3159AA9690053FFA8 /* FacetCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacetCategory.h; path = Advanced/FacetCategory.h; sourceTree = "<group>"; };
 		8D4566F4159AA9690053FFA8 /* FacetCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacetCategory.m; path = Advanced/FacetCategory.m; sourceTree = "<group>"; };
+		8D4D2C99161287C600C0890F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8D5012C1146F5CA300D463D6 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		8D5012C2146F5CA300D463D6 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Card.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8D61423C157478F800482546 /* QueryCardSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCardSequence.h; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 		8DFC70801576878500B36CF0 /* Launch Images */ = {
 			isa = PBXGroup;
 			children = (
+				8D4D2C99161287C600C0890F /* Default-568h@2x.png */,
 				8DFC70851576899300B36CF0 /* Default-Landscape~ipad.png */,
 				8DFC70861576899300B36CF0 /* Default-Landscape@2x~ipad.png */,
 				8DFC70871576899300B36CF0 /* Default-Portrait~ipad.png */,
@@ -708,6 +711,7 @@
 				8DCD7CF4157BA58F0088E8C5 /* AdvancedSearchController.xib in Resources */,
 				8DC7D6F2157C5BC200EB0C8C /* Orcish-Emblem.png in Resources */,
 				8D01AFBE158E656D00090E47 /* FacetOptionController.xib in Resources */,
+				8D4D2C9A161287C600C0890F /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
