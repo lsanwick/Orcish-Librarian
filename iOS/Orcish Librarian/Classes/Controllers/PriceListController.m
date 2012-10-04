@@ -14,7 +14,7 @@
 #define kRequestTimeout 15
 
 @interface PriceListController ()
-
+ 
 @property (nonatomic, strong) NSArray *prices;
 @property (nonatomic, strong) NSArray *foilPrices;
 @property (nonatomic, assign) BOOL firstRequestMade;
@@ -26,7 +26,6 @@
 
 @implementation PriceListController
 
-@synthesize webView;
 @synthesize tableView;
 @synthesize successView;
 @synthesize loadingView;
@@ -42,40 +41,26 @@
 
 // ----------------------------------------------------------------------------
 
-- (NSString *) strippedHTML:(NSString *)html {
-    NSError *error;
-    html = [html stringByReplacingOccurrencesOfRegex:@"<script.*?<\\/script>" withString:@"<noscript></noscript>" options:RKLDotAll range:NSMakeRange(0, html.length) error:&error];
-    html = [html stringByReplacingOccurrencesOfRegex:@"<(\\/)?(?i:link)\\s" withString:@"<$1fink " options:RKLDotAll range:NSMakeRange(0, html.length) error:&error];
-    html = [html stringByReplacingOccurrencesOfRegex:@"src=\"[^\"]+\"" withString:@"src=\"#\"" options:RKLDotAll range:NSMakeRange(0, html.length) error:&error];
-    return html;
-}
-
-// ----------------------------------------------------------------------------
-
 - (void) setProductId:(NSString *)theProductId {
     productId = theProductId;    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kRequestTimeout * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if (self.prices == nil) {
-            [self.webView stopLoading];
-            self.firstRequestMade = NO;
             self.loadingView.hidden = YES;
             self.timeoutView.hidden = NO;
-            [gAppDelegate trackEvent:@"All Prices" action:@"Failed" label:@"Timeout"];
         }
     });
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *url = [NSString stringWithFormat:@"http://store.tcgplayer.com/product.aspx?id=%@", productId];
-        NSData *response = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-        if (!response) {
-            self.firstRequestMade = NO;
+        NSError *networkError;
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://orcish.info/prices/%@/json", productId]];
+        NSString *pricesAsJSON = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&networkError];
+        if (!pricesAsJSON) {
             self.loadingView.hidden = YES;
             self.timeoutView.hidden = NO;
             [gAppDelegate trackEvent:@"All Prices" action:@"Failed" label:@"No Response"];
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSURL *base = [NSURL URLWithString:@"http://store.tcgplayer.com/"];
-                NSString *html = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-                [self.webView loadHTMLString:[self strippedHTML:html] baseURL:base];
+                NSError *jsonError;
+                self.prices = [NSJSONSerialization JSONObjectWithData:[pricesAsJSON dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&jsonError];
             });
         }
     });
@@ -184,13 +169,7 @@
 - (BOOL) webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSURL *URL = request.URL;
     if ([URL.scheme isEqualToString:@"done"]) {
-        NSString *pricesAsJSON = [self.webView stringByEvaluatingJavaScriptFromString:@"JSON.stringify(window._orcish_librarian_prices)"];
-        if (pricesAsJSON) {
-            NSError *error = nil;
-            self.prices = [NSJSONSerialization JSONObjectWithData:[pricesAsJSON dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
-        } else {
-            [gAppDelegate trackEvent:@"All Prices" action:@"Failed" label:@"Bad JSON"];
-        }
+        
         return NO;
     } else if (self.firstRequestMade) {
         return NO;
@@ -204,14 +183,6 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:indexPath {
     return [PriceVendorCell height];
-}
-
-// ----------------------------------------------------------------------------
-//  UIWebViewDelegate
-// ----------------------------------------------------------------------------
-
-- (void) webViewDidFinishLoad:(UIWebView *)theWebView {
-    [self.webView stringByEvaluatingJavaScriptFromString:@"(function(){ var s = document.createElement('script'); s.src = 'http://d1g6xmf8vayz1g.cloudfront.net/scripts/prices.js'; document.getElementsByTagName('head')[0].appendChild(s); })()"];
 }
 
 // ----------------------------------------------------------------------------

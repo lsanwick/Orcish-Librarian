@@ -57,7 +57,9 @@
     if (theCard != nil && self.isDoneLoading) {        
         dispatch_async(dispatch_get_main_queue(), ^{ 
             NSString *js = [NSString stringWithFormat:@"Orcish.setCardData(%@)", [card toJSON]];
-            // NSLog(@"%@", js);
+            #if TARGET_IPHONE_SIMULATOR
+                NSLog(@"%@", js);
+            #endif
             [self stringByEvaluatingJavaScriptFromString:js];
             [[PriceManager shared] requestPriceForCard:card withCallback:^(Card *priceCard, NSDictionary *price) {
                 [self setPrice:price forCard:card];

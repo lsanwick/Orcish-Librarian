@@ -65,6 +65,7 @@
 		8DA1E03E156B323B0061C698 /* Previous-Card-Arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DA1E03A156B323B0061C698 /* Previous-Card-Arrow@2x.png */; };
 		8DA5F092157420A60094F888 /* RandomCardSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5F091157420A50094F888 /* RandomCardSequence.m */; };
 		8DA5F095157424670094F888 /* CardSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5F094157424660094F888 /* CardSequence.m */; };
+		8DAE3359161D2C0B00242766 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DAE3358161D2C0B00242766 /* FMDatabaseQueue.m */; };
 		8DB1AE85155E03790038F991 /* OrcishSequenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB1AE84155E03790038F991 /* OrcishSequenceController.m */; };
 		8DBDB1251466DEC600140217 /* BasicSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDB1241466DEC600140217 /* BasicSearchController.m */; };
 		8DC308EC1555ED32007AAD7D /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC308EB1555ED32007AAD7D /* libGoogleAnalytics.a */; };
@@ -159,7 +160,7 @@
 		8D40B9841473543A00F3A4EC /* Linen-Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Linen-Background.png"; sourceTree = "<group>"; };
 		8D4566F3159AA9690053FFA8 /* FacetCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacetCategory.h; path = Advanced/FacetCategory.h; sourceTree = "<group>"; };
 		8D4566F4159AA9690053FFA8 /* FacetCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacetCategory.m; path = Advanced/FacetCategory.m; sourceTree = "<group>"; };
-		8D4D2C99161287C600C0890F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		8D4D2C99161287C600C0890F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8D5012C1146F5CA300D463D6 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		8D5012C2146F5CA300D463D6 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Card.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8D61423C157478F800482546 /* QueryCardSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryCardSequence.h; sourceTree = "<group>"; };
@@ -198,6 +199,8 @@
 		8DA5F091157420A50094F888 /* RandomCardSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomCardSequence.m; sourceTree = "<group>"; };
 		8DA5F093157424650094F888 /* CardSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardSequence.h; sourceTree = "<group>"; };
 		8DA5F094157424660094F888 /* CardSequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardSequence.m; sourceTree = "<group>"; };
+		8DAE3357161D2C0B00242766 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = Other/FMDB/FMDatabaseQueue.h; sourceTree = "<group>"; };
+		8DAE3358161D2C0B00242766 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = Other/FMDB/FMDatabaseQueue.m; sourceTree = "<group>"; };
 		8DB1AE83155E03790038F991 /* OrcishSequenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrcishSequenceController.h; path = Controllers/OrcishSequenceController.h; sourceTree = "<group>"; };
 		8DB1AE84155E03790038F991 /* OrcishSequenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrcishSequenceController.m; path = Controllers/OrcishSequenceController.m; sourceTree = "<group>"; };
 		8DBDB1231466DEC600140217 /* BasicSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicSearchController.h; path = Controllers/BasicSearchController.h; sourceTree = "<group>"; };
@@ -558,6 +561,8 @@
 		8DED645A146F36F000A787F4 /* FMDB */ = {
 			isa = PBXGroup;
 			children = (
+				8DAE3357161D2C0B00242766 /* FMDatabaseQueue.h */,
+				8DAE3358161D2C0B00242766 /* FMDatabaseQueue.m */,
 				8DED645B146F374500A787F4 /* FMDatabase.h */,
 				8DED645C146F374500A787F4 /* FMDatabase.m */,
 				8DED645D146F374500A787F4 /* FMDatabaseAdditions.h */,
@@ -783,6 +788,7 @@
 				8D321C58158D6E160006A145 /* OrcishViewController.m in Sources */,
 				8D01AFC1158EACBA00090E47 /* FacetOptionTextController.m in Sources */,
 				8D4566F5159AA9690053FFA8 /* FacetCategory.m in Sources */,
+				8DAE3359161D2C0B00242766 /* FMDatabaseQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,8 +856,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Stewart Rosenberger";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -860,7 +866,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "49E85B3F-A85A-4A60-A4C5-11AE5EACD8D5";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

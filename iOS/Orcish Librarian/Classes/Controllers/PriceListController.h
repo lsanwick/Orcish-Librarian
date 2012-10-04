@@ -11,7 +11,6 @@
 
 @interface PriceListController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIWebViewDelegate>
 
-@property (nonatomic, strong) IBOutlet UIWebView *webView;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *successView;
 @property (nonatomic, strong) IBOutlet UIView *loadingView;
