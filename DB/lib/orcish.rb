@@ -43,9 +43,5 @@ module Orcish
   def cache_enabled?
     true
   end
-    
-  def cache_path
-    'data/net-cache'
-  end 
-  
+
 end

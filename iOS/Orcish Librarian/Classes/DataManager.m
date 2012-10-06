@@ -128,7 +128,7 @@
 
 - (NSString *) namesPath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    return [[paths objectAtIndex:0] stringByAppendingPathComponent:@"card-names.txt"];    
+    return [[paths objectAtIndex:0] stringByAppendingPathComponent:@"cards.names"];    
 }
 
 // ----------------------------------------------------------------------------
@@ -144,7 +144,7 @@
     NSError *error;
     NSFileManager *fm = [NSFileManager defaultManager];
     NSString *dbPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"cards.sqlite3"];
-    NSString *namesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"card-names.txt"];
+    NSString *namesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"cards.names"];
     [fm removeItemAtPath:self.dbPath error:&error];
     [fm removeItemAtPath:self.namesPath error:&error];
     [fm copyItemAtPath:dbPath toPath:self.dbPath error:&error];

@@ -3,18 +3,15 @@
 
 require 'optparse'
 
-options = { :log => $stderr, :env => 'dev', :append => false }
+options = { :log => $stderr, :append => false }
 OptionParser.new do |opts|
   opts.banner = 'fetch [options] [SET]...'
   opts.on('-l', '--log [file]') {|f| s = open(f, 'w'); options[:log] = s; at_exit { s.close } }
-  opts.on('-e', '--env [name]') {|e| options[:env] = e }
   opts.on('-a', '--append') { options[:append] = true }
 end.parse!
 
 require File.join(File.dirname(__FILE__), '../lib/bootstrap')
-Orcish.env = options[:env]
 Orcish.log = options[:log]
-Orcish.debug("Using '#{Orcish.env}' environment")
 
 collection = { }
 manager = FetchManager.new
@@ -28,8 +25,8 @@ sets_to_process.each do |set|
   end
 end
 
-FileUtils.rm_rf("data/#{Orcish.env}.pstore") unless options[:append]
-PStore.new("data/#{Orcish.env}.pstore").transaction do |store|
+FileUtils.rm_rf("data/cards.pstore") unless options[:append]
+PStore.new("data/cards.pstore").transaction do |store|
   collection.each_pair do |set, cards|
     store[set] = cards
   end

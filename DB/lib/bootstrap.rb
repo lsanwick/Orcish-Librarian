@@ -26,4 +26,5 @@ require 'orcish'
 require 'fetchmanager'
 require 'cardbox'
 
-FileUtils.mkdir_p("data/net-cache")
+FileUtils.mkdir_p("cache")
+FileUtils.mkdir_p("data")

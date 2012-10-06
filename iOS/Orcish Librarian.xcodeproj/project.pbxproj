@@ -83,7 +83,7 @@
 		8DE5D9921457A02000B6CAAF /* Menu-Section.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9901457A02000B6CAAF /* Menu-Section.png */; };
 		8DE5D9931457A02000B6CAAF /* Menu-Section@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */; };
 		8DE898DA147F32C50024E016 /* Facet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE898D9147F32C50024E016 /* Facet.m */; };
-		8DE898E314832D820024E016 /* card-names.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8DE898E214832D820024E016 /* card-names.txt */; };
+		8DE898E314832D820024E016 /* cards.names in Resources */ = {isa = PBXBuildFile; fileRef = 8DE898E214832D820024E016 /* cards.names */; };
 		8DE898E71484645F0024E016 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE898E61484645F0024E016 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8DE898E9148473CF0024E016 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE898E8148473CE0024E016 /* libicucore.dylib */; };
 		8DED6461146F374500A787F4 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DED645C146F374500A787F4 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -228,7 +228,7 @@
 		8DE5D9911457A02000B6CAAF /* Menu-Section@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu-Section@2x.png"; sourceTree = "<group>"; };
 		8DE898D8147F32C50024E016 /* Facet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Facet.h; path = Advanced/Facet.h; sourceTree = "<group>"; };
 		8DE898D9147F32C50024E016 /* Facet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Facet.m; path = Advanced/Facet.m; sourceTree = "<group>"; };
-		8DE898E214832D820024E016 /* card-names.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "card-names.txt"; path = "../../../DB/data/card-names.txt"; sourceTree = "<group>"; };
+		8DE898E214832D820024E016 /* cards.names */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cards.names; path = ../../../DB/data/cards.names; sourceTree = "<group>"; };
 		8DE898E51484645F0024E016 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		8DE898E61484645F0024E016 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		8DE898E8148473CE0024E016 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -552,7 +552,7 @@
 		8DED6455146F08F700A787F4 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				8DE898E214832D820024E016 /* card-names.txt */,
+				8DE898E214832D820024E016 /* cards.names */,
 				8DED646D146F4E2000A787F4 /* cards.sqlite3 */,
 			);
 			name = Data;
@@ -692,7 +692,7 @@
 				8D0480AB1470AC3A001E183C /* Back-Button.png in Resources */,
 				8D40B9851473543A00F3A4EC /* Linen-Background.png in Resources */,
 				8D1DE81214775E1200D2A3C4 /* HTML in Resources */,
-				8DE898E314832D820024E016 /* card-names.txt in Resources */,
+				8DE898E314832D820024E016 /* cards.names in Resources */,
 				8D6B5687154E3046006BFA0C /* PriceListController.xib in Resources */,
 				8DA1AFDC155E1F9C0091A368 /* OrcishSequenceController.xib in Resources */,
 				8DA1AFDF155E21C20091A368 /* SetListController.xib in Resources */,
