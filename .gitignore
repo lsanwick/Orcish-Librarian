@@ -6,5 +6,6 @@
 *.xcuserstate
 project.xcworkspace/
 xcuserdata/
-DB/data/
+DB/data
+DB/cache
 iOS/Orcish Librarian.xcodeproj/xcuserdata
