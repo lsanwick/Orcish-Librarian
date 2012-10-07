@@ -25,8 +25,8 @@ sets_to_process.each do |set|
   end
 end
 
-FileUtils.rm_rf("data/cards.pstore") unless options[:append]
-PStore.new("data/cards.pstore").transaction do |store|
+FileUtils.rm_rf("data/orcish.pstore") unless options[:append]
+PStore.new("data/orcish.pstore").transaction do |store|
   collection.each_pair do |set, cards|
     store[set] = cards
   end

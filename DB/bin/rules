@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+require 'optparse'
+
+options = { :log => $stderr }
+OptionParser.new do |opts|
+  opts.banner = 'docs [options] '
+  opts.on('-l', '--log FILE') {|f| s = open(f, 'w'); options[:log] = s; at_exit { s.close } }
+  opts.on('-o', '--out-file FILE') {|f| options[:out] = f } 
+end.parse!
+
+require File.join(File.dirname(__FILE__), '../lib/bootstrap')
+Orcish.log = options[:log]
+
+# fetch the CR rules text from WotC's website
+fetcher = Source.new
+Orcish.debug("Fetching the rules landing page")
+landing_page = fetcher.fetch_document('http://www.wizards.com/magic/rules/')
+link = landing_page.at('a[@href$=".txt"][@href*="MagicCompRules"]')
+if link.nil?
+  Orcish.debug("[ERROR] Couldn't find compehensive rules document link")
+  exit -1
+end
+cr_text = File.open(fetcher.fetch_file(link['href'])) {|f| f.read }
+
+# parse rules and output to SQL
+out_file = options[:out] || "data/rules.sql"
+rules = Rules.new(cr_text)
+writer = RulesWriter.new(rules)
+Orcish.debug("Exporting to \"#{out_file}\" as \"SQL\"")
+File.open(out_file, 'w') {|f| writer.to_sql(f) }

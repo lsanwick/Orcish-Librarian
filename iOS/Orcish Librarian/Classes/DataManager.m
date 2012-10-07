@@ -92,7 +92,7 @@
             return;
         }
         
-        NSURL *dataURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://orcish.info/database/%@/%@/cards.sqlite3", gAppDelegate.version, availableVersion]];
+        NSURL *dataURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://orcish.info/database/%@/%@/orcish.sqlite3", gAppDelegate.version, availableVersion]];
         NSData *data = [NSData dataWithContentsOfURL:dataURL options:0 error:&error];
         if (!data) {
             return;
@@ -121,14 +121,14 @@
 
 - (NSString *) dbPath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    return [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"cards-%@.%@.sqlite3", gAppDelegate.version, self.dataVersion]];
+    return [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"orcish-%@.%@.sqlite3", gAppDelegate.version, self.dataVersion]];
 }
 
 // ----------------------------------------------------------------------------
 
 - (NSString *) namesPath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    return [[paths objectAtIndex:0] stringByAppendingPathComponent:@"cards.names"];    
+    return [[paths objectAtIndex:0] stringByAppendingPathComponent:@"orcish.names"];    
 }
 
 // ----------------------------------------------------------------------------
@@ -143,8 +143,8 @@
 - (void) installDataFromBundle {
     NSError *error;
     NSFileManager *fm = [NSFileManager defaultManager];
-    NSString *dbPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"cards.sqlite3"];
-    NSString *namesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"cards.names"];
+    NSString *dbPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"orcish.sqlite3"];
+    NSString *namesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"orcish.names"];
     [fm removeItemAtPath:self.dbPath error:&error];
     [fm removeItemAtPath:self.namesPath error:&error];
     [fm copyItemAtPath:dbPath toPath:self.dbPath error:&error];

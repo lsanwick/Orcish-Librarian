@@ -11,7 +11,11 @@ class Rules
     :credits,
     :footer
     
-  def initialize(text)
+  def initialize(text)    
+    process_text(text)    
+  end
+
+  def process_text(text)
     text.gsub!(/\r\n/, "\n")
     @effective_date = find_effective_date(text)
     @introduction = find_introduction(text)
@@ -49,10 +53,10 @@ class Rules
   
   def find_rules(text)
     text = capture(/^Customer Service Information\s*(1\. Game Concepts.*?)^Glossary\s*$/m, text)
-    rules = text.split(/\n+/)
+    rules = text.split("\n\n")
     rules.map do |rule|
       split_point = rule.index(' ')
-      { :index => rule[0...split_point], :text => rule[(split_point+1)..-1] }
+      { :index => rule[0...split_point].strip, :text => rule[(split_point+1)..-1].strip }
     end
   end
   
@@ -63,7 +67,7 @@ class Rules
   
   def find_glossary(text)
     text = capture(/^Glossary\s*$.*^Glossary\s*$(.*)^Credits\s*$/m, text)
-    entries = text.split("\n\n")
+    entries = text.split(/\n\n/)
     entries.map do |e| 
       { :keyword => capture(/(^.*?)$/m, e), :description => capture(/^.*?$(.*)/m, e) } 
     end

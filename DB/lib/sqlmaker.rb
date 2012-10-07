@@ -8,7 +8,7 @@ module SQLMaker
     values_sql = [ ]
     row.each_pair do |k, v| 
       fields_sql << "'#{sql_escape(k)}'"
-      values_sql << "'#{sql_escape(v)}'"
+      values_sql << (v.nil? ? 'NULL' : "'#{sql_escape(v)}'")
     end
     insert_sql << fields_sql.join(', ') << ") VALUES (" << values_sql.join(', ') << ");"    
     insert_sql.join(' ')

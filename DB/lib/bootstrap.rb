@@ -25,6 +25,8 @@ require 'fileutils'
 require 'orcish'
 require 'fetchmanager'
 require 'cardbox'
+require 'rules'
+require 'rules_writer'
 
 FileUtils.mkdir_p("cache")
 FileUtils.mkdir_p("data")

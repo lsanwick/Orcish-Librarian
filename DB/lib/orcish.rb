@@ -39,9 +39,5 @@ module Orcish
   def conf
     { }
   end
-    
-  def cache_enabled?
-    true
-  end
 
 end
