@@ -1,0 +1,63 @@
+
+.searchBar {
+  background: #fff;
+}
+
+.results {
+  border-top: 1px solid #d9d9d9;
+  background: #fff;
+}
+
+.results .cardResult {
+  padding: 10px 12px 10px 12px;
+  border-top: 1px solid #d9d9d9;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.results .cardResult:first-child {
+  border-top: 0;
+}
+
+.results .cardResult:last-child {
+  padding-bottom: 9px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.results .cardResult.tappable-active {
+  background: #1a665a;
+  border-top-color: #1a665a;
+  color: #eee;
+}
+
+.results .cardResult.tappable-active + .cardResult {
+  border-top-color: #1a665a;
+}
+
+.results .cardResult.tappable-active:last-child {
+  border-bottom-color: #0376ed;
+}
+
+.results .cardResult .title,
+.results .cardResult .setName {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.results .cardResult .title {
+  font-family: "HelveticaNeue-Bold";
+  font-size: 17px;
+}
+
+.results .cardResult .setName {
+  margin-top: 2px;
+  font-size: 14px;
+}
+
+.results .cardResult .prices {
+  float: right;
+  text-align: right;
+  font-size: 11px;
+  padding-left: 5px;
+}

@@ -1,0 +1,31 @@
+html {
+  height: 100%;
+}
+
+form, body, #views {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.view {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  height: 100%;
+}
+
+.scroll {
+  position: relative;
+  height: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-flex: 1;
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+}
+
+.scroll .liner {
+  -webkit-box-flex: 1;
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+}
