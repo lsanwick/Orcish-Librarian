@@ -25,10 +25,6 @@ body {
   clear: both;
 }
 
-#views {
-  background: #dedede;  
-}
-
 .view .header {
   position: relative;
   text-align: center;

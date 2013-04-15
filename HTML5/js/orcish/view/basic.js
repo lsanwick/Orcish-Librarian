@@ -2,25 +2,48 @@ Orcish.register('View.BasicSearch', Orcish.extend({
 
   initialize: function(app) {
     this.app = app;
+    this.searchInput = $('#basicSearch input[name=search]');
+    this.searchPrompt = $('#basicSearch .prompt');
     this.attachSearchBarEvents();
     this.attachTapEvents();
   },
 
   attachSearchBarEvents: function() {
-      
+    var self = this;      
+    $('#basicSearch input[name=search]')
+      .on('input', this.handleSearchTextChange.bind(this))
+      .on('focus', this.handleSearchTextFocus.bind(this))
+      .on('blur', this.handleSearchTextBlur.bind(this));
   },
 
   attachTapEvents: function() {
-    tappable('#basicSearch .navButton', { noScroll: true, onTap: this.handleNavTap.bind(this) });
-    tappable('#basicSearch .cardResult', { activeClassDelay: 150, onTap: this.handleResultTap.bind(this) });
+    var self = this;
+    tappable('#basicSearch .navButton', { noScroll: true, onTap: function(){ self.handleNavTap() } });
+    tappable('#basicSearch .cardResult', { activeClassDelay: 150, onTap: function(){ self.handleResultTap(this) } });
   },
 
   handleNavTap: function() {
     this.app.toggleMenu();
   },
 
-  handleResultTap: function() {
+  handleResultTap: function(row) {
     console.log('Result');
+  },
+
+  handleSearchTextFocus: function() {
+
+  },
+
+  handleSearchTextBlur: function() {
+
+  },
+
+  handleSearchTextChange: function() {
+    if (this.searchInput.val().trim().length > 0) {
+      this.searchPrompt.hide();
+    } else {
+      this.searchPrompt.show();
+    }
   }
 
 }));

@@ -5,8 +5,13 @@
 
 .results {
   border-top: 1px solid #d9d9d9;
-  background: #fff;
+  background: #fff;  
 }
+
+  .results.noResults {
+    height: 100%;
+    -webkit-box-flex: 1;
+  }
 
 .results .cardResult {
   padding: 10px 12px 10px 12px;
