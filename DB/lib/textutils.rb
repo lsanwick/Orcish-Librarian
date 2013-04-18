@@ -106,10 +106,10 @@ class String
   
   def to_name_hash()
     result = self.clean.to_searchable_name
-    return result.to_hash
+    return result.to_ol_hash
   end
 
-  def to_hash()    
+  def to_ol_hash()    
     result = (Digest::SHA256.new << self).to_s
     return Zlib::crc32(result).to_s
   end

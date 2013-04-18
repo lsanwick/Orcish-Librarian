@@ -61,13 +61,13 @@ class RulesWriter
     @rules.rules.each do |entry|
       index = split_index(entry[:index])
       rules_idx = rules_idx + 1
-      pk = index.join('.').to_hash
+      pk = index.join('.').to_ol_hash
       if pk_safety[pk]
         debug("[ERROR] Duplicate PKs \"#{index.join('.')}\" == \"#{pk_safety[pk]}\"")
         exit -1
       end
       pk_safety[pk] = index.join('.')
-      parent_pk = (index.length < 2) ? nil : index.slice(0, index.length - 1).join('.').to_hash
+      parent_pk = (index.length < 2) ? nil : index.slice(0, index.length - 1).join('.').to_ol_hash
       io.puts(sql_insert_row(:cr_rules, :pk => pk, :idx => rules_idx, 
         :parent_pk => parent_pk, :key => entry[:index], :text => entry[:text]))
     end
