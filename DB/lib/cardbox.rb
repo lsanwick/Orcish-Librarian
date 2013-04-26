@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'yaml'
+require 'csv'
 require 'tempfile'
 require 'sqlmaker'
 
@@ -33,7 +34,7 @@ class CardBox
   private
   
   def save_as_json(path)
-    open(path, 'w') {|io| io.write(JSON.pretty_generate(@data)) }
+    open(path, 'w') {|io| io.write(JSON.fast_generate(@data)) }
   end
   
   def save_as_yaml(path)
@@ -50,14 +51,72 @@ class CardBox
     val = %x[sqlite3 #{path} < #{temp_file.path}]
     temp_file.unlink
   end
-  
+
+  def save_as_files(path)
+    
+    if File.exists?(path)
+      debug("Removing existing files")
+      FileUtils.rm_rf(path)
+    end
+
+    debug("Creating folder structure")
+    FileUtils.mkdir(path)
+    FileUtils.mkdir(path + "/hashes")
+    FileUtils.mkdir(path + "/keys")
+    FileUtils.mkdir(path + "/sets")
+
+    # debug("Saving name/hash lookup file")
+    # save_as_names(path + "/names.txt")
+
+    debug("Saving set meta-data file")
+    sets = [ ]
+    @data[:sets].each do |set|
+      meta = (@data[:meta][set] || { })      
+      sets << [
+        set.to_name_hash.to_s.to_i,
+        set,
+        meta[:display],
+       (meta[:tcg].nil? || meta[:tcg] == set) ? nil : meta[:tcg],
+        meta[:format],
+        meta[:type] 
+      ]
+    end
+    save_as_text(sets, path + "/sets.csv")
+    sets = nil
+
+    if false
+    debug("Saving set index files")    
+    @data[:sets].each do |set|
+      cards = [ ]
+      @data[:cards][set].each do |card|
+        cards << [ "#{set} #{card[:name]} #{card[:art_index]}".to_name_hash.to_s ]
+      end
+      save_as_text(cards, path + "/sets/" + set.to_name_hash.to_s)
+    end   
+    cards = nil
+    end
+
+    debug("Saving name hash files")
+    names = { }
+    @data[:sets].each do |set|
+      @data[:cards][set].each do |card|
+        names[card[:search_name]] = names[card[:search_name]] || [ ]
+        names[card[:search_name]] << "#{set} #{card[:name]} #{card[:art_index]}".to_name_hash.to_s
+      end
+    end
+    names.each_key do |hash| 
+      debug ("hash => " + hash)
+      # save_as_text(names[hash], path + '/hashes/' + hash)
+    end 
+
+  end  
+
   def save_as_names(path)
     names = { }
     numbers = { }
     open(path, 'w') do |io| 
       @data[:sets].each do |set|
         @data[:cards][set].each do |card|
-          name = card[:name].to_searchable_name
           if names[name].nil?
             io.write('|' + card[:search_name])
             io.write('|' + card[:name_hash])
@@ -158,6 +217,22 @@ class CardBox
       end
       io.puts "VACUUM;"
       io.puts
+    end
+  end
+
+  def save_json_to_file(obj, path)
+    open(path, 'w') { |io| io.write(JSON.pretty_generate(obj)) }
+  end
+
+  def save_as_text(data, path)
+    open(path, 'w') do |io|
+      data.each do |row|
+        if row.class == String
+          io.puts row
+        else
+          io.puts row.join("\t")
+        end
+      end
     end
   end
     

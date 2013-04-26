@@ -123,6 +123,7 @@ class Gatherer < Source
     "Duel Decks: Ajani vs. Nicol Bolas"             => { :tcg => "Duel Decks: Ajani vs. Nicol Bolas", :type => SpecialSet },
     "Duel Decks: Venser vs. Koth"                   => { :tcg => "Duel Decks: Venser vs. Koth", :type => SpecialSet },
     "Duel Decks: Izzet vs. Golgari"                 => { :tcg => "Duel Decks: Izzet vs. Golgari", :type => SpecialSet },
+    "Duel Decks: Sorin vs. Tibalt"                  => { :tcg => "Duel Decks: Sorin vs. Tibalt", :type => SpecialSet },
     "From the Vault: Dragons"                       => { :tcg => "From the Vault: Dragons", :type => SpecialSet },
     "From the Vault: Exiled"                        => { :tcg => "From the Vault: Exiled", :type => SpecialSet },
     "From the Vault: Relics"                        => { :tcg => "From the Vault: Relics", :type => SpecialSet },
@@ -213,7 +214,9 @@ class Gatherer < Source
     "Dark Ascension"                => { :tcg => "Dark Ascension", :type => ExpansionSet, :format => Standard },
     "Avacyn Restored"               => { :tcg => "Avacyn Restored", :type => ExpansionSet, :format => Standard },
     "Magic 2013"                    => { :tcg => "Magic 2013 (M13)", :type => CoreSet, :format => Standard },
-    "Return to Ravnica"             => { :tcg => "Return to Ravnica", :type => CoreSet, :format => Standard }
+    "Return to Ravnica"             => { :tcg => "Return to Ravnica", :type => ExpansionSet, :format => Standard },
+    "Gatecrash"                     => { :tcg => "Gatecrash", :type => ExpansionSet, :format => Standard },
+    "Dragon's Maze"                 => { :tcg => "Dragon's Maze", :type => ExpansionSet, :format => Standard }
   }
       
 end
