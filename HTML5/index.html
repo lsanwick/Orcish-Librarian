@@ -22,21 +22,11 @@
       <div class="scroll">    
         <div class="liner">
           <div class="searchBar">            
-            <input type="text" name="search" />
+            <input type="text" name="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
             <div class="prompt">Search:</div>
           </div>
           <div class="results">
-              <br /><br /><br />
-              <br /><br /><br />
-              <br /><br /><br />
-              <br /><br /><br />
-              <br /><br /><br />
-              <br /><br /><br />
-              <br /><br /><br />
-              <br /><br /><br />
-              <br /><br /><br />
-              <br /><br /><br />
-              <br /><br /><br />
+              
           </div>
         </div>
       </div>
@@ -53,9 +43,11 @@
 <script src="js/ext/tappable.js"></script>
 <script src="js/orcish/base.js"></script>
 <script src="js/orcish/app.js"></script>
+<script src="js/orcish/data/source.js"></script>
+<script src="js/orcish/data/local.js"></script>
 <script src="js/orcish/view/basic.js"></script>
 <script>
-  (function(){ var app = new Orcish.App() })();
+  new Orcish.App();
 </script>
 </body>
 </html>

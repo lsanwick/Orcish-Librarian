@@ -22,6 +22,7 @@ class Gatherer < Source
         cards_with_name.each do |card|
           card = card.clone
           card.merge!(spoiler_entry)
+          card[:key] = "#{set} #{card[:name]} #{card[:art_index]}".to_name_hash.to_s
           cards << card
         end
       end
@@ -78,7 +79,7 @@ class Gatherer < Source
           current_card[:name] = value.inner_text.strip.to_spell_name
           current_card[:display_name] = value.inner_text.strip.to_display_name
           current_card[:tcg] = value.inner_text.strip.to_tcg_name
-          current_card[:search_name] = value.inner_text.strip.to_searchable_name
+          current_card[:search_name] = value.inner_text.strip.to_searchable_name          
           current_card[:name_hash] = value.inner_text.strip.to_name_hash 
           current_card[:gatherer_id] = value.at('a')['href'].gsub(/^.*?(\d+)$/, '\1')
         elsif label == 'Pow/Tgh'
@@ -87,7 +88,7 @@ class Gatherer < Source
         elsif label == 'Loyalty'
           current_card[:loyalty] = value.inner_text.strip.gsub(/^\((.*)\)$/, '\1')
         elsif label == 'Type'
-          current_card[:type_line] = value.inner_text.strip
+          current_card[:type_line] = value.inner_text.strip.gsub(/\s+/, ' ')
         elsif label == 'Rules Text'
           current_card[:oracle_text] = value.inner_text.strip
         elsif label == 'Cost'

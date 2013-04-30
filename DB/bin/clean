@@ -17,10 +17,10 @@ storage_path = "data/*"
 cache_path = "cache/*"
 
 Orcish.debug("Deleting '#{storage_path}'")
-FileUtils.remove(Dir.glob(storage_path))
+FileUtils.rm_rf(Dir.glob(storage_path))
 
 if options[:empty_cache]
   Orcish.debug("Deleting '#{cache_path}'")
-  FileUtils.remove(Dir.glob(cache_path))
+  FileUtils.rm_rf(Dir.glob(cache_path))
 end
 

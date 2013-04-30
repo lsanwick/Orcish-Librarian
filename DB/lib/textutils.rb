@@ -100,7 +100,7 @@ class String
     if result != "ERASE (NOT THE URZA'S LEGACY ONE)"
       result = result.gsub(/\(.*?\)/, '')   # remove parethetical text
     end
-    result = result.gsub(/[^A-Z0-9]/, '')   # remove non-alphanumeric characters
+    result = result.gsub(/[^A-Z0-9_]/, '')   # remove non-alphanumeric characters
     result
   end
   

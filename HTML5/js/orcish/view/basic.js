@@ -2,18 +2,16 @@ Orcish.register('View.BasicSearch', Orcish.extend({
 
   initialize: function(app) {
     this.app = app;
+    this.dataSource = app.getDataSource();
     this.searchInput = $('#basicSearch input[name=search]');
     this.searchPrompt = $('#basicSearch .prompt');
     this.attachSearchBarEvents();
     this.attachTapEvents();
+    this.setInitialFocus();
   },
 
   attachSearchBarEvents: function() {
-    var self = this;      
-    $('#basicSearch input[name=search]')
-      .on('input', this.handleSearchTextChange.bind(this))
-      .on('focus', this.handleSearchTextFocus.bind(this))
-      .on('blur', this.handleSearchTextBlur.bind(this));
+    $('#basicSearch input[name=search]').on('input', this.handleSearchTextChange.bind(this));
   },
 
   attachTapEvents: function() {
@@ -30,57 +28,54 @@ Orcish.register('View.BasicSearch', Orcish.extend({
     console.log('Result');
   },
 
-  handleSearchTextFocus: function() {
-
-  },
-
-  handleSearchTextBlur: function() {
-
-  },
-
   handleSearchTextChange: function() {
-    if (this.searchInput.val().trim().length > 0) {
+    var searchText = this.searchInput.val().trim()
+    if (searchText.length > 0) {
       this.searchPrompt.hide();
     } else {
       this.searchPrompt.show();
     }
+    this.setSearchText(searchText); 
+  },
+
+  setInitialFocus: function() {
+    // grrr, stupid iOS
+    // for this to work, we have to set a property of the UIWebView
+    // setKeyboardDisplayRequiresUserAction
+    // ... but it will never work in Safari :(
+  },
+
+  setSearchText: function(text) {
+    var self = this;
+    self.dataSource.findCardsByTitle(text, {
+      success: function(cards) {
+        self.setCards(cards);
+      },
+      failure: function(errorCode) {
+        // TODO: should there be an error handler here?
+        // what are the possible error conditions? 
+        //  - network failure
+        //  -  
+      }
+    });
+  },
+
+  setCards: function(cards) {     
+    var self = this;
+    var results = $('<div class="results" />');
+    $.each(cards, function() {
+      var row = self.createCardResultRow(this);
+      results.append(row);
+    });
+    $('#basicSearch .results').replaceWith(results);
+  },
+
+  createCardResultRow: function(card) {
+    return $('<div class="cardResult">' +
+        '<div class="cardTitle">' + h(card.title) + '</div>' + 
+        '<div class="setTitle">' + h(card.setTitle) + '</div>' +
+        '<div class="prices"></div>' +
+      '</div>');
   }
 
 }));
-/*
-$ ->
-
-  $(document).on 'touchmove', (e) ->
-    e.preventDefault
-
-  view = $('#basicSearch');
-
-  tappable '#basicSearch .menuButton', noScroll: true, onTap: ->
-    console.log('MENU') 
-
-  bar = $ '.searchBar', view
-  input = $ '.searchInput', bar
-  prompt = $ '.searchPrompt', bar
-  initialPromptText = prompt.val
-  results = $ '.results', view
-
-  # hide & show the search field 'prompt' appropriately
-  input.focus ->
-    bar.addClass 'focus'
-
-  input.blur ->
-    bar.removeClass 'focus'
-
-  input.on 'input', ->
-    if this.value == ''
-      bar.removeClass 'textEntered'
-    else
-      bar.addClass 'textEntered'
-
-  # results rows
-  tappable '#basicSearch .cardResult', 
-    activeClassDelay: 150, 
-    onTap: (x, y) ->
-      console.log(y);
-  
-*/

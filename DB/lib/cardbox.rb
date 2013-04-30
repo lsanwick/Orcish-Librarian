@@ -65,8 +65,8 @@ class CardBox
     FileUtils.mkdir(path + "/keys")
     FileUtils.mkdir(path + "/sets")
 
-    # debug("Saving name/hash lookup file")
-    # save_as_names(path + "/names.txt")
+    debug("Saving name/hash lookup file")
+    save_as_names(path + "/names.txt")    
 
     debug("Saving set meta-data file")
     sets = [ ]
@@ -84,30 +84,37 @@ class CardBox
     save_as_text(sets, path + "/sets.csv")
     sets = nil
 
-    if false
     debug("Saving set index files")    
     @data[:sets].each do |set|
       cards = [ ]
       @data[:cards][set].each do |card|
-        cards << [ "#{set} #{card[:name]} #{card[:art_index]}".to_name_hash.to_s ]
+        cards << [ card[:key] ]
       end
       save_as_text(cards, path + "/sets/" + set.to_name_hash.to_s)
     end   
     cards = nil
-    end
 
     debug("Saving name hash files")
-    names = { }
     @data[:sets].each do |set|
       @data[:cards][set].each do |card|
-        names[card[:search_name]] = names[card[:search_name]] || [ ]
-        names[card[:search_name]] << "#{set} #{card[:name]} #{card[:art_index]}".to_name_hash.to_s
+        save_as_text(card[:key], path + '/hashes/' + card[:name_hash], 'a')
+      end
+    end    
+
+    debug("Saving card files")
+    @data[:sets].each do |set|      
+      @data[:cards][set].each do |card|
+        card = card.merge({
+          :version_count => @data[:names][card[:name]],
+          :set_key => set.to_name_hash.to_s
+        })
+        card.delete(:tcg) unless card[:tcg] != card[:name]
+        card.delete(:display_name) unless card[:display_name] != card[:name]
+        card.delete(:search_name)
+        card.delete(:version_count) unless card[:version_count] > 1
+        save_json_to_file(card, path + '/keys/' + card[:key])
       end
     end
-    names.each_key do |hash| 
-      debug ("hash => " + hash)
-      # save_as_text(names[hash], path + '/hashes/' + hash)
-    end 
 
   end  
 
@@ -117,7 +124,7 @@ class CardBox
     open(path, 'w') do |io| 
       @data[:sets].each do |set|
         @data[:cards][set].each do |card|
-          if names[name].nil?
+          if names[card[:search_name]].nil?
             io.write('|' + card[:search_name])
             io.write('|' + card[:name_hash])
             names[card[:search_name]] = true
@@ -211,7 +218,7 @@ class CardBox
         io.puts(sql_insert_row(:cards, card.merge({
           :version_count => @data[:names][card[:name]],
           :idx => current_card_index,
-          :pk => "#{set_name} #{card[:name]} #{card[:art_index]}".to_name_hash.to_s,
+          :pk => card[:key],
           :set_pk => current_set_pk
         })))
       end
@@ -224,13 +231,17 @@ class CardBox
     open(path, 'w') { |io| io.write(JSON.pretty_generate(obj)) }
   end
 
-  def save_as_text(data, path)
-    open(path, 'w') do |io|
-      data.each do |row|
-        if row.class == String
-          io.puts row
-        else
-          io.puts row.join("\t")
+  def save_as_text(data, path, mode = 'w')
+    open(path, mode) do |io|
+      if (data.class == String)
+        io.puts data
+      elsif data.class == Array
+        data.each do |row|
+          if row.class == String
+            io.puts row
+          elsif row.class == Array
+            io.puts row.join("\t")
+          end
         end
       end
     end
