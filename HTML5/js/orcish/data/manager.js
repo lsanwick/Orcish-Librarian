@@ -4,14 +4,9 @@
 
     initialize: function(baseUrl) {
       this.baseUrl = baseUrl;
-    },
-
-    loadCard: function(key, callback) {
-
-    },
-
-    loadSet: function(key, callback) {
-      loadText(baseUrl)
+      this.dataQueue = new Orcish.Queue();
+      loadSets(this);
+      loadCardNameSearchBlob(this);
     },
 
     findCardsByTitle: function(text, callback) {
@@ -42,7 +37,52 @@
 
   }));
 
-  
+  function loadSets(self) {
+    self.dataQueue.addJob(function(job) {
+      Orcish.ajax({
+        url: self.baseUrl + '/data/sets.txt', 
+        success: function(text) {
+          self.sets = transformRawSetData(text);
+        },
+        complete: function() {
+          self.dataQueue.finished(job);
+        }
+      })
+    })
+  }
+
+  function transformRawSetData(text) {    
+    var sets = [ ];
+    text.splitData().forEach(function(row) {
+      if (row.length > 0) {
+        sets.push(new Orcish.Data.Set({
+          key: parseInt(row[0]), 
+          name: row[1], 
+          displayName: row[2], 
+          tcgName: row[3], 
+          format: row[4] ? parseInt(row[4]) : null,
+          type: row[5] ? parseInt(row[5]) : null
+        }))
+      }
+    })
+    return sets;
+  }
+
+  function loadCardNameSearchBlob(self) {
+    self.dataQueue.addJob(function(job) {
+      Orcish.ajax({
+        url: self.baseUrl + '/data/names.txt',
+        responseType: 'ArrayBuffer',
+        success: function(blob) {
+          self.nameSearchBlob = blob;
+        },
+        complete: function() {
+          self.dataQueue.finished(job);
+        }
+      })
+    })
+  }
+
   // ------------------------------------------------------------------------
   //  Boyer–Moore–Horspool string searches in ArrayBuffer
 
@@ -89,6 +129,24 @@
       view[i] = encoded.charCodeAt(i);
     }
     return buffer;
+  }
+
+  // ------------------------------------------------------------------------
+  //  Split text by rows and tabs
+
+  String.prototype.splitData = function() {
+    var result = [ ];
+    var rows = this.split("\n");
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i] != '') {
+        rows[i] = rows[i].split("\t");
+        for (var j = 0; j < rows[i].length; j++) {
+          rows[i][j] = rows[i][j] ? rows[i][j] : null;
+        }
+        result.push(rows[i]);
+      }
+    }
+    return result;
   }
 
 })()

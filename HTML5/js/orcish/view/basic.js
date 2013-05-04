@@ -2,7 +2,7 @@ Orcish.register('View.BasicSearch', Orcish.extend({
 
   initialize: function(app) {
     this.app = app;
-    this.dataSource = app.getDataSource();
+    this.dataManager = app.getDataManager();
     this.searchInput = $('#basicSearch input[name=search]');
     this.searchPrompt = $('#basicSearch .prompt');
     this.attachSearchBarEvents();

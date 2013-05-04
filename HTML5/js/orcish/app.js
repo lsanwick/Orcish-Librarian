@@ -4,8 +4,8 @@
 
   Orcish.register('App', Orcish.extend({
 
-    initialize: function() {    
-      this.dataSource = new Orcish.Data.LocalSource(this);
+    initialize: function(basePath) {    
+      this.dataManager = new Orcish.Data.Manager(basePath);
       this.basicSearch = new Orcish.View.BasicSearch(this);
       this.attachScrollEvents();
     },
@@ -37,8 +37,8 @@
       });
     },
 
-    getDataSource: function() {
-      return this.dataSource;
+    getDataManager: function() {
+      return this.dataManager;
     },
 
     pushView: function(view) {

@@ -61,11 +61,11 @@ class CardBox
 
     debug("Creating folder structure")
     FileUtils.mkdir(path)
-    FileUtils.mkdir(path + "/hashes")
+    FileUtils.mkdir(path + "/names")
     FileUtils.mkdir(path + "/keys")
     FileUtils.mkdir(path + "/sets")
 
-    debug("Saving name/hash lookup file")
+    debug("Saving name lookup file")
     save_as_names(path + "/names.txt")    
 
     debug("Saving set meta-data file")
@@ -77,11 +77,11 @@ class CardBox
         set,
         meta[:display],
        (meta[:tcg].nil? || meta[:tcg] == set) ? nil : meta[:tcg],
-        meta[:format],
-        meta[:type] 
+        meta[:format] == Orcish::Legacy ? nil : meta[:format],
+        meta[:type] == Orcish::SpecialSet ? nil : meta[:type]
       ]
     end
-    save_as_text(sets, path + "/sets.csv")
+    save_as_text(sets, path + "/sets.txt")
     sets = nil
 
     debug("Saving set index files")    
@@ -94,10 +94,10 @@ class CardBox
     end   
     cards = nil
 
-    debug("Saving name hash files")
+    debug("Saving name index files")
     @data[:sets].each do |set|
       @data[:cards][set].each do |card|
-        save_as_text(card[:key], path + '/hashes/' + card[:name_hash], 'a')
+        save_as_text(card[:key], path + '/names/' + card[:name_hash], 'a')
       end
     end    
 
@@ -209,7 +209,7 @@ class CardBox
         :name => set_name, 
         :display_name => (meta[:display] || set_name),
         :tcg => (meta[:tcg] || ''), 
-        :type => (meta[:type] || Orcish::Special),
+        :type => (meta[:type] || Orcish::SpecialSet),
         :format => (meta[:format] || Orcish::Legacy)
       ))
       io.puts
@@ -228,21 +228,15 @@ class CardBox
   end
 
   def save_json_to_file(obj, path)
-    open(path, 'w') { |io| io.write(JSON.pretty_generate(obj)) }
+    open(path, 'w') { |io| io.write(JSON.fast_generate(obj)) }
   end
 
   def save_as_text(data, path, mode = 'w')
-    open(path, mode) do |io|
-      if (data.class == String)
-        io.puts data
-      elsif data.class == Array
-        data.each do |row|
-          if row.class == String
-            io.puts row
-          elsif row.class == Array
-            io.puts row.join("\t")
-          end
-        end
+    data = [ data ] unless data.class == Array 
+    open(path, mode) do |io|      
+      data.each do |row|
+        row = [ row ] unless row.class == Array
+        io.puts row.join("\t")
       end
     end
   end

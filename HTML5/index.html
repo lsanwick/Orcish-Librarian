@@ -43,11 +43,14 @@
 <script src="js/ext/tappable.js"></script>
 <script src="js/orcish/base.js"></script>
 <script src="js/orcish/app.js"></script>
-<script src="js/orcish/data/source.js"></script>
-<script src="js/orcish/data/local.js"></script>
+<script src="js/orcish/queue.js"></script>
+<script src="js/orcish/data/manager.js"></script>
+<script src="js/orcish/data/node.js"></script>
+<script src="js/orcish/data/set.js"></script>
+<script src="js/orcish/data/card.js"></script>
 <script src="js/orcish/view/basic.js"></script>
 <script>
-  new Orcish.App();
+  gApp = new Orcish.App(location.href.replace(/\/[^\/]*$/, ''))
 </script>
 </body>
 </html>
