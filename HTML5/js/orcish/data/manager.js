@@ -23,7 +23,7 @@
       var hashes = [ ];
       var view = new Uint8Array(this.nameSearchBlob);
       var offset = 0;
-      text = text.toArrayBuffer();
+      text = ArrayBuffer.fromString(text);
       while (true) {
         var instance = this.nameSearchBlob.indexOf(text, offset);
         if (instance == -1) { break; }
@@ -32,7 +32,7 @@
         var hashEnd = ++hashStart;
         while (view[hashEnd] != NAME_HASH_SEPARATOR) { ++hashEnd; }
         offset = hashEnd;
-        hashes.push(parseInt(this.nameSearchBlob.slice(hashStart, hashEnd).toString()));
+        hashes.push(parseInt(String.fromArrayBuffer(this.nameSearchBlob.slice(hashStart, hashEnd))));
       }
       return hashes;
     }
@@ -138,14 +138,11 @@
     return buffer;
   }
 
-  String.prototype.toArrayBuffer = function() {
-    return ArrayBuffer.fromString(this);
-  }
-
   // ------------------------------------------------------------------------
+  //  Create a JavaScript string from a UTF-8 ArrayBuffer
 
-  ArrayBuffer.prototype.toString = function() {    
-    var view = new Uint8Array(this);
+  String.fromArrayBuffer = function(buffer) {    
+    var view = new Uint8Array(buffer);
     var encodedBytes = new Array(view.length);
     for (var i = 0; i < view.length; i++) {
       encodedBytes[i] = String.fromCharCode(view[i]);
