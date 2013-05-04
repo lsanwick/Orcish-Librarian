@@ -145,7 +145,7 @@
 // ----------------------------------------------------------------------------
 
 - (void) beginLookup:(QueuedLookup *)lookup {
-    NSString *url = [NSString stringWithFormat:@"http://partner.tcgplayer.com/x/phl.asmx/p?pk=ORCSHLBRN&p=%@&s=%@",
+    NSString *url = [NSString stringWithFormat:@"http://partner.tcgplayer.com/x3/phl.asmx/p?pk=ORCSHLBRN&p=%@&s=%@",
         [lookup.card.tcgName stringByEncodingForURL], [lookup.card.tcgSetName stringByEncodingForURL]];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData *response = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
@@ -167,10 +167,10 @@
 
 - (NSDictionary *) priceForResponse:(NSData *)response {
     NSString *text = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-    NSArray *tcgId = [text arrayOfCaptureComponentsMatchedByRegex:@"id&gt;(\\d+)"];    
-    NSArray *high = [text arrayOfCaptureComponentsMatchedByRegex:@"hiprice&gt;(\\d+\\.\\d+)"];
-    NSArray *average = [text arrayOfCaptureComponentsMatchedByRegex:@"avgprice&gt;(\\d+\\.\\d+)"];
-    NSArray *low = [text arrayOfCaptureComponentsMatchedByRegex:@"lowprice&gt;(\\d+\\.\\d+)"];
+    NSArray *tcgId = [text arrayOfCaptureComponentsMatchedByRegex:@"<id>(\\d+)"];
+    NSArray *high = [text arrayOfCaptureComponentsMatchedByRegex:@"<hiprice>(\\d+\\.\\d+)"];
+    NSArray *average = [text arrayOfCaptureComponentsMatchedByRegex:@"<avgprice>(\\d+\\.\\d+)"];
+    NSArray *low = [text arrayOfCaptureComponentsMatchedByRegex:@"<lowprice>(\\d+\\.\\d+)"];
     if (high.count == 1 && average.count == 1 && low.count == 1 && tcgId.count == 1) {
         return [NSDictionary dictionaryWithObjectsAndKeys:
             [NSDate date], @"cacheDate",
