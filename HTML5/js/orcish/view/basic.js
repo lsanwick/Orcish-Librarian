@@ -47,7 +47,7 @@ Orcish.register('View.BasicSearch', Orcish.extend({
 
   setSearchText: function(text) {
     var self = this;
-    self.dataSource.findCardsByTitle(text, {
+    self.dataManager.findCardsByTitle(text, {
       success: function(cards) {
         self.setCards(cards);
       },
