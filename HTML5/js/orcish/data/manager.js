@@ -1,5 +1,7 @@
 (function(){
 
+  var NAME_HASH_SEPARATOR = '|'.charCodeAt(0);
+
   Orcish.register('Data.Manager', Orcish.extend({
 
     initialize: function(baseUrl) {
@@ -10,29 +12,29 @@
     },
 
     findCardsByTitle: function(text, callback) {
-      
+      text = text.trim().toUpperCase().replace(/[^A-Z0-9_]/g, '');
+      var hashes = [ ];
+      if (text.length >= 3) {
+        hashes = this.findNameHashesByText(text);
+      }
     },    
 
     findNameHashesByText: function(text) {
-      /*
       var hashes = [ ];
-      var view = new Uint8Array(this.cardTitleSearchBlob);
-      var scope = { start: 0, length: view.length };
-      var separator = '|'.charCodeAt(0);
-      text = ArrayBuffer.fromString(text);
+      var view = new Uint8Array(this.nameSearchBlob);
+      var offset = 0;
+      text = text.toArrayBuffer();
       while (true) {
-        var instance = this.cardTitleSearchBlob.indexOf(text, scope.start, scope.length);
+        var instance = this.nameSearchBlob.indexOf(text, offset);
         if (instance == -1) { break; }
-        var hashStart = instance;            
-        while (view[hashStart] != separator) { ++hashStart; }
+        var hashStart = instance;
+        while (view[hashStart] != NAME_HASH_SEPARATOR) { ++hashStart; }
         var hashEnd = ++hashStart;
-        while (view[hashEnd] != separator) { ++hashEnd; }
-        scope.start = hashEnd;
-        scope.length = view.length - hashEnd;
-        hashes.push(parseInt(this.cardTitleSearchBlob.slice(hashStart, hashEnd).toString()));
+        while (view[hashEnd] != NAME_HASH_SEPARATOR) { ++hashEnd; }
+        offset = hashEnd;
+        hashes.push(parseInt(this.nameSearchBlob.slice(hashStart, hashEnd).toString()));
       }
       return hashes;
-      */
     }
 
   }));
@@ -91,7 +93,12 @@
     length = typeof length == 'number' ? length : (this.byteLength - start);
     var needleView = new Uint8Array(needle, 0, needle.byteLength);
     var haystackView = new Uint8Array(this, start, length);
-    return memmem(needleView, haystackView) + start;
+    var idx = memmem(needleView, haystackView);
+    if (idx == -1) {
+      return -1;
+    } else {
+      return idx + start;
+    }
   }
 
   function memmem(needle, haystack) {
@@ -129,6 +136,21 @@
       view[i] = encoded.charCodeAt(i);
     }
     return buffer;
+  }
+
+  String.prototype.toArrayBuffer = function() {
+    return ArrayBuffer.fromString(this);
+  }
+
+  // ------------------------------------------------------------------------
+
+  ArrayBuffer.prototype.toString = function() {    
+    var view = new Uint8Array(this);
+    var encodedBytes = new Array(view.length);
+    for (var i = 0; i < view.length; i++) {
+      encodedBytes[i] = String.fromCharCode(view[i]);
+    }
+    return decodeURIComponent(escape(encodedBytes.join('')));
   }
 
   // ------------------------------------------------------------------------
