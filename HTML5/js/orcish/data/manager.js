@@ -21,6 +21,9 @@
 
     findNameHashesByText: function(text) {
       var hashes = [ ];
+      if (text.length < 3) {
+        return hashes;
+      }
       var view = new Uint8Array(this.nameSearchBlob);
       var offset = 0;
       text = ArrayBuffer.fromString(text);
