@@ -71,11 +71,11 @@ class CardBox
     debug("Saving set meta-data file")
     sets = [ ]
     @data[:sets].each do |set|
-      meta = (@data[:meta][set] || { })      
+      meta = (@data[:meta][set] || { })
       sets << [
         set.to_name_hash.to_s.to_i,
         set,
-        meta[:display],
+       (meta[:display].nil? || meta[:display] == set) ? nil : meta[:display],
        (meta[:tcg].nil? || meta[:tcg] == set) ? nil : meta[:tcg],
         meta[:format] == Orcish::Legacy ? nil : meta[:format],
         meta[:type] == Orcish::SpecialSet ? nil : meta[:type]
@@ -88,21 +88,57 @@ class CardBox
     @data[:sets].each do |set|
       cards = [ ]
       @data[:cards][set].each do |card|
-        cards << [ card[:key] ]
+        cards << [ 
+          card[:key],
+          card[:name],
+         (card[:display_name].nil? || card[:display_name] == card[:name]) ? '' : card[:display_name],
+         (card[:tcg].nil? || card[:tcg] == card[:name]) ? '' : card[:tcg]
+        ]
       end
       save_as_text(cards, path + "/sets/" + set.to_name_hash.to_s)
     end   
     cards = nil
 
     debug("Saving name index files")
+    byname = { }
+    current_set_index = 0
     @data[:sets].each do |set|
+      current_set_index = current_set_index + 1
+      meta = (@data[:meta][set] || { })
       @data[:cards][set].each do |card|
-        save_as_text(card[:key], path + '/names/' + card[:name_hash], 'a')
+        byname[card[:name_hash]] = byname[card[:name_hash]] || [ ]
+        byname[card[:name_hash]] << {
+          key: card[:key],
+          name: card[:name],
+          display_name: (card[:display_name].nil? || card[:display_name] == card[:name]) ? '' : card[:display_name],
+          tcg: (card[:tcg].nil? || card[:tcg] == card[:name]) ? '' : card[:tcg],
+          art_index: card[:art_index],
+          set_key: set.to_name_hash.to_s,
+          set_index: current_set_index,
+          set_name: set,
+          set_display_name: (meta[:display].nil? || meta[:display] == set) ? nil : meta[:display],
+          set_tcg_name: (meta[:tcg].nil? || meta[:tcg] == set) ? nil : meta[:tcg],          
+        }
       end
-    end    
+    end
+    byname.each_key do |name_hash|
+      cards = byname[name_hash]
+      if cards.length > 0
+        cards.sort_by { |card| [ card[:set_index], card[:art_index] ] }
+        card = cards[0]
+        card = [
+          card[:key], 
+          card[:name], card[:display_name], card[:tcg], 
+          card[:set_key], card[:set_name], card[:set_display_name], card[:set_tcg_name],
+          cards.length > 1 ? '' : cards.length - 1
+        ]
+        save_as_text([ card ], path + '/names/' + name_hash)
+      end
+    end
+    byname = nil  
 
     debug("Saving card files")
-    @data[:sets].each do |set|      
+    @data[:sets].each do |set|
       @data[:cards][set].each do |card|
         card = card.merge({
           :version_count => @data[:names][card[:name]],

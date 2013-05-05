@@ -9,8 +9,8 @@
       this.runningJobId = 0;
     },
 
-    addJob: function(callback) {
-      this.waiting.push(callback);
+    addJob: function(automatic, callback) {
+      this.waiting.push({ automatic: automatic, callback: callback });
       checkJobs(this);
     },
 
@@ -27,8 +27,14 @@
     if (!self.runningJobId) {
       var job = self.waiting.shift();
       if (job) {
-        self.runningJobId = ++latestJobId;
-        job(self.runningJobId);
+        var jobId = ++latestJobId;
+        self.runningJobId = jobId;
+        setTimeout(function() {
+          job.callback(jobId);
+          if (job.automatic) {
+            self.finished(jobId)
+          }
+        }, 1);
       }
     }
   }

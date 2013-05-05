@@ -40,33 +40,6 @@ Orcish = {
 };
 
 // --------------------------------------------------------------------------
-//  AJAX helper
-
-Orcish.register('ajax', function(options) {
-  options = options || { };
-  options.url = options.url || window.location.href;
-  options.complete = options.complete || function(){};
-  options.error = options.error || function(){};
-  options.success = options.success || function(){};
-  options.type = options.type || 'GET';
-  options.responseType = options.responseType || 'text';
-  var xhr = new XMLHttpRequest();
-  xhr.open(options.type, options.url, true);
-  xhr.responseType = options.responseType.toLowerCase();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4) {
-      if (xhr.status == 200) {
-        options.success(xhr.response);
-      } else {
-        options.error();
-      }
-      options.complete();
-    }
-  }
-  xhr.send(null);
-});
-
-// --------------------------------------------------------------------------
 
 function h(text) {
   return String(text)

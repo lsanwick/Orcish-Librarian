@@ -11,43 +11,34 @@
       loadCardNameSearchBlob(this);
     },
 
-    findCardsByTitle: function(text, callback) {
+    findCardStubsByTitle: function(text, callback) {
+      var self = this;
       text = text.trim().toUpperCase().replace(/[^A-Z0-9_]/g, '');
-      var hashes = [ ];
-      if (text.length >= 3) {
-        hashes = this.findNameHashesByText(text);
-      }
-    },    
-
-    findNameHashesByText: function(text) {
-      var hashes = [ ];
-      if (text.length < 3) {
-        return hashes;
-      }
-      var view = new Uint8Array(this.nameSearchBlob);
-      var offset = 0;
-      text = ArrayBuffer.fromString(text);
-      while (true) {
-        var instance = this.nameSearchBlob.indexOf(text, offset);
-        if (instance == -1) { break; }
-        var hashStart = instance;
-        while (view[hashStart] != NAME_HASH_SEPARATOR) { ++hashStart; }
-        var hashEnd = ++hashStart;
-        while (view[hashEnd] != NAME_HASH_SEPARATOR) { ++hashEnd; }
-        offset = hashEnd;
-        hashes.push(parseInt(String.fromArrayBuffer(this.nameSearchBlob.slice(hashStart, hashEnd))));
-      }
-      return hashes;
+      self.dataQueue.addJob(false, function(job) {
+        var hashes = findNameHashesByText(self, text);
+        var tracker = new Orcish.MediaTracker();
+        for (var i = 0; i < hashes.length; i++) {
+          tracker.add(self.baseUrl + '/data/names/' + hashes[i]);
+        }
+        tracker.start({
+          success: function(data) {
+            var cardStubs = transformRawCardStubs(data);
+          },
+          complete: function() {
+            self.dataQueue.finished(job);
+          }
+        })
+      })
     }
 
   }));
 
   function loadSets(self) {
-    self.dataQueue.addJob(function(job) {
+    self.dataQueue.addJob(false, function(job) {
       Orcish.ajax({
         url: self.baseUrl + '/data/sets.txt', 
         success: function(text) {
-          self.sets = transformRawSetData(text);
+          self.sets = transformRawSets(text);
         },
         complete: function() {
           self.dataQueue.finished(job);
@@ -56,7 +47,7 @@
     })
   }
 
-  function transformRawSetData(text) {    
+  function transformRawSets(text) {    
     var sets = [ ];
     text.splitData().forEach(function(row) {
       if (row.length > 0) {
@@ -73,8 +64,31 @@
     return sets;
   }
 
+  function transformRawCardStubs(rawStubs) {
+    var stubs = [ ];
+    rawStubs.forEach(function(stub) {
+      stub = stub.split("\t");
+      stubs.push(new Orcish.Data.CardStub({
+        key: parseInt(stub[0]),
+        name: stub[1],
+        displayName: stub[2],
+        tcgName: stub[3],
+        setKey: parseInt(stub[4]),
+        setName: stub[5],
+        setDisplayName: stub[6],
+        setTcgName: stub[7],
+        versionCount: stub[8] ? parseInt(stub[8]) : null
+      }))
+    })
+    return stubs;
+  }
+
+  // ------------------------------------------------------------------------
+  //  Search methods for a blob of card titles and hash values 
+  //  e.g. |GIDEONJURA|123456|GIDEONSAVENGER|789012|...|
+
   function loadCardNameSearchBlob(self) {
-    self.dataQueue.addJob(function(job) {
+    self.dataQueue.addJob(false, function(job) {
       Orcish.ajax({
         url: self.baseUrl + '/data/names.txt',
         responseType: 'ArrayBuffer',
@@ -86,6 +100,27 @@
         }
       })
     })
+  }
+
+  function findNameHashesByText(self, text) {
+    var hashes = [ ];
+    if (text.length < 3) {
+      return hashes;
+    }
+    var view = new Uint8Array(self.nameSearchBlob);
+    var offset = 0;
+    text = ArrayBuffer.fromString(text);
+    while (true) {
+      var instance = self.nameSearchBlob.indexOf(text, offset);
+      if (instance == -1) { break; }
+      var hashStart = instance;
+      while (view[hashStart] != NAME_HASH_SEPARATOR) { ++hashStart; }
+      var hashEnd = ++hashStart;
+      while (view[hashEnd] != NAME_HASH_SEPARATOR) { ++hashEnd; }
+      offset = hashEnd;
+      hashes.push(parseInt(String.fromArrayBuffer(self.nameSearchBlob.slice(hashStart, hashEnd))));
+    }
+    return hashes;
   }
 
   // ------------------------------------------------------------------------
