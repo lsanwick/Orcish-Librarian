@@ -25,11 +25,11 @@ module Orcish
   end
   
   def self.log()
-    @log
+    @log || $stderr
   end
   
   def self.debug(message, name = 'ORCISH')
-    @log.puts("#{name}: #{message}")
+    log.puts("#{name}: #{message}")
   end
       
   def debug(message, name = 'ORCISH')

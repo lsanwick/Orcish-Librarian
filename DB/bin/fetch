@@ -2,33 +2,17 @@
 # encoding: utf-8
 
 require 'optparse'
-
-options = { :log => $stderr, :append => false }
-OptionParser.new do |opts|
-  opts.banner = 'fetch [options] [SET]...'
-  opts.on('-l', '--log [file]') {|f| s = open(f, 'w'); options[:log] = s; at_exit { s.close } }
-  opts.on('-a', '--append') { options[:append] = true }
-end.parse!
-
 require File.join(File.dirname(__FILE__), '../lib/bootstrap')
-Orcish.log = options[:log]
 
-collection = { }
 manager = FetchManager.new
-sets_to_process = (ARGV.length > 0) ? ARGV : manager.sets.keys
-sets_to_process.each do |set|
-  if manager.sets.keys.include?(set)    
-    cards = manager.cards_for_set(set)
-    collection[set] = cards
+box = CardBox.new
+sets_to_process = (ARGV.length > 0) ? ARGV : MtgSet.all_set_names
+sets_to_process.each do |set_name|
+  set = manager.fetch(set_name)
+  if set.nil?
+    debug("Could not fetch set \"#{set_name}\"")
   else
-    Orcish.debug("The set '#{set}' could not be found.")
+    box.add(set)
   end
-end
-
-FileUtils.rm_rf("data/orcish.pstore") unless options[:append]
-PStore.new("data/orcish.pstore").transaction do |store|
-  collection.each_pair do |set, cards|
-    store[set] = cards
-  end
-  store[:sets] = manager.sets
+  box.save_as_yaml(File.join(File.dirname(__FILE__), '../data/store'))
 end

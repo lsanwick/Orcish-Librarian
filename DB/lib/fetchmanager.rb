@@ -8,15 +8,12 @@ class FetchManager
   
   def initialize
     @gatherer = Gatherer.new
-    @sets = @gatherer.sets
   end
-    
-  def sets
-    @sets
+
+  def fetch(name)
+    set = MtgSet.new(name)
+    set.add(@gatherer.cards_for_set(name))
+    set
   end
-      
-  def cards_for_set(set)
-    cards = @gatherer.cards_for_set(set)        
-  end
-      
+
 end
