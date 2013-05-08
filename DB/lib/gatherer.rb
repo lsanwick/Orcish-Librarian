@@ -17,15 +17,15 @@ class Gatherer < Source
   def set_other_parts(cards)
     sorted = { }
     cards.each do |card|
-      if card.collector_number != ''
-        sorted[card.collector_number] = sorted[card.collector_number] || [ ]
-        sorted[card.collector_number] << card
+      if card.collector != ''
+        sorted[card.collector] = sorted[card.collector] || [ ]
+        sorted[card.collector] << card
       end
     end
     sorted.each do |number, cards|
       cards.each do |card|
         others = cards.select { |other| other != card }
-        card.other_parts = others.map { |other| other.name }
+        card.others = others.map { |other| other.name }
       end
     end
   end
@@ -52,23 +52,23 @@ class Gatherer < Source
       cells = tr.search('td')
       card = MtgCard.new(cells[1].at('a').inner_text.strip, set_name)
       others = by_name[card.name] = by_name[card.name] || [ ]
-      card.gatherer_id = cells[1].at('a')['href'].gsub(/^.*multiverseid=(\d+)$/, '\1').to_i
+      card.gatherer = cells[1].at('a')['href'].gsub(/^.*multiverseid=(\d+)$/, '\1').to_i
       card.artist = cells[2].inner_text.strip
-      card.collector_number = cells[0].inner_text.strip
+      card.collector = cells[0].inner_text.strip
       card.rarity = cells[4].inner_text.strip      
-      if (others.length == 0 || card.collector_number != others[0].collector_number || card.rarity == 'L' || (set_name != 'Apocalypse' && set_name != 'Invasion'))
+      if (others.length == 0 || card.collector != others[0].collector || card.rarity == 'L' || (set_name != 'Apocalypse' && set_name != 'Invasion'))
         others << card
       else
-        debug("[WARNING] #{card.name} has a duplicate collector's number (#{card.collector_number})")
+        debug("[WARNING] #{card.name} has a duplicate collector's number (#{card.collector})")
       end
     end
     by_name.each_pair do |name, cards|      
       if cards.length > 1
         for i in 0 ... cards.length
-          cards[i].art_index = (i + 1)
+          cards[i].art = (i + 1)
         end
       else 
-        cards[0].art_index = nil
+        cards[0].art = nil
       end
     end
     by_name
@@ -85,18 +85,18 @@ class Gatherer < Source
         value = cells[1]
         if label == 'Name'         
           current = MtgCard.new(value.inner_text.strip, set_name)
-          current.gatherer_id = value.at('a')['href'].gsub(/^.*?(\d+)$/, '\1').to_i
+          current.gatherer = value.at('a')['href'].gsub(/^.*?(\d+)$/, '\1').to_i
         elsif label == 'Pow/Tgh'
           current.power = value.inner_text.strip.gsub(/^\(([^\/]*(?:\{1\/2\})?)\/([^\/]*(?:\{1\/2\})?)\)/, '\1')
           current.toughness = value.inner_text.strip.gsub(/^\(([^\/]*(?:\{1\/2\})?)\/([^\/]*(?:\{1\/2\})?)\)/, '\2')
         elsif label == 'Loyalty'
           current.loyalty = value.inner_text.strip.gsub(/^\((.*)\)$/, '\1')
         elsif label == 'Type'
-          current.type_line = value.inner_text.strip.gsub(/\s+/, ' ')
+          current.type = value.inner_text.strip.gsub(/\s+/, ' ')
         elsif label == 'Rules Text'
-          current.oracle_text = value.inner_text.strip
+          current.oracle = value.inner_text.strip.gsub(/\n+/, "\n")
         elsif label == 'Cost'
-          current.mana_cost = value.inner_text.strip
+          current.cost = value.inner_text.strip
         end
       else
         # disregard token cards

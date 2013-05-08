@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'yaml'
+require 'psych'
 
 class CardBox 
   
@@ -19,17 +19,10 @@ class CardBox
       FileUtils.mkdir_p(path + '/' + set.name)
       set.cards.each do |card|
         open("#{path}/#{set.name}/#{card.key}.yml", 'w') do |io| 
-          YAML.dump(card.to_hash, io) 
+          io.print card.to_yaml
         end
       end
     end
   end
     
-end
-
-
-class Array
-  def to_yaml_style
-    :inline
-  end
 end

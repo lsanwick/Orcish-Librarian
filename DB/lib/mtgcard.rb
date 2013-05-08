@@ -2,38 +2,39 @@
 class MtgCard 
 
   attr_accessor \
-    :gatherer_id,
-    :mana_cost,
-    :type_line,
-    :oracle_text,
+    :gatherer,
+    :cost,
+    :type,
+    :oracle,
     :power, 
     :toughness, 
     :loyalty,
     :rarity,
     :artist, 
-    :collector_number,
-    :art_index,
-    :other_parts
+    :collector,
+    :art,
+    :others
 
   attr_reader :name, :set_name
 
   def initialize(text, set_name)
     @name = text.to_spell_name
-    @display_name = text.to_display_name unless text.to_display_name == @name
-    @tcg_name = text.to_tcg_name unless text.to_tcg_name == @name
-    @set_name = set_name
+    @display = text.to_display_name unless text.to_display_name == @name
+    @tcg = text.to_tcg_name unless text.to_tcg_name == @name
+    @set = set_name
+    @others = [ ]
   end
 
   def display_name
-    @display_name || @name
+    @display || @name
   end
 
   def tcg_name
-    @tcg_name || @name
+    @tcg || @name
   end
 
   def key
-    name #name + (art_index && art_index > 1 ? " - #{art_index}" : '')
+    name + (@art && @art > 1 ? " - #{@art}" : '')
   end
 
   def search_name
@@ -45,46 +46,64 @@ class MtgCard
   end
 
   def is_token?
-    (@mana_cost.nil? || @mana_cost == '') && (@name == 'Hornet' || @type_line == "Creature - #{@name}")
+    (@cost.nil? || @cost == '') && (@name == 'Hornet' || @type == "Creature - #{@name}")
   end
 
   def merge!(other)
-    self.gatherer_id = other.gatherer_id || self.gatherer_id
-    self.mana_cost = other.mana_cost || self.mana_cost
-    self.type_line = other.type_line || self.type_line
-    self.oracle_text = other.oracle_text || self.oracle_text
+    self.gatherer = other.gatherer || self.gatherer
+    self.cost = other.cost || self.cost
+    self.type = other.type || self.type
+    self.oracle = other.oracle || self.oracle
     self.power = other.power || self.power 
     self.toughness = other.toughness || self.toughness 
     self.loyalty = other.loyalty || self.loyalty
     self.rarity = other.rarity || self.rarity
     self.artist = other.artist || self.artist
-    self.collector_number = other.collector_number || self.collector_number
-    self.art_index = other.art_index || self.art_index
+    self.collector = other.collector || self.collector
+    self.art = other.art || self.art
   end
 
   def to_s
     "[#{self.name}]"
   end
 
-  def to_hash
-    hash = { }
-    hash['name'] = @name
-    hash['set_name'] = @set_name
-    hash['display_name'] = @display_name unless (@display_name.nil? || @display_name == '')
-    hash['tcg_name'] = @tcg_name unless (@tcg_name.nil? || @tcg_name == '')
-    hash['gatherer_id'] = @gatherer_id unless (@gatherer_id.nil? || @gatherer_id == '')
-    hash['mana_cost'] = @mana_cost unless (@mana_cost.nil? || @mana_cost == '')
-    hash['type_line'] = @type_line unless (@type_line.nil? || @type_line == '')    
-    hash['power'] = (@power.to_i.to_s == @power ? @power.to_i : @power) unless (@power.nil? || @power == '') 
-    hash['toughness'] = (@toughness.to_i.to_s == @toughness ? @toughness.to_i : @toughness) unless (@toughness.nil? || @toughness == '')
-    hash['loyalty'] = (@loyalty.to_i.to_s == @loyalty ? @loyalty.to_i : @loyalty) unless (@loyalty.nil? || @loyalty == '')
-    hash['rarity'] = @rarity unless (@rarity.nil? || @rarity == '')
-    hash['artist'] = @artist unless (@artist.nil? || @artist == '') 
-    hash['collector_number'] = (@collector_number.to_i.to_s == @collector_number ? @collector_number.to_i : @collector_number) unless (@collector_number.nil? || @collector_number == '')
-    hash['art_index'] = @art_index unless (@art_index.nil? || @art_index == '')
-    hash['others'] = @other_parts unless @other_parts.length == 0
-    hash['oracle_text'] = @oracle_text unless (@oracle_text.nil? || @oracle_text == '')
-    hash
+  def to_yaml
+    text = [ ]
+    text << "name: #{y(@name)}"
+    text << "display: #{y(@display)}" unless (@display.nil? || @display == '')
+    text << "tcg: #{y(@tcg)}" unless @tcg.nil?
+    text << "set: #{y(@set)}"
+    text << "gatherer: #{y(@gatherer)}"
+    text << "cost: #{y(@cost)}" unless (@cost.nil? || @cost == '')
+    text << "type: #{y(@type)}" unless (@type.nil? || @type == '')
+    text << "power: #{y(@power)}" unless (@power.nil? || @power == '') 
+    text << "toughness: #{y(@toughness)}" unless (@toughness.nil? || @toughness == '') 
+    text << "loyalty: #{y(@loyalty)}" unless (@loyalty.nil? || @loyalty == '') 
+    text << "rarity: #{y(@rarity)}" unless (@rarity.nil? || @rarity == '')    
+    text << "artist: #{y(@artist)}" unless (@artist.nil? || @artist == '')
+    text << "collector: #{y(@collector)}" unless (@collector.nil? || @collector == '')
+    text << "art:  #{y(@art)}" unless (@art.nil? || @art == '')
+    text << "others: #{y(@others)}" unless @others.length == 0
+    text << "oracle: #{y(@oracle)}" unless (@oracle.nil? || @oracle == '')
+    text.join("\n")
+  end
+
+  def y(obj, in_array = false)
+    if obj.class == Array
+      '[ ' + (obj.map { |val| y(val, true) }).join(', ') + ' ]'
+    else    
+      if obj.to_s.to_i == obj.to_s
+        obj.to_s.to_i
+      else
+        if (in_array && obj.to_s.include?(',')) || obj.to_s.match(/(^'|'$)/)
+          obj = "'#{obj.to_s.gsub(/'/,"''")}'"
+        end
+        if obj.to_s.include?("\n")
+          obj = "|\n  " + obj.gsub(/\n/, "\n\  ")
+        end
+        obj.to_s
+      end
+    end
   end
 
 end
