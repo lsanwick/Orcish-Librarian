@@ -10,11 +10,12 @@ class Gatherer < Source
     checklist = checklist_for_set(set_name)
     spoiler = spoiler_for_set(set_name)
     cards = merge_checklist_and_spoiler(checklist, spoiler)
-    set_other_parts(cards)
+    set_other_parts_and_variants(cards)
     cards
   end
   
-  def set_other_parts(cards)
+  def set_other_parts_and_variants(cards)
+    # other parts (sorted by collector #)
     sorted = { }
     cards.each do |card|
       if card.collector != ''
@@ -28,6 +29,13 @@ class Gatherer < Source
         card.others = others.map { |other| other.name }
       end
     end
+    # art variants (sorted by name)
+    sorted = { }
+    cards.each do |card|
+      sorted[card.name] = sorted[name] || [ ]
+      sorted[card.name] << card
+    end
+    # TODO
   end
 
   def merge_checklist_and_spoiler(checklist, spoiler)

@@ -35,7 +35,7 @@ class MtgCard
   end
 
   def key
-    name + (@art && @art > 1 ? " - #{@art}" : '')
+    name + (@art && @art > 0 ? " - #{@art}" : '')
   end
 
   def search_name
@@ -83,7 +83,7 @@ class MtgCard
     text << "rarity: #{y(@rarity)}" unless (@rarity.nil? || @rarity == '')    
     text << "artist: #{y(@artist)}" unless (@artist.nil? || @artist == '')
     text << "collector: #{y(@collector)}" unless (@collector.nil? || @collector == '')
-    text << "art: #{y(@art)}" unless (@art.nil? || @art == '')
+    text << "art: #{y(@art)} / #{y(@max_art)}" unless (@art.nil? || @art == '')
     text << "others: #{y(@others)}" unless @others.length == 0
     text << "oracle: #{y(@oracle, force_block_text: true)}" unless (@oracle.nil? || @oracle == '')
     text.join("\n")
