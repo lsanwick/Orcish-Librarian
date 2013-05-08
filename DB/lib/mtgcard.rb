@@ -1,3 +1,4 @@
+# encoding: utf-8
 
 class MtgCard 
 
@@ -82,26 +83,26 @@ class MtgCard
     text << "rarity: #{y(@rarity)}" unless (@rarity.nil? || @rarity == '')    
     text << "artist: #{y(@artist)}" unless (@artist.nil? || @artist == '')
     text << "collector: #{y(@collector)}" unless (@collector.nil? || @collector == '')
-    text << "art:  #{y(@art)}" unless (@art.nil? || @art == '')
+    text << "art: #{y(@art)}" unless (@art.nil? || @art == '')
     text << "others: #{y(@others)}" unless @others.length == 0
-    text << "oracle: #{y(@oracle)}" unless (@oracle.nil? || @oracle == '')
+    text << "oracle: #{y(@oracle, force_block_text: true)}" unless (@oracle.nil? || @oracle == '')
     text.join("\n")
   end
 
-  def y(obj, in_array = false)
+  def y(obj, opts = { })
     if obj.class == Array
-      '[ ' + (obj.map { |val| y(val, true) }).join(', ') + ' ]'
+      '[ ' + (obj.map { |val| y(val, in_array: true) }).join(', ') + ' ]'
     else    
       if obj.to_s.to_i == obj.to_s
         obj.to_s.to_i
       else
-        if (in_array && obj.to_s.include?(',')) || obj.to_s.match(/(^'|'$)/)
+        if obj.to_s.include?("\n") || opts[:force_block_text]
+          "|\n  " + obj.gsub(/\n/, "\n\  ")
+        elsif (opts[:in_array] && obj.to_s.include?(',')) || obj.to_s.match(/(^'|'$|^\{|\}$|^\*)/)
           obj = "'#{obj.to_s.gsub(/'/,"''")}'"
+        else
+          obj.to_s
         end
-        if obj.to_s.include?("\n")
-          obj = "|\n  " + obj.gsub(/\n/, "\n\  ")
-        end
-        obj.to_s
       end
     end
   end
