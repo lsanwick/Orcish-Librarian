@@ -5,14 +5,14 @@ require 'optparse'
 require File.join(File.dirname(__FILE__), '../lib/bootstrap')
 
 manager = FetchManager.new
-box = CardBox.new
 sets_to_process = (ARGV.length > 0) ? ARGV : MtgSet.all_set_names
 sets_to_process.each do |set_name|
   set = manager.fetch(set_name)
   if set.nil?
     debug("Could not fetch set \"#{set_name}\"")
   else
+  	box = CardBox.new
     box.add(set)
+    box.save_as_yaml(File.join(File.dirname(__FILE__), '../data/store'))
   end
-  box.save_as_yaml(File.join(File.dirname(__FILE__), '../data/store'))
 end

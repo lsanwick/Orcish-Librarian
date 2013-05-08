@@ -26,16 +26,22 @@ class Gatherer < Source
     sorted.each do |number, cards|
       cards.each do |card|
         others = cards.select { |other| other != card }
-        card.others = others.map { |other| other.name }
+        card.others = others.map { |other| other.key }
       end
     end
     # art variants (sorted by name)
     sorted = { }
     cards.each do |card|
-      sorted[card.name] = sorted[name] || [ ]
-      sorted[card.name] << card
+      sorted[card.name] = sorted[card.name] || [ ]
+      sorted[card.name] << card      
     end
-    # TODO
+    sorted.each do |name, cards|
+      cards.each do |card|
+        if card.art != nil && card.art != ''
+          card.max_art = (cards.map { |c| c.art.to_i }).max
+        end
+      end
+    end
   end
 
   def merge_checklist_and_spoiler(checklist, spoiler)
@@ -102,7 +108,7 @@ class Gatherer < Source
         elsif label == 'Type'
           current.type = value.inner_text.strip.gsub(/\s+/, ' ')
         elsif label == 'Rules Text'
-          current.oracle = value.inner_text.strip.gsub(/\n+/, "\n")
+          current.oracle = fix_oracle_text(value.inner_text.strip.gsub(/\n+/, "\n"), set_name)
         elsif label == 'Cost'
           current.cost = value.inner_text.strip
         end
@@ -114,6 +120,45 @@ class Gatherer < Source
       end
     end
     by_name
+  end
+
+  def fix_oracle_text(text, set_name)
+
+    # fix basic lands
+    if text.length == 1  
+      text = "{T}: Add {#{text}} to your mana pool." 
+    end  
+
+    # Unhinged has 1/2 mana symbols that look like nonsense
+    # It also has 1/2 P/T modifiers that are represented similarly
+    if set_name == 'Unhinged'
+      text.gsub!(/\{([WBURG])([WBURG])\}/i, '{\1}{\2}')
+      text.gsub!(/\{o(\d+)o\{1\/2\}\}/, '{\1}{o{C\/2}}')
+      text.gsub!('{o{1\/2}}', '{o{C\/2}}')
+      text.gsub!(/\{o\{1\/2\*([WBURG])\}\}/, '{o{\1\/2}}')
+      text.gsub!(/\{o\{([WBURGC])\/2\}\}/i, '{\1/2}')
+      text.gsub!(/\{1\/2\}/, '½')
+      text.gsub!(/o([0-9WBURGX])o([0-9WBURGX])/, '{\1}{\2}')
+    end
+
+    # Unglued was never updated with modern markup
+    if set_name == 'Unglued'
+      text.gsub!(/o([\d]+|[WBURGS])/, '{\1}') # fixes old-style mana symbol
+      text.gsub!(/ocT/, '{T}') # fixes old-style tap symbol
+    end 
+
+    # miscellaneous text bugs
+    text.gsub!(/\n+/, "\n") # no more than one newline in a row
+    text.gsub!(/\{(\d+)([WBURGS]+)\}/, '{\1}{\2}') # fix compressed mana cost in Blast from the Past
+    text.gsub!(/\{1\}0\}/, '{10}') # fixes a bug in Draco's {10} symbol
+    text.gsub!(/\{2\}0\}/, '{20}') # fixes a bug in Spawnsire of Ulamog's text
+    text.gsub!(/\{([^}]+)\{/, '{\1}{') # fixes a symbol bug in Rhys the Redeemed's text
+    text.gsub!(/\{S\}i\}/i, '{S}') # fixes a bug with Snow Mana symbol            
+
+    # convert hyphen into em-dash
+    text.gsub(/(\s)-(\s)/, '\1—\2');
+
+    text
   end
       
 end
