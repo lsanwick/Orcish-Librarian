@@ -9,15 +9,18 @@ else
   Dir.chdir "data"
 end
 
-# create names.txt file
-names = { }
+sets_by_name = { }
+search_names = [ ]
+
+# collect all the relevant data for post-processing
 Dir.glob("*").each do |set_name|
   if File.directory?(set_name)
     Dir.glob(File.join(set_name, '*.yml')).each do |file|
       File.open(file, 'r') do |io|
         begin 
-          card = YAML.load(io)          
-          names[MtgCard.new(card['name'], set_name).search_name] = true
+          card = YAML.load(io)
+          sets_by_name[card['name']] = sets_by_name[card['name']] || [ ]
+          sets_by_name[card['name']] << set_name
         rescue Exception => e
           puts "Error loading YAML document: #{file}"
           puts e.to_s
@@ -26,7 +29,20 @@ Dir.glob("*").each do |set_name|
     end    
   end
 end
-File.open('names.txt', 'w') do |io|
-  io.write names.keys.sort.join(',')
+
+sets_by_name.each do |name, sets|
+  search_name = MtgCard.new(name).search_name
+  search_names << search_name 
+  # TODO: write index file  
 end
 
+# create search-by-name file
+File.open('names.txt', 'w') do |io|
+  io.write(search_names.sort.join(','))
+end
+
+# create index-by-name files
+#names.each do |name, sets| 
+#  File.open('names.txt', 'w') do |io|
+#  io.write names.keys.sort.join(',')
+#end

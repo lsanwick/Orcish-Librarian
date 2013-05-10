@@ -19,7 +19,7 @@ class MtgCard
     :max_art,
     :others
 
-  def initialize(name, set_name)
+  def initialize(name, set_name = nil)
     @name = clean_name(name)
     @set = set_name
     @others = [ ]
@@ -84,7 +84,7 @@ class MtgCard
         obj.to_s.to_i
       else
         if obj.to_s.include?("\n") || opts[:force_block_text]
-          "|\n  " + obj.gsub(/\n/, "\n\  ")
+          "|\n " + obj.gsub(/\n/, "\n ")
         elsif (opts[:in_array] && obj.to_s.include?(',')) || obj.to_s.match(/(^'|'$|^\{|\}$|^\*|:)/)
           obj = "'#{obj.to_s.gsub(/'/,"''")}'"
         else
