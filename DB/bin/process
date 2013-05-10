@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+require File.join(File.dirname(__FILE__), '../lib/bootstrap')
+
+if ARGV.length == 1
+  Dir.chdir ARGV[0]
+else
+  Dir.chdir "data"
+end
+
+# create names.txt file
+names = { }
+Dir.glob("*").each do |set_name|
+  if File.directory?(set_name)
+    Dir.glob(File.join(set_name, '*.yml')).each do |file|
+      File.open(file, 'r') do |io|
+        begin 
+          card = YAML.load(io)          
+          names[MtgCard.new(card['name'], set_name).search_name] = true
+        rescue Exception => e
+          puts "Error loading YAML document: #{file}"
+          puts e.to_s
+        end        
+      end
+    end    
+  end
+end
+File.open('names.txt', 'w') do |io|
+  io.write names.keys.sort.join(',')
+end
+

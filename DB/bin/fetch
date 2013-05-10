@@ -13,6 +13,6 @@ sets_to_process.each do |set_name|
   else
   	box = CardBox.new
     box.add(set)
-    box.save_as_yaml(File.join(File.dirname(__FILE__), '../data/store'))
+    box.save_as_yaml(File.join(File.dirname(__FILE__), '../data'))
   end
 end

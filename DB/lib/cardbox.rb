@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require 'psych'
-
 class CardBox 
   
   include Orcish

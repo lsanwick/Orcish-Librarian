@@ -126,8 +126,11 @@ class Gatherer < Source
 
     # fix basic lands
     if text.length == 1  
-      text = "{T}: Add {#{text}} to your mana pool." 
+      text = ""
     end  
+
+    # Capitalize all symbols inside curly brackets
+    text.gsub!(/\{.*?\}/) { |s| s.upcase; }
 
     # Unhinged has 1/2 mana symbols that look like nonsense
     # It also has 1/2 P/T modifiers that are represented similarly

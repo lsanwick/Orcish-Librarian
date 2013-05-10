@@ -3,15 +3,13 @@
 
 require 'optparse'
 
-options = { :log => $stderr, :empty_cache => false }
+options = { :empty_cache => false }
 OptionParser.new do |opts|
   opts.banner = 'clean [options] '
-  opts.on('-l', '--log [file]') {|f| s = open(f, 'w'); options[:log] = s; at_exit { s.close } }
   opts.on('-c', '--empty-cache') { options[:empty_cache] = true }
 end.parse!
 
 require File.join(File.dirname(__FILE__), '../lib/bootstrap')
-Orcish.log = options[:log]
 
 storage_path = "data/*"
 cache_path = "cache/*"
