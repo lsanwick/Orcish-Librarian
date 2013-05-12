@@ -12,12 +12,16 @@ class String
     'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y', 'ƒ' => 'f'
   }
   
-  def to_basic_ascii()   
+  def to_basic_ascii
     result = self.dup
     @@translations.each_pair do |search, replace|
       result.gsub!(search, replace)
     end    
     result
+  end
+
+  def to_file_name
+    self.to_basic_ascii.gsub(/[:\/\\\*\?"<>\|]/, ' ').gsub(/\s+/, ' ').strip
   end
 
 end

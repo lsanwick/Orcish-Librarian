@@ -3,24 +3,22 @@
 
 require File.join(File.dirname(__FILE__), '../lib/bootstrap')
 
-if ARGV.length == 1
-  Dir.chdir ARGV[0]
-else
-  Dir.chdir "data"
-end
+include Orcish
 
+cards_dir = File.join(File.dirname(__FILE__), '../data/cards')
+names_dir = File.join(File.dirname(__FILE__), '../data/names')
 sets_by_name = { }
 search_names = [ ]
 
 # collect all the relevant data for post-processing
-Dir.glob("*").each do |set_name|
+Dir.glob(File.join(cards_dir, "*")).each do |set_name|
   if File.directory?(set_name)
     Dir.glob(File.join(set_name, '*.yml')).each do |file|
       File.open(file, 'r') do |io|
         begin 
           card = YAML.load(io)
           sets_by_name[card['name']] = sets_by_name[card['name']] || [ ]
-          sets_by_name[card['name']] << set_name
+          sets_by_name[card['name']] << MtgSet.new(card['set']).key
         rescue Exception => e
           puts "Error loading YAML document: #{file}"
           puts e.to_s
@@ -30,19 +28,20 @@ Dir.glob("*").each do |set_name|
   end
 end
 
+# create index-by-name files
 sets_by_name.each do |name, sets|
   search_name = MtgCard.new(name).search_name
-  search_names << search_name 
-  # TODO: write index file  
+  search_names << search_name
+  File.open(File.join(names_dir, "#{search_name}.yml"), 'w') do |io|
+    io.puts("name: #{y(name)}\n")
+    io.puts("sets:")
+    sets.each do |set_name|
+      io.puts " - #{y(set_name)}"
+    end
+  end
 end
 
 # create search-by-name file
-File.open('names.txt', 'w') do |io|
+File.open(File.join(names_dir, 'all.txt'), 'w') do |io|
   io.write(search_names.sort.join(','))
 end
-
-# create index-by-name files
-#names.each do |name, sets| 
-#  File.open('names.txt', 'w') do |io|
-#  io.write names.keys.sort.join(',')
-#end

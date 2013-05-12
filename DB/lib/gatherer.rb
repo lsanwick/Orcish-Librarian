@@ -32,8 +32,8 @@ class Gatherer < Source
     # art variants (sorted by name)
     sorted = { }
     cards.each do |card|
-      sorted[card.name] = sorted[card.name] || [ ]
-      sorted[card.name] << card      
+      sorted[card.single_spell_name] = sorted[card.single_spell_name] || [ ]
+      sorted[card.single_spell_name] << card      
     end
     sorted.each do |name, cards|
       cards.each do |card|
@@ -65,15 +65,15 @@ class Gatherer < Source
     doc.search("tr[@class=cardItem]").each do |tr|
       cells = tr.search('td')
       card = MtgCard.new(cells[1].at('a').inner_text.strip, set_name)
-      others = by_name[card.name] = by_name[card.name] || [ ]
+      by_name[card.single_spell_name] = by_name[card.single_spell_name] || [ ]
       card.gatherer = cells[1].at('a')['href'].gsub(/^.*multiverseid=(\d+)$/, '\1').to_i
       card.artist = cells[2].inner_text.strip
       card.collector = cells[0].inner_text.strip
       card.rarity = cells[4].inner_text.strip      
-      if (others.length == 0 || card.collector != others[0].collector || card.rarity == 'L' || (set_name != 'Apocalypse' && set_name != 'Invasion'))
-        others << card
+      if (by_name[card.single_spell_name].length == 0 || card.collector != by_name[card.single_spell_name][0].collector || card.rarity == 'L' || (set_name != 'Apocalypse' && set_name != 'Invasion'))
+        by_name[card.single_spell_name] << card
       else
-        debug("[WARNING] #{card.name} has a duplicate collector's number (#{card.collector})")
+        debug("[WARNING] #{card.single_spell_name} has a duplicate collector's number (#{card.collector})")
       end
     end
     by_name.each_pair do |name, cards|      
@@ -115,7 +115,7 @@ class Gatherer < Source
       else
         # disregard token cards
         if !current.is_token?
-          by_name[current.name] = current
+          by_name[current.single_spell_name] = current
         end
       end
     end

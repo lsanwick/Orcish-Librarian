@@ -13,6 +13,9 @@ rescue LoadError
   exit
 end
 
+require 'pry'
+require 'pry-nav'
+
 require 'digest/sha2'
 require 'open-uri'
 require 'net/http'
@@ -20,10 +23,11 @@ require 'fileutils'
 require 'yaml'
 
 require 'orcish'
+require 'gatherer'
 require 'mtgset'
 require 'mtgcard'
-require 'fetchmanager'
 require 'cardbox'
 
 FileUtils.mkdir_p("cache")
-FileUtils.mkdir_p("data")
+FileUtils.mkdir_p("data/cards")
+FileUtils.mkdir_p("data/names")
