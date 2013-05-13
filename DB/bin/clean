@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
-require 'optparse'
+require File.join(File.dirname(__FILE__), '../lib/bootstrap')
 
 options = { :empty_cache => false }
 OptionParser.new do |opts|
@@ -9,9 +9,9 @@ OptionParser.new do |opts|
   opts.on('-c', '--empty-cache') { options[:empty_cache] = true }
 end.parse!
 
-require File.join(File.dirname(__FILE__), '../lib/bootstrap')
 
-storage_path = "data/*"
+
+storage_path = File.join "data/*"
 cache_path = "cache/*"
 
 Orcish.debug("Deleting '#{storage_path}'")

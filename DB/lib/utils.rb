@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'yaml'
+
 class String
   
   @@translations = {
@@ -22,6 +24,6 @@ class String
 
   def to_file_name
     self.to_basic_ascii.gsub(/[:\/\\\*\?"<>\|]/, ' ').gsub(/\s+/, ' ').strip
-  end
+  end  
 
 end

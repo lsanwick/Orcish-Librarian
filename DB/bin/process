@@ -2,46 +2,60 @@
 # encoding: utf-8
 
 require File.join(File.dirname(__FILE__), '../lib/bootstrap')
-
 include Orcish
 
-cards_dir = File.join(File.dirname(__FILE__), '../data/cards')
-names_dir = File.join(File.dirname(__FILE__), '../data/names')
+FileUtils.mkdir_p('data/build/sets')
+
+cards_by_search_name = { }
+cards_by_set_name = { }
 sets_by_name = { }
-search_names = [ ]
 
 # collect all the relevant data for post-processing
-Dir.glob(File.join(cards_dir, "*")).each do |set_name|
-  if File.directory?(set_name)
-    Dir.glob(File.join(set_name, '*.yml')).each do |file|
-      File.open(file, 'r') do |io|
-        begin 
-          card = YAML.load(io)
-          sets_by_name[card['name']] = sets_by_name[card['name']] || [ ]
-          sets_by_name[card['name']] << MtgSet.new(card['set']).key
-        rescue Exception => e
-          puts "Error loading YAML document: #{file}"
-          puts e.to_s
-        end        
+Dir.glob('data/source/*').each do |set_dir|
+  if File.directory?(set_dir)
+    set = File.open("#{set_dir}/meta.yml", 'r') { |io| MtgSet.load(io) }
+    sets_by_name[set.name] = set
+    cards_by_set_name[set.name] = [ ]    
+    Dir.glob("#{set_dir}/*") do |card_file|
+      if !/meta\.yml$/.match(card_file)
+        card = File.open(card_file, 'r') { |io| MtgCard.load(io) }
+        cards_by_search_name[card.search_name] = card
+        cards_by_set_name[set.name] << card
       end
-    end    
-  end
-end
-
-# create index-by-name files
-sets_by_name.each do |name, sets|
-  search_name = MtgCard.new(name).search_name
-  search_names << search_name
-  File.open(File.join(names_dir, "#{search_name}.yml"), 'w') do |io|
-    io.puts("name: #{y(name)}\n")
-    io.puts("sets:")
-    sets.each do |set_name|
-      io.puts " - #{y(set_name)}"
     end
   end
 end
 
-# create search-by-name file
-File.open(File.join(names_dir, 'all.txt'), 'w') do |io|
-  io.write(search_names.sort.join(','))
+# write the index-by-name file
+debug("Saving index-by-name file")
+File.open('data/build/names.blob', 'w') { |io| io.print cards_by_search_name.keys.sort.join(',') }
+
+# write the individual card files
+debug("Saving individual card files")
+cards_by_search_name.each do |key, card|
+  FileUtils.mkdir_p("data/build/cards/#{key[0]}")
+  File.open("data/build/cards/#{key[0]}/#{key}.yml", 'w') do |io|
+    io.print card.to_yaml
+  end
+end
+
+# write the index-by-set files
+debug("Saving index-by-set files")
+sets_by_name.each do |set_name, set|
+  cards_by_set_name[set_name].sort_by! { |card| card.search_name }  
+  File.open("data/build/sets/#{sets_by_name[set_name].key}.yml", 'w') do |io|
+    io.puts set.to_yaml
+    io.puts "cards: "
+    cards_by_set_name[set_name].each do |card|
+      io.puts " - #{y(card.name)}"
+    end
+  end
+end
+
+# write the set index file
+File.open('data/build/sets.yaml', 'w') do |io|
+  MtgSet.all_sets.each do |set|
+    io.puts "---"
+    io.puts set.to_yaml
+  end    
 end

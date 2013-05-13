@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 require 'source'
-require 'textutils'
 
 class Gatherer < Source
   
@@ -10,12 +9,11 @@ class Gatherer < Source
     checklist = checklist_for_set(set_name)
     spoiler = spoiler_for_set(set_name)
     cards = merge_checklist_and_spoiler(checklist, spoiler)
-    set_other_parts_and_variants(cards)
+    set_other_parts(cards)
     cards
   end
   
-  def set_other_parts_and_variants(cards)
-    # other parts (sorted by collector #)
+  def set_other_parts(cards)
     sorted = { }
     cards.each do |card|
       if card.collector != ''
@@ -29,31 +27,16 @@ class Gatherer < Source
         card.others = others.map { |other| other.key }
       end
     end
-    # art variants (sorted by name)
-    sorted = { }
-    cards.each do |card|
-      sorted[card.single_spell_name] = sorted[card.single_spell_name] || [ ]
-      sorted[card.single_spell_name] << card      
-    end
-    sorted.each do |name, cards|
-      cards.each do |card|
-        if card.art != nil && card.art != ''
-          card.max_art = (cards.map { |c| c.art.to_i }).max
-        end
-      end
-    end
   end
 
   def merge_checklist_and_spoiler(checklist, spoiler)
     merged_cards = [ ]
-    checklist.each_pair do |name, cards|
+    checklist.each_pair do |name, card|
       if spoiler[name].nil?
         debug("[WARNING] No spoiler entry for #{name}")
       else
-        cards.each do |card|
-          card.merge!(spoiler[name])
-          merged_cards << card
-        end
+        card.merge!(spoiler[name])
+        merged_cards << card
       end
     end
     merged_cards
@@ -66,8 +49,6 @@ class Gatherer < Source
       cells = tr.search('td')
       card = MtgCard.new(cells[1].at('a').inner_text.strip, set_name)
       by_name[card.single_spell_name] = by_name[card.single_spell_name] || [ ]
-      card.gatherer = cells[1].at('a')['href'].gsub(/^.*multiverseid=(\d+)$/, '\1').to_i
-      card.artist = cells[2].inner_text.strip
       card.collector = cells[0].inner_text.strip
       card.rarity = cells[4].inner_text.strip      
       if (by_name[card.single_spell_name].length == 0 || card.collector != by_name[card.single_spell_name][0].collector || card.rarity == 'L' || (set_name != 'Apocalypse' && set_name != 'Invasion'))
@@ -76,14 +57,10 @@ class Gatherer < Source
         debug("[WARNING] #{card.single_spell_name} has a duplicate collector's number (#{card.collector})")
       end
     end
-    by_name.each_pair do |name, cards|      
-      if cards.length > 1
-        for i in 0 ... cards.length
-          cards[i].art = (i + 1)
-        end
-      else 
-        cards[0].art = nil
-      end
+    by_name.each_key do |name|      
+      by_name[name][0].art = by_name[name].length
+      #by_name[name].length unless by_name[name].length == 1
+      by_name[name] = by_name[name][0]
     end
     by_name
   end
@@ -99,7 +76,6 @@ class Gatherer < Source
         value = cells[1]
         if label == 'Name'         
           current = MtgCard.new(value.inner_text.strip, set_name)
-          current.gatherer = value.at('a')['href'].gsub(/^.*?(\d+)$/, '\1').to_i
         elsif label == 'Pow/Tgh'
           current.power = value.inner_text.strip.gsub(/^\(([^\/]*(?:\{1\/2\})?)\/([^\/]*(?:\{1\/2\})?)\)/, '\1')
           current.toughness = value.inner_text.strip.gsub(/^\(([^\/]*(?:\{1\/2\})?)\/([^\/]*(?:\{1\/2\})?)\)/, '\2')

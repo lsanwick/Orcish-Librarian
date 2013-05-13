@@ -6,7 +6,7 @@ class MtgSet
 
   attr_reader :name, :tcg, :display
 
-  def initialize(name, tcg, display)    
+  def initialize(name, tcg = nil, display = nil)    
     @name = name
     @tcg = tcg
     @display = display    
@@ -33,8 +33,19 @@ class MtgSet
     end
   end
 
+  def self.load(io)
+    data = YAML.load(io)
+    set = MtgSet.new(data['name'])
+    data.each do |key, value|
+      if set.respond_to?("#{key}=")
+        set.public_send("#{key}=", value)
+      end
+    end
+    set
+  end
+
   def self.all_sets
-    @@sets
+    @@sets.map { |set| MtgSet.new(set[:name], set[:tcg], set[:display]) }
   end
 
   def self.all_set_names
@@ -148,7 +159,6 @@ class MtgSet
     { name: "Mirrodin Besieged" },
     { name: "New Phyrexia" },
     { name: "Magic 2012", tcg: "Magic 2012 (M12)" },
-
 
     { name: "Innistrad" },
     { name: "Dark Ascension" },

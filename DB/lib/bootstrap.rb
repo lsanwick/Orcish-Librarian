@@ -14,20 +14,17 @@ rescue LoadError
 end
 
 require 'pry'
-require 'pry-nav'
 
 require 'digest/sha2'
 require 'open-uri'
 require 'net/http'
 require 'fileutils'
 require 'yaml'
+require 'optparse'
 
+require 'utils'
 require 'orcish'
 require 'gatherer'
 require 'mtgset'
 require 'mtgcard'
 require 'cardbox'
-
-FileUtils.mkdir_p("cache")
-FileUtils.mkdir_p("data/cards")
-FileUtils.mkdir_p("data/names")

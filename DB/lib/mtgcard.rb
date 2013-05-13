@@ -6,8 +6,7 @@ class MtgCard
 
   attr_accessor \
     :name,
-    :set_name,
-    :gatherer,
+    :set,
     :cost,
     :type,
     :oracle,
@@ -15,10 +14,8 @@ class MtgCard
     :toughness, 
     :loyalty,
     :rarity,
-    :artist, 
     :collector,
     :art,
-    :max_art,
     :others
 
   def initialize(name, set_name = nil)
@@ -28,7 +25,7 @@ class MtgCard
   end
 
   def key
-    (single_spell_name + (@art.to_i > 0 ? " - #{@art}" : '')).to_file_name
+    single_spell_name.to_file_name
   end
 
   def is_token?
@@ -37,7 +34,6 @@ class MtgCard
 
   def merge!(other)
     self.name = other.name || self.name
-    self.gatherer = other.gatherer || self.gatherer
     self.cost = other.cost || self.cost
     self.type = other.type || self.type
     self.oracle = other.oracle || self.oracle
@@ -45,7 +41,6 @@ class MtgCard
     self.toughness = other.toughness || self.toughness 
     self.loyalty = other.loyalty || self.loyalty
     self.rarity = other.rarity || self.rarity
-    self.artist = other.artist || self.artist
     self.collector = other.collector || self.collector
     self.art = other.art || self.art
   end
@@ -60,16 +55,14 @@ class MtgCard
     text << "display: #{y(@display)}" unless @display.nil?
     text << "tcg: #{y(@tcg)}" unless @tcg.nil?
     text << "set: #{y(@set)}"
-    text << "gatherer: #{y(@gatherer)}"
     text << "cost: #{y(@cost)}" unless (@cost.nil? || @cost == '')
     text << "type: #{y(@type)}" unless (@type.nil? || @type == '')
     text << "power: #{y(@power)}" unless (@power.nil? || @power == '') 
     text << "toughness: #{y(@toughness)}" unless (@toughness.nil? || @toughness == '') 
     text << "loyalty: #{y(@loyalty)}" unless (@loyalty.nil? || @loyalty == '') 
     text << "rarity: #{y(@rarity)}" unless (@rarity.nil? || @rarity == '')    
-    text << "artist: #{y(@artist)}" unless (@artist.nil? || @artist == '')
-    text << "collector: #{y(@collector)}" unless (@collector.nil? || @collector == '')
-    text << "art: #{y(@art)}/#{y(@max_art)}" unless (@art.nil? || @art == '')
+    text << "artist: #{y(@artist)}" unless (@artist.nil? || @artist == '')    
+    text << "art: #{y(@art)}" unless @art.to_i <= 1
     text << "others: #{y(@others)}" unless @others.length == 0
     text << "oracle: #{y(@oracle, force_block_text: true)}" unless (@oracle.nil? || @oracle == '')
     text.join("\n")
@@ -119,13 +112,24 @@ class MtgCard
   end
 
   def search_name
-    result = single_spell_name.to_basic_ascii.upcase
+    result = single_spell_name.to_basic_ascii.downcase
     # "Erase" from Unhinged is the only card that contains parentheses in its name
     if result != "ERASE (NOT THE URZA'S LEGACY ONE)"
       result.gsub!(/\(.*?\)/, '') # remove parethetical text
     end
-    result.gsub!(/[^A-Z0-9_]/, '') # remove special characters
+    result.gsub!(/[^a-z0-9_]/, '') # remove special characters
     result
+  end
+
+  def self.load(io)
+    data = YAML.load(io)
+    card = MtgCard.new(data['name'])
+    data.each do |key, value|
+      if card.respond_to?("#{key}=")
+        card.public_send("#{key}=", value)
+      end
+    end
+    card
   end
   
 end

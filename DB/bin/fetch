@@ -1,22 +1,12 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
-require 'optparse'
 require File.join(File.dirname(__FILE__), '../lib/bootstrap')
 
-options = { :path => nil }
-OptionParser.new do |opts|
-  opts.banner = 'fetch [options] '
-  opts.on('-o', '--output-path [path]') { |path| options[:path] = path }
-end.parse!
-if options[:path].nil?
-  options[:path] = File.join(File.dirname(__FILE__), '../data/source')
-end
-FileUtils.mkdir_p(options[:path])
 sets_to_process = (ARGV.length > 0) ? ARGV : MtgSet.all_set_names
 sets_to_process.each do |set_name|
   cards = Gatherer.new.cards_for_set(set_name)
 	box = CardBox.new
   box.add(set_name, cards)    
-  box.save_as_yaml(options[:path])
+  box.save_as_yaml
 end
