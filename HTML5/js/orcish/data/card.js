@@ -1,17 +1,19 @@
 Orcish.register('Data.Card', Orcish.Data.Node.extend({
-  
-  key: null,
-  setKey: null,
-  name: null,
-  tcgName: null,
-  displayName: null,
-  gathererId: null,
-  manaCost: null,
 
-  initialize: function(values) {
-    this.super.initialize(values);
-    this.displayName = this.displayName || this.name;
-    this.tcgName = this.tcgName || this.name;
-  }
+  setName: function(name) {
+    this.name = name;
+  },
+
+  setDisplay: function(display) {
+    display && (this.display = display);
+  },
+
+  setTcg: function(tcg) {
+    tcg && (this.tcg = tcg);
+  },
+
+  getName: function() { return this.name },
+  getDisplay: function() { return this.display || this.name },
+  getTcg: function(){ return this.tcg || this.name }
 
 }))

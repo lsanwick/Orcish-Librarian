@@ -24,6 +24,18 @@ class MtgSet
     text.join("\n")
   end
 
+  def to_hash
+    hash = { }
+    hash['name'] = @name
+    hash['tcg'] = @tcg unless @tcg.nil?
+    hash['display'] = @display unless @display.nil?
+    hash
+  end
+
+  def to_json
+    to_hash.to_json
+  end
+
   def self.find_by_name(name)
     meta = (@@sets.select { |s| s[:name] == name })[0]
     if meta.nil?
@@ -137,8 +149,8 @@ class MtgSet
     { name: "Ravnica: City of Guilds", tcg: "Ravnica" },
     { name: "Guildpact" },
     { name: "Dissension" },
-    { name: "Coldsnap", tcg: "Coldsnap" },
-    { name: "Time Spiral", tcg: "Time Spiral" },
+    { name: "Coldsnap" },
+    { name: "Time Spiral" },
     { name: "Time Spiral \"Timeshifted\"", tcg: "Timeshifted", display: "Time Spiral (Timeshifted)" },
     { name: "Planar Chaos" },
     { name: "Future Sight" },

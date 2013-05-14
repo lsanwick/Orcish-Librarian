@@ -52,20 +52,37 @@ class MtgCard
   def to_yaml
     text = [ ]
     text << "name: #{y(@name)}"
-    text << "display: #{y(@display)}" unless @display.nil?
-    text << "tcg: #{y(@tcg)}" unless @tcg.nil?
     text << "set: #{y(@set)}"
     text << "cost: #{y(@cost)}" unless (@cost.nil? || @cost == '')
     text << "type: #{y(@type)}" unless (@type.nil? || @type == '')
     text << "power: #{y(@power)}" unless (@power.nil? || @power == '') 
     text << "toughness: #{y(@toughness)}" unless (@toughness.nil? || @toughness == '') 
     text << "loyalty: #{y(@loyalty)}" unless (@loyalty.nil? || @loyalty == '') 
-    text << "rarity: #{y(@rarity)}" unless (@rarity.nil? || @rarity == '')    
-    text << "artist: #{y(@artist)}" unless (@artist.nil? || @artist == '')    
+    text << "rarity: #{y(@rarity)}" unless (@rarity.nil? || @rarity == '')
     text << "art: #{y(@art)}" unless @art.to_i <= 1
     text << "others: #{y(@others)}" unless @others.length == 0
     text << "oracle: #{y(@oracle, force_block_text: true)}" unless (@oracle.nil? || @oracle == '')
     text.join("\n")
+  end
+
+  def to_hash
+    hash = { }
+    hash['name'] = @name
+    hash['set'] = @set
+    hash['cost'] = @cost unless (@cost.nil? || @cost == '')    
+    hash['type'] = @type unless (@type.nil? || @type == '')
+    hash['power'] = @power unless (@power.nil? || @power == '')
+    hash['toughness'] = @toughness unless (@toughness.nil? || @toughness == '')
+    hash['loyalty'] = @loyalty unless (@loyalty.nil? || @loyalty == '')
+    hash['rarity'] = @rarity unless (@rarity.nil? || @rarity == '')
+    hash['art'] = @art unless @art.to_i <= 1
+    hash['others'] = @others unless @others.length == 0
+    hash['oracle'] = @oracle unless (@oracle.nil? || @oracle == '')
+    hash
+  end
+
+  def to_json
+    to_hash.to_json
   end
 
   # removes formatting codes from name (e.g. "XX" flashback icon)

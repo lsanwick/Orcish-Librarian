@@ -1,6 +1,6 @@
 (function(){
 
-  var NAME_HASH_SEPARATOR = '|'.charCodeAt(0);
+  var NAME_SEPARATOR = '|'.charCodeAt(0);
 
   Orcish.register('Data.Manager', Orcish.extend({
 
@@ -11,23 +11,13 @@
       loadCardNameSearchBlob(this);
     },
 
-    findCardStubsByTitle: function(text, callback) {
+    findCardsByText: function(text) {
       var self = this;
-      text = text.trim().toUpperCase().replace(/[^A-Z0-9_]/g, '');
       self.dataQueue.addJob(false, function(job) {
-        var hashes = findNameHashesByText(self, text);
-        var tracker = new Orcish.MediaTracker();
-        for (var i = 0; i < hashes.length; i++) {
-          tracker.add(self.baseUrl + '/data/names/' + hashes[i]);
-        }
-        tracker.start({
-          success: function(data) {
-            var cardStubs = transformRawCardStubs(data);
-          },
-          complete: function() {
-            self.dataQueue.finished(job);
-          }
-        })
+        var names = findNamesByText(self, normalizeTextForSearch(text));
+        names = sortNamesByAppearanceOfSearchText(names, text);
+        console.log(names);
+        self.dataQueue.finished(job);
       })
     }
 
@@ -36,64 +26,31 @@
   function loadSets(self) {
     self.dataQueue.addJob(false, function(job) {
       Orcish.ajax({
-        url: self.baseUrl + '/data/sets.txt', 
+        url: self.baseUrl + '/db/sets.json', 
         success: function(text) {
-          self.sets = transformRawSets(text);
+          self.sets = [ ];
+          $.parseJSON(text).forEach(function(rawSet) {
+            self.sets.push(new Orcish.Data.Set(rawSet));
+          })
         },
         complete: function() {
           self.dataQueue.finished(job);
         }
       })
     })
-  }
-
-  function transformRawSets(text) {    
-    var sets = [ ];
-    text.splitData().forEach(function(row) {
-      if (row.length > 0) {
-        sets.push(new Orcish.Data.Set({
-          key: parseInt(row[0]), 
-          name: row[1], 
-          displayName: row[2], 
-          tcgName: row[3], 
-          format: row[4] ? parseInt(row[4]) : null,
-          type: row[5] ? parseInt(row[5]) : null
-        }))
-      }
-    })
-    return sets;
-  }
-
-  function transformRawCardStubs(rawStubs) {
-    var stubs = [ ];
-    rawStubs.forEach(function(stub) {
-      stub = stub.split("\t");
-      stubs.push(new Orcish.Data.CardStub({
-        key: parseInt(stub[0]),
-        name: stub[1],
-        displayName: stub[2],
-        tcgName: stub[3],
-        setKey: parseInt(stub[4]),
-        setName: stub[5],
-        setDisplayName: stub[6],
-        setTcgName: stub[7],
-        versionCount: stub[8] ? parseInt(stub[8]) : null
-      }))
-    })
-    return stubs;
   }
 
   // ------------------------------------------------------------------------
   //  Search methods for a blob of card titles and hash values 
-  //  e.g. |GIDEONJURA|123456|GIDEONSAVENGER|789012|...|
+  //  e.g. |gideonjura|123456|GIDEONSAVENGER|789012|...|
 
   function loadCardNameSearchBlob(self) {
     self.dataQueue.addJob(false, function(job) {
       Orcish.ajax({
-        url: self.baseUrl + '/data/names.txt',
+        url: self.baseUrl + '/db/names.blob',
         responseType: 'ArrayBuffer',
         success: function(blob) {
-          self.nameSearchBlob = blob;
+          self.namesBlob = blob;
         },
         complete: function() {
           self.dataQueue.finished(job);
@@ -102,25 +59,25 @@
     })
   }
 
-  function findNameHashesByText(self, text) {
-    var hashes = [ ];
+  function findNamesByText(self, text) {
+    var names = [ ];
     if (text.length < 3) {
-      return hashes;
+      return names;
     }
-    var view = new Uint8Array(self.nameSearchBlob);
+    var view = new Uint8Array(self.namesBlob);
     var offset = 0;
     text = ArrayBuffer.fromString(text);
     while (true) {
-      var instance = self.nameSearchBlob.indexOf(text, offset);
+      var instance = self.namesBlob.indexOf(text, offset);
       if (instance == -1) { break; }
-      var hashStart = instance;
-      while (view[hashStart] != NAME_HASH_SEPARATOR) { ++hashStart; }
-      var hashEnd = ++hashStart;
-      while (view[hashEnd] != NAME_HASH_SEPARATOR) { ++hashEnd; }
-      offset = hashEnd;
-      hashes.push(parseInt(String.fromArrayBuffer(self.nameSearchBlob.slice(hashStart, hashEnd))));
+      var nameStart = instance;
+      var nameEnd = instance;
+      while (view[nameStart] != NAME_SEPARATOR) { --nameStart; }
+      while (view[nameEnd] != NAME_SEPARATOR) { ++nameEnd; }
+      offset = nameEnd;
+      names.push(String.fromArrayBuffer(self.namesBlob.slice(nameStart + 1, nameEnd)));
     }
-    return hashes;
+    return names;
   }
 
   // ------------------------------------------------------------------------
@@ -189,21 +146,26 @@
   }
 
   // ------------------------------------------------------------------------
-  //  Split text by rows and tabs
+  //  Normalize text for search (no special characters, all lower-case, etc.)
 
-  String.prototype.splitData = function() {
-    var result = [ ];
-    var rows = this.split("\n");
-    for (var i = 0; i < rows.length; i++) {
-      if (rows[i] != '') {
-        rows[i] = rows[i].split("\t");
-        for (var j = 0; j < rows[i].length; j++) {
-          rows[i][j] = rows[i][j] ? rows[i][j] : null;
-        }
-        result.push(rows[i]);
-      }
+  function normalizeTextForSearch(text) {
+    return text.toLowerCase().replace(/[^a-z0-9_]/, '');
+  }
+
+  function sortNamesByAppearanceOfSearchText(names, text) {
+    var indexes = { };
+    for (var i = 0; i < names.length; i++) {
+      indexes[names[i]] = names[i].indexOf(text);      
     }
-    return result;
+    return names.sort(function(a, b) {
+      if (indexes[a] == indexes[b]) {
+        return 0;
+      } else if (b == -1 || a < b) {
+        return -1;
+      } else {
+        return 1;
+      }
+    })
   }
 
 })()

@@ -28,14 +28,14 @@ end
 
 # write the index-by-name file
 debug("Saving index-by-name file")
-File.open('data/build/names.blob', 'w') { |io| io.print cards_by_search_name.keys.sort.join(',') }
+File.open('data/build/names.blob', 'w') { |io| io.print '|' + cards_by_search_name.keys.sort.join('|') + '|' }
 
 # write the individual card files
 debug("Saving individual card files")
 cards_by_search_name.each do |key, card|
   FileUtils.mkdir_p("data/build/cards/#{key[0]}")
-  File.open("data/build/cards/#{key[0]}/#{key}.yml", 'w') do |io|
-    io.print card.to_yaml
+  File.open("data/build/cards/#{key[0]}/#{key}.json", 'w') do |io|
+    io.print card.to_json
   end
 end
 
@@ -43,19 +43,21 @@ end
 debug("Saving index-by-set files")
 sets_by_name.each do |set_name, set|
   cards_by_set_name[set_name].sort_by! { |card| card.search_name }  
-  File.open("data/build/sets/#{sets_by_name[set_name].key}.yml", 'w') do |io|
-    io.puts set.to_yaml
-    io.puts "cards: "
+  File.open("data/build/sets/#{sets_by_name[set_name].key}.json", 'w') do |io|
+    hash = set.to_hash
+    hash['cards'] = [ ]      
     cards_by_set_name[set_name].each do |card|
-      io.puts " - #{y(card.name)}"
+      hash['cards'] << card.name
     end
+    io.puts hash.to_json
   end
 end
 
 # write the set index file
-File.open('data/build/sets.yaml', 'w') do |io|
+File.open('data/build/sets.json', 'w') do |io|
+  sets = [ ]
   MtgSet.all_sets.each do |set|
-    io.puts "---"
-    io.puts set.to_yaml
-  end    
+    sets << set.to_hash
+  end
+  io.puts sets.to_json
 end

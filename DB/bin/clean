@@ -3,19 +3,24 @@
 
 require File.join(File.dirname(__FILE__), '../lib/bootstrap')
 
-options = { :empty_cache => false }
+options = { :empty_cache => false, :empty_source => false }
 OptionParser.new do |opts|
   opts.banner = 'clean [options] '
   opts.on('-c', '--empty-cache') { options[:empty_cache] = true }
+  opts.on('-s', '--empty-source') { options[:empty_source] = true }
 end.parse!
 
-
-
-storage_path = File.join "data/*"
+build_path = "data/build/*"
+source_path = "data/source/*"
 cache_path = "cache/*"
 
-Orcish.debug("Deleting '#{storage_path}'")
-FileUtils.rm_rf(Dir.glob(storage_path))
+Orcish.debug("Deleting '#{build_path}'")
+FileUtils.rm_rf(Dir.glob(build_path))
+
+if options[:source_cache]
+  Orcish.debug("Deleting '#{source_path}'")
+  FileUtils.rm_rf(Dir.glob(source_path))
+end
 
 if options[:empty_cache]
   Orcish.debug("Deleting '#{cache_path}'")
