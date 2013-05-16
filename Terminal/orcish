@@ -67,8 +67,8 @@ def print_results(results)
     puts 
     puts "#{card['display_name']}  \e[2m#{card['mana_cost']}\e[0m"
     puts "#{card['type_line'].gsub(/\s+/,' ')}\e[2m#{ptl}\e[0m"
-    puts "\e[2m#{card['oracle_text']}\e[0m"
     puts card['sets'].join(', ')
+    puts "\e[2m#{card['oracle_text']}\e[0m"
   end
 end
 
