@@ -1,0 +1,155 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+require 'optparse'
+require 'fileutils'
+require 'open-uri'
+require 'sqlite3'
+
+DATA_DIR = File.expand_path('~') + '/.orcish/'
+DATA_FILE = DATA_DIR + '/cards.sqlite3'
+
+# ---------------------------------------------------------------------------
+
+def execute_query(db, options)
+
+  operator = options[:exact] ? ' AND ' : ' OR ';
+  clauses = [ '1' ]
+  params = [ ]
+
+  # search by name
+  name = options[:name].map { |name| 'cards.name LIKE ?' }
+  options[:name].each { |name| params << "%#{name}%" }
+  clauses << '(' + name.join(operator) + ')' unless name.length == 0
+
+  # search by oracle text
+  oracle = options[:oracleText].map { |oracle| 'cards.oracle_text LIKE ?' }
+  options[:oracleText].each { |oracle| params << "%#{oracle}%" }
+  clauses << '(' + oracle.join(operator) + ')' unless oracle.length == 0
+
+  # search by type
+  type = options[:type].map { |type| 'cards.type_line LIKE ?' }
+  options[:type].each { |type| params << "%#{type}%" }
+  clauses << '(' + type.join(operator) + ')' unless type.length == 0
+
+  # search by color
+  color = options[:color].map { |type| 'cards.mana_cost LIKE ?' }
+  options[:color].each { |color| params << "%#{color}%" }
+  clauses << '(' + color.join(operator) + ')' unless color.length == 0
+  
+  db.execute(
+    'SELECT cards.*, sets.name AS set_name ' + 
+    'FROM cards, sets ' + 
+    'WHERE sets.pk = cards.set_pk AND ' +
+    '(' + clauses.join(' AND ') + ') ' +
+    'ORDER BY cards.name ASC',
+    params)
+
+end
+
+# ---------------------------------------------------------------------------
+
+def print_results(results)
+  by_name = { }
+  results.each do |card|
+    by_name[card['name']] = by_name[card['name']] || card
+    by_name[card['name']]['sets'] = by_name[card['name']]['sets'] || [ ]
+    by_name[card['name']]['sets'] << card['set_name']
+  end
+  by_name.keys.sort.each do |name|
+    card = by_name[name]
+    ptl = ""
+    if "#{card['loyalty']}" != ''
+      ptl = "  #{card['loyalty']}"
+    elsif "#{card['power']}" != '' && "#{card['toughness']}" != '' 
+      ptl = "  #{card['power']}/#{card['toughness']}"
+    end
+    puts 
+    puts "#{card['display_name']}  \e[2m#{card['mana_cost']}\e[0m"
+    puts "#{card['type_line'].gsub(/\s+/,' ')}\e[2m#{ptl}\e[0m"
+    puts "\e[2m#{card['oracle_text']}\e[0m"
+    puts card['sets'].join(', ')
+  end
+end
+
+# ---------------------------------------------------------------------------
+
+def update_database
+  FileUtils.mkdir_p(DATA_DIR)
+  puts "Requesting latest database version ... "
+  remote_version = nil
+  begin
+    open("http://orcish.info/database/2.2/latest.txt", 'r') do |remote|
+      remote_version = remote.read
+    end
+  rescue
+    puts "Failed to read remote database version information"
+    return false
+  end
+  begin
+    File.open(DATA_FILE, 'wb') do |local|
+      open("http://orcish.info/database/2.2/#{remote_version}/cards.sqlite3", 'r') do |remote|
+        local.write(remote.read)
+      end
+    end
+  rescue
+    puts "Failed to save local copy of remote database"
+    return false
+  end
+  puts "Database updated"
+  true
+end
+
+# ---------------------------------------------------------------------------
+
+def load_database
+  if !File.exists?(DATA_FILE)
+    if !update_database
+      return false
+    end
+  end
+  db = SQLite3::Database.new(DATA_FILE)
+  db.results_as_hash = true
+  db
+end
+
+# ---------------------------------------------------------------------------
+
+def wrap(text, width)
+  text.split("\n").collect do |line|
+    line.length > width ? line.gsub(/(.{1,#{width}})(\s+|$)/, "\\1\n").strip : line
+  end * "\n"
+end
+
+# ---------------------------------------------------------------------------
+
+options = { 
+  :update => false,
+  :oracleText => [],
+  :type => [],
+  :color => [],
+  :format => [],
+  :name => [],
+  :exact => false
+}
+OptionParser.new do |opts|
+  opts.banner = 'orcish [options] name'
+  opts.on('-o', '--oracle [text]') { |text| options[:oracleText] << text }
+  opts.on('-t', '--type [text]') { |text| options[:type] << text }
+  opts.on('-c', '--color [color]') { |color| options[:color] << color }
+  opts.on('-e', '--exact') { options[:exact] = true }
+  opts.on('-u', '--update') { options[:update] = true }
+end.parse!
+ARGV.each { |name| options[:name] << name }
+if options[:update]
+  update_database
+else
+  db = load_database
+  if db 
+    results = execute_query(db, options)
+    print_results(results)
+    puts
+  end
+end
+
+# ---------------------------------------------------------------------------
